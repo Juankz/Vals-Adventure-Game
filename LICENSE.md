@@ -7,7 +7,7 @@ that, but you can contact me for autorization no problem with that. (By the way 
 
 THE LICENSE ABOVE APPLY ONLY TO THE CODE, THE NEXT APPLY TO THE ASSETS
 
-All graphics are made by kenney.nl check his website and opengameart.org page its th most awesome free art you can find. The following is taken from the graphics license, this said, you may consider not take this graphic assets from this repository to use them into other projects (in fact this assets has been modified to the game purposes), instead you should download it from kenneys website (its free)
+All graphics are made by kenney.nl check his website and opengameart.org page its the most awesome free art you can find. The following is taken from the graphics license.
 
 ###############################################################################
 	License (Creative Commons Zero, CC0)
@@ -21,3 +21,5 @@ All graphics are made by kenney.nl check his website and opengameart.org page it
 	Donate:   http://donate.kenney.nl/
 	Request:  http://request.kenney.nl/
 ###############################################################################
+
+This said, you may consider not take this graphic assets from this repository to use them into other projects (in fact this assets has been modified to the game purposes), instead you should download it from kenneys website (its free)
