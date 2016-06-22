@@ -1,0 +1,131 @@
+
+items.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+plant1
+  rotate: false
+  xy: 1, 90
+  size: 141, 153
+  orig: 141, 153
+  offset: 0, 0
+  index: -1
+plant2
+  rotate: false
+  xy: 144, 91
+  size: 135, 152
+  orig: 135, 152
+  offset: 0, 0
+  index: -1
+silver
+  rotate: false
+  xy: 1, 4
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: 1
+gold
+  rotate: false
+  xy: 281, 159
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: 1
+bronze
+  rotate: false
+  xy: 367, 159
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: 1
+carrot_gold
+  rotate: false
+  xy: 281, 87
+  size: 78, 70
+  orig: 78, 70
+  offset: 0, 0
+  index: -1
+carrot
+  rotate: false
+  xy: 361, 87
+  size: 78, 70
+  orig: 78, 70
+  offset: 0, 0
+  index: -1
+silver
+  rotate: false
+  xy: 87, 4
+  size: 66, 84
+  orig: 66, 84
+  offset: 0, 0
+  index: 2
+bronze
+  rotate: false
+  xy: 155, 5
+  size: 66, 84
+  orig: 66, 84
+  offset: 0, 0
+  index: 2
+silver
+  rotate: false
+  xy: 453, 159
+  size: 50, 84
+  orig: 50, 84
+  offset: 0, 0
+  index: 3
+bronze
+  rotate: false
+  xy: 223, 5
+  size: 50, 84
+  orig: 50, 84
+  offset: 0, 0
+  index: 3
+gold
+  rotate: false
+  xy: 275, 1
+  size: 66, 84
+  orig: 66, 84
+  offset: 0, 0
+  index: 2
+gold
+  rotate: false
+  xy: 343, 1
+  size: 50, 84
+  orig: 50, 84
+  offset: 0, 0
+  index: 3
+carrotBucket
+  rotate: false
+  xy: 441, 87
+  size: 62, 70
+  orig: 62, 70
+  offset: 0, 0
+  index: -1
+knife
+  rotate: false
+  xy: 395, 15
+  size: 48, 70
+  orig: 48, 70
+  offset: 0, 0
+  index: -1
+gold
+  rotate: false
+  xy: 445, 1
+  size: 15, 84
+  orig: 15, 84
+  offset: 0, 0
+  index: 4
+bronze
+  rotate: false
+  xy: 462, 1
+  size: 14, 84
+  orig: 14, 84
+  offset: 0, 0
+  index: 4
+silver
+  rotate: false
+  xy: 478, 1
+  size: 14, 84
+  orig: 14, 84
+  offset: 0, 0
+  index: 4

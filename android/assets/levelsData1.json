@@ -1,0 +1,29 @@
+{
+  "levels":[
+    {
+      "level":1,
+      "medal":false,
+      "locked":false
+    },
+    {
+      "level":2,
+      "medal":false,
+      "locked":true
+    },
+    {
+      "level":3,
+      "medal":false,
+      "locked":true
+    },
+    {
+      "level":4,
+      "medal":false,
+      "locked":true
+    },
+    {
+      "level":5,
+      "medal":false,
+      "locked":true
+    }
+  ]
+}

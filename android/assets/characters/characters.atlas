@@ -1,0 +1,122 @@
+
+characters.png
+format: RGBA8888
+filter: MipMapLinearNearest,Nearest
+repeat: none
+Gomh/gomhLeft
+  rotate: false
+  xy: 1, 1
+  size: 87, 148
+  orig: 87, 148
+  offset: 0, 0
+  index: -1
+Gomh/gomhIdle
+  rotate: false
+  xy: 91, 2
+  size: 86, 147
+  orig: 86, 147
+  offset: 0, 0
+  index: -1
+Gomh/gomhRight
+  rotate: false
+  xy: 180, 3
+  size: 86, 146
+  orig: 86, 146
+  offset: 0, 0
+  index: -1
+Gomh/gomhIdle2
+  rotate: false
+  xy: 269, 8
+  size: 86, 141
+  orig: 86, 141
+  offset: 0, 0
+  index: -1
+
+characters2.png
+format: RGBA8888
+filter: MipMapLinearNearest,Nearest
+repeat: none
+Val/bunny2_climb1
+  rotate: false
+  xy: 1, 206
+  size: 136, 199
+  orig: 136, 199
+  offset: 0, 0
+  index: -1
+Val/bunny2_climb2
+  rotate: false
+  xy: 1, 4
+  size: 136, 199
+  orig: 136, 199
+  offset: 0, 0
+  index: -1
+Val/bunny2_jump
+  rotate: false
+  xy: 140, 224
+  size: 150, 181
+  orig: 150, 181
+  offset: 0, 0
+  index: -1
+Val/bunny2_walk3
+  rotate: false
+  xy: 140, 13
+  size: 121, 208
+  orig: 121, 208
+  offset: 0, 0
+  index: -1
+Val/bunny2_hurt
+  rotate: false
+  xy: 293, 231
+  size: 150, 174
+  orig: 150, 174
+  offset: 0, 0
+  index: -1
+Val/bunny2_walk1
+  rotate: false
+  xy: 446, 204
+  size: 121, 201
+  orig: 121, 201
+  offset: 0, 0
+  index: -1
+Val/bunny2_stand
+  rotate: false
+  xy: 570, 204
+  size: 121, 201
+  orig: 121, 201
+  offset: 0, 0
+  index: -1
+Val/bunny2_walk2
+  rotate: false
+  xy: 694, 198
+  size: 121, 207
+  orig: 121, 207
+  offset: 0, 0
+  index: -1
+Val/bunny2_walk4
+  rotate: false
+  xy: 818, 203
+  size: 121, 202
+  orig: 121, 202
+  offset: 0, 0
+  index: -1
+Val/bunny2_shook1
+  rotate: false
+  xy: 264, 21
+  size: 120, 200
+  orig: 120, 200
+  offset: 0, 0
+  index: -1
+Val/bunny2_ready
+  rotate: false
+  xy: 387, 10
+  size: 121, 191
+  orig: 121, 191
+  offset: 0, 0
+  index: -1
+Val/bunny2_shook2
+  rotate: false
+  xy: 511, 1
+  size: 120, 200
+  orig: 120, 200
+  offset: 0, 0
+  index: -1

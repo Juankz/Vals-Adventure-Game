@@ -1,0 +1,28 @@
+<Script>
+    <Conversations>
+        <Conversation character="GOMH" ID="A"  keys = "NONE" key="0" secondary="NONE">
+            <Dialog character="GOMH">Hola Val</Dialog>
+            <Dialog character="VAL">Hola Gomh</Dialog>
+            <Dialog character="GOMH">A donde vas?</Dialog>
+            <Dialog character="VAL">Voy hacia la montaña</Dialog>
+            <Dialog character="GOMH">ten cuidado con las espinas pequeña coneja</Dialog>
+            <Dialog character="VAL">Lo tendré, gracias Gohm</Dialog>
+        </Conversation>
+        <Conversation character="GOMH" ID="B"  keys = "A,GOAL" key="1" secondary="C">
+            <Dialog character="GOMH">¿Encontraste lo que buscabas?</Dialog>
+            <Dialog character="VAL">Si, encontré zanahorias para mi padre</Dialog>
+            <Dialog character="VAL">Él está muy enfermo</Dialog>
+            <Dialog character="GOMH">Con un zanahoria dorada él se curaría</Dialog>
+        </Conversation>
+        <Conversation character="GOMH" ID="C"  keys = "NONE" key="2" secondary="NONE">
+            <Dialog character="GOMH">¿Lo encontraste?</Dialog>
+            <Dialog character="VAL">Aún no</Dialog>
+        </Conversation>
+    </Conversations>
+
+    <SelfToughts>
+        <Dialog key = "KEY">Necesito la llave</Dialog>
+        <Dialog key = "GOAL">Primero debo conseguir las zanahorias</Dialog>
+        <Dialog key = "KNIFE">¿Como puedo cortarla?</Dialog>
+    </SelfToughts>
+</Script>

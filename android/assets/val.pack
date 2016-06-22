@@ -1,0 +1,54 @@
+
+val.png
+format: RGBA8888
+filter: Nearest,MipMapNearestLinear
+repeat: none
+bunny2_jump
+  rotate: false
+  xy: 1, 27
+  size: 150, 181
+  orig: 150, 181
+  offset: 0, 0
+  index: -1
+bunny2_hurt
+  rotate: false
+  xy: 153, 34
+  size: 150, 174
+  orig: 150, 174
+  offset: 0, 0
+  index: -1
+bunny2_walk2
+  rotate: false
+  xy: 305, 1
+  size: 121, 207
+  orig: 121, 207
+  offset: 0, 0
+  index: -1
+bunny2_stand
+  rotate: false
+  xy: 428, 7
+  size: 121, 201
+  orig: 121, 201
+  offset: 0, 0
+  index: -1
+bunny2_walk1
+  rotate: false
+  xy: 551, 7
+  size: 121, 201
+  orig: 121, 201
+  offset: 0, 0
+  index: -1
+bunny2_ready
+  rotate: false
+  xy: 674, 17
+  size: 121, 191
+  orig: 121, 191
+  offset: 0, 0
+  index: -1
+val
+  rotate: false
+  xy: 797, 105
+  size: 67, 103
+  orig: 67, 103
+  offset: 0, 0
+  index: -1

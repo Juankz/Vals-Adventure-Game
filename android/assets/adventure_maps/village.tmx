@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="32" tilewidth="70" tileheight="70" backgroundcolor="#aaffff" nextobjectid="35">
+ <properties>
+  <property name="background" value="background1.json"/>
+  <property name="music" value="level1Music.mp3"/>
+ </properties>
+ <tileset firstgid="1" name="BaseTiles6" tilewidth="70" tileheight="70" spacing="2" tilecount="196" columns="14">
+  <image source="resources/BaseTiles6.png" width="1024" height="1024"/>
+  <tile id="134">
+   <properties>
+    <property name="WaterTileFrame" value="2"/>
+   </properties>
+  </tile>
+  <tile id="149">
+   <properties>
+    <property name="WaterTileFrame" value="2"/>
+   </properties>
+  </tile>
+  <tile id="164">
+   <properties>
+    <property name="WaterTileFrame" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="197" source="Builds.tsx"/>
+ <tileset firstgid="295" source="GrassExtension.tsx"/>
+ <tileset firstgid="337" source="medieval.tsx"/>
+ <tileset firstgid="729" source="Items.tsx"/>
+ <layer name="GroundBack" width="128" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztmUsKwjAUABu8iXvd6qargl0Idev9T6JFi0WKTV/ey8fMwCAUFcmkbUybBiy5Kzo4fSFPLFrTvxzoXzct/asnxhyA/LGcB1AGVnMAyoH+dUN/GKE/aK0HoFzoXzf0z5v+Ob4X4Rif3LpTQ8mzo+k42DC27wLOMc3nhr8Efebt6V8WPtfdNTsXfo+lfxpu7uXx3a11n2PD7HXLvVcC/fOn9ewfu9/S+1j/25C6/5bWnP/6pG7t25/rvw2xu877anwnhJFiDSDtv3RNgHBK6V/b+d8L/rufBWvi2P01tWa/0/m8pOX3PoyP18r6a+x3SV0jtKXEQ8LxSGGMMZXuPaT8bYiIiIj/6gNMrgEI
+  </data>
+ </layer>
+ <layer name="GroundMid" width="128" height="32" opacity="0.99">
+  <data encoding="base64" compression="zlib">
+   eJzt2cEJgDAMBdCKi3hyA9dwLSdxGLdyAUHaooHmPfjnBP4tKQUAAAAAAACocTaEcRwNYRz6z03/uemfr+zTcwAAAHpd0QsEWubY+Wvl/C143zd+ILm5gQEA/O8GgLowVQ==
+  </data>
+ </layer>
+ <layer name="GroundFront" width="128" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt2LENgCAQBdAbyCGsHcBJnI/ZtDaAhUEMvJf8RiAx+QXkIgAAAACAXvYrWyZHYV/pe24NAJhD6Z1AG+njc/yL/uem/7npf27pRZ7cZ0O12Y8ZUB8t+wdgbO5xAEayRKy19P4/AAAYzQke/irj
+  </data>
+ </layer>
+ <layer name="Builds" width="128" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt1KEKwzAUBdDGVA2qZqv20f2h/kFN9cz0TO1SMRoqSiiEQDgHbogKD+4jXQcAAAAAAAAAAEArHqH2BNTwir0/M9LbjyZtMZ+MrLUGpCj9892PcGQ83YO/v2n//oek93QP9N+2OWa5yDvznanIdAAAANz1Ay/4H1s=
+  </data>
+ </layer>
+ <layer name="Builds Front" width="128" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztzjEKgDAMBdD2Ap6gF/aabo6u0sFJ0EAdLYT3IISEfEgpAAAAAAAAAJDPOvsBAAAA+EkPPe7J7Qx9qe+ZPPZHHYObVseZO7d95AEAAJjvAiqDEKw=
+  </data>
+ </layer>
+ <layer name="Items" width="128" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt2DEKwyAYgFGx1ykZO/cAvf+QK+QGndqt1KFEqonyvwdOEQx8GCUpAT0tnecztkfn+YxN/9j0j03/2PSPTf/Y/ul/u7R8E85g/8emf2z6x7Xm8fo/c+cF+DJaf46l/9y2/Bl75pWWlO4169XOZ2zXd8/acfY7M4899zl3PgCYm7Mc2lvtK6ChX/8Oy2fl98c5DwAAtPQC4pggVQ==
+  </data>
+ </layer>
+ <layer name="Coins" width="128" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt08EKQFAURVGR//9MvyEDJUkMPJezVr356e1u1wEAAADwN1P/9gLepH82/aGtcbj+7nLP2fTPpn82/SGHe8+mfzb94f/ceTb9n7H86/ZVVXlbBfuOFf/rbFvl3S1Vb7j6yk4AAIAjM54RIR0=
+  </data>
+ </layer>
+ <objectgroup name="physicLayer">
+  <object id="1" type="ground" x="7980" y="630" width="209" height="65">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="2" type="ground" x="0" y="1820" width="8960" height="140">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="3" type="ground" x="7350" y="1541" width="420" height="68">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="4" type="ground" x="7280" y="631" width="490" height="67">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="5" type="ground" x="8681" y="912" width="211" height="68">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="6" type="ground" x="7770" y="1260" width="350" height="70">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="7" type="ground" x="8330" y="1261" width="420" height="68">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="8" type="trigger" x="6932" y="1399" width="70" height="420">
+   <properties>
+    <property name="action" value="checkpoint"/>
+    <property name="number" value="2"/>
+   </properties>
+  </object>
+  <object id="9" type="ground" x="2868" y="1888">
+   <properties>
+    <property name="shape" value="1"/>
+   </properties>
+   <polygon points="0,0 1124,-1 1123,-139 143,-139"/>
+  </object>
+  <object id="10" type="ground" x="4758" y="1120" width="1262" height="138">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="11" type="ground" x="8400" y="631" width="280" height="68">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="12" type="ground" x="7140" y="911" width="628" height="69">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="13" type="ground" x="7140" y="911" width="66" height="485">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="14" type="ground" x="6160" y="981" width="66" height="415">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="15" type="ground" x="6160" y="1261" width="978" height="135">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="16" type="ground" x="5880" y="1192">
+   <properties>
+    <property name="shape" value="1"/>
+   </properties>
+   <polygon points="0,0 348,-2 350,-280 281,-279"/>
+  </object>
+  <object id="17" type="trigger" x="6162" y="353" width="70" height="560">
+   <properties>
+    <property name="action" value="checkpoint"/>
+    <property name="number" value="3"/>
+   </properties>
+  </object>
+  <object id="18" type="trigger" x="6232" y="986" width="908" height="270">
+   <properties>
+    <property name="action" value="die"/>
+   </properties>
+  </object>
+  <object id="19" type="bridge" x="6230" y="1120" width="910" height="70">
+   <properties>
+    <property name="number" value="1"/>
+   </properties>
+  </object>
+  <object id="20" type="rope" x="6230" y="350" width="70" height="770">
+   <properties>
+    <property name="number" value="1"/>
+   </properties>
+  </object>
+  <object id="21" type="rope" x="7070" y="350" width="70" height="770">
+   <properties>
+    <property name="number" value="1"/>
+   </properties>
+  </object>
+  <object id="22" type="switch" x="7280" y="560" width="70" height="70">
+   <properties>
+    <property name="number" value="1"/>
+    <property name="object" value="bridge"/>
+   </properties>
+  </object>
+  <object id="23" type="ground" x="3780" y="1820">
+   <properties>
+    <property name="shape" value="1"/>
+   </properties>
+   <polygon points="0,0 140,-138 981,-139 1049,-70 1048,0"/>
+  </object>
+  <object id="24" type="trigger" x="4690" y="1259" width="70" height="420">
+   <properties>
+    <property name="action" value="checkpoint"/>
+    <property name="number" value="1"/>
+   </properties>
+  </object>
+  <object id="25" type="trigger" x="6172" y="1787" width="186" height="32">
+   <properties>
+    <property name="action" value="die"/>
+   </properties>
+  </object>
+  <object id="26" type="trigger" x="6662" y="1788" width="186" height="32">
+   <properties>
+    <property name="action" value="die"/>
+   </properties>
+  </object>
+  <object id="27" x="6300" y="1820" width="350"/>
+  <object id="28" type="trigger" x="5122" y="1088" width="186" height="32">
+   <properties>
+    <property name="action" value="die"/>
+   </properties>
+  </object>
+  <object id="29" type="trigger" x="5823" y="1089" width="117" height="32">
+   <properties>
+    <property name="action" value="die"/>
+   </properties>
+  </object>
+  <object id="30" type="trigger" x="841" y="1401" width="70" height="420">
+   <properties>
+    <property name="action" value="checkpoint"/>
+    <property name="number" value="0"/>
+   </properties>
+  </object>
+  <object id="31" type="character" x="140" y="1750" width="70" height="70">
+   <properties>
+    <property name="name" value="Val"/>
+   </properties>
+  </object>
+  <object id="32" type="character" x="2730" y="1715" width="70" height="105">
+   <properties>
+    <property name="conversations" value="A,B"/>
+    <property name="name" value="Gomh"/>
+   </properties>
+  </object>
+  <object id="33" type="collectable" x="4900" y="1050" width="70" height="70">
+   <properties>
+    <property name="captureTile" value="false"/>
+    <property name="conversationKey" value="GOAL"/>
+    <property name="key" value="GOAL"/>
+    <property name="number" value="1"/>
+    <property name="particleEffect" value="null"/>
+    <property name="texture" value="carrot"/>
+   </properties>
+  </object>
+  <object id="34" type="exit" x="630" y="1680" width="70" height="140">
+   <properties>
+    <property name="key" value="GOAL"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,8 @@
+SCRIPT: start
+GOMH: Hello Val
+VAL: Hello Gomh
+GOMH: Where do you go?
+VAL: I'm heading to the mountain
+GOMH: Beware of the spikes
+VAL: I will
+SCRIPT:end

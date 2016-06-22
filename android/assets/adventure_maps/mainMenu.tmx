@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="11" tilewidth="70" tileheight="70" backgroundcolor="#bde3f2">
+ <tileset firstgid="1" source="BaseTiles6.tsx"/>
+ <tileset firstgid="197" source="Builds.tsx"/>
+ <tileset firstgid="295" source="GrassExtension.tsx"/>
+ <tileset firstgid="337" source="Items.tsx"/>
+ <tileset firstgid="435" source="medieval.tsx"/>
+ <layer name="Tile Layer 1" width="30" height="11">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAOJBlxSBAJZjJRpp9cEAO09ywU2yOxQXgaHjexUOjfbUCzeZgZGLZCaWT8ASjGzIiJhRipZy8I3wGyxbDYKwTFyHZTw14NqH87gHgp1B0aWPyrSGV7PzBi2gsSA9l7nQE7fkaZtWB7tzJh2gvig+w1ZySMlzLgx8SYgY79iMDtDPgxMWaQg4eTvQBPKkuf
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="30" height="11">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgYcAYPVmWknb238ODTFJqtxkScGD3BazT6H53s5WREpfloGKf4gAzU3pMDYz0K0GFgcMCHB9p9owA3AAApihQJ
+  </data>
+ </layer>
+ <objectgroup name="Objects" width="30" height="11">
+  <object type="character" x="630" y="420" width="70" height="70">
+   <properties>
+    <property name="name" value="Val"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
