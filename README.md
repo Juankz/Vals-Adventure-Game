@@ -4,3 +4,5 @@ interesting puzzles.
 
 Vals Adventure is made in libGDX using Ashley and Box2d, there is also localization
 support for 2 languajes: English and Spanish
+
+Please check the LICENSE.md file
