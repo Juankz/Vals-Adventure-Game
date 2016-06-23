@@ -195,6 +195,8 @@ public class LevelBuilder {
                 createIndoor(object,flag);
             }else if(type.equals("pack")){
                 createPack(object,flag);
+            }else if(type.equals("trunk")){
+                createTrunk(object,flag);
             }else if(type.equals("button")){
                 createButton(object,flag);
             }else if(type.equals("box")){
@@ -534,11 +536,84 @@ public class LevelBuilder {
         engine.addEntity(entity);
     }
 
+    private void createTrunk(MapObject object, int flag){
+        Entity entity = new Entity();
+        BoundsComponent boundsComponent = new BoundsComponent();
+        TrunkComponent trunkComponent = new TrunkComponent();
+        TiledMapComponent tiledMapComponent = new TiledMapComponent();
+
+        MapRecToWorldRec(object,boundsComponent.bounds);
+
+        trunkComponent.content = (String)object.getProperties().get("content");
+        trunkComponent.amount = Integer.parseInt((String)object.getProperties().get("amount"));
+
+        if(trunkComponent.content.equals("coins")){
+            totalCoins+=trunkComponent.amount;
+        }
+
+        TiledMapTileLayer layer = (TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]);
+        tiledMapComponent.cell = layer.getCell((int)boundsComponent.bounds.getX(),(int)boundsComponent.bounds.getY());
+
+        TiledMapTileSet tileSet= levelMap.getTileSets().getTileSet("naval");
+        for(TiledMapTile tile:tileSet) {
+            Object property = tile.getProperties().get("tag");
+            if (property != null) {
+                String tag = (String) property;
+                if (tag.equals("trunk")) {
+                    Gdx.app.debug(tag,"Tag found");
+                    property = tile.getProperties().get("state");
+                    if(property==null)continue;
+                    String state = (String) property;
+                    if (state.equals("locked")) {
+                        Gdx.app.debug(tag,"Trunk locked found");
+                        tiledMapComponent.tiledMaps.put(TrunkComponent.LOCKED,tile);
+                    } else if (state.equals("open")) {
+                        Gdx.app.debug(tag,"Trunk open found");
+                        tiledMapComponent.tiledMaps.put(TrunkComponent.OPEN,tile);
+                    }else if (state.equals("empty")) {
+                        Gdx.app.debug(tag,"Trunk empty found");
+                        tiledMapComponent.tiledMaps.put(TrunkComponent.EMPTY,tile);
+                    }else{
+                        Gdx.app.debug(tag,"No state match: "+state);
+                    }
+                }
+            }
+        }
+
+        boolean dynamic = Boolean.parseBoolean((String)object.getProperties().get("dynamic"));
+        if(dynamic){
+            BodyComponent bodyComponent = new BodyComponent();
+            BodyDef def = new BodyDef();
+            def.type = BodyDef.BodyType.DynamicBody;
+            def.position.set(boundsComponent.bounds.x+boundsComponent.bounds.width*0.5f, boundsComponent.bounds.y+boundsComponent.bounds.height*0.5f);
+            PolygonShape shape = new PolygonShape();
+            shape.setAsBox(boundsComponent.bounds.width*0.5f, boundsComponent.bounds.height*0.5f);
+            FixtureDef fix = new FixtureDef();
+            fix.shape = shape;
+            fix.density = 1;
+            fix.friction =0.1f;
+            fix.filter.groupIndex = 0;
+            fix.filter.categoryBits = Constants.layerCategoryBits[flag];
+            fix.filter.maskBits = (short)(Constants.BOUNDS|Constants.layerCategoryBits[flag]);
+            bodyComponent.body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
+            bodyComponent.body.createFixture(fix);
+            shape.dispose();
+            entity.add(bodyComponent);
+            checkForJoints(object,bodyComponent.body);
+        }
+
+        entity.add(boundsComponent);
+        entity.add(trunkComponent);
+        entity.add(tiledMapComponent);
+        entity.flags = flag;
+        engine.addEntity(entity);
+    }
+
     private void checkForJoints(MapObject object, Body body){
         if(object.getProperties().get("hasJoint")!=null){
             String bod = (String)object.getProperties().get("body");
             int jointId = Integer.parseInt((String)object.getProperties().get("jointID"));
-            Gdx.app.debug(tag,"(String)object.getProperties().get(\"body\") : "+(String)object.getProperties().get("body")+" ID: "+jointId);
+//            Gdx.app.debug(tag,"(String)object.getProperties().get(\"body\") : "+(String)object.getProperties().get("body")+" ID: "+jointId);
             if(bod.contains("BodyA")){
                 bodiesA.put(jointId,body);
             }else{
@@ -800,8 +875,6 @@ public class LevelBuilder {
             if (cell == null) continue;
             //Get texture regions
             TextureRegion r = new TextureRegion(cell.getTile().getTextureRegion());
-            Gdx.app.debug(tag,"r.getHeight ="+r.getRegionHeight());
-            Gdx.app.debug(tag,"h ="+h);
             float height = h*Constants.inversePPU;
             TextureRegion region = new TextureRegion(r,0,(int)Constants.inversePPU-(int)height,r.getRegionWidth(),(int)height);
 //            TextureRegion region = new TextureRegion(r,0,0,r.getRegionWidth(),r.getRegionHeight());
@@ -1494,8 +1567,6 @@ public class LevelBuilder {
                 textureComponent.region = new TextureRegion(texture,texture.getWidth()*repeatNumber,texture.getHeight());
                 parallaxComponent.scrollingFactorX = layer.scrollX;
                 parallaxComponent.scrollingFactorY = layer.scrollY;
-
-                Gdx.app.debug(tag,"texture width = "+textureWidth*repeatNumber);
 
                 transformComponent.pos.x = layer.scrollX*(textureWidth+48);
                 transformComponent.pos.y = layer.scrollY*(textureHeight+1.8f);

@@ -38,6 +38,7 @@ public class CollisionSystem extends EntitySystem {
 	private ImmutableArray<Entity> actionables;
 	private ImmutableArray<Entity> ladders;
 	private ImmutableArray<Entity> packs;
+	private ImmutableArray<Entity> trunks;
 
 	public interface CollisionListener {
 		void pickCoin ();
@@ -71,6 +72,7 @@ public class CollisionSystem extends EntitySystem {
 		actionables = this.engine.getEntitiesFor(Family.all(ActionableComponent.class,BoundsComponent.class).get());
 		ladders = this.engine.getEntitiesFor(Family.all(LadderComponent.class,BoundsComponent.class).get());
 		packs = this.engine.getEntitiesFor(Family.all(PackComponent.class,BoundsComponent.class).get());
+		trunks = this.engine.getEntitiesFor(Family.all(TrunkComponent.class,BoundsComponent.class).get());
 	}
 
 	@Override
@@ -171,6 +173,24 @@ public class CollisionSystem extends EntitySystem {
 						PackComponent packComponent= entity.getComponent(PackComponent.class);
 						listener.pickPack(packComponent.content,packComponent.amount);
 						listener.removeEntity(entity);
+					}
+				}
+			}
+
+			for(Entity entity : trunks){
+				if(entity.flags!=val.flags)continue;
+				Rectangle otherBounds = bm.get(entity).bounds;
+				if(valBounds.bounds.overlaps(otherBounds)){
+					isOnSwitch = true;
+					setDialogPosition(otherBounds);
+					if(action) {
+						TrunkComponent trunkComponent= entity.getComponent(TrunkComponent.class);
+						listener.pickPack(trunkComponent.content,trunkComponent.amount);
+						int tileID = TrunkComponent.EMPTY;
+						if(trunkComponent.content.equals("coins")){
+							tileID = TrunkComponent.OPEN;
+						}
+						engine.getSystem(TiledMapSystem.class).setTile(entity,tileID);
 					}
 				}
 			}

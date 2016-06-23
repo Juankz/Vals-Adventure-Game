@@ -8,7 +8,6 @@ support for 2 languajes: English and Spanish
 Versioning:
 
 gdxVersion = '1.9.3'
-box2DLightsVersion = '1.4'
 ashleyVersion = '1.7.0'
 
 
