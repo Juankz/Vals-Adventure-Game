@@ -23,7 +23,6 @@ public class CharacterSystem extends IteratingSystem {
     private static final float dstYM = 4;
     private static final float dstYm = -2;
 
-    private States state = States.WAITING_IN;
     private Entity val;
 
     public InputHandler inputHandler;
@@ -39,6 +38,7 @@ public class CharacterSystem extends IteratingSystem {
         for(Entity val : getEngine().getEntitiesFor(Family.all(Val_Component.class,TransformComponent.class).get())) {
             this.val = val;
             CharacterComponent characterComponent = entity.getComponent(CharacterComponent.class);
+            CharacterComponent.States state = characterComponent.state;
             switch (state) {
                 case WAITING_IN:
                     String conversationID = characterComponent.conversationIDs.get(characterComponent.current);
@@ -46,14 +46,18 @@ public class CharacterSystem extends IteratingSystem {
 
                     if (isEntityClose(entity, val)) {
                         if (manager.matches(conversationID, valKeys)) {
-                            state = States.CONVERSATING;
+                            characterComponent.state = CharacterComponent.States.CONVERSATING;
+                            Gdx.app.debug(tag,"Start Conversation with "+characterComponent.character);
                             isSecondary = false;
+                            manager.line = 0;
                             getEngine().getSystem(Val_System.class).setMove(val,false);
                             inputHandler.setActive(false);
                             manager.startConversation(conversationID);
                         }else if(manager.hasSecondary(conversationID)){
-                            state = States.CONVERSATING;
+                            characterComponent.state = CharacterComponent.States.CONVERSATING;
+                            Gdx.app.debug(tag,"Start Secondary Conversation with "+characterComponent.character);
                             isSecondary = true;
+                            manager.line = 0;
                             getEngine().getSystem(Val_System.class).setMove(val,false);
                             inputHandler.setActive(false);
                             manager.startConversation(manager.getSecondaryOf(conversationID));
@@ -64,7 +68,8 @@ public class CharacterSystem extends IteratingSystem {
                     if (manager.conversationEnded()) {
                         inputHandler.setActive(true);
                         getEngine().getSystem(Val_System.class).canMove = true;
-                        state = States.WATING_OUT;
+                        characterComponent.state = CharacterComponent.States.WATING_OUT;
+                        Gdx.app.debug(tag,"Waiting out for "+characterComponent.character);
                     }
                     break;
                 case WATING_OUT:
@@ -76,13 +81,13 @@ public class CharacterSystem extends IteratingSystem {
                                 characterComponent.current++;
                             }
                             manager.line=0;
-                            state = States.WAITING_IN;
+                            characterComponent.state = CharacterComponent.States.WAITING_IN;
                         }else{
                             if(!isSecondary) {
-                                state = States.DO_NOTHING;
+                                characterComponent.state = CharacterComponent.States.DO_NOTHING;
                             }else{
                                 manager.line=0;
-                                state = States.WAITING_IN;
+                                characterComponent.state = CharacterComponent.States.WAITING_IN;
                             }
                         }
                     }
@@ -104,9 +109,5 @@ public class CharacterSystem extends IteratingSystem {
             return  true;
 
         return false;
-    }
-
-    private enum States{
-        WAITING_IN,CONVERSATING,WATING_OUT,DO_NOTHING
     }
 }

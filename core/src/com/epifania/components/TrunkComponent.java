@@ -14,4 +14,5 @@ public class TrunkComponent implements Component {
     public String content = "";
     public int amount = 0;
     public String key = "NONE";
+    public boolean open = false;
 }

@@ -3,6 +3,7 @@ package com.epifania.utils;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Camera;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader;
 import com.epifania.components.BoundsComponent;
+import com.epifania.components.CharacterComponent;
 import com.epifania.components.GomhComponent;
 import com.epifania.components.Val_Component;
 import com.epifania.systems.RenderingSystem;
@@ -63,8 +65,8 @@ public class ConversationManager {
                 Array<XmlReader.Element> dialogs = conversation.getChildrenByNameRecursively("Dialog");
                 this.dialogs.add(dialogs);
             }
-            System.out.println("CONVERSATIONS");
             /*
+            System.out.println("CONVERSATIONS");
             for(XmlReader.Element conversation : conversations)
             {
                 System.out.println("character: "+conversation.get("character") +
@@ -76,12 +78,13 @@ public class ConversationManager {
             }
             */
 
+
             this.selfThoughts = new Array<XmlReader.Element>();
             XmlReader.Element selfThoughts = root.getChildByName("SelfToughts");
             Array<XmlReader.Element> dialogs = selfThoughts.getChildrenByNameRecursively("Dialog");
             this.selfThoughts.addAll(dialogs);
 
-        }catch (Throwable e){
+        }catch (Exception e){
             Gdx.app.error(tag,"Error reading script: "+e);
         }
     }
@@ -91,10 +94,17 @@ public class ConversationManager {
         Entity entity = null;
         if(character.equals("VAL")){
             entity = engine.getEntitiesFor(Family.all(Val_Component.class, BoundsComponent.class).get()).get(0);
-        }else if (character.equals("GOMH")){
-            entity = engine.getEntitiesFor(Family.all(GomhComponent.class, BoundsComponent.class).get()).get(0);
         }else {
-            Gdx.app.error(tag,"No entity matched with "+character);
+            ImmutableArray<Entity> entities = engine.getEntitiesFor(Family.all(CharacterComponent.class, BoundsComponent.class).exclude(GomhComponent.class,Val_Component.class).get());
+            for(Entity entity1 : entities){
+                CharacterComponent characterComponent = entity1.getComponent(CharacterComponent.class);
+                if(characterComponent.character.equals(CharacterComponent.Character.valueOf(character.toUpperCase()))){
+                    entity = entity1;
+                }
+            }
+            if(entity==null) {
+                Gdx.app.error(tag, "No entity matched with " + character);
+            }
         }
         if(entity!=null){
             Rectangle rectangle = entity.getComponent(BoundsComponent.class).bounds;
@@ -160,7 +170,6 @@ public class ConversationManager {
         for(XmlReader.Element conversation : conversations){
             if(conversation.getAttribute("ID").equals(conversationID)){
                 conversationNumber = conversations.indexOf(conversation,true);
-                Gdx.app.debug(tag,"conversationNumber = "+conversationNumber);
                 conversationEnded();
                 dialog.setVisible(true);
             }
@@ -173,7 +182,6 @@ public class ConversationManager {
             dialog.setText(element.getText());
             getRelativePosition(element.get("character"),tmp);
             dialog.setPosition(tmp.x,tmp.y);
-//            Gdx.app.debug("Conversation System",element.get("character")+" : "+element.getText());
             if(!dialog.isVisible())dialog.setVisible(true);
         }else{
             dialog.setVisible(false);

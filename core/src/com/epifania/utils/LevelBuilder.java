@@ -168,13 +168,15 @@ public class LevelBuilder {
             }else
             if(type.equals("character")){
                 String name = (String)object.getProperties().get("name");
-                if(name.equals("GOMH")){
-                    createGomh(object,flag);
+                if(name.equals("GOMH")||name.equals("MOM")||name.equals("PINKY")){
+                    createCharacter(object,flag,name);
                 }else if(name.equals("VAL")){
                     //Create the main character and make the camera follow it
                     Entity val = createVal(object.getProperties(),flag);
                     createCamera(val);
                     engine.addEntity(val);
+                }else {
+                    Gdx.app.error(tag,"character not found : "+name);
                 }
             }else
             if(type.equals("collectable")){
@@ -560,18 +562,14 @@ public class LevelBuilder {
             if (property != null) {
                 String tag = (String) property;
                 if (tag.equals("trunk")) {
-                    Gdx.app.debug(tag,"Tag found");
                     property = tile.getProperties().get("state");
                     if(property==null)continue;
                     String state = (String) property;
                     if (state.equals("locked")) {
-                        Gdx.app.debug(tag,"Trunk locked found");
                         tiledMapComponent.tiledMaps.put(TrunkComponent.LOCKED,tile);
                     } else if (state.equals("open")) {
-                        Gdx.app.debug(tag,"Trunk open found");
                         tiledMapComponent.tiledMaps.put(TrunkComponent.OPEN,tile);
                     }else if (state.equals("empty")) {
-                        Gdx.app.debug(tag,"Trunk empty found");
                         tiledMapComponent.tiledMaps.put(TrunkComponent.EMPTY,tile);
                     }else{
                         Gdx.app.debug(tag,"No state match: "+state);
@@ -1416,25 +1414,23 @@ public class LevelBuilder {
         engine.addEntity(entity);
     }
 
-    private void createGomh(MapObject object,int flag){
+    private void createCharacter(MapObject object,int flag, String name){
+        //TODO choose animations for each character
+
+        CharacterComponent.Character character = CharacterComponent.Character.valueOf(name);
+
         Entity entity = new Entity();
         TextureComponent textureComponent = new TextureComponent();
         AnimationComponent animationComponent = new AnimationComponent();
         StateComponent stateComponent = new StateComponent();
         BoundsComponent boundsComponent = new BoundsComponent();
         TransformComponent transformComponent = new TransformComponent();
-        GomhComponent gomhComponent = new GomhComponent();
-        ConversationComponent conversationComponent = new ConversationComponent();
         CharacterComponent characterComponent = new CharacterComponent();
+        characterComponent.character = character;
 
         if(object.getProperties().get("conversations")!=null) {
             characterComponent.conversationIDs.addAll(((String) object.getProperties().get("conversations")).split(","));
         }
-//		characterComponent.conversationIDs.addAll(
-//				getCharacterConversations((String)object.getProperties().get("conversations")));
-
-        conversationComponent.currentCondition = 0;
-        conversationComponent.character = "Gomh";
 
         Object pX = object.getProperties().get("x");
         Object pY = object.getProperties().get("y");
@@ -1461,18 +1457,9 @@ public class LevelBuilder {
         entity.add(animationComponent);
         entity.add(stateComponent);
         entity.add(boundsComponent);
-        entity.add(gomhComponent);
         entity.add(characterComponent);
         entity.flags = flag;
         engine.addEntity(entity);
-
-		/*Object properties
-		TestGameplay: width:70.0
-		TestGameplay: name:Gomh
-		TestGameplay: height:70.0
-		TestGameplay: x:2730.0
-		TestGameplay: y:420.0
-		 */
     }
 
     private Entity createVal(MapProperties properties,int flag) {
@@ -1487,9 +1474,6 @@ public class LevelBuilder {
         AnimationComponent anim = new AnimationComponent();
         BoundsComponent bounds = new BoundsComponent();
         BodyComponent body = new BodyComponent();
-        ConversationComponent conversationComponent = new ConversationComponent();
-
-        conversationComponent.conditions.add("GOMH0");
 
         transc.pos.set(x,y+0.5f,-1);
         transc.scale.set(0.5f, 0.5f);
@@ -1516,14 +1500,12 @@ public class LevelBuilder {
         FixtureDef fix2 = new FixtureDef();
         fix2.density = 3f;
         fix2.filter.groupIndex = Constants.groupsIndexes[flag];
-//        fix2.filter.categoryBits = Constants.layerCategoryBits[flag];
         fix2.filter.categoryBits = Constants.PLAYER;
         fix2.filter.maskBits = Constants.BOUNDS;
         fix2.friction = 0;
         fix2.shape = shape2;
 
         body.body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
-//		body.body.createFixture(fix);
         body.body.createFixture(fix2);
         body.body.setUserData("Val");
         shape.dispose();
@@ -1543,7 +1525,6 @@ public class LevelBuilder {
         entity.add(anim);
         entity.add(bounds);
         entity.add(body);
-        entity.add(conversationComponent);
         entity.flags = flag;
         return entity;
     }

@@ -430,12 +430,6 @@ public class GameScreen extends ScreenAdapter{
 		stage.addActor(lockedButton);
 		dialog = new ConversationDialog(skin);
 		conversationManager.dialog = dialog;
-//		dialog.listener = new ConversationDialog.Listener() {
-//			@Override
-//			public boolean action() {
-//				return engine.getSystem(ConversationSystem.class).next();
-//			}
-//		};
 		dialog.listener = new ConversationDialog.Listener() {
 			@Override
 			public boolean action() {

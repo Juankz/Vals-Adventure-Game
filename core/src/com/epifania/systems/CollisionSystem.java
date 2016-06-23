@@ -180,13 +180,14 @@ public class CollisionSystem extends EntitySystem {
 			for(Entity entity : trunks){
 				if(entity.flags!=val.flags)continue;
 				Rectangle otherBounds = bm.get(entity).bounds;
-				if(valBounds.bounds.overlaps(otherBounds)){
+				TrunkComponent trunkComponent= entity.getComponent(TrunkComponent.class);
+				if(valBounds.bounds.overlaps(otherBounds) && !trunkComponent.open){
 					isOnSwitch = true;
 					setDialogPosition(otherBounds);
 					if(action) {
-						TrunkComponent trunkComponent= entity.getComponent(TrunkComponent.class);
 						listener.pickPack(trunkComponent.content,trunkComponent.amount);
 						int tileID = TrunkComponent.EMPTY;
+						trunkComponent.open = true;
 						if(trunkComponent.content.equals("coins")){
 							tileID = TrunkComponent.OPEN;
 						}
