@@ -184,6 +184,7 @@ public class GameScreen extends ScreenAdapter{
 		engine.addSystem(new AnimatedTileSystem());
 		engine.addSystem(new BoundsSystem());
 		engine.addSystem(new AnimatedWaterCellSystem());
+		engine.addSystem(new TiledMapSystem());
 		engine.addSystem(new CameraSystem());
 		engine.addSystem(new CharacterSystem());
         engine.addSystem(new CollisionSystem(new CollisionSystem.CollisionListener() {
@@ -429,12 +430,6 @@ public class GameScreen extends ScreenAdapter{
 		stage.addActor(lockedButton);
 		dialog = new ConversationDialog(skin);
 		conversationManager.dialog = dialog;
-//		dialog.listener = new ConversationDialog.Listener() {
-//			@Override
-//			public boolean action() {
-//				return engine.getSystem(ConversationSystem.class).next();
-//			}
-//		};
 		dialog.listener = new ConversationDialog.Listener() {
 			@Override
 			public boolean action() {

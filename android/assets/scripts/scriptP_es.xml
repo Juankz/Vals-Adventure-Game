@@ -1,0 +1,75 @@
+<Script>
+    <Conversations>
+        <!-- GOMH -->
+        <Conversation character="GOMH" ID="A"  keys = "NONE" key="0" secondary="NONE">
+            <Dialog character="GOMH">Hello Val</Dialog>
+            <Dialog character="VAL">Hello Gomh</Dialog>
+            <Dialog character="GOMH">Where do you go?</Dialog>
+            <Dialog character="VAL">I'm heading to the mountain</Dialog>
+            <Dialog character="GOMH">Beware of the spikes little bunny</Dialog>
+            <Dialog character="VAL">I will, thank you Gohm</Dialog>
+        </Conversation>
+        <Conversation character="GOMH" ID="B"  keys = "A,GOAL" key="1" secondary="NONE">
+            <Dialog character="GOMH">Did you find what you were looking for?</Dialog>
+            <Dialog character="VAL">Yes, I got medicines for my dad</Dialog>
+            <Dialog character="VAL">He is very sick</Dialog>
+            <Dialog character="GOMH">mmm</Dialog>
+        </Conversation>
+        <Conversation character="GOMH" ID="C"  keys = "NONE" key="2" secondary="NONE">
+            <Dialog character="GOMH">Did you find it?</Dialog>
+            <Dialog character="VAL">Not Yet</Dialog>
+        </Conversation>
+
+
+        <Conversation character="MOM" ID="F"  keys = "NONE" key="0" secondary="NONE">
+            <Dialog character="VAL">Mom what are you ding here?</Dialog>
+            <Dialog character="MOM">I was worried about you</Dialog>
+            <Dialog character="VAL">I'm totally fine mom</Dialog>
+            <Dialog character="MOM">Your dad is so sick ... </Dialog>
+            <Dialog character="MOM">I'm really worried Val</Dialog>
+            <Dialog character="MOM">I don't know what can happen</Dialog>
+            <Dialog character="VAL">Mom I'm not going to give up</Dialog>
+            <Dialog character="VAL">I'll find the golden carrot and cure my dad</Dialog>
+            <Dialog character="MOM">I love you Val</Dialog>
+            <Dialog character="VAL">And I love you mom</Dialog>
+        </Conversation>
+
+        <Conversation character="PINKY" ID="X"  keys = "NONE" key="0" secondary="NONE">
+            <Dialog character="VAL"> Hi I am Val </Dialog>
+            <Dialog character="PINKY">Who?</Dialog>
+            <Dialog character="VAL">I'm searching the golden carrot, can you help me?</Dialog>
+            <Dialog character="PINKY">No I don't want to help you</Dialog>
+            <Dialog character="PINKY">Besides It's just a stupid tale</Dialog>
+            <Dialog character="PINKY">If you believe the golden carrot you are really dumb</Dialog>
+            <Dialog character="VAL"> :( </Dialog>
+            <Dialog character="VAL"> No I'm not </Dialog>
+            <Dialog character="VAL"> :'(</Dialog>
+            <Dialog character="PINKY">You better go away</Dialog>
+        </Conversation>
+        <Conversation character="PINKY" ID="Y"  keys = "X" key="1" secondary="NONE">
+            <Dialog character="PINKY">Go away</Dialog>
+            <Dialog character="VAL">Bring on board of the ship</Dialog>
+            <Dialog character="PINKY">Never</Dialog>
+            <Dialog character="VAL">You want that shiny stone, right?</Dialog>
+            <Dialog character="VAL">Oh, give i t to me</Dialog>
+        </Conversation>
+        <Conversation character="PINKY" ID="Z"  keys = "X,Y,GOAL" key="2" secondary="AA">
+            <Dialog character="VAL">Here is your stone</Dialog>
+            <Dialog character="PINKY">Thank you :)</Dialog>
+            <Dialog character="PINKY">By the way I won't help you with the ship</Dialog>
+            <Dialog character="VAL">but ...</Dialog>
+            <Dialog character="PINKY">Sorry can help it, Byyyye</Dialog>
+        </Conversation>
+        <Conversation character="PINKY" ID="AA"  keys = "NONE" key="30" secondary="NONE">
+            <Dialog character="PINKY">Did you find it?</Dialog>
+            <Dialog character="VAL">Not Yet</Dialog>
+        </Conversation>
+
+    </Conversations>
+
+    <SelfToughts>
+        <Dialog key = "KEY">I need a key</Dialog>
+        <Dialog key = "GOAL">First I need to get the stone</Dialog>
+        <Dialog key = "SWITCH">What does the switch do?</Dialog>
+    </SelfToughts>
+</Script>

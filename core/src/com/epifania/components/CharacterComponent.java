@@ -13,4 +13,14 @@ public class CharacterComponent implements Component{
 
     public final Array<String> conversationIDs = new Array<String>();
     public int current = 0;
+    public Character character;
+    public States state = States.WAITING_IN;
+
+    public static enum Character{
+        GOMH, PINKY, MOM
+    }
+
+    public enum States{
+        WAITING_IN,CONVERSATING,WATING_OUT,DO_NOTHING
+    }
 }

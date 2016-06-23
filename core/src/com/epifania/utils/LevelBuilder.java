@@ -168,13 +168,15 @@ public class LevelBuilder {
             }else
             if(type.equals("character")){
                 String name = (String)object.getProperties().get("name");
-                if(name.equals("GOMH")){
-                    createGomh(object,flag);
+                if(name.equals("GOMH")||name.equals("MOM")||name.equals("PINKY")){
+                    createCharacter(object,flag,name);
                 }else if(name.equals("VAL")){
                     //Create the main character and make the camera follow it
                     Entity val = createVal(object.getProperties(),flag);
                     createCamera(val);
                     engine.addEntity(val);
+                }else {
+                    Gdx.app.error(tag,"character not found : "+name);
                 }
             }else
             if(type.equals("collectable")){
@@ -195,6 +197,8 @@ public class LevelBuilder {
                 createIndoor(object,flag);
             }else if(type.equals("pack")){
                 createPack(object,flag);
+            }else if(type.equals("trunk")){
+                createTrunk(object,flag);
             }else if(type.equals("button")){
                 createButton(object,flag);
             }else if(type.equals("box")){
@@ -534,11 +538,80 @@ public class LevelBuilder {
         engine.addEntity(entity);
     }
 
+    private void createTrunk(MapObject object, int flag){
+        Entity entity = new Entity();
+        BoundsComponent boundsComponent = new BoundsComponent();
+        TrunkComponent trunkComponent = new TrunkComponent();
+        TiledMapComponent tiledMapComponent = new TiledMapComponent();
+
+        MapRecToWorldRec(object,boundsComponent.bounds);
+
+        trunkComponent.content = (String)object.getProperties().get("content");
+        trunkComponent.amount = Integer.parseInt((String)object.getProperties().get("amount"));
+
+        if(trunkComponent.content.equals("coins")){
+            totalCoins+=trunkComponent.amount;
+        }
+
+        TiledMapTileLayer layer = (TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]);
+        tiledMapComponent.cell = layer.getCell((int)boundsComponent.bounds.getX(),(int)boundsComponent.bounds.getY());
+
+        TiledMapTileSet tileSet= levelMap.getTileSets().getTileSet("naval");
+        for(TiledMapTile tile:tileSet) {
+            Object property = tile.getProperties().get("tag");
+            if (property != null) {
+                String tag = (String) property;
+                if (tag.equals("trunk")) {
+                    property = tile.getProperties().get("state");
+                    if(property==null)continue;
+                    String state = (String) property;
+                    if (state.equals("locked")) {
+                        tiledMapComponent.tiledMaps.put(TrunkComponent.LOCKED,tile);
+                    } else if (state.equals("open")) {
+                        tiledMapComponent.tiledMaps.put(TrunkComponent.OPEN,tile);
+                    }else if (state.equals("empty")) {
+                        tiledMapComponent.tiledMaps.put(TrunkComponent.EMPTY,tile);
+                    }else{
+                        Gdx.app.debug(tag,"No state match: "+state);
+                    }
+                }
+            }
+        }
+
+        boolean dynamic = Boolean.parseBoolean((String)object.getProperties().get("dynamic"));
+        if(dynamic){
+            BodyComponent bodyComponent = new BodyComponent();
+            BodyDef def = new BodyDef();
+            def.type = BodyDef.BodyType.DynamicBody;
+            def.position.set(boundsComponent.bounds.x+boundsComponent.bounds.width*0.5f, boundsComponent.bounds.y+boundsComponent.bounds.height*0.5f);
+            PolygonShape shape = new PolygonShape();
+            shape.setAsBox(boundsComponent.bounds.width*0.5f, boundsComponent.bounds.height*0.5f);
+            FixtureDef fix = new FixtureDef();
+            fix.shape = shape;
+            fix.density = 1;
+            fix.friction =0.1f;
+            fix.filter.groupIndex = 0;
+            fix.filter.categoryBits = Constants.layerCategoryBits[flag];
+            fix.filter.maskBits = (short)(Constants.BOUNDS|Constants.layerCategoryBits[flag]);
+            bodyComponent.body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
+            bodyComponent.body.createFixture(fix);
+            shape.dispose();
+            entity.add(bodyComponent);
+            checkForJoints(object,bodyComponent.body);
+        }
+
+        entity.add(boundsComponent);
+        entity.add(trunkComponent);
+        entity.add(tiledMapComponent);
+        entity.flags = flag;
+        engine.addEntity(entity);
+    }
+
     private void checkForJoints(MapObject object, Body body){
         if(object.getProperties().get("hasJoint")!=null){
             String bod = (String)object.getProperties().get("body");
             int jointId = Integer.parseInt((String)object.getProperties().get("jointID"));
-            Gdx.app.debug(tag,"(String)object.getProperties().get(\"body\") : "+(String)object.getProperties().get("body")+" ID: "+jointId);
+//            Gdx.app.debug(tag,"(String)object.getProperties().get(\"body\") : "+(String)object.getProperties().get("body")+" ID: "+jointId);
             if(bod.contains("BodyA")){
                 bodiesA.put(jointId,body);
             }else{
@@ -800,8 +873,6 @@ public class LevelBuilder {
             if (cell == null) continue;
             //Get texture regions
             TextureRegion r = new TextureRegion(cell.getTile().getTextureRegion());
-            Gdx.app.debug(tag,"r.getHeight ="+r.getRegionHeight());
-            Gdx.app.debug(tag,"h ="+h);
             float height = h*Constants.inversePPU;
             TextureRegion region = new TextureRegion(r,0,(int)Constants.inversePPU-(int)height,r.getRegionWidth(),(int)height);
 //            TextureRegion region = new TextureRegion(r,0,0,r.getRegionWidth(),r.getRegionHeight());
@@ -1343,25 +1414,23 @@ public class LevelBuilder {
         engine.addEntity(entity);
     }
 
-    private void createGomh(MapObject object,int flag){
+    private void createCharacter(MapObject object,int flag, String name){
+        //TODO choose animations for each character
+
+        CharacterComponent.Character character = CharacterComponent.Character.valueOf(name);
+
         Entity entity = new Entity();
         TextureComponent textureComponent = new TextureComponent();
         AnimationComponent animationComponent = new AnimationComponent();
         StateComponent stateComponent = new StateComponent();
         BoundsComponent boundsComponent = new BoundsComponent();
         TransformComponent transformComponent = new TransformComponent();
-        GomhComponent gomhComponent = new GomhComponent();
-        ConversationComponent conversationComponent = new ConversationComponent();
         CharacterComponent characterComponent = new CharacterComponent();
+        characterComponent.character = character;
 
         if(object.getProperties().get("conversations")!=null) {
             characterComponent.conversationIDs.addAll(((String) object.getProperties().get("conversations")).split(","));
         }
-//		characterComponent.conversationIDs.addAll(
-//				getCharacterConversations((String)object.getProperties().get("conversations")));
-
-        conversationComponent.currentCondition = 0;
-        conversationComponent.character = "Gomh";
 
         Object pX = object.getProperties().get("x");
         Object pY = object.getProperties().get("y");
@@ -1388,18 +1457,9 @@ public class LevelBuilder {
         entity.add(animationComponent);
         entity.add(stateComponent);
         entity.add(boundsComponent);
-        entity.add(gomhComponent);
         entity.add(characterComponent);
         entity.flags = flag;
         engine.addEntity(entity);
-
-		/*Object properties
-		TestGameplay: width:70.0
-		TestGameplay: name:Gomh
-		TestGameplay: height:70.0
-		TestGameplay: x:2730.0
-		TestGameplay: y:420.0
-		 */
     }
 
     private Entity createVal(MapProperties properties,int flag) {
@@ -1414,9 +1474,6 @@ public class LevelBuilder {
         AnimationComponent anim = new AnimationComponent();
         BoundsComponent bounds = new BoundsComponent();
         BodyComponent body = new BodyComponent();
-        ConversationComponent conversationComponent = new ConversationComponent();
-
-        conversationComponent.conditions.add("GOMH0");
 
         transc.pos.set(x,y+0.5f,-1);
         transc.scale.set(0.5f, 0.5f);
@@ -1443,14 +1500,12 @@ public class LevelBuilder {
         FixtureDef fix2 = new FixtureDef();
         fix2.density = 3f;
         fix2.filter.groupIndex = Constants.groupsIndexes[flag];
-//        fix2.filter.categoryBits = Constants.layerCategoryBits[flag];
         fix2.filter.categoryBits = Constants.PLAYER;
         fix2.filter.maskBits = Constants.BOUNDS;
         fix2.friction = 0;
         fix2.shape = shape2;
 
         body.body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
-//		body.body.createFixture(fix);
         body.body.createFixture(fix2);
         body.body.setUserData("Val");
         shape.dispose();
@@ -1470,7 +1525,6 @@ public class LevelBuilder {
         entity.add(anim);
         entity.add(bounds);
         entity.add(body);
-        entity.add(conversationComponent);
         entity.flags = flag;
         return entity;
     }
@@ -1494,8 +1548,6 @@ public class LevelBuilder {
                 textureComponent.region = new TextureRegion(texture,texture.getWidth()*repeatNumber,texture.getHeight());
                 parallaxComponent.scrollingFactorX = layer.scrollX;
                 parallaxComponent.scrollingFactorY = layer.scrollY;
-
-                Gdx.app.debug(tag,"texture width = "+textureWidth*repeatNumber);
 
                 transformComponent.pos.x = layer.scrollX*(textureWidth+48);
                 transformComponent.pos.y = layer.scrollY*(textureHeight+1.8f);

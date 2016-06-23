@@ -16,7 +16,7 @@ public class Constants {
 	public static final float UIViewportHeight = 720;
 	public static final float PixelsPerUnit = 1/70f;
 	public static final float inversePPU = 70f;
-	public static final String[] scriptsNames={"scripts/script1.xml","scripts/script1.xml","scripts/script1.xml"};
+	public static final String[] scriptsNames={"scripts/script1.xml","scripts/scriptP.xml","scripts/scriptP.xml"};
 	public static final String[] mapsNames={"adventure_maps/level1.tmx","adventure_maps/prototype.tmx","adventure_maps/prototype.tmx"};
 	public static final String[] objectsLayersNames={"Objects","Interior Objects"};
 	public static final String[] itemsLayersNames={"Items","Build Interior"};

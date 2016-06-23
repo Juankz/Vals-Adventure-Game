@@ -43,8 +43,6 @@ public class SwitchSystem extends IteratingSystem {
             if(bridgeNumber == number && !bridgeComponent.moving){
                 BridgeSystem bridgeSystem = getEngine().getSystem(BridgeSystem.class);
                 bridgeSystem.moveBy(bridge,bridgeComponent.targets.get(bridgeComponent.targetIndex));
-
-                Gdx.app.debug("switch system","target = "+bridgeComponent.targets.get(bridgeComponent.targetIndex));
             }
         }
 
