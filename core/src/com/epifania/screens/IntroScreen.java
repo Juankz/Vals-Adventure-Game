@@ -66,8 +66,8 @@ public class IntroScreen extends ScreenAdapter {
         if(Assets.instance.update()) {
             nextButton.addAction(Actions.sequence(
                     Actions.visible(true),
-                    Actions.fadeIn(1),
-                    Actions.touchable(Touchable.enabled)
+                    Actions.touchable(Touchable.enabled),
+                    Actions.fadeIn(1)
                 )
             );
             loading.setVisible(false);

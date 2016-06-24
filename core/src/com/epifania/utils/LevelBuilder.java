@@ -7,7 +7,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
@@ -22,11 +21,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.IntMap;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.epifania.components.*;
 import com.epifania.systems.*;
-import javafx.geometry.Bounds;
 
 /**
  * Created by juan on 6/4/16.
@@ -207,6 +206,8 @@ public class LevelBuilder {
                 createPlatform(object,flag);
             }else if(type.equals("block")){
                 createBlock(object,flag);
+            }else if(type.equals("password")){
+                createPassword(object,flag);
             }else if(type.equals("exit")){
                 createExit(object.getProperties());
             }
@@ -265,18 +266,55 @@ public class LevelBuilder {
         engine.addEntity(entity);
     }
 
+    private IntMap<TiledMapTile> getButtonTiles(String color){
+        IntMap<TiledMapTile> map = new IntMap<TiledMapTile>();
+
+        for(TiledMapTile tile : levelMap.getTileSets().getTileSet("Items")){
+            Object property = tile.getProperties().get("tag");
+            if(property == null)continue;
+            String tag = (String)property;
+            if(tag.equals("button")){
+                String color1 = (String)tile.getProperties().get("color");
+                if(color1.equals(color)){
+                    String state = (String)tile.getProperties().get("state");
+                    if(state.equals("up")){
+                        map.put(ButtonComponent.UP,tile);
+                    }else if(state.equals("down")){
+                        map.put(ButtonComponent.DOWN,tile);
+                    }
+                }
+            }
+        }
+        return map;
+    }
+
     private void createButton(final MapObject object, int flag){
-        Entity entity = createRectangle(object,"button",Constants.groupsIndexes[flag],
+        final Entity entity = createRectangle(object,"button",Constants.groupsIndexes[flag],
                 Constants.layerCategoryBits[flag],
                 Constants.layerMaskBits[flag]);
         entity.remove(BoundsComponent.class);
         entity.flags = flag;
         entity.getComponent(BodyComponent.class).body.setUserData(entity);
 
-        ButtonComponent buttonComponent = new ButtonComponent();
-        buttonComponent.number = Integer.parseInt((String)object.getProperties().get("number"));
+        Rectangle rectangle = new Rectangle();
+        MapRecToWorldRec(object,rectangle);
 
-        ActionableComponent actionableComponent = new ActionableComponent();
+        TiledMapTileLayer layer = (TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]);
+        Gdx.app.debug(tag,"(int)rectangle.getX(),(int)rectangle.getY() : "+(int)rectangle.getX()+" - "+(int)rectangle.getY());
+        TiledMapTileLayer.Cell cell = layer.getCell((int)rectangle.getX(),(int)rectangle.getY());
+        TiledMapTile tile = cell.getTile();
+        Object property = tile.getProperties().get("color");
+        String color = (String)property;
+
+        final ButtonComponent buttonComponent = new ButtonComponent();
+        buttonComponent.number = Integer.parseInt((String)object.getProperties().get("number"));
+        buttonComponent.color = ButtonComponent.Color.valueOf(color.toUpperCase());
+
+        final MapTileComponent mapTileComponent = new MapTileComponent();
+        mapTileComponent.tiledMaps.putAll(getButtonTiles(color));
+        mapTileComponent.cell = cell;
+
+        final ActionableComponent actionableComponent = new ActionableComponent();
         actionableComponent.actionable = new ActionableComponent.Actionable() {
             @Override
             public void action() {
@@ -294,9 +332,12 @@ public class LevelBuilder {
                     int number = Integer.parseInt((String)object.getProperties().get("number"));
                     listener.destroyJoint(number);
                 }
+                buttonComponent.state = ButtonComponent.DOWN;
+                mapTileComponent.cell.setTile(mapTileComponent.tiledMaps.get(buttonComponent.state));
             }
         };
 
+        entity.add(mapTileComponent);
         entity.add(buttonComponent);
         entity.add(actionableComponent);
         engine.addEntity(entity);
@@ -420,7 +461,7 @@ public class LevelBuilder {
         FixtureDef fix = new FixtureDef();
         fix.shape = shape;
         fix.density = 1;
-        fix.friction =0.1f;
+        fix.friction =0.5f;
         fix.filter.groupIndex = Constants.groupsIndexes[flag];
         fix.filter.categoryBits = Constants.layerCategoryBits[flag];
         fix.filter.maskBits = Constants.layerMaskBits[flag];
@@ -448,12 +489,15 @@ public class LevelBuilder {
         Object property = object.getProperties().get("breakable");
         if(property != null) {
             platformComponent.breakable = Boolean.parseBoolean((String)property);
+            platformComponent.breakingTime = PlatformComponent.BREAKING_TIME_EASY;
         }
+
         MapRecToWorldRec(object,boundsComponent.bounds);
         transformComponent.pos.set(boundsComponent.bounds.x,boundsComponent.bounds.y,flag);
 
         boolean captureTile = Boolean.parseBoolean((String)object.getProperties().get("captureTile"));
         if(captureTile){
+            Gdx.app.debug(tag,"captureTile platform");
             textureComponent.region=captureTile((TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]),object);
         }else{
             String textureName = (String)object.getProperties().get("texture");
@@ -462,7 +506,7 @@ public class LevelBuilder {
         }
 
         BodyDef def = new BodyDef();
-        def.type = BodyDef.BodyType.KinematicBody;
+        def.type = BodyDef.BodyType.StaticBody;
         def.position.set(transformComponent.pos.x+boundsComponent.bounds.width*0.5f, transformComponent.pos.y+boundsComponent.bounds.height*0.5f);
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(boundsComponent.bounds.width*0.5f, boundsComponent.bounds.height*0.5f);
@@ -476,6 +520,8 @@ public class LevelBuilder {
         bodyComponent.body.setUserData(entity);
         shape.dispose();
         checkForJoints(object,bodyComponent.body);
+
+        platformComponent.originalPosition.set(bodyComponent.body.getWorldCenter().x,bodyComponent.body.getWorldCenter().y);
 
         entity.add(transformComponent);
         entity.add(boundsComponent);
@@ -542,7 +588,7 @@ public class LevelBuilder {
         Entity entity = new Entity();
         BoundsComponent boundsComponent = new BoundsComponent();
         TrunkComponent trunkComponent = new TrunkComponent();
-        TiledMapComponent tiledMapComponent = new TiledMapComponent();
+        MapTileComponent mapTileComponent = new MapTileComponent();
 
         MapRecToWorldRec(object,boundsComponent.bounds);
 
@@ -554,7 +600,7 @@ public class LevelBuilder {
         }
 
         TiledMapTileLayer layer = (TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]);
-        tiledMapComponent.cell = layer.getCell((int)boundsComponent.bounds.getX(),(int)boundsComponent.bounds.getY());
+        mapTileComponent.cell = layer.getCell((int)boundsComponent.bounds.getX(),(int)boundsComponent.bounds.getY());
 
         TiledMapTileSet tileSet= levelMap.getTileSets().getTileSet("naval");
         for(TiledMapTile tile:tileSet) {
@@ -566,11 +612,11 @@ public class LevelBuilder {
                     if(property==null)continue;
                     String state = (String) property;
                     if (state.equals("locked")) {
-                        tiledMapComponent.tiledMaps.put(TrunkComponent.LOCKED,tile);
+                        mapTileComponent.tiledMaps.put(TrunkComponent.LOCKED,tile);
                     } else if (state.equals("open")) {
-                        tiledMapComponent.tiledMaps.put(TrunkComponent.OPEN,tile);
+                        mapTileComponent.tiledMaps.put(TrunkComponent.OPEN,tile);
                     }else if (state.equals("empty")) {
-                        tiledMapComponent.tiledMaps.put(TrunkComponent.EMPTY,tile);
+                        mapTileComponent.tiledMaps.put(TrunkComponent.EMPTY,tile);
                     }else{
                         Gdx.app.debug(tag,"No state match: "+state);
                     }
@@ -602,7 +648,7 @@ public class LevelBuilder {
 
         entity.add(boundsComponent);
         entity.add(trunkComponent);
-        entity.add(tiledMapComponent);
+        entity.add(mapTileComponent);
         entity.flags = flag;
         engine.addEntity(entity);
     }
@@ -840,81 +886,98 @@ public class LevelBuilder {
 
     }
 
-    private  void createBridge(MapObject object,int flag){
-        //Get tiles
-        //Get coordinates
-        float unit = 1/70f;
-        float x,y,w,h;
+    private IntMap<TiledMapTile> getRuneMapTiles() {
+        IntMap<TiledMapTile> intMap = new IntMap<TiledMapTile>();
 
-        Rectangle rectangle =  ((RectangleMapObject)object).getRectangle();
-        x = rectangle.x*unit;
-        y=rectangle.y*unit;
-        w=rectangle.width*unit;
-        h=rectangle.height*unit;
-
-        //Create body
-        Body body;
-        BodyDef def = new BodyDef();
-        def.type = BodyDef.BodyType.KinematicBody;
-//        def.position.set(x+w*0.5f, y+h*0.5f);
-        def.position.set(x+w*0.5f, y+h*0.5f);
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(w*0.5f, h*0.5f);
-        FixtureDef fix = new FixtureDef();
-        fix.shape = shape;
-        body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
-        body.createFixture(fix);
-        body.setUserData("bridge");
-        shape.dispose();
-
-        TiledMapTileLayer tileLayer = (TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]);
-        for(int i = 0;i<(int)w;i++) {
-            TiledMapTileLayer.Cell cell = tileLayer.getCell((int) x + i, (int) y);
-            if (cell == null) continue;
-            //Get texture regions
-            TextureRegion r = new TextureRegion(cell.getTile().getTextureRegion());
-            float height = h*Constants.inversePPU;
-            TextureRegion region = new TextureRegion(r,0,(int)Constants.inversePPU-(int)height,r.getRegionWidth(),(int)height);
-//            TextureRegion region = new TextureRegion(r,0,0,r.getRegionWidth(),r.getRegionHeight());
-            region.flip(cell.getFlipHorizontally(), cell.getFlipVertically());
-            cell.setTile(null);
-
-            //Create Entity
-            TransformComponent transform = new TransformComponent();
-            BridgeComponent bridgeComponent = new BridgeComponent();
-            BodyComponent bodyComponent = new BodyComponent();
-            TextureComponent textureComponent = new TextureComponent();
-            MovementComponent movementComponent = new MovementComponent();
-
-            transform.pos.set( x + i,  y , 0);
-            transform.origin.set(0.0f, 0.5f);
-            textureComponent.region = region;
-            bodyComponent.body = body;
-            bodyComponent.offsetPosition.set((-w * 0.5f) + i, -0.0f);
-            bridgeComponent.number = Integer.parseInt((String) object.getProperties().get("number"));
-
-            //Get targets from object property
-            transform.rotation = cell.getRotation();
-            String s = (String)object.getProperties().get("target");
-            String[] ss = s.split(",");
-            float[] coords = new float[ss.length];
-            for(int m = 0;m<coords.length;m++){
-                coords[m]=Float.parseFloat(ss[m]);
-            }
-            for(int m = 0;m<coords.length;m+=2){
-                bridgeComponent.targets.add(new Vector2(coords[m],coords[m+1]));
-            }
-
-            Entity entity = new Entity();
-            entity.add(transform);
-            entity.add(textureComponent);
-            entity.add(bridgeComponent);
-            entity.add(movementComponent);
-            entity.add(bodyComponent);
-            entity.flags = flag;
-            engine.addEntity(entity);
-
+        TiledMapTileSet tileSet = levelMap.getTileSets().getTileSet("rune");
+        for(TiledMapTile tile : tileSet){
+            String k= (String)tile.getProperties().get("key");
+            if(k==null)continue;
+            int key = Integer.parseInt(k);
+            intMap.put(key,tile);
         }
+
+        return intMap;
+    }
+
+    private  void createPassword(MapObject object, int flag){
+        final Entity entity = new Entity();
+        BoundsComponent boundsComponent = new BoundsComponent();
+        PasswordComponent passwordComponent = new PasswordComponent();
+        ActionableComponent actionableComponent = new ActionableComponent();
+        MapRecToWorldRec(object,boundsComponent.bounds);
+
+        IntMap<TiledMapTile> mapTiles = getRuneMapTiles();
+
+        String password = (String)object.getProperties().get("password");
+        String[] keys = password.split(",");
+
+        int x = (int)boundsComponent.bounds.getX();
+        int y = (int)boundsComponent.bounds.getY();
+        int w = (int)boundsComponent.bounds.getWidth();
+
+        TiledMapTileLayer layer = (TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]);
+
+        for(int i = 0; i < w; i++){
+            int key = Integer.parseInt(keys[i]);
+            Entity piece = createPasswordPiece(x + i, y, layer, key, mapTiles);
+            passwordComponent.keys.add(piece.getComponent(PasswordPieceComponent.class));
+            engine.addEntity(piece);
+        }
+
+        Object property = object.getProperties().get("object");
+        if(property!=null){
+            String obj = (String)property;
+            if(obj.equals("bridge")){
+                property = object.getProperties().get("id");
+                final int id = Integer.parseInt((String)property);
+                actionableComponent.actionable = new ActionableComponent.Actionable() {
+                    @Override
+                    public void action() {
+                        for(Entity bridge : engine.getEntitiesFor(Family.all(BridgeComponent.class).get())){
+                            BridgeComponent bc = bridge.getComponent(BridgeComponent.class);
+                            if(bc.number == id){
+                                engine.getSystem(BridgeSystem.class).moveBy(bridge,bc.targets.get(bc.targetIndex));
+                            }
+                        }
+                    }
+                };
+            }
+        }
+
+
+        entity.add(actionableComponent);
+        entity.add(passwordComponent);
+        entity.flags = flag;
+        engine.addEntity(entity);
+    }
+
+    private Entity createPasswordPiece(int x, int y, TiledMapTileLayer layer , int key, IntMap<TiledMapTile> mapTiles){
+        final Entity entity = new Entity();
+        TiledMapTileLayer.Cell cell = layer.getCell(x,y);
+
+        PasswordPieceComponent passwordPieceComponent = new PasswordPieceComponent();
+        passwordPieceComponent.key = key;
+        Object property = cell.getTile().getProperties().get("key");
+        passwordPieceComponent.actualValue = Integer.parseInt((String)property);
+        MapTileComponent mapTileComponent = new MapTileComponent();
+        mapTileComponent.cell = cell;
+        mapTileComponent.tiledMaps.putAll(mapTiles);
+        BoundsComponent boundsComponent = new BoundsComponent();
+        boundsComponent.bounds.set(x+0.35f,y-2,0.1f,3);
+        ActionableComponent actionableComponent = new ActionableComponent();
+        actionableComponent.actionable = new ActionableComponent.Actionable() {
+            @Override
+            public void action() {
+                engine.getSystem(PasswordSystem.class).nextKey(entity);
+            }
+        };
+
+        entity.add(passwordPieceComponent);
+        entity.add(mapTileComponent);
+        entity.add(boundsComponent);
+        entity.add(actionableComponent);
+        return  entity;
     }
 
     private void createDoor(MapObject object,int flag){
@@ -1043,6 +1106,94 @@ public class LevelBuilder {
             entity.add(bodyComponent);
             entity.flags = flag;
             engine.addEntity(entity);
+        }
+    }
+
+    private  void createBridge(MapObject object,int flag){
+        //Get tiles
+        //Get coordinates
+        float unit = 1/70f;
+        float x,y,w,h;
+
+        Rectangle rectangle =  ((RectangleMapObject)object).getRectangle();
+        x = rectangle.x*unit;
+        y=rectangle.y*unit;
+        w=rectangle.width*unit;
+        h=rectangle.height*unit;
+
+        //Create body
+        Body body;
+        BodyDef def = new BodyDef();
+        def.type = BodyDef.BodyType.KinematicBody;
+//        def.position.set(x+w*0.5f, y+h*0.5f);
+        def.position.set(x+w*0.5f, y+h*0.5f);
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(w*0.5f, h*0.5f);
+        FixtureDef fix = new FixtureDef();
+        fix.shape = shape;
+        fix.friction = 0.5f;
+        body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
+        body.createFixture(fix);
+        body.setUserData("bridge");
+        shape.dispose();
+
+        TiledMapTileLayer tileLayer = (TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]);
+        for(int i = 0;i<(int)w;i++) {
+            TiledMapTileLayer.Cell cell = tileLayer.getCell((int) x + i, (int) y);
+            if (cell == null) continue;
+            //Get texture regions
+            TextureRegion r = new TextureRegion(cell.getTile().getTextureRegion());
+            float height = h*Constants.inversePPU;
+            TextureRegion region = new TextureRegion(r,0,(int)Constants.inversePPU-(int)height,r.getRegionWidth(),(int)height);
+//            TextureRegion region = new TextureRegion(r,0,0,r.getRegionWidth(),r.getRegionHeight());
+            region.flip(cell.getFlipHorizontally(), cell.getFlipVertically());
+            cell.setTile(null);
+
+            //Create Entity
+            TransformComponent transform = new TransformComponent();
+            BridgeComponent bridgeComponent = new BridgeComponent();
+            BodyComponent bodyComponent = new BodyComponent();
+            TextureComponent textureComponent = new TextureComponent();
+            MovementComponent movementComponent = new MovementComponent();
+
+            transform.pos.set( x + i,  y , 0);
+            transform.origin.set(0.0f, 0.5f);
+            textureComponent.region = region;
+            bodyComponent.body = body;
+            bodyComponent.offsetPosition.set((-w * 0.5f) + i, -0.0f);
+            bridgeComponent.number = Integer.parseInt((String) object.getProperties().get("number"));
+
+            //Get targets from object property
+            transform.rotation = cell.getRotation();
+            String s = (String)object.getProperties().get("target");
+            String[] ss = s.split(",");
+            float[] coords = new float[ss.length];
+            for(int m = 0;m<coords.length;m++){
+                coords[m]=Float.parseFloat(ss[m]);
+            }
+            for(int m = 0;m<coords.length;m+=2){
+                bridgeComponent.targets.add(new Vector2(coords[m],coords[m+1]));
+            }
+
+            Object property = object.getProperties().get("continuous");
+            if(property!=null){
+                bridgeComponent.continuos = Boolean.parseBoolean((String)property);
+            }
+
+            property = object.getProperties().get("moving");
+            if(property!=null){
+                bridgeComponent.moving = Boolean.parseBoolean((String)property);
+            }
+
+            Entity entity = new Entity();
+            entity.add(transform);
+            entity.add(textureComponent);
+            entity.add(bridgeComponent);
+            entity.add(movementComponent);
+            entity.add(bodyComponent);
+            entity.flags = flag;
+            engine.addEntity(entity);
+
         }
     }
 
@@ -1264,7 +1415,7 @@ public class LevelBuilder {
      * Example: [RIGHT] x= 11.0 , y=80.00 , w = 8 , h = 3
      * [WRONG] x = 11.23 , y=80.01 , w = 7.96 , h=3.000001
      * @param object levelMap Oject
-     * @return A new entity with a physic component, bounds component,ground component and transform component
+     * @return A new entity with a physic component, bounds component and transform component
      */
     private Entity createRectangle(MapObject object,String userData, short groupIndex, short categoryBits, short maskBits) {
         RectangleMapObject rectangle = (RectangleMapObject)object;
@@ -1502,7 +1653,7 @@ public class LevelBuilder {
         fix2.filter.groupIndex = Constants.groupsIndexes[flag];
         fix2.filter.categoryBits = Constants.PLAYER;
         fix2.filter.maskBits = Constants.BOUNDS;
-        fix2.friction = 0;
+        fix2.friction = 0f;
         fix2.shape = shape2;
 
         body.body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
@@ -1569,9 +1720,15 @@ public class LevelBuilder {
         TiledMapTileLayer.Cell cell = tileLayer.getCell((int)x, (int)y);
         if (cell == null) return null;
         //Get texture regions
+        float ty = 0;
+        if(cell.getFlipVertically()){
+            ty = Constants.inversePPU-height;
+        }
+        Gdx.app.debug(tag,"ty = "+ty);
         TextureRegion r = cell.getTile().getTextureRegion();
-        TextureRegion region = new TextureRegion(r,0,(int)Constants.inversePPU-(int)height,r.getRegionWidth(),(int)height);
-        region.flip(cell.getFlipHorizontally(), cell.getFlipVertically());
+//        TextureRegion region = new TextureRegion(r,0,(int)Constants.inversePPU-(int)height,r.getRegionWidth(),(int)height);
+//        r.flip(cell.getFlipHorizontally(), cell.getFlipVertically());
+        TextureRegion region = new TextureRegion(r,0,(int)ty,r.getRegionWidth(),(int)height);
         cell.setTile(null);
         return region;
     }

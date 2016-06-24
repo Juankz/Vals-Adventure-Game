@@ -15,8 +15,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Joint;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -35,6 +34,7 @@ import com.epifania.ui.ConversationDialog;
 import com.epifania.ui.Item;
 import com.epifania.ui.PauseMenu;
 import com.epifania.utils.*;
+import javafx.application.Platform;
 
 public class GameScreen extends ScreenAdapter{
 
@@ -126,6 +126,8 @@ public class GameScreen extends ScreenAdapter{
 		}
 		engine.getSystem(RenderingSystem.class).setProcessing(true);
 
+		engine.getSystem(BridgeSystem.class).start();
+
 		//Set box2d active objects
 		engine.getSystem(PhysicsSystem.class).setActiveObjects();
 
@@ -174,6 +176,7 @@ public class GameScreen extends ScreenAdapter{
 
 		engine.addSystem(new PhysicsSystem(world));
 		engine.addSystem(new MovementSystem());
+		engine.addSystem(new PlatformSystem());
 		engine.addSystem(new TextureManipulationSystem());
 		engine.addSystem(new Val_System());
 		engine.addSystem(new SpringSystem());
@@ -185,6 +188,7 @@ public class GameScreen extends ScreenAdapter{
 		engine.addSystem(new BoundsSystem());
 		engine.addSystem(new AnimatedWaterCellSystem());
 		engine.addSystem(new TiledMapSystem());
+		engine.addSystem(new PasswordSystem());
 		engine.addSystem(new CameraSystem());
 		engine.addSystem(new CharacterSystem());
         engine.addSystem(new CollisionSystem(new CollisionSystem.CollisionListener() {
@@ -393,7 +397,6 @@ public class GameScreen extends ScreenAdapter{
 		actionButton.addListener(new ClickListener(){
 			@Override
 			public void clicked (InputEvent event, float x, float y) {
-				Gdx.app.debug("Stage","Action button Clicked");
 				engine.getSystem(CollisionSystem.class).action = true;
 			}
 		});
@@ -619,6 +622,7 @@ public class GameScreen extends ScreenAdapter{
 					levelMap.getLayers().get("Builds Front").setVisible(b);
 					levelMap.getLayers().get("Build").setVisible(b);
 				}
+				engine.getSystem(PlatformSystem.class).resetPlatforms();
 			}
 		}
 	}

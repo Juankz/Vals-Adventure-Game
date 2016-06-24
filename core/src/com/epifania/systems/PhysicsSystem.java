@@ -131,9 +131,18 @@ public class PhysicsSystem extends IteratingSystem implements ContactListener {
 		if(val==null || other.getUserData()==null)
 			return;
 
-		if(other.getUserData().equals("Ground") || other.getUserData().equals("bridge")){
+		if(other.getUserData().equals("Ground") ){
 			Val_System vs = this.getEngine().getSystem(Val_System.class);
 			vs.endJump();
+		}
+		if(other.getUserData().equals("bridge")){
+			Val_System vs = this.getEngine().getSystem(Val_System.class);
+			vs.endJump();
+			vals.first().getComponent(MovementComponent.class).bringerBody = other;
+		}else {
+			if(vals.first().getComponent(MovementComponent.class).bringerBody !=null) {
+				vals.first().getComponent(MovementComponent.class).bringerBody = null;
+			}
 		}
 	}
 
@@ -246,7 +255,9 @@ public class PhysicsSystem extends IteratingSystem implements ContactListener {
 			if(otherBody.getUserData()=="Val"){
 				Val_System vs = this.getEngine().getSystem(Val_System.class);
 				vs.endJump();
+				engine.getSystem(PlatformSystem.class).characterCollision(entity);
 			}
 		}
 	}
+
 }

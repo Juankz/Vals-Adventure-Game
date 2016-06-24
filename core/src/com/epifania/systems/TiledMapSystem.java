@@ -5,16 +5,15 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 
-import com.badlogic.gdx.Gdx;
-import com.epifania.components.TiledMapComponent;
+import com.epifania.components.MapTileComponent;
 
 public class TiledMapSystem extends IteratingSystem {
 
-	private ComponentMapper<TiledMapComponent> tm;
+	private ComponentMapper<MapTileComponent> tm;
 	
 	public TiledMapSystem(){
-		super(Family.all(TiledMapComponent.class).get());
-		tm  = ComponentMapper.getFor(TiledMapComponent.class);
+		super(Family.all(MapTileComponent.class).get());
+		tm  = ComponentMapper.getFor(MapTileComponent.class);
 	}
 	
 	@Override
@@ -23,8 +22,8 @@ public class TiledMapSystem extends IteratingSystem {
 
 	public void setTile(Entity entity, int tileID){
 		if(!getFamily().matches(entity))return;
-		TiledMapComponent tiledMapComponent = tm.get(entity);
-		tiledMapComponent.cell.setTile(tiledMapComponent.tiledMaps.get(tileID));
+		MapTileComponent mapTileComponent = tm.get(entity);
+		mapTileComponent.cell.setTile(mapTileComponent.tiledMaps.get(tileID));
 	}
 
 }

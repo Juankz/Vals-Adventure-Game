@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 import com.epifania.components.BodyComponent;
@@ -30,7 +29,7 @@ public class MovementSystem extends IteratingSystem {
 	protected void processEntity(Entity entity, float deltaTime) {
 		MovementComponent mov = mm.get(entity);
 		BodyComponent body = bm.get(entity);
-		
+
 		tmp.set(body.body.getLinearVelocity());
 		float velChangeX = mov.velocity.x - tmp.x;
 		float velChangeY = mov.velocity.y - tmp.y;
@@ -48,6 +47,11 @@ public class MovementSystem extends IteratingSystem {
 		body.body.setTransform(body.body.getPosition().add(mov.traslation),0);
 		mov.traslation.setZero();
 		body.body.applyForceToCenter(mov.accel,false);
+
+		if(mov.bringerBody !=null){
+			body.body.setLinearVelocity(body.body.getLinearVelocity().add(mov.bringerBody.getLinearVelocity().x,0));
+		}
+
 	}
 
 }

@@ -67,7 +67,7 @@ task run(type: Exec) {
         path = "$System.env.ANDROID_HOME"
     }
 
-    def adb = path + "/platform-tools/adb"
+    def adb = path + "/bringerBody-tools/adb"
     commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.epifania.valsadventure/com.epifania.valsadventure.AndroidLauncher'
 }
 
