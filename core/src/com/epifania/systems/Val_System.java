@@ -46,7 +46,6 @@ public class Val_System extends IteratingSystem {
 	@Override
 	protected void processEntity(Entity entity, float deltaTime) {
 		Val_Component val = val_mapper.get(entity);
-		TransformComponent transform = transform_mapper.get(entity);
 		MovementComponent movement = mov_mapper.get(entity);
 		StateComponent state = state_mapper.get(entity);
 		BodyComponent body = bom.get(entity);

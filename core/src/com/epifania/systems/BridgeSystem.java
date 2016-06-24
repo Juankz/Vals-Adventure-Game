@@ -1,9 +1,11 @@
 package com.epifania.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.epifania.components.BodyComponent;
 import com.epifania.components.BridgeComponent;
@@ -27,6 +29,7 @@ public class BridgeSystem extends IteratingSystem {
         mm = ComponentMapper.getFor(MovementComponent.class);
         bm2 = ComponentMapper.getFor(BodyComponent.class);
     }
+
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         BridgeComponent bridgeComponent = bm.get(entity);
@@ -37,6 +40,11 @@ public class BridgeSystem extends IteratingSystem {
             bodyComponent.body.setLinearVelocity(0,0);
             nextTarget(bridgeComponent);
             bridgeComponent.moving=false;
+
+            if(bridgeComponent.continuos){
+                moveBy(entity,bridgeComponent.targets.get(bridgeComponent.targetIndex));
+                bridgeComponent.moving=true;
+            }
         }
     }
 
@@ -70,6 +78,16 @@ public class BridgeSystem extends IteratingSystem {
         bridgeComponent.target.set(x,y);
         bridgeComponent.target.add(bodyComponent.body.getTransform().getPosition());
         bridgeComponent.moving=true;
+    }
+
+    public void start(){
+        for(Entity entity : getEngine().getEntitiesFor(getFamily())){
+            BridgeComponent bridgeComponent = bm.get(entity);
+            if(bridgeComponent.continuos && bridgeComponent.moving){
+                moveBy(entity,bridgeComponent.targets.get(bridgeComponent.targetIndex));
+                bridgeComponent.moving=true;
+            }
+        }
     }
 
 

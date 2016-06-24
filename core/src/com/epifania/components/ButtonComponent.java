@@ -12,7 +12,10 @@ public class ButtonComponent implements Component{
     public static final int DOWN= 1;
     public static final int RESISTANCE = 2;
     public int number = 0;
-    public TiledMapTileLayer.Cell cell=null;
-    public TiledMapTile down = null;
-    public TiledMapTile up = null;
+    public int state = 0;
+    public Color color;
+
+    public enum Color{
+        RED,YELLOW,GREEN,BLUE
+    }
 }
