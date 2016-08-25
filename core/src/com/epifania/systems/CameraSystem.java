@@ -35,22 +35,22 @@ public class CameraSystem extends IteratingSystem {
 			return;
 		}
 		float distance = cam.camera.position.x - target.pos.x;
-		if(Math.abs(distance)>cam.DISTANCE){
+		if(Math.abs(distance)>cam.DISTANCEX){
 			if(distance>0){
-				cam.camera.position.x = cam.DISTANCE + target.pos.x;
+				cam.camera.position.x = cam.DISTANCEX + target.pos.x;
 			}else{
-				cam.camera.position.x = -cam.DISTANCE + target.pos.x;
+				cam.camera.position.x = -cam.DISTANCEX + target.pos.x;
 			}
 		}
 		
 		distance = cam.camera.position.y - target.pos.y;
-		if(Math.abs(distance)>cam.DISTANCE){
-			if(distance>0){
-				cam.camera.position.y = cam.DISTANCE + target.pos.y;
-			}else{
-				cam.camera.position.y = -cam.DISTANCE + target.pos.y;
-			}
+		//Keeps the camera above the player, hence the player has more visibility of the upper part of the map.
+		if(distance>CameraComponent.DISTANCEYD){
+			cam.camera.position.y = CameraComponent.DISTANCEYD + target.pos.y;
+		}else if(distance < -CameraComponent.DISTANCEYU){
+			cam.camera.position.y = -CameraComponent.DISTANCEYU + target.pos.y;
 		}
+
 		//Keep camera into bounds
 		float wv = cam.camera.viewportWidth;
 		float wh = cam.camera.viewportHeight;
@@ -60,21 +60,11 @@ public class CameraSystem extends IteratingSystem {
 			wh = cam.camera.viewportWidth * Gdx.graphics.getHeight() / Gdx.graphics.getWidth();
 		}
 
-//		if(cam.camera.position.x - cam.camera.viewportWidth*0.5f < 0){
-//			cam.camera.position.x = cam.camera.viewportWidth*0.5f;
-//		}else if(cam.camera.position.x + cam.camera.viewportWidth*0.5f > cam.bounds.width){
-//			cam.camera.position.x = cam.bounds.width-cam.camera.viewportWidth*0.5f;
-//		}
 		if(cam.camera.position.x - wv*0.5f < 0){
 			cam.camera.position.x = wv*0.5f;
 		}else if(cam.camera.position.x + wv*0.5f > cam.bounds.width){
 			cam.camera.position.x = cam.bounds.width-wv*0.5f;
 		}
-//		if(cam.camera.position.y - cam.camera.viewportHeight*0.5f <0){
-//			cam.camera.position.y = cam.camera.viewportHeight*0.5f;
-//		}else if(cam.camera.position.y + cam.camera.viewportHeight*0.5f > cam.bounds.height){
-//			cam.camera.position.y = cam.bounds.height - cam.camera.viewportHeight*0.5f;
-//		}
 
 		if(cam.camera.position.y - wh*0.5f <0){
 			cam.camera.position.y = wh*0.5f;

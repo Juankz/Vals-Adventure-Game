@@ -15,8 +15,8 @@
   {
     "name":"bg1.png",
     "layer":2,
-    "scrollX":0.5,
-    "scrollY":0.5
+    "scrollX":0.25,
+    "scrollY":0.25
   }
 ]
 }

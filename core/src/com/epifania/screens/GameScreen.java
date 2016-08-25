@@ -323,6 +323,10 @@ public class GameScreen extends ScreenAdapter{
 				boolean debug = !engine.getSystem(PhysicsDebugSystem.class).checkProcessing();
 				engine.getSystem(PhysicsDebugSystem.class).setProcessing(debug);
 			}
+			if (Gdx.input.isKeyJustPressed(Input.Keys.G) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+				boolean debug = !engine.getSystem(RenderingSystem.class).checkProcessing();
+				engine.getSystem(RenderingSystem.class).setProcessing(debug);
+			}
 		}
 
 		switch (gameState){
@@ -620,7 +624,7 @@ public class GameScreen extends ScreenAdapter{
 					engine.getSystem(PhysicsSystem.class).setActiveObjects();
 					levelMap.getLayers().get("Items").setVisible(b);
 					levelMap.getLayers().get("Builds Front").setVisible(b);
-					levelMap.getLayers().get("Build").setVisible(b);
+					levelMap.getLayers().get("Builds").setVisible(b);
 				}
 				engine.getSystem(PlatformSystem.class).resetPlatforms();
 			}

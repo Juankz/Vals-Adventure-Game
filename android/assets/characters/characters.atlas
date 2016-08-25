@@ -3,6 +3,84 @@ characters.png
 format: RGBA8888
 filter: MipMapLinearNearest,Nearest
 repeat: none
+Bonny/idle1
+  rotate: false
+  xy: 1, 1
+  size: 121, 202
+  orig: 121, 202
+  offset: 0, 0
+  index: -1
+Bonny/idle2
+  rotate: false
+  xy: 125, 11
+  size: 121, 192
+  orig: 121, 192
+  offset: 0, 0
+  index: -1
+
+characters2.png
+format: RGBA8888
+filter: MipMapLinearNearest,Nearest
+repeat: none
+Blue/talk1
+  rotate: false
+  xy: 1, 1
+  size: 59, 100
+  orig: 59, 100
+  offset: 0, 0
+  index: -1
+Blue/talk2
+  rotate: false
+  xy: 63, 5
+  size: 59, 96
+  orig: 59, 96
+  offset: 0, 0
+  index: -1
+
+characters3.png
+format: RGBA8888
+filter: MipMapLinearNearest,Nearest
+repeat: none
+Mom/sad3
+  rotate: false
+  xy: 1, 1
+  size: 71, 120
+  orig: 71, 120
+  offset: 0, 0
+  index: -1
+Mom/happy1
+  rotate: false
+  xy: 75, 1
+  size: 71, 120
+  orig: 71, 120
+  offset: 0, 0
+  index: -1
+Mom/sad1
+  rotate: false
+  xy: 149, 1
+  size: 71, 120
+  orig: 71, 120
+  offset: 0, 0
+  index: -1
+Mom/sad2
+  rotate: false
+  xy: 223, 5
+  size: 71, 116
+  orig: 71, 116
+  offset: 0, 0
+  index: -1
+Mom/happy2
+  rotate: false
+  xy: 297, 5
+  size: 71, 116
+  orig: 71, 116
+  offset: 0, 0
+  index: -1
+
+characters4.png
+format: RGBA8888
+filter: MipMapLinearNearest,Nearest
+repeat: none
 Gomh/gomhLeft
   rotate: false
   xy: 1, 1
@@ -32,7 +110,33 @@ Gomh/gomhIdle2
   offset: 0, 0
   index: -1
 
-characters2.png
+characters5.png
+format: RGBA8888
+filter: MipMapLinearNearest,Nearest
+repeat: none
+Pinky/idle1
+  rotate: false
+  xy: 1, 1
+  size: 59, 100
+  orig: 59, 100
+  offset: 0, 0
+  index: -1
+Pinky/despective1
+  rotate: false
+  xy: 63, 1
+  size: 59, 100
+  orig: 59, 100
+  offset: 0, 0
+  index: -1
+Pinky/despective2
+  rotate: false
+  xy: 125, 4
+  size: 59, 97
+  orig: 59, 97
+  offset: 0, 0
+  index: -1
+
+characters6.png
 format: RGBA8888
 filter: MipMapLinearNearest,Nearest
 repeat: none

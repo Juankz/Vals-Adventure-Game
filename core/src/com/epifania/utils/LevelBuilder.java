@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObject;
@@ -20,10 +21,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.IntMap;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.*;
 import com.epifania.components.*;
 import com.epifania.systems.*;
 
@@ -65,6 +63,10 @@ public class LevelBuilder {
         createWorldBounds();
         createCoins();
 
+        for(TiledMapTileSet set : levelMap.getTileSets()){
+            Gdx.app.debug(tag,"tileset name : "+set.getName());
+        }
+
         for(int flag = 0;flag<Constants.objectsLayersNames.length;flag++) {
             createSpring(flag);
             createFlags(flag);
@@ -72,7 +74,8 @@ public class LevelBuilder {
             createJoints(flag);
             createPostItems(flag);
         }
-        setTilesAnimation();
+        setTilesAnimation("GroundBack");
+        setTilesAnimation("GroundMid");
         createBackground();
     }
 
@@ -452,21 +455,57 @@ public class LevelBuilder {
             textureComponent.region=captureTile((TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]),object);
         }
 
+        float density = 1;
+
+        Object property = object.getProperties().get("density");
+        if(property!=null){
+            density = Float.parseFloat((String)property);
+        }
+
+        boolean rotate = true;
+        property = object.getProperties().get("rotate");
+        if(property!=null){
+            rotate = Boolean.parseBoolean((String)property);
+        }
+
+        BodyDef.BodyType type = BodyDef.BodyType.StaticBody;
+        property=object.getProperties().get("dynamic");
+        if(property!=null){
+            boolean isDynamic = Boolean.parseBoolean((String)property);
+            if(isDynamic){
+                type = BodyDef.BodyType.DynamicBody;
+            }
+        }
+
+        property=object.getProperties().get("playerCollide");
+        short maskBits = Constants.layerMaskBits[flag];
+        short groupindex = Constants.groupsIndexes[flag];
+        if(property!=null){
+            boolean playerCollide = Boolean.parseBoolean((String)property);
+            if(!playerCollide){
+                Gdx.app.debug(tag,"Box does not collide with player");
+                groupindex = 0;
+                maskBits = (short)(Constants.layerCategoryBits[flag]|Constants.BOUNDS);
+            }
+        }
+
         BodyComponent bodyComponent = new BodyComponent();
         BodyDef def = new BodyDef();
-        def.type = BodyDef.BodyType.DynamicBody;
+        def.type = type;
+        def.fixedRotation = !rotate;
         def.position.set(transformComponent.pos.x+boundsComponent.bounds.width*0.5f, transformComponent.pos.y+boundsComponent.bounds.height*0.5f);
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(boundsComponent.bounds.width*0.5f, boundsComponent.bounds.height*0.5f);
         FixtureDef fix = new FixtureDef();
         fix.shape = shape;
-        fix.density = 1;
+        fix.density = density;
         fix.friction =0.5f;
-        fix.filter.groupIndex = Constants.groupsIndexes[flag];
+        fix.filter.groupIndex = groupindex;
         fix.filter.categoryBits = Constants.layerCategoryBits[flag];
-        fix.filter.maskBits = Constants.layerMaskBits[flag];
+        fix.filter.maskBits = maskBits;
         bodyComponent.body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
         bodyComponent.body.createFixture(fix);
+        bodyComponent.body.setUserData("Box");
         shape.dispose();
         entity.add(bodyComponent);
         checkForJoints(object,bodyComponent.body);
@@ -850,10 +889,11 @@ public class LevelBuilder {
         TiledMapTileLayer.Cell cell = tileLayer.getCell((int)x,(int)y);
 
         //Select tiles
-        TiledMapTileSet tileset =  levelMap.getTileSets().getTileSet(Constants.itemsLayersNames[flag]);
+        Gdx.app.debug(tag,"flag: "+ flag);
+        TiledMapTileSet tileset =  levelMap.getTileSets().getTileSet("Items");
         for(TiledMapTile tile:tileset){
 
-            Object property = tile.getProperties().get("type");
+            Object property = tile.getProperties().get("tag");
 
             if(property == null) {
                 continue;
@@ -996,7 +1036,7 @@ public class LevelBuilder {
                 engine.getSystem(PhysicsSystem.class).setActiveObjects();
                 levelMap.getLayers().get("Items").setVisible(false);
                 levelMap.getLayers().get("Builds Front").setVisible(false);
-                levelMap.getLayers().get("Build").setVisible(false);
+                levelMap.getLayers().get("Builds").setVisible(false);
             }
         };
 
@@ -1023,7 +1063,7 @@ public class LevelBuilder {
                 engine.getSystem(PhysicsSystem.class).setActiveObjects();
                 levelMap.getLayers().get("Items").setVisible(true);
                 levelMap.getLayers().get("Builds Front").setVisible(true);
-                levelMap.getLayers().get("Build").setVisible(true);
+                levelMap.getLayers().get("Builds").setVisible(true);
             }
         };
 
@@ -1263,8 +1303,8 @@ public class LevelBuilder {
         }
     }
 
-    private void setTilesAnimation(){
-        TiledMapTileLayer layer = (TiledMapTileLayer)levelMap.getLayers().get("GroundBack");
+    private void setTilesAnimation(String layerName){
+        TiledMapTileLayer layer = (TiledMapTileLayer)levelMap.getLayers().get(layerName);
 
         for(int x = 0; x < layer.getWidth();x++){
             for(int y = 0; y < layer.getHeight();y++){
@@ -1273,7 +1313,7 @@ public class LevelBuilder {
                 if(cell == null)
                     continue;
 
-                Object property = cell.getTile().getProperties().get("WaterTileFrame");
+                Object property = cell.getTile().getProperties().get("waterTileFrame");
 
                 if(property == null) {
                     continue;
@@ -1596,10 +1636,8 @@ public class LevelBuilder {
 
         transformComponent.pos.set(x,y,1);
         transformComponent.origin.set(0.5f,0);
-        animationComponent.animations.put(GomhComponent.LEFT,Assets.instance.gomhAnimations.left);
-        animationComponent.animations.put(GomhComponent.RIGHT,Assets.instance.gomhAnimations.right);
-        animationComponent.animations.put(GomhComponent.CENTER,Assets.instance.gomhAnimations.center);
-        stateComponent.set(GomhComponent.LEFT);
+        getCharacterAnimations(character,animationComponent.animations);
+        stateComponent.set(animationComponent.animations.keys().next());
 
         MapRecToWorldRec(object,boundsComponent.bounds);
 
@@ -1611,6 +1649,33 @@ public class LevelBuilder {
         entity.add(characterComponent);
         entity.flags = flag;
         engine.addEntity(entity);
+    }
+
+    private void getCharacterAnimations(CharacterComponent.Character character, IntMap<Animation> out){
+        switch(character){
+            case GOMH:
+                out.put(CharacterComponent.LEFT,Assets.instance.gomhAnimations.left);
+                out.put(CharacterComponent.RIGHT,Assets.instance.gomhAnimations.right);
+                out.put(CharacterComponent.IDLE,Assets.instance.gomhAnimations.center);
+                break;
+            case PINKY:
+                out.put(CharacterComponent.IDLE,Assets.instance.pinkyAnimations.idle);
+                out.put(CharacterComponent.TALKING,Assets.instance.pinkyAnimations.despective);
+                break;
+            case MOM:
+                out.put(CharacterComponent.SAD,Assets.instance.momAnimations.sad);
+                out.put(CharacterComponent.HAPPY,Assets.instance.momAnimations.happy);
+                break;
+            case BLUE:
+                out.put(CharacterComponent.IDLE,Assets.instance.blueAnimations.idle);
+                out.put(CharacterComponent.TALKING,Assets.instance.blueAnimations.talk);
+                break;
+            case BONNY:
+                out.put(CharacterComponent.IDLE,Assets.instance.bonnyAnimations.idle);
+                break;
+            default:
+                Gdx.app.error(tag,"No character found under the name of: "+character);
+        }
     }
 
     private Entity createVal(MapProperties properties,int flag) {
@@ -1633,31 +1698,52 @@ public class LevelBuilder {
         state.set(Val_Component.IDLE);
         bounds.bounds.set(transc.pos.x,transc.pos.y,Val_Component.WIDTH,Val_Component.HEIGHT);
 
+        //Body
         BodyDef def = new BodyDef();
         def.fixedRotation = true;
         def.type = BodyDef.BodyType.DynamicBody;
         def.linearDamping=1;
         def.position.set(transc.pos.x, transc.pos.y);
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(Val_Component.WIDTH*0.25f, Val_Component.HEIGHT*0.25f,new Vector2(0,Val_Component.HEIGHT*0.25f),0);
+//        shape.setAsBox(Val_Component.WIDTH*0.4f, Val_Component.HEIGHT*0.5f,new Vector2(0,0),0);
+        float w=0.8f;
+        float h=1f;
+        float[] vertices = {0,0,0.2f,-0.2f,0.8f,-0.2f,1,0,1,0.8f,0,0.8f};
+        for(int i = 0;i<vertices.length;i++){
+            float value=vertices[i];
+            if(i%2==0){
+                value*=w;
+                value-=0.5f*w;
+            }else{
+//                value*=h;
+                value-=0.25;
+            }
+            vertices[i]=value;
+        }
+        shape.set(vertices);
         FixtureDef fix = new FixtureDef();
         fix.shape = shape;
-        fix.density = 2.5f;
+        fix.density = 2f;
         fix.friction = 0f;
+        fix.filter.groupIndex = Constants.groupsIndexes[flag];
+        fix.filter.categoryBits = Constants.PLAYER;
+        fix.filter.maskBits = Constants.BOUNDS;
 
-        CircleShape shape2 = new CircleShape();
-        shape2.setRadius(Val_Component.WIDTH*0.5f);
-        shape2.setPosition(new Vector2(0,-Val_Component.HEIGHT*0.1f));
-        FixtureDef fix2 = new FixtureDef();
-        fix2.density = 3f;
-        fix2.filter.groupIndex = Constants.groupsIndexes[flag];
-        fix2.filter.categoryBits = Constants.PLAYER;
-        fix2.filter.maskBits = Constants.BOUNDS;
-        fix2.friction = 0f;
-        fix2.shape = shape2;
+        //Feet
+        PolygonShape shape3 = new PolygonShape();
+        shape3.setAsBox(Val_Component.WIDTH*0.2f, Val_Component.HEIGHT*0.05f,new Vector2(0,-(Val_Component.HEIGHT * 0.5f) - 0.025f),0);
+        FixtureDef fix3 = new FixtureDef();
+        fix3.shape = shape3;
+        fix3.isSensor=true;
+        fix3.density = 0f;
+        fix3.friction = 0f;
+        fix3.filter.groupIndex = Constants.groupsIndexes[flag];
+        fix3.filter.categoryBits = Constants.PLAYER;
+        fix3.filter.maskBits = Constants.BOUNDS;
 
         body.body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
-        body.body.createFixture(fix2);
+        body.body.createFixture(fix);
+        body.body.createFixture(fix3);
         body.body.setUserData("Val");
         shape.dispose();
 

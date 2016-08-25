@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<tileset name="custom" tilewidth="70" tileheight="70" spacing="2" tilecount="7" columns="7">
- <image source="resources/custom.png" width="512" height="128"/>
-</tileset>

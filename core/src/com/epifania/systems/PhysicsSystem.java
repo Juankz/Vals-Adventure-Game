@@ -131,7 +131,7 @@ public class PhysicsSystem extends IteratingSystem implements ContactListener {
 		if(val==null || other.getUserData()==null)
 			return;
 
-		if(other.getUserData().equals("Ground") ){
+		if(other.getUserData().equals("Ground") || other.getUserData().equals("Box")){
 			Val_System vs = this.getEngine().getSystem(Val_System.class);
 			vs.endJump();
 		}
