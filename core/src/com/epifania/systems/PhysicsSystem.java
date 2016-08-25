@@ -132,13 +132,27 @@ public class PhysicsSystem extends IteratingSystem implements ContactListener {
 			return;
 
 		if(other.getUserData().equals("Ground") || other.getUserData().equals("Box")){
-			Val_System vs = this.getEngine().getSystem(Val_System.class);
-			vs.endJump();
+			for(Fixture fixture : val.getFixtureList()){
+				if(fixture.getUserData()!=null){
+					if(fixture.getUserData().equals("feetFixture")){
+						Val_System vs = this.getEngine().getSystem(Val_System.class);
+						vs.endJump();
+					}else{
+						this.getEngine().getSystem(Val_System.class).canJump=false;
+					}
+				}
+			}
 		}
 		if(other.getUserData().equals("bridge")){
-			Val_System vs = this.getEngine().getSystem(Val_System.class);
-			vs.endJump();
-			vals.first().getComponent(MovementComponent.class).bringerBody = other;
+			for(Fixture fixture : val.getFixtureList()){
+				if(fixture.getUserData()!=null){
+					if(fixture.getUserData().equals("feetFixture")){
+						Val_System vs = this.getEngine().getSystem(Val_System.class);
+						vs.endJump();
+						vals.first().getComponent(MovementComponent.class).bringerBody = other;
+					}
+				}
+			}
 		}else {
 			if(vals.first().getComponent(MovementComponent.class).bringerBody !=null) {
 				vals.first().getComponent(MovementComponent.class).bringerBody = null;

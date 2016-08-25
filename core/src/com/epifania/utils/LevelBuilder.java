@@ -1743,7 +1743,8 @@ public class LevelBuilder {
 
         body.body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
         body.body.createFixture(fix);
-        body.body.createFixture(fix3);
+        Fixture feetFixture = body.body.createFixture(fix3);
+        feetFixture.setUserData("feetFixture");
         body.body.setUserData("Val");
         shape.dispose();
 
