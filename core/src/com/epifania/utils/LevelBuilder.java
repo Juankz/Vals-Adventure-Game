@@ -1696,7 +1696,8 @@ public class LevelBuilder {
         mov.accel.set(0,0);
         mov.velocity.set(0, 0);
         state.set(Val_Component.IDLE);
-        bounds.bounds.set(transc.pos.x,transc.pos.y,Val_Component.WIDTH,Val_Component.HEIGHT);
+        bounds.bounds.set(transc.pos.x,transc.pos.y,Val_Component.WIDTH*0.8f,Val_Component.HEIGHT*0.7f);
+        bounds.posOffset.y=Val_Component.HEIGHT*0.0f;
 
         //Body
         BodyDef def = new BodyDef();
@@ -1705,18 +1706,15 @@ public class LevelBuilder {
         def.linearDamping=1;
         def.position.set(transc.pos.x, transc.pos.y);
         PolygonShape shape = new PolygonShape();
-//        shape.setAsBox(Val_Component.WIDTH*0.4f, Val_Component.HEIGHT*0.5f,new Vector2(0,0),0);
         float w=0.8f;
-        float h=1f;
-        float[] vertices = {0,0,0.2f,-0.2f,0.8f,-0.2f,1,0,1,0.8f,0,0.8f};
+        float[] vertices = {0,0,0.2f,-0.2f,0.8f,-0.2f,1,0,1,0.6f,0.8f,0.8f,0.2f,0.8f,0,0.6f};
         for(int i = 0;i<vertices.length;i++){
             float value=vertices[i];
             if(i%2==0){
                 value*=w;
                 value-=0.5f*w;
             }else{
-//                value*=h;
-                value-=0.25;
+                value-=0.27f;
             }
             vertices[i]=value;
         }
