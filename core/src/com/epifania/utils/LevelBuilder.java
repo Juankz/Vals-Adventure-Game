@@ -505,14 +505,17 @@ public class LevelBuilder {
         fix.filter.maskBits = maskBits;
         bodyComponent.body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
         bodyComponent.body.createFixture(fix);
-        bodyComponent.body.setUserData("Box");
+        bodyComponent.body.setUserData(entity);
         shape.dispose();
         entity.add(bodyComponent);
         checkForJoints(object,bodyComponent.body);
 
+        BoxComponent boxComponent = new BoxComponent();
+
         entity.add(transformComponent);
         entity.add(boundsComponent);
         entity.add(textureComponent);
+        entity.add(boxComponent);
         entity.flags = flag;
         engine.addEntity(entity);
     }
@@ -1098,7 +1101,7 @@ public class LevelBuilder {
         fix.shape = shape;
         body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
         body.createFixture(fix);
-        body.setUserData("rope");
+        body.setUserData(null);
         shape.dispose();
 
         TiledMapTileLayer tileLayer = (TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]);
@@ -1174,7 +1177,6 @@ public class LevelBuilder {
         fix.friction = 0.5f;
         body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
         body.createFixture(fix);
-        body.setUserData("bridge");
         shape.dispose();
 
         TiledMapTileLayer tileLayer = (TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]);
@@ -1190,6 +1192,8 @@ public class LevelBuilder {
             cell.setTile(null);
 
             //Create Entity
+            Entity entity = new Entity();
+
             TransformComponent transform = new TransformComponent();
             BridgeComponent bridgeComponent = new BridgeComponent();
             BodyComponent bodyComponent = new BodyComponent();
@@ -1200,6 +1204,7 @@ public class LevelBuilder {
             transform.origin.set(0.0f, 0.5f);
             textureComponent.region = region;
             bodyComponent.body = body;
+            bodyComponent.body.setUserData(entity);
             bodyComponent.offsetPosition.set((-w * 0.5f) + i, -0.0f);
             bridgeComponent.number = Integer.parseInt((String) object.getProperties().get("number"));
 
@@ -1225,7 +1230,7 @@ public class LevelBuilder {
                 bridgeComponent.moving = Boolean.parseBoolean((String)property);
             }
 
-            Entity entity = new Entity();
+
             entity.add(transform);
             entity.add(textureComponent);
             entity.add(bridgeComponent);
@@ -1436,12 +1441,14 @@ public class LevelBuilder {
                     Constants.layerMaskBits[flag]);
             GroundComponent gc = new GroundComponent();
             gc.shape = GroundComponent.POLYGON;
+            entity.add(gc);
         }else if(Integer.parseInt((String)(shape))==GroundComponent.RECTANGLE){
             entity = createRectangle(object,"Ground",Constants.groupsIndexes[flag],
                     Constants.layerCategoryBits[flag],
                     Constants.layerMaskBits[flag]);
             GroundComponent gc = new GroundComponent();
             gc.shape = GroundComponent.RECTANGLE;
+            entity.add(gc);
         }else{
             entity=new Entity();
             Gdx.app.error(tag, "No shape match");
@@ -1485,7 +1492,7 @@ public class LevelBuilder {
         shape.dispose();
         checkForJoints(object,body.body);
 
-        body.body.setUserData(userData);
+        body.body.setUserData(entity);
         entity.add(bounds);
         entity.add(transform);
         entity.add(body);
@@ -1531,7 +1538,7 @@ public class LevelBuilder {
         body.body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
         body.body.createFixture(fix);
         shape.dispose();
-        body.body.setUserData(userData);
+        body.body.setUserData(entity);
         entity.add(polygon);
         entity.add(transform);
 //        entity.add(body);
@@ -1696,8 +1703,8 @@ public class LevelBuilder {
         mov.accel.set(0,0);
         mov.velocity.set(0, 0);
         state.set(Val_Component.IDLE);
-        bounds.bounds.set(transc.pos.x,transc.pos.y,Val_Component.WIDTH*0.8f,Val_Component.HEIGHT*0.7f);
-        bounds.posOffset.y=Val_Component.HEIGHT*0.0f;
+        bounds.bounds.set(transc.pos.x,transc.pos.y,Val_Component.WIDTH*0.8f,Val_Component.HEIGHT*0.9f);
+        bounds.posOffset.y=Val_Component.HEIGHT*0.1f;
 
         //Body
         BodyDef def = new BodyDef();
@@ -1707,7 +1714,7 @@ public class LevelBuilder {
         def.position.set(transc.pos.x, transc.pos.y);
         PolygonShape shape = new PolygonShape();
         float w=0.8f;
-        float[] vertices = {0,0,0.2f,-0.2f,0.8f,-0.2f,1,0,1,0.6f,0.8f,0.8f,0.2f,0.8f,0,0.6f};
+        float[] vertices = {0,0,0.2f,-0.2f,0.8f,-0.2f,1,0,1,0.5f,0.8f,0.7f,0.2f,0.7f,0,0.5f};
         for(int i = 0;i<vertices.length;i++){
             float value=vertices[i];
             if(i%2==0){
@@ -1721,7 +1728,7 @@ public class LevelBuilder {
         shape.set(vertices);
         FixtureDef fix = new FixtureDef();
         fix.shape = shape;
-        fix.density = 2f;
+        fix.density = 2.4f;
         fix.friction = 0f;
         fix.filter.groupIndex = Constants.groupsIndexes[flag];
         fix.filter.categoryBits = Constants.PLAYER;
@@ -1729,7 +1736,7 @@ public class LevelBuilder {
 
         //Feet
         PolygonShape shape3 = new PolygonShape();
-        shape3.setAsBox(Val_Component.WIDTH*0.2f, Val_Component.HEIGHT*0.05f,new Vector2(0,-(Val_Component.HEIGHT * 0.5f) - 0.025f),0);
+        shape3.setAsBox(Val_Component.WIDTH*0.25f, Val_Component.HEIGHT*0.05f,new Vector2(0,-(Val_Component.HEIGHT * 0.5f) - 0.025f),0);
         FixtureDef fix3 = new FixtureDef();
         fix3.shape = shape3;
         fix3.isSensor=true;
@@ -1740,10 +1747,11 @@ public class LevelBuilder {
         fix3.filter.maskBits = Constants.BOUNDS;
 
         body.body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
-        body.body.createFixture(fix);
+        Fixture bodyFixture = body.body.createFixture(fix);
         Fixture feetFixture = body.body.createFixture(fix3);
+        bodyFixture.setUserData("bodyFixture");
         feetFixture.setUserData("feetFixture");
-        body.body.setUserData("Val");
+        body.body.setUserData(entity);
         shape.dispose();
 
         anim.animations.put(Val_Component.IDLE, Assets.instance.valAssets.idle);

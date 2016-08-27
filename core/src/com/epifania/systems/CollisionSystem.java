@@ -12,10 +12,11 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.epifania.components.*;
 
-public class CollisionSystem extends EntitySystem {
+public class CollisionSystem extends EntitySystem implements ContactListener {
 
 	private static final String tag = "Collision System";
 	private static final String NONE = "NONE";
@@ -23,6 +24,7 @@ public class CollisionSystem extends EntitySystem {
 	public Button actionButton;
 	public Button lockedButton;
 	private Vector3 tmp = new Vector3();
+	private Entity valEntity, otherEntity;
 	
 	private static final String TAG = "CollisionSystem";
 	private ComponentMapper<BoundsComponent> bm;
@@ -274,5 +276,169 @@ public class CollisionSystem extends EntitySystem {
 			if(!button.isVisible())
 				button.setVisible(true);
 		}
+	}
+
+	//BOX2D
+	@Override
+	public void beginContact(Contact contact) {
+		valEntity = null; otherEntity = null;
+		getFeetCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
+		if(valEntity!=null && otherEntity!=null) {
+
+			if (otherEntity.getComponent(GroundComponent.class) != null) {
+				addFeetContacts(valEntity);
+			}
+			if (otherEntity.getComponent(BoxComponent.class) != null) {
+				addFeetContacts(valEntity);
+			}
+			if (Family.all(BridgeComponent.class).get().matches(otherEntity)) {
+				addFeetContacts(valEntity);
+				bridgeCollision();
+			}
+			if (otherEntity.getComponent(PlatformComponent.class) != null) {
+				addFeetContacts(valEntity);
+				platformCollision();
+			}
+		}
+
+		valEntity = null; otherEntity = null;
+		getBodyCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
+		Gdx.app.debug(tag,valEntity + "," + otherEntity);
+		if(valEntity==null || otherEntity==null) return;
+
+		if(otherEntity.getComponent(SpringComponent.class)!=null){
+			springCollision();
+		}
+		if(Family.all(ButtonComponent.class,ActionableComponent.class,BodyComponent.class).get().matches(otherEntity)){
+			buttonCollision();
+		}
+
+	}
+
+	@Override
+	public void endContact(Contact contact) {
+		valEntity =null;
+		otherEntity = null;
+
+		getFeetCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
+		if(valEntity==null || otherEntity==null) return;
+
+		if(otherEntity.getComponent(GroundComponent.class)!=null){
+			subFeetContacts(valEntity);
+		}
+		if(otherEntity.getComponent(BoxComponent.class)!=null){
+			subFeetContacts(valEntity);
+		}
+		if(otherEntity.getComponent(PlatformComponent.class)!=null){
+			subFeetContacts(valEntity);
+		}
+		if(Family.all(BridgeComponent.class).get().matches(otherEntity)){
+			subFeetContacts(valEntity);
+			valEntity.getComponent(MovementComponent.class).bringerBody = null;
+		}
+	}
+
+	@Override
+	public void preSolve(Contact contact, Manifold oldManifold) {
+
+	}
+
+	@Override
+	public void postSolve(Contact contact, ContactImpulse impulse) {
+
+	}
+
+	/**
+	 * Gets the entity which Val feet collides with and store it in output Entities.
+	 * All body.userData must be an Entity object
+	 * @param fixA contact Fixture
+	 * @param fixB contact fixture
+	 */
+	private void getFeetCollisionEntity(Fixture fixA, Fixture fixB){
+		Object dataA = fixA.getUserData();
+		Object dataB = fixB.getUserData();
+
+		if(dataA != null){
+			if(dataA.equals("feetFixture")){
+				valEntity = (Entity) fixA.getBody().getUserData();
+				otherEntity = (Entity) fixB.getBody().getUserData();
+			}
+		}
+		if(dataB != null){
+			if(dataB.equals("feetFixture")){
+				valEntity = (Entity) fixB.getBody().getUserData();
+				otherEntity = (Entity) fixA.getBody().getUserData();
+			}
+		}
+	}
+
+	/**
+	 * Gets the entity which Val body collides with and store it in output Entities.
+	 * All body.userData must be an Entity object
+	 * @param fixA contact Fixture
+	 * @param fixB contact fixture
+	 */
+	private void getBodyCollisionEntity(Fixture fixA, Fixture fixB){
+		Object dataA = fixA.getUserData();
+		Object dataB = fixB.getUserData();
+
+		if(dataA != null){
+			if(dataA.equals("bodyFixture")){
+				valEntity = (Entity) fixA.getBody().getUserData();
+				otherEntity = (Entity) fixB.getBody().getUserData();
+			}
+		}
+		if(dataB != null){
+			if(dataB.equals("bodyFixture")){
+				valEntity = (Entity) fixB.getBody().getUserData();
+				otherEntity = (Entity) fixA.getBody().getUserData();
+			}
+		}
+	}
+
+	/**
+	 * Val can jump again
+	 * @param val Val entity
+	 */
+	private void addFeetContacts(Entity val){
+		val.getComponent(Val_Component.class).numberOfContacts++;
+		Gdx.app.debug(tag,"feet fixture collision. Contacts = "+val.getComponent(Val_Component.class).numberOfContacts);
+		this.getEngine().getSystem(Val_System.class).endJump();
+	}
+	private void subFeetContacts(Entity val){
+		val.getComponent(Val_Component.class).numberOfContacts--;
+		Gdx.app.debug(tag,"feet fixture collision. Contacts = "+val.getComponent(Val_Component.class).numberOfContacts);
+		if(vals.first().getComponent(Val_Component.class).numberOfContacts<1){
+			this.getEngine().getSystem(Val_System.class).canJump=false;
+		}
+	}
+	private void springCollision(){
+		Val_System valSystem = this.getEngine().getSystem(Val_System.class);
+		SpringSystem springSystem = getEngine().getSystem(SpringSystem.class);
+
+		if(valEntity.getComponent(BodyComponent.class).body.getLinearVelocity().y + SpringComponent.RESISTANCE <= 0) {
+			valSystem.springCollision(valEntity);
+			valSystem.canJump = false;
+			springSystem.expandSpring(otherEntity);
+		}else{
+			valSystem.endJump();
+		}
+	}
+	private void buttonCollision(){
+		Val_System valSystem = this.getEngine().getSystem(Val_System.class);
+
+		if(valEntity.getComponent(BodyComponent.class).body.getLinearVelocity().y + ButtonComponent.RESISTANCE <= 0) {
+			ActionableComponent actionableComponent = otherEntity.getComponent(ActionableComponent.class);
+			actionableComponent.actionable.action();
+		}
+		valSystem.endJump();
+	}
+	private void platformCollision(){
+		engine.getSystem(PlatformSystem.class).characterCollision(otherEntity);
+	}
+	private void bridgeCollision(){
+		Val_System vs = this.getEngine().getSystem(Val_System.class);
+		vs.endJump();
+		valEntity.getComponent(MovementComponent.class).bringerBody = otherEntity.getComponent(BodyComponent.class).body;
 	}
 }

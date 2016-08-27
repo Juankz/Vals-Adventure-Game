@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.Array;
 import com.epifania.components.*;
 import com.epifania.utils.Constants;
 
-public class PhysicsSystem extends IteratingSystem implements ContactListener {
+public class PhysicsSystem extends IteratingSystem{
 
 	private static final String tag = "PhysicsSystem";
 	private ArrayList<Entity> entities;
@@ -37,12 +37,16 @@ public class PhysicsSystem extends IteratingSystem implements ContactListener {
 	public PhysicsSystem(World world) {
 		super(Family.all(BodyComponent.class,TransformComponent.class).get());
 		this.world = world;
-		this.world.setContactListener(this);
+//		this.world.setContactListener(this);
 		bodies = new Array<Body>();
 		bodies4destroy = new Array<Body>();
 		entities = new ArrayList<Entity>();
 		tm = ComponentMapper.getFor(TransformComponent.class);
 		bom = ComponentMapper.getFor(BodyComponent.class);
+	}
+
+	public void setContactListener(ContactListener contactListener){
+		this.world.setContactListener(contactListener);
 	}
 
 	public void addedToEngine(Engine engine) {
@@ -107,171 +111,4 @@ public class PhysicsSystem extends IteratingSystem implements ContactListener {
 	public World getWorld(){
 		return this.world;
 	}
-
-	@Override
-	public void beginContact(Contact contact) {
-		Body bodyA = contact.getFixtureA().getBody();
-		Body bodyB = contact.getFixtureB().getBody();
-		Object dataA = bodyA.getUserData();
-		Object dataB = bodyB.getUserData();
-		Body val = null;
-		Body other = null;
-		if(dataA == "Val"){
-			val = bodyA;
-			other = bodyB;
-		}else if(dataB == "Val"){
-			val = bodyB;
-			other = bodyA;
-		}
-
-		buttonCollision(bodyA,bodyB);
-		springCollision(bodyA,bodyB);
-		platformCollision(bodyA,bodyB);
-
-		if(val==null || other.getUserData()==null)
-			return;
-
-		if(other.getUserData().equals("Ground") || other.getUserData().equals("Box")){
-			for(Fixture fixture : val.getFixtureList()){
-				if(fixture.getUserData()!=null){
-					if(fixture.getUserData().equals("feetFixture")){
-						Val_System vs = this.getEngine().getSystem(Val_System.class);
-						vs.endJump();
-					}else{
-						this.getEngine().getSystem(Val_System.class).canJump=false;
-					}
-				}
-			}
-		}
-		if(other.getUserData().equals("bridge")){
-			for(Fixture fixture : val.getFixtureList()){
-				if(fixture.getUserData()!=null){
-					if(fixture.getUserData().equals("feetFixture")){
-						Val_System vs = this.getEngine().getSystem(Val_System.class);
-						vs.endJump();
-						vals.first().getComponent(MovementComponent.class).bringerBody = other;
-					}
-				}
-			}
-		}else {
-			if(vals.first().getComponent(MovementComponent.class).bringerBody !=null) {
-				vals.first().getComponent(MovementComponent.class).bringerBody = null;
-			}
-		}
-	}
-
-	@Override
-	public void endContact(Contact contact) {
-
-	}
-
-	@Override
-	public void preSolve(Contact contact, Manifold oldManifold) {
-
-	}
-
-	@Override
-	public void postSolve(Contact contact, ContactImpulse impulse) {
-
-	}
-
-	private void buttonCollision(Body bodyA, Body bodyB){
-
-		Entity entity=null;
-		Body otherBody = null;
-
-		try{
-			entity = (Entity)bodyA.getUserData();
-			otherBody = bodyB;
-		}catch (Exception e){}
-		if(entity==null){
-			try{
-				entity=(Entity)bodyB.getUserData();
-				otherBody = bodyA;
-			}catch (Exception e){}
-		}
-		if(entity==null) return;
-
-		boolean match;
-		match=Family.all(ActionableComponent.class,ButtonComponent.class,BodyComponent.class).get().matches(entity);
-
-		if(match){
-			if(otherBody.getLinearVelocity().y + ButtonComponent.RESISTANCE < 0) {
-				ActionableComponent actionableComponent = entity.getComponent(ActionableComponent.class);
-				actionableComponent.actionable.action();
-			}
-			if(otherBody.getUserData()=="Val"){
-				engine.getSystem(Val_System.class).endJump();
-			}
-		}
-	}
-
-	private void springCollision(Body bodyA, Body bodyB){
-
-		Entity entity=null;
-		Body otherBody = null;
-
-		try{
-			entity = (Entity)bodyA.getUserData();
-			otherBody = bodyB;
-		}catch (Exception e){}
-		if(entity==null){
-			try{
-				entity=(Entity)bodyB.getUserData();
-				otherBody = bodyA;
-			}catch (Exception e){}
-		}
-		if(entity==null) return;
-
-		Gdx.app.debug(tag,"other:"+otherBody.getUserData());
-
-		boolean match;
-		match=Family.all(SpringComponent.class,BodyComponent.class).get().matches(entity);
-
-		if(match){
-			Gdx.app.debug(tag,"match");
-			Val_System vs = this.getEngine().getSystem(Val_System.class);
-			SpringSystem springSystem = getEngine().getSystem(SpringSystem.class);
-
-			if(otherBody.getLinearVelocity().y + SpringComponent.RESISTANCE < 0) {
-				vs.springCollision(vals.first());
-				vs.canJump = false;
-				springSystem.expandSpring(entity);
-			}else if(otherBody.getUserData()=="Val"){
-				engine.getSystem(Val_System.class).endJump();
-			}
-		}
-	}
-
-	private void platformCollision(Body bodyA, Body bodyB){
-
-		Entity entity=null;
-		Body otherBody = null;
-
-		try{
-			entity = (Entity)bodyA.getUserData();
-			otherBody = bodyB;
-		}catch (Exception e){}
-		if(entity==null){
-			try{
-				entity=(Entity)bodyB.getUserData();
-				otherBody = bodyA;
-			}catch (Exception e){}
-		}
-		if(entity==null) return;
-
-		Gdx.app.debug(tag,"other:"+otherBody.getUserData());
-
-		boolean match;
-		match=Family.all(PlatformComponent.class,BodyComponent.class).get().matches(entity);
-
-		if(match){
-			if(otherBody.getUserData()=="Val"){
-				Val_System vs = this.getEngine().getSystem(Val_System.class);
-				vs.endJump();
-				engine.getSystem(PlatformSystem.class).characterCollision(entity);
-			}
-		}
-	}
-
 }

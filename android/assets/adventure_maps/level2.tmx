@@ -541,7 +541,7 @@
     <property name="object" value="bridge"/>
    </properties>
   </object>
-  <object id="88" type="ground" x="4888" y="1050" width="920.503" height="15.3333">
+  <object id="88" type="ground" x="4888" y="1050" width="920.503" height="30">
    <properties>
     <property name="shape" type="int" value="0"/>
    </properties>
@@ -579,7 +579,7 @@
   </object>
   <object id="115" type="box" x="5670" y="980" width="70" height="70">
    <properties>
-    <property name="captureTile" type="bool" value="true"/>
+    <property name="captureTile" type="bool" value="false"/>
     <property name="density" type="float" value="1000"/>
     <property name="dynamic" type="bool" value="false"/>
     <property name="playerCollide" type="bool" value="false"/>

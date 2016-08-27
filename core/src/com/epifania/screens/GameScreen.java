@@ -109,6 +109,7 @@ public class GameScreen extends ScreenAdapter{
 		engine = new Engine();
 		world = new World(new Vector2(0,-10),true);
 		addSystemsToEngine();
+		engine.getSystem(PhysicsSystem.class).setContactListener(engine.getSystem(CollisionSystem.class));
 		inactiveEntities = new Array<Entity>();
 		entities2Bremoved = new Array<Entity>();
 		joints2Bdestroyed = new Array<Joint>();
