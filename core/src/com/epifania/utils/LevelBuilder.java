@@ -1178,6 +1178,7 @@ public class LevelBuilder {
         body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
         body.createFixture(fix);
         shape.dispose();
+        Rectangle bounds = new Rectangle(0,0,w,h);
 
         TiledMapTileLayer tileLayer = (TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]);
         for(int i = 0;i<(int)w;i++) {
@@ -1196,6 +1197,7 @@ public class LevelBuilder {
 
             TransformComponent transform = new TransformComponent();
             BridgeComponent bridgeComponent = new BridgeComponent();
+            BoundsComponent boundsComponent = new BoundsComponent();
             BodyComponent bodyComponent = new BodyComponent();
             TextureComponent textureComponent = new TextureComponent();
             MovementComponent movementComponent = new MovementComponent();
@@ -1207,6 +1209,7 @@ public class LevelBuilder {
             bodyComponent.body.setUserData(entity);
             bodyComponent.offsetPosition.set((-w * 0.5f) + i, -0.0f);
             bridgeComponent.number = Integer.parseInt((String) object.getProperties().get("number"));
+            boundsComponent.bounds.set(bounds);
 
             //Get targets from object property
             transform.rotation = cell.getRotation();
@@ -1234,6 +1237,7 @@ public class LevelBuilder {
             entity.add(transform);
             entity.add(textureComponent);
             entity.add(bridgeComponent);
+            entity.add(boundsComponent);
             entity.add(movementComponent);
             entity.add(bodyComponent);
             entity.flags = flag;

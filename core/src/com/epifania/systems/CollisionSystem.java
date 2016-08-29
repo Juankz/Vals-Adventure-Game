@@ -81,7 +81,8 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 	public void update(float deltaTime) {
 		for(Entity val : vals){
 			BoundsComponent valBounds = bm.get(val);
-			
+			Gdx.app.debug(tag,"val V.y"+val.getComponent(BodyComponent.class).body.getLinearVelocity().y);
+
 			for(Entity coin : coins){
 				if(coin.flags!=val.flags)continue;
 				BoundsComponent coinBounds = bm.get(coin);
@@ -340,7 +341,21 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
+		valEntity = null; otherEntity = null;
+		getBodyCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
+		if(valEntity!=null && otherEntity!=null) {
+			if (Family.one(BridgeComponent.class,GroundComponent.class,PlatformComponent.class).all(TransformComponent.class,BoundsComponent.class).get().matches(otherEntity)) {
+				TransformComponent tv = valEntity.getComponent(TransformComponent.class);
+				TransformComponent to = otherEntity.getComponent(TransformComponent.class);
+				BoundsComponent bo = otherEntity.getComponent(BoundsComponent.class);
 
+				float valBottom = tv.pos.y - Val_Component.HEIGHT*0.5f;
+				float objectTop = to.pos.y + bo.bounds.getHeight()*0.5f;
+				if(valBottom + TransformComponent.DELTA < objectTop){
+					contact.setEnabled(false);
+				}
+			}
+		}
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 public class TransformComponent implements Component {
+	public static final float DELTA = 0.05f;
 	public final Vector3 pos = new Vector3();
 	public final Vector2 scale = new Vector2(1.0f, 1.0f);
 	public final Vector2 origin = new Vector2(0.5f,0.5f);

@@ -20,6 +20,7 @@ public class Val_Component implements Component{
 	public static final float SPRING_VELOCITY = 10;
 	public static final float WIDTH = 0.8f;
 	public static final float HEIGHT = 1.0f;
+	public static final float BODY_HEIGHT = 0.8f;
 
 	public final Array<Entity> objects = new Array<Entity>();
 	public final Array<String> conversationKeys = new Array<String>();

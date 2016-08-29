@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-up" width="105" height="40" tilewidth="70" tileheight="70" backgroundcolor="#55ffff" nextobjectid="117">
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="105" height="40" tilewidth="70" tileheight="70" backgroundcolor="#55ffff" nextobjectid="119">
  <properties>
   <property name="background" value="background1.json"/>
  </properties>
@@ -315,7 +315,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Interior Objects" visible="0">
+ <objectgroup name="Interior Objects">
   <object id="68" type="pack" x="1680" y="2100" width="70" height="70">
    <properties>
     <property name="amount" type="int" value="10"/>
@@ -405,7 +405,7 @@
     <property name="action" value="die"/>
    </properties>
   </object>
-  <object id="34" name="VAL" type="character" x="280" y="2310" width="70" height="140">
+  <object id="34" name="VAL" type="character" x="1820" y="2310" width="70" height="140">
    <properties>
     <property name="name" value="VAL"/>
    </properties>
@@ -434,7 +434,7 @@
     <property name="action" value="die"/>
    </properties>
   </object>
-  <object id="42" type="platform" x="2940" y="2240" width="210" height="16.6667">
+  <object id="42" type="platform" x="2940" y="2240" width="210" height="68.6667">
    <properties>
     <property name="breakable" type="bool" value="false"/>
     <property name="captureTile" type="bool" value="false"/>
