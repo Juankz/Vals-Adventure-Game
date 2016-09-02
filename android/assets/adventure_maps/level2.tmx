@@ -405,7 +405,7 @@
     <property name="action" value="die"/>
    </properties>
   </object>
-  <object id="34" name="VAL" type="character" x="1820" y="2310" width="70" height="140">
+  <object id="34" name="VAL" type="character" x="280" y="2310" width="70" height="140">
    <properties>
     <property name="name" value="VAL"/>
    </properties>

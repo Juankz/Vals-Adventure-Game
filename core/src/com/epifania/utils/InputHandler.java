@@ -16,7 +16,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 
 public class InputHandler extends InputAdapter {
-	
+
 	private static final int NOT_SET = -1;
 	private static final float DRAG_TOLERANCE = Gdx.graphics.getWidth()*0.01f;
 	private static final float DRAG_TOLERANCEY = Gdx.graphics.getWidth()*0.2f;
@@ -35,8 +35,12 @@ public class InputHandler extends InputAdapter {
 	
 	private int hMovPointer = -1; //-1 equals to not set
 	private int vMovPointer = -1;
-	public InputHandler(Engine engine) {
+
+	private InputController inputController;
+
+	public InputHandler(Engine engine,InputController controller) {
 		this.engine = engine;
+		this.inputController = controller;
 		camera = engine.getSystem(RenderingSystem.class).getCamera();
 		val=engine.getEntitiesFor(Family.all(Val_Component.class).get()).first();
 	}
@@ -97,7 +101,8 @@ public class InputHandler extends InputAdapter {
 		if(!active) return false;
 		if(hMovPointer==pointer){
 			hMovPointer = NOT_SET;
-			engine.getSystem(Val_System.class).setVelocity(0);
+//			engine.getSystem(Val_System.class).setVelocity(0);
+			inputController.stopHorizontal();
 		}else if(vMovPointer == pointer){
 			vMovPointer = NOT_SET;
 			engine.getSystem(Val_System.class).climb(0);
@@ -110,17 +115,22 @@ public class InputHandler extends InputAdapter {
 	public boolean touchDragged (int screenX, int screenY, int pointer) {
 		Val_System val_system = engine.getSystem(Val_System.class);
 		if(!active) return false;
+		//X Axis
 		if(hMovPointer==pointer){
 			screenCoords.set(screenX, screenY, 0);
 			newCoordsH.set(screenCoords);
 			float distance = newCoordsH.x - (previousCoordsH.x);
 			if(Math.abs(distance)>DRAG_TOLERANCE){
 				int d = distance<0? -1:1;
-				val_system.setVelocity(d);
+				if(d<0)
+					inputController.left();
+				else
+					inputController.right();
+//				val_system.setVelocity(d);
 			}else{
-				val_system.setVelocity(0);
+//				val_system.setVelocity(0);
 			}
-		}else if(vMovPointer==pointer){
+		}else if(vMovPointer==pointer){ //Y Axis
 			screenCoords.set(screenX, screenY, 0);
 			newCoordsV.set(screenCoords);
 			float distance = newCoordsV.y - (previousCoordsV.y);
@@ -172,5 +182,11 @@ public class InputHandler extends InputAdapter {
 
 	public boolean isActive(){
 		return active;
+	}
+
+	public void act(float delta){
+		if(leftKeyPressed){
+
+		}
 	}
 }

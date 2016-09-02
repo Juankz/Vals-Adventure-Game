@@ -81,7 +81,6 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 	public void update(float deltaTime) {
 		for(Entity val : vals){
 			BoundsComponent valBounds = bm.get(val);
-			Gdx.app.debug(tag,"val V.y"+val.getComponent(BodyComponent.class).body.getLinearVelocity().y);
 
 			for(Entity coin : coins){
 				if(coin.flags!=val.flags)continue;
@@ -97,7 +96,6 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 				if(ladder.flags!=val.flags)continue;
 				BoundsComponent boundsComponent = bm.get(ladder);
 				if(boundsComponent.bounds.overlaps(valBounds.bounds)){
-					//TODO program ladder behavior
 					canClimb=true;
 				}
 			}
@@ -285,20 +283,24 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		valEntity = null; otherEntity = null;
 		getFeetCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
 		if(valEntity!=null && otherEntity!=null) {
+			if(valEntity.getComponent(BodyComponent.class).body.getLinearVelocity().y<=0) {
 
-			if (otherEntity.getComponent(GroundComponent.class) != null) {
-				addFeetContacts(valEntity);
-			}
-			if (otherEntity.getComponent(BoxComponent.class) != null) {
-				addFeetContacts(valEntity);
-			}
-			if (Family.all(BridgeComponent.class).get().matches(otherEntity)) {
-				addFeetContacts(valEntity);
-				bridgeCollision();
-			}
-			if (otherEntity.getComponent(PlatformComponent.class) != null) {
-				addFeetContacts(valEntity);
-				platformCollision();
+				if (otherEntity.getComponent(GroundComponent.class) != null) {
+					addFeetContacts(valEntity);
+				}
+				if (otherEntity.getComponent(BoxComponent.class) != null) {
+					addFeetContacts(valEntity);
+				}
+				if (Family.all(BridgeComponent.class).get().matches(otherEntity)) {
+					addFeetContacts(valEntity);
+					bridgeCollision();
+				}
+				if (otherEntity.getComponent(PlatformComponent.class) != null) {
+					addFeetContacts(valEntity);
+					platformCollision();
+				}
+			}else{
+				valEntity.getComponent(Val_Component.class).invalidContacts++;
 			}
 		}
 
@@ -421,7 +423,12 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		this.getEngine().getSystem(Val_System.class).endJump();
 	}
 	private void subFeetContacts(Entity val){
-		val.getComponent(Val_Component.class).numberOfContacts--;
+		Val_Component val_component = val.getComponent(Val_Component.class);
+		if(val_component.invalidContacts>0)
+			val_component.invalidContacts--;
+		else
+			val.getComponent(Val_Component.class).numberOfContacts--;
+
 		Gdx.app.debug(tag,"feet fixture collision. Contacts = "+val.getComponent(Val_Component.class).numberOfContacts);
 		if(vals.first().getComponent(Val_Component.class).numberOfContacts<1){
 			this.getEngine().getSystem(Val_System.class).canJump=false;

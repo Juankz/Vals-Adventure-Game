@@ -1617,8 +1617,6 @@ public class LevelBuilder {
     }
 
     private void createCharacter(MapObject object,int flag, String name){
-        //TODO choose animations for each character
-
         CharacterComponent.Character character = CharacterComponent.Character.valueOf(name);
 
         Entity entity = new Entity();
@@ -1662,6 +1660,11 @@ public class LevelBuilder {
         engine.addEntity(entity);
     }
 
+    /**
+     * Choose animations for each character
+     * @param character
+     * @param out Animation ArrayList to avoid new objects
+     */
     private void getCharacterAnimations(CharacterComponent.Character character, IntMap<Animation> out){
         switch(character){
             case GOMH:
@@ -1740,7 +1743,7 @@ public class LevelBuilder {
 
         //Feet
         PolygonShape shape3 = new PolygonShape();
-        shape3.setAsBox(Val_Component.WIDTH*0.25f, Val_Component.HEIGHT*0.05f,new Vector2(0,-(Val_Component.HEIGHT * 0.5f) - 0.025f),0);
+        shape3.setAsBox(Val_Component.WIDTH*0.3f, Val_Component.HEIGHT*0.01f,new Vector2(0,-(Val_Component.HEIGHT * 0.5f) - 0.005f),0);
         FixtureDef fix3 = new FixtureDef();
         fix3.shape = shape3;
         fix3.isSensor=true;

@@ -88,7 +88,7 @@ public class Val_System extends IteratingSystem {
 		}else {
 //			movement.velocity.x = directionX * Val_Component.MOVE_VELOCITY*0.2f;
 		}
-		//Update selfThoughs
+		//Update self thoughs
 		ConversationManager conversationManager = val.conversationManager;
 		if(conversationManager.showingThoughts) {
 			if (conversationManager.time > ConversationManager.timer1) {
@@ -101,8 +101,9 @@ public class Val_System extends IteratingSystem {
 	}
 	
 	public void setVelocity(int direction){
-		if(direction == 0) this.directionX = 0;
-		else if(direction > 0) this.directionX = 1;
+		this.directionX = 0;
+//		if(direction == 0) this.directionX = 0;
+		if(direction > 0) this.directionX = 1;
 		else if(direction < 0)this.directionX = -1;
 	}
 

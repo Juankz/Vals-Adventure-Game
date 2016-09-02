@@ -2,25 +2,12 @@
     <Conversations>
         <!--MOM -->
         <Conversation character="MOM" ID="M1" keys = "NONE" secondary="NONE">
-            <Dialog character="MOM">Val, bring carrots please</Dialog>
-            <Dialog character="MOM">I'll prepare medicine for your father</Dialog>
-            <Dialog character="VAL">Yes mom</Dialog>
-            <Dialog character="MOM">Be careful Val</Dialog>
-        </Conversation>
-        <Conversation character="MOM" ID="M2" keys = "M1,GOAL" secondary="NONE">
-            <Dialog character="MOM">Your Dad is very sick</Dialog>
-            <Dialog character="MOM">I'm afraid of what can happen</Dialog>
-            <Dialog character="VAL">......</Dialog>
-            <Dialog character="VAL">I will find the golden carrot</Dialog>
-            <Dialog character="MOM">Are you crazy!?</Dialog>
-            <Dialog character="MOM">Bunnies like you never go out of the village</Dialog>
-            <Dialog character="MOM">Besides, it doesn't even exist</Dialog>
-            <Dialog character="VAL">Dad says it is real, so do Gomh</Dialog>
-            <Dialog character="MOM">Gomh is a crazy bunny</Dialog>
-            <Dialog character="VAL">Dad is not, and ...</Dialog>
-            <Dialog character="VAL">and is the only way to help him</Dialog>
-            <Dialog character="MOM">Oh Val</Dialog>
-            <Dialog character="VAL">I go home to prepare the trip</Dialog>
+            <Dialog character="MOM">Val, sabes que no me gusta que vayas tan lejos</Dialog>
+            <Dialog character="VAL">Si mamá, solo me estaba divirtiendo</Dialog>
+            <Dialog character="MOM">Me preocupo por ti Val, ¿Por que no puedes ser como las demás conejas?</Dialog>
+            <Dialog character="VAL">Perdón</Dialog>
+            <Dialog character="MOM">Como sea. Ve a casa y alístate para ir a la villa</Dialog>
+            <Dialog character="VAL">Si mamá</Dialog>
         </Conversation>
         <!-- GOHM -->
         <Conversation character="GOMH" ID="G1"  keys = "NONE" secondary="NONE">
@@ -44,8 +31,7 @@
     </Conversations>
 
     <SelfToughts>
-        <Dialog key = "KEY">I need a key</Dialog>
-        <Dialog key = "GOAL">Nothing to do here</Dialog>
-        <Dialog key = "KNIFE">I need to cut it</Dialog>
+        <Dialog key = "KEY">Necesito la llave</Dialog>
+        <Dialog key = "GOAL">Necesito la llave primero</Dialog>
     </SelfToughts>
 </Script>

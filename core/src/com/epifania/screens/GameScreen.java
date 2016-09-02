@@ -29,15 +29,13 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.viewport.*;
 import com.epifania.components.*;
 import com.epifania.systems.*;
-import com.epifania.ui.ControlButton;
-import com.epifania.ui.ConversationDialog;
-import com.epifania.ui.Item;
-import com.epifania.ui.PauseMenu;
+import com.epifania.ui.*;
 import com.epifania.utils.*;
 import javafx.application.Platform;
 
 public class GameScreen extends ScreenAdapter{
 
+    private static final String tag = "Game Screen";
 	//Core
 	private SpriteBatch batch;
 	private TiledMap levelMap;
@@ -48,12 +46,11 @@ public class GameScreen extends ScreenAdapter{
 	private Array<Entity> entities2Bremoved;
 	private Array<Joint> joints2Bdestroyed;
 	private ObjectMap<Integer,Joint> joints;
-	private Array<Entity> inactiveEntities;
 	private ConversationManager conversationManager;
 
 	//UI
 	private Stage stage;
-	private Stage stageHUD;
+	private StageHUD stageHUD;
 	private Skin skin;
 	private PauseMenu pauseMenu;
 	private Button actionButton;
@@ -76,6 +73,8 @@ public class GameScreen extends ScreenAdapter{
 	//Input
 	private InputHandler inputHandler;
 	private InputMultiplexer multiplexer;
+    private InputController inputController;
+    private boolean activeInput = true;
 
 	//GameState vars
 	private GameStates gameState;
@@ -87,6 +86,9 @@ public class GameScreen extends ScreenAdapter{
 	private int coinsCollected = 0;
 	private int level = 0;
 	private int totalCoins = 0;
+
+    //Easy access systems
+    private Val_System val_system;
 
 	public GameScreen(SpriteBatch batch, TiledMap map, FileHandle script, int level){
 		this.batch = batch;
@@ -110,7 +112,6 @@ public class GameScreen extends ScreenAdapter{
 		world = new World(new Vector2(0,-10),true);
 		addSystemsToEngine();
 		engine.getSystem(PhysicsSystem.class).setContactListener(engine.getSystem(CollisionSystem.class));
-		inactiveEntities = new Array<Entity>();
 		entities2Bremoved = new Array<Entity>();
 		joints2Bdestroyed = new Array<Joint>();
 		joints = new ObjectMap<Integer,Joint>();
@@ -140,9 +141,71 @@ public class GameScreen extends ScreenAdapter{
 			val.getComponent(Val_Component.class).conversationManager = conversationManager;
 		}
 
+		//Initialize InputController
+        inputController = new InputController() {
+            @Override
+            public void left() {
+                val_system.setVelocity(-1);
+            }
+
+            @Override
+            public void right() {
+                val_system.setVelocity(1);
+            }
+
+            @Override
+            public void stopHorizontal() {
+                val_system.setVelocity(0);
+            }
+
+			@Override
+			public void stopVertical() {
+				if (val_system.climbing){
+					val_system.climb(0);
+				}
+			}
+
+			@Override
+            public void up() {
+				Entity val = engine.getEntitiesFor(Family.all(Val_Component.class).get()).first();
+				if(val_system.canClimb && !val_system.climbing){
+					if(val.getComponent(StateComponent.class).get()!=Val_Component.CLIMB){
+						val_system.setState(val,Val_Component.CLIMB);
+					}
+				}else if (val_system.climbing){
+					val_system.climb(1);
+				}else if(!val_system.isJumping()){
+					engine.getSystem(Val_System.class).setJump(true);
+				}
+            }
+
+            @Override
+            public void down() {
+				Entity val = engine.getEntitiesFor(Family.all(Val_Component.class).get()).first();
+				if(val_system.canClimb && !val_system.climbing){
+					if(val.getComponent(StateComponent.class).get()!=Val_Component.CLIMB){
+						val_system.setState(val,Val_Component.CLIMB);
+					}
+				}else if (val_system.climbing){
+					val_system.climb(-1);
+				}
+            }
+        };
+
 		//Create an input handler with full access to the engine
-		inputHandler = new InputHandler(engine);
-		characterSystem.inputHandler = inputHandler;
+        if(Settings.instance.controls){
+            inputHandler = new InputHandler(engine,inputController);
+        }
+        characterSystem.characterListener = new CharacterSystem.CharacterListener() {
+			@Override
+			public void setActive(boolean b) {
+				if(Settings.instance.controls){
+					inputHandler.setActive(b);
+				}else{
+					stageHUD.setActive(b);
+				}
+			}
+		};
 
 		//Add viewport to camera
 		OrthographicCamera cam = engine.getSystem(RenderingSystem.class).getCamera();
@@ -153,7 +216,6 @@ public class GameScreen extends ScreenAdapter{
 		return new LevelBuilder.Listener() {
 			@Override
 			public void exit() {
-				//TODO program this
 				setState(GameStates.GAMEOVER);
 			}
 
@@ -179,7 +241,7 @@ public class GameScreen extends ScreenAdapter{
 		engine.addSystem(new MovementSystem());
 		engine.addSystem(new PlatformSystem());
 		engine.addSystem(new TextureManipulationSystem());
-		engine.addSystem(new Val_System());
+		engine.addSystem(val_system = new Val_System());
 		engine.addSystem(new SpringSystem());
 		engine.addSystem(new BridgeSystem());
 		engine.addSystem(new SwitchSystem());
@@ -243,7 +305,8 @@ public class GameScreen extends ScreenAdapter{
 			@Override
             public void die() {
                 setState(GameStates.DEATH);
-                inputHandler.setActive(false);
+//                inputHandler.setActive(false);
+                activeInput = true;
                 engine.getSystem(CollisionSystem.class).setProcessing(false);
             }
 
@@ -394,7 +457,10 @@ public class GameScreen extends ScreenAdapter{
 	public void buildUI(){
 		debugFont = new BitmapFont();
 		stage = new Stage(new FillViewport(Constants.UIViewportWidth,Constants.UIViewportHeight),batch);
-		stageHUD = new Stage(new ExtendViewport(Constants.UIViewportWidth,Constants.UIViewportHeight),batch);
+        if(!Settings.instance.controls)
+            stageHUD = new StageHUD(new ExtendViewport(Constants.UIViewportWidth,Constants.UIViewportHeight),batch,inputController);
+        else
+            stageHUD = new StageHUD(new ExtendViewport(Constants.UIViewportWidth,Constants.UIViewportHeight),batch);
 //		stage = new Stage(new FillViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight()),batch);
 		skin = Assets.instance.get("user interface/uiskin.json",Skin.class);
 		//Load UI
@@ -405,7 +471,6 @@ public class GameScreen extends ScreenAdapter{
 				engine.getSystem(CollisionSystem.class).action = true;
 			}
 		});
-		actionButton.setSize(70,70);
 		actionButton.setScale(1);
 		actionButton.addAction(Actions.forever(Actions.sequence(Actions.scaleBy(0.2f,0.2f,1),Actions.scaleBy(-0.2f,-0.2f,1))));
 		actionButton.setVisible(false);
@@ -464,18 +529,18 @@ public class GameScreen extends ScreenAdapter{
 			}
 		});
 
+
 		coinsLabel = new Label("0",skin,"middle_outline");
-//		coinsLabel.setColor(0,0,0,0.9f);
 		coinsLabel.setColor(Color.GOLD);
 
 		coinsIndicator = new Table();
 		coinsIndicator.add(new Image(skin.getDrawable("gold"))).size(50);
 		coinsIndicator.add(coinsLabel).padLeft(20);
-		coinsIndicator.setPosition(
-				30,
-				30
-		);
 		coinsIndicator.pack();
+        coinsIndicator.setPosition(
+                stageHUD.getWidth()*0.5f - coinsIndicator.getWidth()*0.5f,
+                stageHUD.getHeight() - 50 - coinsIndicator.getHeight()
+        );
 
 		pauseMenu = new PauseMenu(new PauseMenu.Listener() {
 			@Override
@@ -554,12 +619,14 @@ public class GameScreen extends ScreenAdapter{
 		stageHUD.addActor(coinsIndicator);
 		stageHUD.addActor(pauseButton);
 		stageHUD.addActor(pauseMenu);
+//		stageHUD.setDebugAll(true);
 
 		//Set input processor
 		multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(stage);
 		multiplexer.addProcessor(stageHUD);
-		multiplexer.addProcessor(inputHandler);
+        if(Settings.instance.controls)
+		    multiplexer.addProcessor(inputHandler);
 		Gdx.input.setInputProcessor(multiplexer);
 	}
 
@@ -589,7 +656,8 @@ public class GameScreen extends ScreenAdapter{
 			setState(previousGameState);
 		}
 		pauseMenu.setVisible(false);
-		inputHandler.setActive(true);
+//		inputHandler.setActive(true);
+        activeInput = true;
 		multiplexer.addProcessor(0,stage);
 	}
 
@@ -599,7 +667,7 @@ public class GameScreen extends ScreenAdapter{
 			setState(GameStates.PAUSE);
 		}
 		pauseMenu.setVisible(true);
-		inputHandler.setActive(false);
+		activeInput = false;
 		multiplexer.removeProcessor(stage);
 	}
 
@@ -619,7 +687,7 @@ public class GameScreen extends ScreenAdapter{
 
 					movementComponent.traslation.x = checkpointTransform.pos.x - bodyComponent.body.getPosition().x;
 					movementComponent.traslation.y = checkpointTransform.pos.y - bodyComponent.body.getPosition().y + 0.5f;
-
+					bodyComponent.body.setLinearVelocity(0,0);
 					entity.flags = checkpoint.flags;
 					boolean b = entity.flags==0;
 					engine.getSystem(PhysicsSystem.class).setActiveObjects();
@@ -642,7 +710,8 @@ public class GameScreen extends ScreenAdapter{
 				setState(GameStates.RUN);
 				break;
 			case RUN:
-				inputHandler.setActive(true);
+//				inputHandler.setActive(true);
+                activeInput = true;
 				engine.getSystem(CollisionSystem.class).setProcessing(true);
 				break;
 			case PAUSE:

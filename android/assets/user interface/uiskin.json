@@ -38,7 +38,9 @@
     "leftArrow":{"up":"arrowLeft","down":"arrowLeft_p"},
     "rightArrow":{"up":"arrowRight","down":"arrowRight_p"},
     "close":{"up":"close","down":"close_p"},
-    "pause":{"up":"pause","down":"pause_p"}
+    "pause":{"up":"pause","down":"pause_p"},
+    "upArrow":{"up":"arrowLeft","down":"arrowLeft_p"},
+    "downArrow":{"up":"arrowRight","down":"arrowRight_p"}
 },
 
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle":{
