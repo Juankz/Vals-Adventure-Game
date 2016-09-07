@@ -12,6 +12,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -36,7 +37,6 @@ public class LevelSelectionScreen extends ScreenAdapter {
     private Button rightArrow;
     private ScrollPane scrollPane;
     private Table levelsContainer;
-    private Label instruction;
     private Image loadingImage;
 
     private I18NBundle bundle;
@@ -117,6 +117,10 @@ public class LevelSelectionScreen extends ScreenAdapter {
             stack.add(levelImages[i]);
             if(LevelsData.getInstance().getLevelDataOf(i).locked) {
                 stack.add(new Image(Assets.instance.get("user interface/level selection/lock_chain.png", Texture.class)));
+            }else{
+                Image play = new Image(Assets.instance.get("user interface/level selection/play.png", Texture.class));
+                play.setTouchable(Touchable.disabled);
+                stack.add(play);
             }
             Container<Stack> container = new Container<Stack>(stack);
             container.background(skin.getDrawable("panel_brown"));
@@ -152,14 +156,6 @@ public class LevelSelectionScreen extends ScreenAdapter {
         scrollPane.setPosition(stage.getWidth()*0.5f - scrollPane.getWidth()*0.5f,
                 stage.getHeight()*.5f  - scrollPane.getHeight()*0.5f);
         scrollPane.setFlickScroll(false);
-
-        instruction = new Label(bundle.get("tap_inst"),skin);
-        instruction.setAlignment(Align.center);
-        instruction.setWrap(true);
-        instruction.setWidth(150);
-        instruction.setPosition(stage.getWidth() - instruction.getWidth() - 50,
-                scrollPane.getY()+scrollPane.getHeight()-instruction.getHeight() - 30);
-        instruction.setColor(0,0,0,0.8f);
 
         for(int i = 0;i<levelImages.length;i++){
             final int finalI = i;
@@ -200,7 +196,6 @@ public class LevelSelectionScreen extends ScreenAdapter {
         stage.addActor(scrollPane);
         stage.addActor(leftArrow);
         stage.addActor(rightArrow);
-        stage.addActor(instruction);
 
         stage.setDebugAll(debug);
         Gdx.input.setInputProcessor(stage);
@@ -227,6 +222,7 @@ public class LevelSelectionScreen extends ScreenAdapter {
         Assets.instance.load("user interface/level selection/level4.png",Texture.class,textureParameter);
         Assets.instance.load("user interface/level selection/level5.png",Texture.class,textureParameter);
         Assets.instance.load("user interface/level selection/lock_chain.png",Texture.class,textureParameter);
+        Assets.instance.load("user interface/level selection/play.png",Texture.class,textureParameter);
         Assets.instance.finishLoading();
     }
 
@@ -239,6 +235,7 @@ public class LevelSelectionScreen extends ScreenAdapter {
         Assets.instance.unload("user interface/level selection/level4.png");
         Assets.instance.unload("user interface/level selection/level5.png");
         Assets.instance.unload("user interface/level selection/lock_chain.png");
+        Assets.instance.unload("user interface/level selection/play.png");
     }
 
     private void goToScreen(Screen screen){

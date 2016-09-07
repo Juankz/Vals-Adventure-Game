@@ -1,226 +1,202 @@
 
 characters.png
-format: RGBA8888
-filter: MipMapLinearNearest,Nearest
-repeat: none
-Bonny/idle1
-  rotate: false
-  xy: 1, 1
-  size: 121, 202
-  orig: 121, 202
-  offset: 0, 0
-  index: -1
-Bonny/idle2
-  rotate: false
-  xy: 125, 11
-  size: 121, 192
-  orig: 121, 192
-  offset: 0, 0
-  index: -1
-
-characters2.png
+size: 1024,1024
 format: RGBA8888
 filter: MipMapLinearNearest,Nearest
 repeat: none
 Blue/talk1
   rotate: false
-  xy: 1, 1
+  xy: 124, 74
   size: 59, 100
   orig: 59, 100
   offset: 0, 0
   index: -1
 Blue/talk2
   rotate: false
-  xy: 63, 5
+  xy: 197, 432
   size: 59, 96
   orig: 59, 96
   offset: 0, 0
   index: -1
-
-characters3.png
-format: RGBA8888
-filter: MipMapLinearNearest,Nearest
-repeat: none
-Mom/sad3
+Bonny/idle1
   rotate: false
-  xy: 1, 1
-  size: 71, 120
-  orig: 71, 120
+  xy: 689, 820
+  size: 121, 202
+  orig: 121, 202
+  offset: 0, 0
+  index: -1
+Bonny/idle2
+  rotate: false
+  xy: 384, 636
+  size: 121, 192
+  orig: 121, 192
+  offset: 0, 0
+  index: -1
+Gomh/gomhIdle
+  rotate: false
+  xy: 507, 671
+  size: 86, 147
+  orig: 86, 147
+  offset: 0, 0
+  index: -1
+Gomh/gomhIdle2
+  rotate: false
+  xy: 683, 676
+  size: 86, 141
+  orig: 86, 141
+  offset: 0, 0
+  index: -1
+Gomh/gomhLeft
+  rotate: false
+  xy: 934, 874
+  size: 87, 148
+  orig: 87, 148
+  offset: 0, 0
+  index: -1
+Gomh/gomhRight
+  rotate: false
+  xy: 595, 672
+  size: 86, 146
+  orig: 86, 146
   offset: 0, 0
   index: -1
 Mom/happy1
   rotate: false
-  xy: 75, 1
+  xy: 771, 697
   size: 71, 120
   orig: 71, 120
   offset: 0, 0
   index: -1
+Mom/happy2
+  rotate: false
+  xy: 124, 502
+  size: 71, 116
+  orig: 71, 116
+  offset: 0, 0
+  index: -1
 Mom/sad1
   rotate: false
-  xy: 149, 1
+  xy: 844, 699
   size: 71, 120
   orig: 71, 120
   offset: 0, 0
   index: -1
 Mom/sad2
   rotate: false
-  xy: 223, 5
+  xy: 124, 383
   size: 71, 116
   orig: 71, 116
   offset: 0, 0
   index: -1
-Mom/happy2
+Mom/sad3
   rotate: false
-  xy: 297, 5
-  size: 71, 116
-  orig: 71, 116
-  offset: 0, 0
-  index: -1
-
-characters4.png
-format: RGBA8888
-filter: MipMapLinearNearest,Nearest
-repeat: none
-Gomh/gomhLeft
-  rotate: false
-  xy: 1, 1
-  size: 87, 148
-  orig: 87, 148
-  offset: 0, 0
-  index: -1
-Gomh/gomhIdle
-  rotate: false
-  xy: 91, 2
-  size: 86, 147
-  orig: 86, 147
-  offset: 0, 0
-  index: -1
-Gomh/gomhRight
-  rotate: false
-  xy: 180, 3
-  size: 86, 146
-  orig: 86, 146
-  offset: 0, 0
-  index: -1
-Gomh/gomhIdle2
-  rotate: false
-  xy: 269, 8
-  size: 86, 141
-  orig: 86, 141
-  offset: 0, 0
-  index: -1
-
-characters5.png
-format: RGBA8888
-filter: MipMapLinearNearest,Nearest
-repeat: none
-Pinky/idle1
-  rotate: false
-  xy: 1, 1
-  size: 59, 100
-  orig: 59, 100
+  xy: 917, 699
+  size: 71, 120
+  orig: 71, 120
   offset: 0, 0
   index: -1
 Pinky/despective1
   rotate: false
-  xy: 63, 1
+  xy: 124, 280
   size: 59, 100
   orig: 59, 100
   offset: 0, 0
   index: -1
 Pinky/despective2
   rotate: false
-  xy: 125, 4
+  xy: 197, 531
   size: 59, 97
   orig: 59, 97
   offset: 0, 0
   index: -1
-
-characters6.png
-format: RGBA8888
-filter: MipMapLinearNearest,Nearest
-repeat: none
+Pinky/idle1
+  rotate: false
+  xy: 124, 177
+  size: 59, 100
+  orig: 59, 100
+  offset: 0, 0
+  index: -1
 Val/bunny2_climb1
   rotate: false
-  xy: 1, 206
+  xy: 1, 823
   size: 136, 199
   orig: 136, 199
   offset: 0, 0
   index: -1
 Val/bunny2_climb2
   rotate: false
-  xy: 1, 4
+  xy: 1, 621
   size: 136, 199
   orig: 136, 199
   offset: 0, 0
   index: -1
-Val/bunny2_jump
-  rotate: false
-  xy: 140, 224
-  size: 150, 181
-  orig: 150, 181
-  offset: 0, 0
-  index: -1
-Val/bunny2_walk3
-  rotate: false
-  xy: 140, 13
-  size: 121, 208
-  orig: 121, 208
-  offset: 0, 0
-  index: -1
 Val/bunny2_hurt
   rotate: false
-  xy: 293, 231
+  xy: 291, 848
   size: 150, 174
   orig: 150, 174
   offset: 0, 0
   index: -1
-Val/bunny2_walk1
+Val/bunny2_jump
   rotate: false
-  xy: 446, 204
-  size: 121, 201
-  orig: 121, 201
+  xy: 139, 841
+  size: 150, 181
+  orig: 150, 181
+  offset: 0, 0
+  index: -1
+Val/bunny2_ready
+  rotate: false
+  xy: 443, 831
+  size: 121, 191
+  orig: 121, 191
+  offset: 0, 0
+  index: -1
+Val/bunny2_shook1
+  rotate: false
+  xy: 812, 822
+  size: 120, 200
+  orig: 120, 200
+  offset: 0, 0
+  index: -1
+Val/bunny2_shook2
+  rotate: false
+  xy: 262, 638
+  size: 120, 200
+  orig: 120, 200
   offset: 0, 0
   index: -1
 Val/bunny2_stand
   rotate: false
-  xy: 570, 204
+  xy: 1, 1
+  size: 121, 201
+  orig: 121, 201
+  offset: 0, 0
+  index: -1
+Val/bunny2_walk1
+  rotate: false
+  xy: 566, 821
   size: 121, 201
   orig: 121, 201
   offset: 0, 0
   index: -1
 Val/bunny2_walk2
   rotate: false
-  xy: 694, 198
+  xy: 139, 631
   size: 121, 207
   orig: 121, 207
   offset: 0, 0
   index: -1
+Val/bunny2_walk3
+  rotate: false
+  xy: 1, 410
+  size: 121, 208
+  orig: 121, 208
+  offset: 0, 0
+  index: -1
 Val/bunny2_walk4
   rotate: false
-  xy: 818, 203
+  xy: 1, 205
   size: 121, 202
   orig: 121, 202
-  offset: 0, 0
-  index: -1
-Val/bunny2_shook1
-  rotate: false
-  xy: 264, 21
-  size: 120, 200
-  orig: 120, 200
-  offset: 0, 0
-  index: -1
-Val/bunny2_ready
-  rotate: false
-  xy: 387, 10
-  size: 121, 191
-  orig: 121, 191
-  offset: 0, 0
-  index: -1
-Val/bunny2_shook2
-  rotate: false
-  xy: 511, 1
-  size: 120, 200
-  orig: 120, 200
   offset: 0, 0
   index: -1

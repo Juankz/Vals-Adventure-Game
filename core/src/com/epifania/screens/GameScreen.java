@@ -483,7 +483,7 @@ public class GameScreen extends ScreenAdapter{
 			public void clicked (InputEvent event, float x, float y) {
 			}
 		});
-		lockedButton.setSize(70,70);
+		lockedButton.setSize(120,120);
 		lockedButton.setScale(1);
 		lockedButton.addAction(Actions.forever(Actions.sequence(Actions.scaleBy(0.2f,0.2f,1),Actions.scaleBy(-0.2f,-0.2f,1))));
 		lockedButton.setVisible(false);
@@ -619,7 +619,7 @@ public class GameScreen extends ScreenAdapter{
 		stageHUD.addActor(coinsIndicator);
 		stageHUD.addActor(pauseButton);
 		stageHUD.addActor(pauseMenu);
-//		stageHUD.setDebugAll(true);
+		stageHUD.setDebugAll(false);
 
 		//Set input processor
 		multiplexer = new InputMultiplexer();

@@ -14,7 +14,7 @@ public class Val_Component implements Component{
 	public static final int HURT = 5;
 	public static final int CLIMB = 6;
 
-	public static final float JUMP_VELOCITY = 5.5f;
+	public static final float JUMP_VELOCITY = 5.25f;
 	public static final float CLIMB_VELOCITY = 3;
 	public static final float MOVE_VELOCITY = 4;
 	public static final float SPRING_VELOCITY = 10;

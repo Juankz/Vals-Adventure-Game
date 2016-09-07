@@ -23,6 +23,7 @@ import com.epifania.utils.InputController;
 public class StageHUD extends Stage {
 
     private static final String tag = "StageHUD class";
+    private static final int BUTTON_SIZE = 120;
     private InputController inputController;
     private Button leftButton;
     private Button rightButton;
@@ -92,7 +93,6 @@ public class StageHUD extends Stage {
             }
         });
         upButton = new Button(skin,"upArrow");
-        upButton.setSize(70,70);
         upButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -103,7 +103,6 @@ public class StageHUD extends Stage {
             }
         });
         downButton = new Button(skin,"downArrow");
-        downButton.setSize(70,70);
         downButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -114,7 +113,7 @@ public class StageHUD extends Stage {
             }
         });
 
-        float pad = 60;
+        float pad = 30;
         controlTable = new Table();
         controlTable.add(leftButton).padLeft(pad);
         controlTable.add(rightButton).padLeft(pad);
@@ -123,7 +122,7 @@ public class StageHUD extends Stage {
         controlTable.add(upButton).padRight(pad);
         controlTable.pack();
         controlTable.setWidth(getWidth());
-        controlTable.setPosition(0,50);
+        controlTable.setPosition(0,20);
     }
 
     public void setAsController(){
