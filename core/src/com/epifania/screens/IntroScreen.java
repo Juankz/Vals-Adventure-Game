@@ -1,9 +1,6 @@
 package com.epifania.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
@@ -164,8 +161,8 @@ public class IntroScreen extends ScreenAdapter {
         float padEdge = 50;
         table.setPosition(0,stage.getHeight()*0.5f - table.getHeight()*0.5f);
 
-        loading.setSize(Math.min(nextButton.getWidth(),nextButton.getHeight()),
-                Math.min(nextButton.getWidth(),nextButton.getHeight()));
+//        loading.setSize(Math.min(nextButton.getWidth(),nextButton.getHeight()),
+//                Math.min(nextButton.getWidth(),nextButton.getHeight()));
         loading.setPosition(stage.getWidth() - padEdge - loading.getWidth(), table.getY());
 
         nextButton.setPosition(loading.getX(),loading.getY());
