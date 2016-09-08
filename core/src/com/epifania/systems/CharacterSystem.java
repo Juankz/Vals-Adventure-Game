@@ -16,7 +16,10 @@ import com.epifania.utils.InputHandler;
  * Created by juan on 5/28/16.
  */
 public class CharacterSystem extends IteratingSystem {
-    //TODO I can use AI extension with states machines
+
+    public interface CharacterListener{
+        void setActive(boolean b);
+    }
 
     private static final String tag = "Character System";
     private static final float dstXM = 2.5f;
@@ -25,9 +28,9 @@ public class CharacterSystem extends IteratingSystem {
 
     private Entity val;
 
-    public InputHandler inputHandler;
     public ConversationManager manager;
     private boolean isSecondary = false;
+    public CharacterListener characterListener;
 
     public CharacterSystem() {
         super(Family.all(CharacterComponent.class,TransformComponent.class).get());
@@ -51,7 +54,7 @@ public class CharacterSystem extends IteratingSystem {
                             isSecondary = false;
                             manager.line = 0;
                             getEngine().getSystem(Val_System.class).setMove(val,false);
-                            inputHandler.setActive(false);
+                            characterListener.setActive(false);
                             manager.startConversation(conversationID);
                         }else if(manager.hasSecondary(conversationID)){
                             characterComponent.state = CharacterComponent.States.CONVERSATING;
@@ -59,14 +62,14 @@ public class CharacterSystem extends IteratingSystem {
                             isSecondary = true;
                             manager.line = 0;
                             getEngine().getSystem(Val_System.class).setMove(val,false);
-                            inputHandler.setActive(false);
+                            characterListener.setActive(false);
                             manager.startConversation(manager.getSecondaryOf(conversationID));
                         }
                     }
                     break;
                 case CONVERSATING:
                     if (manager.conversationEnded()) {
-                        inputHandler.setActive(true);
+                        characterListener.setActive(true);
                         getEngine().getSystem(Val_System.class).canMove = true;
                         characterComponent.state = CharacterComponent.States.WATING_OUT;
                         Gdx.app.debug(tag,"Waiting out for "+characterComponent.character);

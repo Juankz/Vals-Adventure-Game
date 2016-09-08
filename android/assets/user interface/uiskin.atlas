@@ -1,208 +1,265 @@
 
 uiskin.png
+size: 1024,1024
 format: RGBA8888
 filter: MipMapLinearNearest,Linear
 repeat: none
-pause_panel
+action
   rotate: false
-  xy: 1, 654
-  size: 345, 353
-  orig: 345, 353
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
-touch
+action2
   rotate: false
-  xy: 1, 445
-  size: 254, 206
-  orig: 254, 206
+  xy: 718, 653
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1
-buttons
+action2_p
   rotate: false
-  xy: 349, 801
-  size: 254, 206
-  orig: 254, 206
+  xy: 848, 653
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1
-buttonLongBrown
+action3
   rotate: false
-  xy: 606, 930
-  size: 300, 77
-  orig: 300, 77
+  xy: 785, 524
+  size: 126, 126
+  orig: 126, 126
   offset: 0, 0
   index: -1
-longNegative_p
+action3_p
   rotate: false
-  xy: 606, 851
-  size: 300, 76
-  orig: 300, 76
+  xy: 269, 249
+  size: 126, 126
+  orig: 126, 126
   offset: 0, 0
   index: -1
-longNegative
+action_p
   rotate: false
-  xy: 606, 772
-  size: 300, 76
-  orig: 300, 76
+  xy: 257, 464
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
-buttonLongBrown_p
+arrowDown
   rotate: false
-  xy: 1, 366
-  size: 300, 76
-  orig: 300, 76
+  xy: 348, 678
+  size: 132, 132
+  orig: 132, 132
   offset: 0, 0
   index: -1
-labelBgndBrown
+arrowDown_p
   rotate: false
-  xy: 349, 761
-  size: 182, 37
-  orig: 182, 37
-  offset: 0, 0
-  index: -1
-medal
-  rotate: false
-  xy: 909, 870
-  size: 75, 137
-  orig: 75, 137
-  offset: 0, 0
-  index: -1
-arrowLeft_p
-  rotate: false
-  xy: 1, 254
-  size: 100, 109
-  orig: 100, 109
-  offset: 0, 0
-  index: -1
-arrowRight
-  rotate: false
-  xy: 1, 142
-  size: 100, 109
-  orig: 100, 109
+  xy: 1, 243
+  size: 132, 132
+  orig: 132, 132
   offset: 0, 0
   index: -1
 arrowLeft
   rotate: false
-  xy: 104, 254
-  size: 100, 109
-  orig: 100, 109
+  xy: 1, 108
+  size: 132, 132
+  orig: 132, 132
+  offset: 0, 0
+  index: -1
+arrowLeft_p
+  rotate: false
+  xy: 135, 243
+  size: 132, 132
+  orig: 132, 132
+  offset: 0, 0
+  index: -1
+arrowRight
+  rotate: false
+  xy: 135, 108
+  size: 132, 132
+  orig: 132, 132
   offset: 0, 0
   index: -1
 arrowRight_p
   rotate: false
-  xy: 1, 30
-  size: 100, 109
-  orig: 100, 109
+  xy: 257, 531
+  size: 132, 132
+  orig: 132, 132
+  offset: 0, 0
+  index: -1
+arrowUp
+  rotate: false
+  xy: 391, 543
+  size: 132, 132
+  orig: 132, 132
+  offset: 0, 0
+  index: -1
+arrowUp_p
+  rotate: false
+  xy: 584, 649
+  size: 132, 132
+  orig: 132, 132
+  offset: 0, 0
+  index: -1
+buttonLongBrown
+  rotate: false
+  xy: 604, 942
+  size: 300, 77
+  orig: 300, 77
+  offset: 0, 0
+  index: -1
+buttonLongBrown_p
+  rotate: false
+  xy: 604, 863
+  size: 300, 76
+  orig: 300, 76
+  offset: 0, 0
+  index: -1
+buttons
+  rotate: false
+  xy: 1, 457
+  size: 254, 206
+  orig: 254, 206
+  offset: 0, 0
+  index: -1
+close
+  rotate: false
+  xy: 724, 435
+  size: 74, 80
+  orig: 74, 80
+  offset: 0, 0
+  index: -1
+close_p
+  rotate: false
+  xy: 800, 441
+  size: 74, 80
+  orig: 74, 80
+  offset: 0, 0
+  index: -1
+gold
+  rotate: false
+  xy: 906, 795
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+info2
+  rotate: false
+  xy: 269, 82
+  size: 125, 80
+  orig: 125, 80
   offset: 0, 0
   index: -1
 info2_p
   rotate: false
-  xy: 349, 677
+  xy: 269, 165
   size: 125, 81
   orig: 125, 81
   offset: 0, 0
   index: -1
+labelBgndBrown
+  rotate: false
+  xy: 1, 68
+  size: 182, 37
+  orig: 182, 37
+  offset: 0, 0
+  index: -1
 loading
   rotate: false
-  xy: 104, 151
+  xy: 482, 710
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
+locked
+  rotate: false
+  xy: 67, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+locked2
+  rotate: false
+  xy: 525, 518
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+locked2_p
+  rotate: false
+  xy: 655, 518
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+locked_p
+  rotate: false
+  xy: 323, 464
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+longNegative
+  rotate: false
+  xy: 604, 784
+  size: 300, 76
+  orig: 300, 76
+  offset: 0, 0
+  index: -1
+longNegative_p
+  rotate: false
+  xy: 1, 378
+  size: 300, 76
+  orig: 300, 76
+  offset: 0, 0
+  index: -1
+medal
+  rotate: false
+  xy: 906, 882
+  size: 75, 137
+  orig: 75, 137
+  offset: 0, 0
+  index: -1
+pause
+  rotate: false
+  xy: 645, 432
+  size: 77, 83
+  orig: 77, 83
+  offset: 0, 0
+  index: -1
+pause_p
+  rotate: false
+  xy: 913, 566
+  size: 77, 84
+  orig: 77, 84
+  offset: 0, 0
+  index: -1
+pause_panel
+  rotate: false
+  xy: 1, 666
+  size: 345, 353
+  orig: 345, 353
+  offset: 0, 0
+  index: -1
 share2
   rotate: false
-  xy: 104, 68
+  xy: 391, 460
   size: 125, 80
   orig: 125, 80
   offset: 0, 0
   index: -1
 share2_p
   rotate: false
-  xy: 207, 283
+  xy: 518, 435
   size: 125, 80
   orig: 125, 80
   offset: 0, 0
   index: -1
-info2
+touch
   rotate: false
-  xy: 207, 200
-  size: 125, 80
-  orig: 125, 80
-  offset: 0, 0
-  index: -1
-gold
-  rotate: false
-  xy: 258, 567
-  size: 84, 84
-  orig: 84, 84
-  offset: 0, 0
-  index: -1
-pause_p
-  rotate: false
-  xy: 258, 480
-  size: 77, 84
-  orig: 77, 84
-  offset: 0, 0
-  index: -1
-pause
-  rotate: false
-  xy: 909, 784
-  size: 77, 83
-  orig: 77, 83
-  offset: 0, 0
-  index: -1
-close_p
-  rotate: false
-  xy: 477, 678
-  size: 74, 80
-  orig: 74, 80
-  offset: 0, 0
-  index: -1
-close
-  rotate: false
-  xy: 232, 117
-  size: 74, 80
-  orig: 74, 80
-  offset: 0, 0
-  index: -1
-action_p
-  rotate: false
-  xy: 232, 50
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-locked
-  rotate: false
-  xy: 104, 1
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-action3_p
-  rotate: false
-  xy: 309, 128
-  size: 64, 69
-  orig: 64, 69
-  offset: 0, 0
-  index: -1
-action
-  rotate: false
-  xy: 349, 610
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-locked_p
-  rotate: false
-  xy: 416, 610
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-action3
-  rotate: false
-  xy: 483, 606
-  size: 64, 69
-  orig: 64, 69
+  xy: 348, 813
+  size: 254, 206
+  orig: 254, 206
   offset: 0, 0
   index: -1

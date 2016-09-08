@@ -2,12 +2,25 @@
     <Conversations>    
         <!--MOM -->
         <Conversation character="MOM" ID="M1" keys = "NONE" secondary="NONE">
-            <Dialog character="MOM">Val, you know I don't like you being so far from home</Dialog>
-            <Dialog character="VAL">Yes mom, I was just having fun</Dialog>
-            <Dialog character="MOM">I care about you girl ¿Why cannot you be like other bunnies?</Dialog>
-            <Dialog character="VAL">Sorry</Dialog>
-            <Dialog character="MOM">Anyway. Go home and get ready to go to town</Dialog>
+            <Dialog character="MOM">Val, bring carrots please</Dialog>
+            <Dialog character="MOM">I'll prepare medicine for your father</Dialog>
             <Dialog character="VAL">Yes mom</Dialog>
+            <Dialog character="MOM">Be careful Val</Dialog>
+        </Conversation>
+        <Conversation character="MOM" ID="M2" keys = "M1,GOAL" secondary="NONE">
+            <Dialog character="MOM">Your Dad is very sick</Dialog>
+            <Dialog character="MOM">I'm afraid of what can happen</Dialog>
+            <Dialog character="VAL">......</Dialog>
+            <Dialog character="VAL">I will find the golden carrot</Dialog>
+            <Dialog character="MOM">Are you crazy!?</Dialog>
+            <Dialog character="MOM">Bunnies like you never go out of the village</Dialog>
+            <Dialog character="MOM">Besides, it doesn't even exist</Dialog>
+            <Dialog character="VAL">Dad says it is real, so do Gomh</Dialog>
+            <Dialog character="MOM">Gomh is a crazy bunny</Dialog>
+            <Dialog character="VAL">Dad is not, and ...</Dialog>
+            <Dialog character="VAL">and is the only way to help him</Dialog>
+            <Dialog character="MOM">Oh Val</Dialog>
+            <Dialog character="VAL">I go home to prepare the trip</Dialog>
         </Conversation>
         <!-- GOHM -->
         <Conversation character="GOMH" ID="G1"  keys = "NONE" secondary="NONE">

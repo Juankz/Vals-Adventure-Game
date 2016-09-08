@@ -1,21 +1,42 @@
 
 ninePatches.png
+size: 512,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+buttonSquareBrown
+  rotate: false
+  xy: 1, 1
+  size: 45, 49
+  split: 8, 8, 17, 20
+  pad: -1, -1, 17, 20
+  orig: 45, 49
+  offset: 0, 0
+  index: -1
+buttonSquareBrown_p
+  rotate: false
+  xy: 366, 203
+  size: 45, 45
+  split: 8, 8, 17, 16
+  pad: -1, -1, 17, 16
+  orig: 45, 45
+  offset: 0, 0
+  index: -1
 panel_beige
   rotate: false
-  xy: 1, 52
+  xy: 1, 53
   size: 195, 195
-  split: 38, 37, 36, 37
+  split: 38, 37, 34, 37
+  pad: 19, 19, 17, 16
   orig: 195, 195
   offset: 0, 0
   index: -1
 panel_beige_small
   rotate: false
-  xy: 198, 147
+  xy: 198, 148
   size: 100, 100
   split: 19, 20, 19, 18
+  pad: 10, 9, 9, 10
   orig: 100, 100
   offset: 0, 0
   index: -1
@@ -29,25 +50,9 @@ panel_brown
   index: -1
 panel_brown2
   rotate: false
-  xy: 300, 183
+  xy: 300, 184
   size: 64, 64
   split: 12, 12, 13, 12
   orig: 64, 64
-  offset: 0, 0
-  index: -1
-buttonSquareBrown
-  rotate: false
-  xy: 1, 1
-  size: 45, 49
-  split: 8, 8, 17, 20
-  orig: 45, 49
-  offset: 0, 0
-  index: -1
-buttonSquareBrown_p
-  rotate: false
-  xy: 366, 202
-  size: 45, 45
-  split: 8, 8, 17, 16
-  orig: 45, 45
   offset: 0, 0
   index: -1

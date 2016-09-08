@@ -53,6 +53,10 @@ public class Assets implements Disposable, AssetErrorListener{
 	
 	public ValAssets valAssets;
 	public GomhAnimations gomhAnimations;
+	public MomAnimations momAnimations;
+	public PinkyAnimations pinkyAnimations;
+	public BlueAnimations blueAnimations;
+	public BonnyAnimations bonnyAnimations;
 	public Items items;
 	
 	private Assets(){}
@@ -155,6 +159,10 @@ public class Assets implements Disposable, AssetErrorListener{
 		assetManager.finishLoading();
 		valAssets = new ValAssets(assetManager.get("characters/characters.atlas",TextureAtlas.class));
 		gomhAnimations = new GomhAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
+		momAnimations = new MomAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
+		pinkyAnimations = new PinkyAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
+		blueAnimations = new BlueAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
+		bonnyAnimations = new BonnyAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
 		items = new Items(assetManager.get("game_objects/items.atlas",TextureAtlas.class));
 	}
 
@@ -260,6 +268,64 @@ public class Assets implements Disposable, AssetErrorListener{
 			frames.clear();
 			frames.add(new TextureRegion(atlas.findRegion("Gomh/gomhIdle")));
 			center = new Animation(frameDuration,frames,PlayMode.NORMAL);
+		}
+	}
+
+	public class MomAnimations{
+		public  final Animation happy;
+		public  final Animation sad;
+		public MomAnimations(TextureAtlas atlas){
+			float frameDuration = 1.0f;
+			Array<TextureRegion> frames = new Array<TextureRegion>();
+			frames.add(new TextureRegion(atlas.findRegion("Mom/sad1")));
+			frames.add(new TextureRegion(atlas.findRegion("Mom/sad2")));
+			happy = new Animation(frameDuration,frames,PlayMode.LOOP);
+			frames.clear();
+			frames.add(new TextureRegion(atlas.findRegion("Mom/happy1")));
+			frames.add(new TextureRegion(atlas.findRegion("Mom/happy2")));
+			sad = new Animation(frameDuration,frames,PlayMode.LOOP);
+		}
+	}
+
+	public class PinkyAnimations{
+		public  final Animation idle;
+		public  final Animation despective;
+		public PinkyAnimations(TextureAtlas atlas){
+			float frameDuration = 1.0f;
+			Array<TextureRegion> frames = new Array<TextureRegion>();
+			frames.add(new TextureRegion(atlas.findRegion("Pinky/idle1")));
+			idle = new Animation(frameDuration,frames,PlayMode.NORMAL);
+			frames.clear();
+			frames.add(new TextureRegion(atlas.findRegion("Pinky/despective1")));
+			frames.add(new TextureRegion(atlas.findRegion("Pinky/despective2")));
+			despective = new Animation(frameDuration,frames,PlayMode.NORMAL);
+		}
+	}
+
+	public class BlueAnimations{
+		public  final Animation idle;
+		public  final Animation talk;
+		public BlueAnimations(TextureAtlas atlas){
+			float frameDuration = 1.0f;
+			Array<TextureRegion> frames = new Array<TextureRegion>();
+			frames.add(new TextureRegion(atlas.findRegion("Blue/talk1")));
+			frames.add(new TextureRegion(atlas.findRegion("Blue/talk2")));
+			idle = new Animation(frameDuration,frames,PlayMode.NORMAL);
+			frames.clear();
+			frames.add(new TextureRegion(atlas.findRegion("Blue/talk1")));
+			frames.add(new TextureRegion(atlas.findRegion("Blue/talk1")));
+			talk = new Animation(frameDuration,frames,PlayMode.NORMAL);
+		}
+	}
+
+	public class BonnyAnimations{
+		public  final Animation idle;
+		public BonnyAnimations(TextureAtlas atlas){
+			float frameDuration = 1.0f;
+			Array<TextureRegion> frames = new Array<TextureRegion>();
+			frames.add(new TextureRegion(atlas.findRegion("Bonny/idle1")));
+			frames.add(new TextureRegion(atlas.findRegion("Bonny/idle2")));
+			idle = new Animation(frameDuration,frames,PlayMode.NORMAL);
 		}
 	}
 
