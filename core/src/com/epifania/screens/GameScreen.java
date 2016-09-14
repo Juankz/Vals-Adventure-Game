@@ -171,6 +171,7 @@ public class GameScreen extends ScreenAdapter{
 				if(val_system.canClimb && !val_system.climbing){
 					if(val.getComponent(StateComponent.class).get()!=Val_Component.CLIMB){
 						val_system.setState(val,Val_Component.CLIMB);
+						val_system.climb(1);
 					}
 				}else if (val_system.climbing){
 					val_system.climb(1);
@@ -185,6 +186,7 @@ public class GameScreen extends ScreenAdapter{
 				if(val_system.canClimb && !val_system.climbing){
 					if(val.getComponent(StateComponent.class).get()!=Val_Component.CLIMB){
 						val_system.setState(val,Val_Component.CLIMB);
+						val_system.climb(-1);
 					}
 				}else if (val_system.climbing){
 					val_system.climb(-1);

@@ -16,6 +16,7 @@ public class DesktopLauncher {
 			settings.duplicatePadding=true;
 			settings.combineSubdirectories=true;
 			settings.paddingY = 3;
+			settings.paddingX = 3;
 			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/characters","../assets/characters","characters");
 			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/items","../assets/game_objects","items");
 			settings.filterMag = Texture.TextureFilter.Linear;

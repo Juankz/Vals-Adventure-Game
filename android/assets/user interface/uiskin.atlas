@@ -13,42 +13,42 @@ action
   index: -1
 action2
   rotate: false
-  xy: 718, 653
+  xy: 722, 653
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 action2_p
   rotate: false
-  xy: 848, 653
+  xy: 853, 653
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 action3
   rotate: false
-  xy: 785, 524
+  xy: 790, 524
   size: 126, 126
   orig: 126, 126
   offset: 0, 0
   index: -1
 action3_p
   rotate: false
-  xy: 269, 249
+  xy: 271, 249
   size: 126, 126
   orig: 126, 126
   offset: 0, 0
   index: -1
 action_p
   rotate: false
-  xy: 257, 464
+  xy: 258, 464
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 arrowDown
   rotate: false
-  xy: 348, 678
+  xy: 349, 678
   size: 132, 132
   orig: 132, 132
   offset: 0, 0
@@ -69,49 +69,49 @@ arrowLeft
   index: -1
 arrowLeft_p
   rotate: false
-  xy: 135, 243
+  xy: 136, 243
   size: 132, 132
   orig: 132, 132
   offset: 0, 0
   index: -1
 arrowRight
   rotate: false
-  xy: 135, 108
+  xy: 136, 108
   size: 132, 132
   orig: 132, 132
   offset: 0, 0
   index: -1
 arrowRight_p
   rotate: false
-  xy: 257, 531
+  xy: 258, 531
   size: 132, 132
   orig: 132, 132
   offset: 0, 0
   index: -1
 arrowUp
   rotate: false
-  xy: 391, 543
+  xy: 393, 543
   size: 132, 132
   orig: 132, 132
   offset: 0, 0
   index: -1
 arrowUp_p
   rotate: false
-  xy: 584, 649
+  xy: 587, 649
   size: 132, 132
   orig: 132, 132
   offset: 0, 0
   index: -1
 buttonLongBrown
   rotate: false
-  xy: 604, 942
+  xy: 606, 942
   size: 300, 77
   orig: 300, 77
   offset: 0, 0
   index: -1
 buttonLongBrown_p
   rotate: false
-  xy: 604, 863
+  xy: 606, 863
   size: 300, 76
   orig: 300, 76
   offset: 0, 0
@@ -125,35 +125,35 @@ buttons
   index: -1
 close
   rotate: false
-  xy: 724, 435
+  xy: 736, 435
   size: 74, 80
   orig: 74, 80
   offset: 0, 0
   index: -1
 close_p
   rotate: false
-  xy: 800, 441
+  xy: 813, 441
   size: 74, 80
   orig: 74, 80
   offset: 0, 0
   index: -1
 gold
   rotate: false
-  xy: 906, 795
+  xy: 909, 795
   size: 84, 84
   orig: 84, 84
   offset: 0, 0
   index: -1
 info2
   rotate: false
-  xy: 269, 82
+  xy: 271, 82
   size: 125, 80
   orig: 125, 80
   offset: 0, 0
   index: -1
 info2_p
   rotate: false
-  xy: 269, 165
+  xy: 271, 165
   size: 125, 81
   orig: 125, 81
   offset: 0, 0
@@ -167,42 +167,42 @@ labelBgndBrown
   index: -1
 loading
   rotate: false
-  xy: 482, 710
+  xy: 484, 710
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 locked
   rotate: false
-  xy: 67, 1
+  xy: 68, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 locked2
   rotate: false
-  xy: 525, 518
+  xy: 528, 518
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 locked2_p
   rotate: false
-  xy: 655, 518
+  xy: 659, 518
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 locked_p
   rotate: false
-  xy: 323, 464
+  xy: 325, 464
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 longNegative
   rotate: false
-  xy: 604, 784
+  xy: 606, 784
   size: 300, 76
   orig: 300, 76
   offset: 0, 0
@@ -216,21 +216,21 @@ longNegative_p
   index: -1
 medal
   rotate: false
-  xy: 906, 882
+  xy: 909, 882
   size: 75, 137
   orig: 75, 137
   offset: 0, 0
   index: -1
 pause
   rotate: false
-  xy: 645, 432
+  xy: 656, 432
   size: 77, 83
   orig: 77, 83
   offset: 0, 0
   index: -1
 pause_p
   rotate: false
-  xy: 913, 566
+  xy: 919, 566
   size: 77, 84
   orig: 77, 84
   offset: 0, 0
@@ -244,21 +244,21 @@ pause_panel
   index: -1
 share2
   rotate: false
-  xy: 391, 460
+  xy: 400, 460
   size: 125, 80
   orig: 125, 80
   offset: 0, 0
   index: -1
 share2_p
   rotate: false
-  xy: 518, 435
+  xy: 528, 435
   size: 125, 80
   orig: 125, 80
   offset: 0, 0
   index: -1
 touch
   rotate: false
-  xy: 348, 813
+  xy: 349, 813
   size: 254, 206
   orig: 254, 206
   offset: 0, 0

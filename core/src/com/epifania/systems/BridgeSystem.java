@@ -1,12 +1,13 @@
 package com.epifania.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.utils.Array;
 import com.epifania.components.BodyComponent;
 import com.epifania.components.BridgeComponent;
 import com.epifania.components.MovementComponent;
@@ -21,9 +22,10 @@ public class BridgeSystem extends IteratingSystem {
     public ComponentMapper<TransformComponent> tm;
     public ComponentMapper<MovementComponent> mm;
     public ComponentMapper<BodyComponent> bm2;
+    private Array<Body> processedBodies = new Array<Body>();
 
     public BridgeSystem(){
-        super(Family.all(BridgeComponent.class, TransformComponent.class,MovementComponent.class).get());
+        super(Family.all(BridgeComponent.class, TransformComponent.class, BodyComponent.class).get());
         tm = ComponentMapper.getFor(TransformComponent.class);
         bm = ComponentMapper.getFor(BridgeComponent.class);
         mm = ComponentMapper.getFor(MovementComponent.class);
@@ -31,17 +33,38 @@ public class BridgeSystem extends IteratingSystem {
     }
 
     @Override
+    public void update(float delta){
+        super.update(delta);
+        processedBodies.clear(); //remove all the bodies to restart the process in the next cycle
+    }
+
+    @Override
     protected void processEntity(Entity entity, float deltaTime) {
         BridgeComponent bridgeComponent = bm.get(entity);
         BodyComponent bodyComponent = bm2.get(entity);
 
-        //If body position is not in the target position move
-        if(bridgeComponent.target.epsilonEquals(bodyComponent.body.getTransform().getPosition(),0.1f)){
+        /*As the same body is used by different entities of the same bridge,
+         only process one entity with the respective body
+          */
+        if(processedBodies.contains(bodyComponent.body,true))
+            return;
+
+        processedBodies.add(bodyComponent.body);
+        //Slow down the bridge when is near the target (1 unit)
+        if(bridgeComponent.target.epsilonEquals(bodyComponent.body.getTransform().getPosition(),1f)){
+            float vX = bodyComponent.body.getLinearVelocity().x;
+            float vY = bodyComponent.body.getLinearVelocity().y;
+            vX = MathUtils.lerp(vX,0,0.025f);
+            vY = MathUtils.lerp(vY,0,0.025f);
+            bodyComponent.body.setLinearVelocity(vX,vY);
+        }
+        //If target reached, stop
+        if(bridgeComponent.target.epsilonEquals(bodyComponent.body.getTransform().getPosition(),0.05f)){
             bodyComponent.body.setLinearVelocity(0,0);
             nextTarget(bridgeComponent);
             bridgeComponent.moving=false;
 
-            if(bridgeComponent.continuos){
+            if(bridgeComponent.continuous){
                 moveBy(entity,bridgeComponent.targets.get(bridgeComponent.targetIndex));
                 bridgeComponent.moving=true;
             }
@@ -83,7 +106,7 @@ public class BridgeSystem extends IteratingSystem {
     public void start(){
         for(Entity entity : getEngine().getEntitiesFor(getFamily())){
             BridgeComponent bridgeComponent = bm.get(entity);
-            if(bridgeComponent.continuos && bridgeComponent.moving){
+            if(bridgeComponent.continuous && bridgeComponent.moving){
                 moveBy(entity,bridgeComponent.targets.get(bridgeComponent.targetIndex));
                 bridgeComponent.moving=true;
             }

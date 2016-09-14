@@ -236,7 +236,7 @@ public class GameOverScreen extends ScreenAdapter {
         delay+=(1/60f) * epilogueText.length() + d;
 
         nextButton.addAction(Actions.sequence(
-                Actions.delay(delay + 2),
+                Actions.delay(delay),
                 Actions.moveTo(nbposX,nextButton.getY(),actionTime2,Interpolation.bounceOut),
                 Actions.touchable(Touchable.enabled)
         ));

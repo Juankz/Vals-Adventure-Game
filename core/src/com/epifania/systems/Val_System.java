@@ -68,6 +68,7 @@ public class Val_System extends IteratingSystem {
 			}
 			if (jump && canJump) {
 				state.set(Val_Component.JUMP);
+				body.body.setLinearVelocity(body.body.getLinearVelocity().x,0);
 				movement.velocity.y = body.body.getMass() * Val_Component.JUMP_VELOCITY;
 				canJump = false;
 			} else {

@@ -56,15 +56,6 @@ public class StageHUD extends Stage {
         super.act();
 
         if(!(isController && isControllerActive)) return;
-
-        if(leftButton.isOver())
-            inputController.left();
-        if(rightButton.isOver())
-            inputController.right();
-        if(upButton.isOver())
-            inputController.up();
-        if(downButton.isOver())
-            inputController.down();
     }
 
     private void init(){
@@ -75,6 +66,7 @@ public class StageHUD extends Stage {
         leftButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                inputController.left();
                 return isControllerActive;
             }
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -86,6 +78,7 @@ public class StageHUD extends Stage {
         rightButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                inputController.right();
                 return isControllerActive;
             }
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -96,6 +89,7 @@ public class StageHUD extends Stage {
         upButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                inputController.up();
                 return isControllerActive;
             }
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -106,6 +100,7 @@ public class StageHUD extends Stage {
         downButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                inputController.down();
                 return isControllerActive;
             }
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {

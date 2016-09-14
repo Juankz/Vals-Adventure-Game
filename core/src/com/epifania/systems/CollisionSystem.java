@@ -25,8 +25,7 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 	public Button lockedButton;
 	private Vector3 tmp = new Vector3();
 	private Entity valEntity, otherEntity;
-	
-	private static final String TAG = "CollisionSystem";
+
 	private ComponentMapper<BoundsComponent> bm;
 	private ComponentMapper<StateComponent> sm;
 	private ComponentMapper<TransformComponent> tm;
@@ -277,37 +276,44 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		}
 	}
 
-	//BOX2D
+	//***********************************BOX2D*****************************************
 	@Override
 	public void beginContact(Contact contact) {
 		valEntity = null; otherEntity = null;
 		getFeetCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
 		if(valEntity!=null && otherEntity!=null) {
-			if(valEntity.getComponent(BodyComponent.class).body.getLinearVelocity().y<=0) {
 
 				if (otherEntity.getComponent(GroundComponent.class) != null) {
-					addFeetContacts(valEntity);
+					addFeetCollide(valEntity);
 				}
 				if (otherEntity.getComponent(BoxComponent.class) != null) {
-					addFeetContacts(valEntity);
+					addFeetCollide(valEntity);
 				}
 				if (Family.all(BridgeComponent.class).get().matches(otherEntity)) {
-					addFeetContacts(valEntity);
+					addFeetCollide(valEntity);
 					bridgeCollision();
 				}
 				if (otherEntity.getComponent(PlatformComponent.class) != null) {
-					addFeetContacts(valEntity);
-					platformCollision();
+					addFeetCollide(valEntity);
 				}
-			}else{
-				valEntity.getComponent(Val_Component.class).invalidContacts++;
-			}
 		}
 
 		valEntity = null; otherEntity = null;
 		getBodyCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
-		Gdx.app.debug(tag,valEntity + "," + otherEntity);
 		if(valEntity==null || otherEntity==null) return;
+			if (otherEntity.getComponent(GroundComponent.class) != null) {
+				addBodyCollide(valEntity);
+			}
+			if (otherEntity.getComponent(BoxComponent.class) != null) {
+				addBodyCollide(valEntity);
+			}
+			if (Family.all(BridgeComponent.class).get().matches(otherEntity)) {
+				addBodyCollide(valEntity);
+			}
+			if (otherEntity.getComponent(PlatformComponent.class) != null) {
+				addBodyCollide(valEntity);
+				platformCollision();
+			}
 
 		if(otherEntity.getComponent(SpringComponent.class)!=null){
 			springCollision();
@@ -323,20 +329,36 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		valEntity =null;
 		otherEntity = null;
 
+		if(valEntity!=null && otherEntity!=null) {
+			if (otherEntity.getComponent(GroundComponent.class) != null) {
+				subBodyCollide(valEntity);
+			}
+			if (otherEntity.getComponent(BoxComponent.class) != null) {
+				subBodyCollide(valEntity);
+			}
+			if (Family.all(BridgeComponent.class).get().matches(otherEntity)) {
+				subBodyCollide(valEntity);
+			}
+			if (otherEntity.getComponent(PlatformComponent.class) != null) {
+				subBodyCollide(valEntity);
+			}
+		}
+
+		valEntity = null; otherEntity = null;
 		getFeetCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
 		if(valEntity==null || otherEntity==null) return;
 
 		if(otherEntity.getComponent(GroundComponent.class)!=null){
-			subFeetContacts(valEntity);
+			subFeetCollide(valEntity);
 		}
 		if(otherEntity.getComponent(BoxComponent.class)!=null){
-			subFeetContacts(valEntity);
+			subFeetCollide(valEntity);
 		}
 		if(otherEntity.getComponent(PlatformComponent.class)!=null){
-			subFeetContacts(valEntity);
+			subFeetCollide(valEntity);
 		}
 		if(Family.all(BridgeComponent.class).get().matches(otherEntity)){
-			subFeetContacts(valEntity);
+			subFeetCollide(valEntity);
 			valEntity.getComponent(MovementComponent.class).bringerBody = null;
 		}
 	}
@@ -413,26 +435,40 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		}
 	}
 
-	/**
-	 * Val can jump again
-	 * @param val Val entity
-	 */
-	private void addFeetContacts(Entity val){
-		val.getComponent(Val_Component.class).numberOfContacts++;
-		Gdx.app.debug(tag,"feet fixture collision. Contacts = "+val.getComponent(Val_Component.class).numberOfContacts);
-		this.getEngine().getSystem(Val_System.class).endJump();
-	}
-	private void subFeetContacts(Entity val){
-		Val_Component val_component = val.getComponent(Val_Component.class);
-		if(val_component.invalidContacts>0)
-			val_component.invalidContacts--;
-		else
-			val.getComponent(Val_Component.class).numberOfContacts--;
-
-		Gdx.app.debug(tag,"feet fixture collision. Contacts = "+val.getComponent(Val_Component.class).numberOfContacts);
-		if(vals.first().getComponent(Val_Component.class).numberOfContacts<1){
-			this.getEngine().getSystem(Val_System.class).canJump=false;
+	private boolean checkIfCanJump(Entity val) {
+		Val_Component component = val.getComponent(Val_Component.class);
+		BodyComponent bodyComponent = val.getComponent(BodyComponent.class);
+		MovementComponent movementComponent = val.getComponent(MovementComponent.class);
+		if(component.feetCollide > 0 && component.bodyCollide > 0){
+			if(movementComponent.bringerBody!=null){
+				if(bodyComponent.body.getLinearVelocity().y - movementComponent.bringerBody.getLinearVelocity().y <= 0){
+					this.getEngine().getSystem(Val_System.class).endJump();
+				}
+			}else{
+				if(bodyComponent.body.getLinearVelocity().y <= 0){
+					this.getEngine().getSystem(Val_System.class).endJump();
+				}
+			}
+			return true;
 		}
+		return false;
+	}
+	private void addBodyCollide(Entity val){
+		val.getComponent(Val_Component.class).bodyCollide++;
+		checkIfCanJump(val);
+	}
+	private void addFeetCollide(Entity val){
+		val.getComponent(Val_Component.class).feetCollide++;
+		checkIfCanJump(val);
+	}
+	private void subBodyCollide(Entity val){
+		val.getComponent(Val_Component.class).bodyCollide--;
+		this.getEngine().getSystem(Val_System.class).canJump=checkIfCanJump(val);
+
+	}
+	private void subFeetCollide(Entity val){
+		val.getComponent(Val_Component.class).feetCollide--;
+		this.getEngine().getSystem(Val_System.class).canJump=checkIfCanJump(val);
 	}
 	private void springCollision(){
 		Val_System valSystem = this.getEngine().getSystem(Val_System.class);
@@ -459,8 +495,8 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		engine.getSystem(PlatformSystem.class).characterCollision(otherEntity);
 	}
 	private void bridgeCollision(){
-		Val_System vs = this.getEngine().getSystem(Val_System.class);
-		vs.endJump();
+//		Val_System vs = this.getEngine().getSystem(Val_System.class);
+//		vs.endJump();
 		valEntity.getComponent(MovementComponent.class).bringerBody = otherEntity.getComponent(BodyComponent.class).body;
 	}
 }
