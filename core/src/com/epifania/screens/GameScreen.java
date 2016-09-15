@@ -57,10 +57,12 @@ public class GameScreen extends ScreenAdapter{
 	private Button lockedButton;
 	private Button pauseButton;
 	private Table coinsIndicator;
+	private Image coinImage;
 	private Label coinsLabel;
 	private ConversationDialog dialog;
 	private BitmapFont debugFont;
 	private HorizontalGroup cargo;
+	private boolean stageDebug = true;
 
 	//i18n
 	private I18NBundle bundle_ui;
@@ -266,6 +268,9 @@ public class GameScreen extends ScreenAdapter{
             public void pickCoin() {
 				coinsCollected++;
 				coinsLabel.setText(String.valueOf(coinsCollected));
+				float size = 1.3f;
+				float time = 0.05f;
+				coinImage.addAction(Actions.sequence(Actions.scaleTo(size,size,time),Actions.delay(time),Actions.scaleTo(1,1,time)));
             }
 
             @Override
@@ -301,6 +306,9 @@ public class GameScreen extends ScreenAdapter{
 				if(content.equals("coins")){
 					coinsCollected+=amount;
 					coinsLabel.setText(String.valueOf(coinsCollected));
+					float size = 1.3f;
+					float time = 0.05f;
+					coinImage.addAction(Actions.repeat(amount,Actions.sequence(Actions.scaleTo(size,size,time),Actions.delay(time),Actions.scaleTo(1,1,time))));
 				}
 			}
 
@@ -388,6 +396,10 @@ public class GameScreen extends ScreenAdapter{
 			if (Gdx.input.isKeyJustPressed(Input.Keys.D) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
 				boolean debug = !engine.getSystem(PhysicsDebugSystem.class).checkProcessing();
 				engine.getSystem(PhysicsDebugSystem.class).setProcessing(debug);
+			}
+			if (Gdx.input.isKeyJustPressed(Input.Keys.D) && !Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
+				stageDebug = !stageDebug;
+				stageHUD.setDebugAll(stageDebug);
 			}
 			if (Gdx.input.isKeyJustPressed(Input.Keys.G) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
 				boolean debug = !engine.getSystem(RenderingSystem.class).checkProcessing();
@@ -535,10 +547,14 @@ public class GameScreen extends ScreenAdapter{
 		coinsLabel = new Label("0",skin,"middle_outline");
 		coinsLabel.setColor(Color.GOLD);
 
+		coinImage = new Image(skin.getDrawable("gold"));
+		coinImage.setOrigin(25,25);
+
 		coinsIndicator = new Table();
-		coinsIndicator.add(new Image(skin.getDrawable("gold"))).size(50);
+		coinsIndicator.add(coinImage).size(50).grow().center();
 		coinsIndicator.add(coinsLabel).padLeft(20);
 		coinsIndicator.pack();
+		coinsIndicator.setSize(coinsIndicator.getWidth()+20,coinsIndicator.getHeight()+20);
         coinsIndicator.setPosition(
                 stageHUD.getWidth()*0.5f - coinsIndicator.getWidth()*0.5f,
                 stageHUD.getHeight() - 50 - coinsIndicator.getHeight()

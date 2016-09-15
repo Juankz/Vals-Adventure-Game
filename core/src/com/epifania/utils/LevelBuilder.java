@@ -1579,9 +1579,7 @@ public class LevelBuilder {
                     transform.pos.set(x+0.5f, y+0.5f, 0);
                     transform.origin.set(0.5f,0.5f);
                     transform.scale.set(0.4f,0.4f);
-                    bounds.posOffset.set(0.25f,0.20f);
-                    bounds.posOffset.setZero();
-                    bounds.bounds.set(x+0.5f, y+0.5f, 0.35f, 0.35f);
+                    bounds.bounds.set(x+0.5f, y+0.5f, 0.5f, 0.5f);
                     coin.value = Integer.valueOf((String)property);
 
                     entity.add(transform);
