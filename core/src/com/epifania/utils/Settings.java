@@ -17,7 +17,7 @@ public class Settings {
     public boolean controls = false; //False = Buttons ; true = touch
     public String languaje = Locale.getDefault().getLanguage();
     public float sfxVolume =0.8f;
-    public float musicVolume = 1;
+    public float musicVolume = 0.8f;
 
     private Settings(){
         languajes = new ObjectMap<String, String>();
@@ -35,7 +35,7 @@ public class Settings {
         languaje = preferences.getString("languaje");
         if(setted == false) {
             sfxVolume = 0.8f;
-            musicVolume = 1f;
+            musicVolume = 0.8f;
             languaje = Locale.getDefault().getLanguage();
         }
 

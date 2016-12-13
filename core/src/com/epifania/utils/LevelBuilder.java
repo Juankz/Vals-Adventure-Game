@@ -1035,11 +1035,11 @@ public class LevelBuilder {
             public void action() {
                 Gdx.app.debug("Level builder","Door Actionated");
                 Gdx.app.debug("Level builder","val Flags = 1");
-                engine.getEntitiesFor(Family.all(Val_Component.class).get()).first().flags=1;
-                engine.getSystem(PhysicsSystem.class).setActiveObjects();
-                levelMap.getLayers().get("Items").setVisible(false);
-                levelMap.getLayers().get("Builds Front").setVisible(false);
-                levelMap.getLayers().get("Builds").setVisible(false);
+                MapLayerSystem mapLayerSystem = engine.getSystem(MapLayerSystem.class);
+                mapLayerSystem.shuffleAlpha(
+                        engine.getEntitiesFor(Family.all(MapComponent.class).get()).first());
+                engine.getSystem(TextureManipulationSystem.class).shuffleAlpha();
+
             }
         };
 
@@ -1064,9 +1064,9 @@ public class LevelBuilder {
                 Gdx.app.debug("Level builder","val Flags = 0");
                 engine.getEntitiesFor(Family.all(Val_Component.class).get()).first().flags=0;
                 engine.getSystem(PhysicsSystem.class).setActiveObjects();
-                levelMap.getLayers().get("Items").setVisible(true);
-                levelMap.getLayers().get("Builds Front").setVisible(true);
-                levelMap.getLayers().get("Builds").setVisible(true);
+                engine.getSystem(MapLayerSystem.class).shuffleAlpha(
+                        engine.getEntitiesFor(Family.all(MapComponent.class).get()).first());
+                engine.getSystem(TextureManipulationSystem.class).shuffleAlpha();
             }
         };
 
@@ -1599,6 +1599,11 @@ public class LevelBuilder {
     private void setMap() {
         levelMap.getLayers().get("Coins").setVisible(false);
         engine.getSystem(RenderingSystem.class).loadMap(levelMap);
+        Entity entity = new Entity();
+        MapComponent mapComponent = new MapComponent();
+        mapComponent.map = levelMap;
+        entity.add(mapComponent);
+        engine.addEntity(entity);
     }
 
     private void createCamera(Entity target) {

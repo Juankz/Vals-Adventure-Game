@@ -4,6 +4,8 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -31,7 +33,6 @@ import com.epifania.components.*;
 import com.epifania.systems.*;
 import com.epifania.ui.*;
 import com.epifania.utils.*;
-import javafx.application.Platform;
 
 public class GameScreen extends ScreenAdapter{
 
@@ -60,9 +61,13 @@ public class GameScreen extends ScreenAdapter{
 	private Image coinImage;
 	private Label coinsLabel;
 	private ConversationDialog dialog;
+	private Container<Image> itemAction;
 	private BitmapFont debugFont;
 	private HorizontalGroup cargo;
 	private boolean stageDebug = true;
+
+	//Music and SFX
+	private Music music;
 
 	//i18n
 	private I18NBundle bundle_ui;
@@ -122,8 +127,9 @@ public class GameScreen extends ScreenAdapter{
 		levelBuilder.loadLevel(levelMap);
 
 		// Other engine settings
+		//Debug Settings
 		engine.getSystem(DebugSystem.class).setProcessing(false);
-		engine.getSystem(PhysicsDebugSystem.class).setProcessing(true);
+		engine.getSystem(PhysicsDebugSystem.class).setProcessing(false);
 		if(Gdx.app.getType()== Application.ApplicationType.Android){
 			engine.getSystem(DebugSystem.class).setProcessing(false);
 			engine.getSystem(PhysicsDebugSystem.class).setProcessing(false);
@@ -214,6 +220,11 @@ public class GameScreen extends ScreenAdapter{
 		//Add viewport to camera
 		OrthographicCamera cam = engine.getSystem(RenderingSystem.class).getCamera();
 		viewport = new FillViewport(Constants.ViewportWidth,Constants.ViewportHeight,cam);
+
+		//Music
+		music = Assets.instance.get("sounds/"+levelMap.getProperties().get("music","default_music.ogg",String.class));
+		music.setLooping(true);
+		SoundManager.playMusic(music);
 	}
 
 	private LevelBuilder.Listener levelListener(){
@@ -259,6 +270,11 @@ public class GameScreen extends ScreenAdapter{
 		engine.addSystem(new CameraSystem());
 		engine.addSystem(new CharacterSystem());
         engine.addSystem(new CollisionSystem(new CollisionSystem.CollisionListener() {
+        	@Override
+			public Image getItemImage(String key){
+        		Item item = cargo.findActor(key);
+        		return new Image(item.getActor().getDrawable());
+			}
             @Override
             public void removeEntity(Entity entity) {
                 entities2Bremoved.add(entity);
@@ -269,20 +285,23 @@ public class GameScreen extends ScreenAdapter{
 				coinsCollected++;
 				coinsLabel.setText(String.valueOf(coinsCollected));
 				float size = 1.3f;
-				float time = 0.05f;
+				float time = 0.04f;
 				coinImage.addAction(Actions.sequence(Actions.scaleTo(size,size,time),Actions.delay(time),Actions.scaleTo(1,1,time)));
-            }
+				SoundManager.playSound("sounds/pickup_coin.ogg");
+			}
 
             @Override
 			public void pickObject(TextureRegion region, String key){
 				Item item = new Item(skin,region);
 				item.key = key;
+				item.setName(key);
 				cargo.addActor(item);
 				cargo.pack();
 				cargo.setPosition(
 						stageHUD.getWidth() - cargo.getWidth() - 30,
 						stageHUD.getHeight() - cargo.getHeight() -30
 				);
+				SoundManager.playSound("sounds/pickup_object.ogg");
 			}
 
 			@Override
@@ -304,11 +323,22 @@ public class GameScreen extends ScreenAdapter{
 			@Override
 			public void pickPack(String content, int amount) {
 				if(content.equals("coins")){
-					coinsCollected+=amount;
-					coinsLabel.setText(String.valueOf(coinsCollected));
+//					coinsCollected+=amount;
+//					coinsLabel.setText(String.valueOf(coinsCollected));
 					float size = 1.3f;
-					float time = 0.05f;
-					coinImage.addAction(Actions.repeat(amount,Actions.sequence(Actions.scaleTo(size,size,time),Actions.delay(time),Actions.scaleTo(1,1,time))));
+					float time = 0.04f;
+					float delay = 0.01f;
+					coinImage.addAction(Actions.repeat(amount,Actions.sequence(
+							Actions.scaleTo(size,size,time),
+							Actions.run(new Runnable() {
+								@Override
+								public void run() {
+									coinsCollected++;
+									coinsLabel.setText(String.valueOf(coinsCollected));
+								}
+							}),
+							Actions.delay(delay),
+							Actions.scaleTo(1,1,time))));
 				}
 			}
 
@@ -318,7 +348,8 @@ public class GameScreen extends ScreenAdapter{
 //                inputHandler.setActive(false);
                 activeInput = true;
                 engine.getSystem(CollisionSystem.class).setProcessing(false);
-            }
+				SoundManager.playSound("sounds/lose.ogg");
+			}
 
             @Override
             public void checkpointReached(int number) {
@@ -330,6 +361,7 @@ public class GameScreen extends ScreenAdapter{
 		OrthographicCamera camera = engine.getSystem(RenderingSystem.class).getCamera();
 		engine.addSystem(new DebugSystem(camera));
 		engine.addSystem(new PhysicsDebugSystem(world,camera));
+		engine.addSystem(new MapLayerSystem());
 	}
 
 	@Override
@@ -382,7 +414,7 @@ public class GameScreen extends ScreenAdapter{
 			debugFont.setColor(Color.YELLOW);
 		else
 			debugFont.setColor(Color.RED);
-		debugFont.draw(batch, Gdx.graphics.getFramesPerSecond()+" FPS", Gdx.graphics.getWidth()-60 , 30);
+//		debugFont.draw(batch, Gdx.graphics.getFramesPerSecond()+" FPS", Gdx.graphics.getWidth()-60 , 30);
 		batch.end();
 	}
 
@@ -471,6 +503,7 @@ public class GameScreen extends ScreenAdapter{
 	public void buildUI(){
 		debugFont = new BitmapFont();
 		stage = new Stage(new FillViewport(Constants.UIViewportWidth,Constants.UIViewportHeight),batch);
+//		stage.setDebugAll(true);
         if(!Settings.instance.controls)
             stageHUD = new StageHUD(new ExtendViewport(Constants.UIViewportWidth,Constants.UIViewportHeight),batch,inputController);
         else
@@ -490,6 +523,7 @@ public class GameScreen extends ScreenAdapter{
 		actionButton.setVisible(false);
 		actionButton.setPosition(0,0);
 		actionButton.setOrigin(Align.center);
+		actionButton.setZIndex(1);
 		
 		lockedButton = new Button(skin,"locked");
 		lockedButton.addListener(new ClickListener(){
@@ -510,9 +544,18 @@ public class GameScreen extends ScreenAdapter{
 				engine.getSystem(CollisionSystem.class).action = true;
 			}
 		});
-		
+
+		itemAction = new Container<Image>(new Image());
+		itemAction.setVisible(false);
+//		itemAction.size(50);
+		itemAction.setTransform(true);
+		itemAction.setBackground(skin.getDrawable("panel_brown2"));
+		itemAction.pack();
+
 		engine.getSystem(CollisionSystem.class).actionButton = actionButton;
 		engine.getSystem(CollisionSystem.class).lockedButton = lockedButton;
+		engine.getSystem(CollisionSystem.class).itemImage = itemAction;
+		stage.addActor(itemAction);
 		stage.addActor(actionButton);
 		stage.addActor(lockedButton);
 		dialog = new ConversationDialog(skin);
@@ -667,6 +710,15 @@ public class GameScreen extends ScreenAdapter{
 		Assets.instance.unload("backgrounds/bg.png");
 		Assets.instance.unload("backgrounds/bg1.png");
 		Assets.instance.unload("backgrounds/bg2.png");
+		Assets.instance.unload("sounds/"+levelMap.getProperties().get("music","default_music.ogg",String.class));
+
+		Assets.instance.unload("sounds/doorOpen.ogg");
+		Assets.instance.unload("sounds/jump.ogg");
+		Assets.instance.unload("sounds/jump_spring.ogg");
+		Assets.instance.unload("sounds/lose.ogg");
+		Assets.instance.unload("sounds/pickup_coin.ogg");
+		Assets.instance.unload("sounds/pickup_object.ogg");
+		Assets.instance.unload("sounds/footstep.ogg");
 	}
 
 	public void unpause(){

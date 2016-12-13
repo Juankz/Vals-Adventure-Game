@@ -23,8 +23,6 @@ public class Val_Component implements Component{
 
 	public final Array<Entity> objects = new Array<Entity>();
 	public final Array<String> conversationKeys = new Array<String>();
-	public int numberOfContacts = 0;
-	public int invalidContacts = 0;
 
 	public int bodyCollide = 0;
 	public int feetCollide = 0;

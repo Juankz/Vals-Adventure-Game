@@ -1,7 +1,10 @@
 package com.epifania.screens;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.assets.loaders.MusicLoader;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -31,6 +34,7 @@ public class IntroScreen extends ScreenAdapter {
     private Stage stage;
     private Skin skin;
     private Viewport viewport;
+    private TiledMap map;
 
     private Label header;
     private Label title;
@@ -176,7 +180,6 @@ public class IntroScreen extends ScreenAdapter {
         String scriptPath = Constants.scriptsNames[level].split(".xml")[0] +"_"+ bundle.getLocale() + ".xml";
 
         FileHandle file = Gdx.files.internal(scriptPath);
-        TiledMap map = Assets.instance.get(Constants.mapsNames[level],TiledMap.class);
         return new GameScreen(batch,map,file,level);
     }
 
@@ -184,6 +187,7 @@ public class IntroScreen extends ScreenAdapter {
         //Load resources
         TmxMapLoader.Parameters parameters = new TmxMapLoader.Parameters();
         Assets.instance.load(Constants.mapsNames[level], TiledMap.class, parameters);
+        Assets.instance.finishLoading();
         TextureLoader.TextureParameter textureParameter = new TextureLoader.TextureParameter();
         textureParameter.wrapU = Texture.TextureWrap.Repeat;
         textureParameter.wrapV = Texture.TextureWrap.ClampToEdge;
@@ -193,6 +197,17 @@ public class IntroScreen extends ScreenAdapter {
         Assets.instance.load("backgrounds/bg.png",Texture.class,textureParameter);
         Assets.instance.load("backgrounds/bg1.png",Texture.class,textureParameter);
         Assets.instance.load("backgrounds/bg2.png",Texture.class,textureParameter);
+        map = Assets.instance.get(Constants.mapsNames[level],TiledMap.class);
+        String musicPath = "sounds/"+map.getProperties().get("music","default_music.ogg",String.class);
+        Assets.instance.load(musicPath,Music.class);
+
+        Assets.instance.load("sounds/doorOpen.ogg",Sound.class);
+        Assets.instance.load("sounds/jump.ogg",Sound.class);
+        Assets.instance.load("sounds/jump_spring.ogg",Sound.class);
+        Assets.instance.load("sounds/lose.ogg",Sound.class);
+        Assets.instance.load("sounds/pickup_coin.ogg",Sound.class);
+        Assets.instance.load("sounds/pickup_object.ogg",Sound.class);
+        Assets.instance.load("sounds/footstep.ogg",Sound.class);
     }
 
     private String getRoman(int number){

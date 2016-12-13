@@ -72,6 +72,7 @@ public class BridgeSystem extends IteratingSystem {
     }
 
     private void nextTarget(BridgeComponent bridgeComponent){
+        //TODO add bridge sound and stop
         if(bridgeComponent.targetIndex +1<bridgeComponent.targets.size){
             bridgeComponent.targetIndex++;
         }else{

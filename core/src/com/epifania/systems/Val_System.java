@@ -11,6 +11,7 @@ import com.epifania.components.StateComponent;
 import com.epifania.components.TransformComponent;
 import com.epifania.components.Val_Component;
 import com.epifania.utils.ConversationManager;
+import com.epifania.utils.SoundManager;
 
 public class Val_System extends IteratingSystem {
 	
@@ -70,6 +71,7 @@ public class Val_System extends IteratingSystem {
 				state.set(Val_Component.JUMP);
 				body.body.setLinearVelocity(body.body.getLinearVelocity().x,0);
 				movement.velocity.y = body.body.getMass() * Val_Component.JUMP_VELOCITY;
+				SoundManager.playSound("sounds/jump.ogg");
 				canJump = false;
 			} else {
 				if (state.get() == Val_Component.JUMP && canJump) {
@@ -139,6 +141,7 @@ public class Val_System extends IteratingSystem {
 		movement.traslation.set(0,0.5f);
 		jump = false;
 		canJump = true;
+		SoundManager.playSound("sounds/jump_spring.ogg");
 	}
 
 	public void deathCollision(Entity entity){
