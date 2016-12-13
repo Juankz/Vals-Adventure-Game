@@ -14,5 +14,5 @@ public class BridgeComponent implements Component {
     public int targetIndex = 0;
     public final Vector2 target = new Vector2();
     public boolean moving = false;
-    public boolean continuos = false;
+    public boolean continuous = false;
 }

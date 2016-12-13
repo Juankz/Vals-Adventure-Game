@@ -13,77 +13,77 @@ bronze
   index: 1
 bronze
   rotate: false
-  xy: 87, 5
+  xy: 88, 5
   size: 66, 84
   orig: 66, 84
   offset: 0, 0
   index: 2
 bronze
   rotate: false
-  xy: 453, 161
+  xy: 457, 161
   size: 50, 84
   orig: 50, 84
   offset: 0, 0
   index: 3
 bronze
   rotate: false
-  xy: 462, 1
+  xy: 470, 1
   size: 14, 84
   orig: 14, 84
   offset: 0, 0
   index: 4
 carrot
   rotate: false
-  xy: 281, 88
+  xy: 283, 88
   size: 78, 70
   orig: 78, 70
   offset: 0, 0
   index: -1
 carrotBucket
   rotate: false
-  xy: 441, 88
+  xy: 445, 88
   size: 62, 70
   orig: 62, 70
   offset: 0, 0
   index: -1
 carrot_gold
   rotate: false
-  xy: 361, 88
+  xy: 364, 88
   size: 78, 70
   orig: 78, 70
   offset: 0, 0
   index: -1
 gold
   rotate: false
-  xy: 281, 161
+  xy: 283, 161
   size: 84, 84
   orig: 84, 84
   offset: 0, 0
   index: 1
 gold
   rotate: false
-  xy: 155, 6
+  xy: 157, 6
   size: 66, 84
   orig: 66, 84
   offset: 0, 0
   index: 2
 gold
   rotate: false
-  xy: 223, 6
+  xy: 226, 6
   size: 50, 84
   orig: 50, 84
   offset: 0, 0
   index: 3
 gold
   rotate: false
-  xy: 445, 1
+  xy: 452, 1
   size: 15, 84
   orig: 15, 84
   offset: 0, 0
   index: 4
 knife
   rotate: false
-  xy: 395, 15
+  xy: 401, 15
   size: 48, 70
   orig: 48, 70
   offset: 0, 0
@@ -97,35 +97,35 @@ plant1
   index: -1
 plant2
   rotate: false
-  xy: 144, 93
+  xy: 145, 93
   size: 135, 152
   orig: 135, 152
   offset: 0, 0
   index: -1
 silver
   rotate: false
-  xy: 367, 161
+  xy: 370, 161
   size: 84, 84
   orig: 84, 84
   offset: 0, 0
   index: 1
 silver
   rotate: false
-  xy: 275, 1
+  xy: 279, 1
   size: 66, 84
   orig: 66, 84
   offset: 0, 0
   index: 2
 silver
   rotate: false
-  xy: 343, 1
+  xy: 348, 1
   size: 50, 84
   orig: 50, 84
   offset: 0, 0
   index: 3
 silver
   rotate: false
-  xy: 478, 1
+  xy: 487, 1
   size: 14, 84
   orig: 14, 84
   offset: 0, 0

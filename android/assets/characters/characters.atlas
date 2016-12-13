@@ -6,112 +6,112 @@ filter: MipMapLinearNearest,Nearest
 repeat: none
 Blue/talk1
   rotate: false
-  xy: 124, 74
+  xy: 199, 528
   size: 59, 100
   orig: 59, 100
   offset: 0, 0
   index: -1
 Blue/talk2
   rotate: false
-  xy: 197, 432
+  xy: 199, 329
   size: 59, 96
   orig: 59, 96
   offset: 0, 0
   index: -1
 Bonny/idle1
   rotate: false
-  xy: 689, 820
+  xy: 694, 820
   size: 121, 202
   orig: 121, 202
   offset: 0, 0
   index: -1
 Bonny/idle2
   rotate: false
-  xy: 384, 636
+  xy: 387, 636
   size: 121, 192
   orig: 121, 192
   offset: 0, 0
   index: -1
 Gomh/gomhIdle
   rotate: false
-  xy: 507, 671
+  xy: 601, 671
   size: 86, 147
   orig: 86, 147
   offset: 0, 0
   index: -1
 Gomh/gomhIdle2
   rotate: false
-  xy: 683, 676
+  xy: 779, 676
   size: 86, 141
   orig: 86, 141
   offset: 0, 0
   index: -1
 Gomh/gomhLeft
   rotate: false
-  xy: 934, 874
+  xy: 511, 670
   size: 87, 148
   orig: 87, 148
   offset: 0, 0
   index: -1
 Gomh/gomhRight
   rotate: false
-  xy: 595, 672
+  xy: 690, 671
   size: 86, 146
   orig: 86, 146
   offset: 0, 0
   index: -1
 Mom/happy1
   rotate: false
-  xy: 771, 697
+  xy: 941, 902
   size: 71, 120
   orig: 71, 120
   offset: 0, 0
   index: -1
 Mom/happy2
   rotate: false
-  xy: 124, 502
+  xy: 125, 379
   size: 71, 116
   orig: 71, 116
   offset: 0, 0
   index: -1
 Mom/sad1
   rotate: false
-  xy: 844, 699
+  xy: 868, 699
   size: 71, 120
   orig: 71, 120
   offset: 0, 0
   index: -1
 Mom/sad2
   rotate: false
-  xy: 124, 383
+  xy: 125, 260
   size: 71, 116
   orig: 71, 116
   offset: 0, 0
   index: -1
 Mom/sad3
   rotate: false
-  xy: 917, 699
+  xy: 125, 498
   size: 71, 120
   orig: 71, 120
   offset: 0, 0
   index: -1
 Pinky/despective1
   rotate: false
-  xy: 124, 280
+  xy: 125, 157
   size: 59, 100
   orig: 59, 100
   offset: 0, 0
   index: -1
 Pinky/despective2
   rotate: false
-  xy: 197, 531
+  xy: 199, 428
   size: 59, 97
   orig: 59, 97
   offset: 0, 0
   index: -1
 Pinky/idle1
   rotate: false
-  xy: 124, 177
+  xy: 125, 54
   size: 59, 100
   orig: 59, 100
   offset: 0, 0
@@ -132,35 +132,35 @@ Val/bunny2_climb2
   index: -1
 Val/bunny2_hurt
   rotate: false
-  xy: 291, 848
+  xy: 293, 848
   size: 150, 174
   orig: 150, 174
   offset: 0, 0
   index: -1
 Val/bunny2_jump
   rotate: false
-  xy: 139, 841
+  xy: 140, 841
   size: 150, 181
   orig: 150, 181
   offset: 0, 0
   index: -1
 Val/bunny2_ready
   rotate: false
-  xy: 443, 831
+  xy: 446, 831
   size: 121, 191
   orig: 121, 191
   offset: 0, 0
   index: -1
 Val/bunny2_shook1
   rotate: false
-  xy: 812, 822
+  xy: 818, 822
   size: 120, 200
   orig: 120, 200
   offset: 0, 0
   index: -1
 Val/bunny2_shook2
   rotate: false
-  xy: 262, 638
+  xy: 264, 638
   size: 120, 200
   orig: 120, 200
   offset: 0, 0
@@ -174,14 +174,14 @@ Val/bunny2_stand
   index: -1
 Val/bunny2_walk1
   rotate: false
-  xy: 566, 821
+  xy: 570, 821
   size: 121, 201
   orig: 121, 201
   offset: 0, 0
   index: -1
 Val/bunny2_walk2
   rotate: false
-  xy: 139, 631
+  xy: 140, 631
   size: 121, 207
   orig: 121, 207
   offset: 0, 0

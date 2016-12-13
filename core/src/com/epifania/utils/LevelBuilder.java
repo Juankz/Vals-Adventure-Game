@@ -1035,11 +1035,11 @@ public class LevelBuilder {
             public void action() {
                 Gdx.app.debug("Level builder","Door Actionated");
                 Gdx.app.debug("Level builder","val Flags = 1");
-                engine.getEntitiesFor(Family.all(Val_Component.class).get()).first().flags=1;
-                engine.getSystem(PhysicsSystem.class).setActiveObjects();
-                levelMap.getLayers().get("Items").setVisible(false);
-                levelMap.getLayers().get("Builds Front").setVisible(false);
-                levelMap.getLayers().get("Builds").setVisible(false);
+                MapLayerSystem mapLayerSystem = engine.getSystem(MapLayerSystem.class);
+                mapLayerSystem.shuffleAlpha(
+                        engine.getEntitiesFor(Family.all(MapComponent.class).get()).first());
+                engine.getSystem(TextureManipulationSystem.class).shuffleAlpha();
+
             }
         };
 
@@ -1064,9 +1064,9 @@ public class LevelBuilder {
                 Gdx.app.debug("Level builder","val Flags = 0");
                 engine.getEntitiesFor(Family.all(Val_Component.class).get()).first().flags=0;
                 engine.getSystem(PhysicsSystem.class).setActiveObjects();
-                levelMap.getLayers().get("Items").setVisible(true);
-                levelMap.getLayers().get("Builds Front").setVisible(true);
-                levelMap.getLayers().get("Builds").setVisible(true);
+                engine.getSystem(MapLayerSystem.class).shuffleAlpha(
+                        engine.getEntitiesFor(Family.all(MapComponent.class).get()).first());
+                engine.getSystem(TextureManipulationSystem.class).shuffleAlpha();
             }
         };
 
@@ -1088,21 +1088,6 @@ public class LevelBuilder {
         y=rectangle.y*unit;
         w=rectangle.width*unit;
         h=rectangle.height*unit;
-
-        //Create body
-        Body body;
-        BodyDef def = new BodyDef();
-        def.type = BodyDef.BodyType.KinematicBody;
-        def.position.set(x+w*0.5f, y+h*0.5f);
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(w*0.5f, h*0.5f);
-        FixtureDef fix = new FixtureDef();
-        fix.isSensor = true;
-        fix.shape = shape;
-        body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
-        body.createFixture(fix);
-        body.setUserData(null);
-        shape.dispose();
 
         TiledMapTileLayer tileLayer = (TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]);
         for(int i = 0;i<(int)h;i++){
@@ -1126,8 +1111,6 @@ public class LevelBuilder {
             transform.origin.set(0.0f,0.0f);
             transform.rotation = cell.getRotation();
             textureComponent.region = region;
-            bodyComponent.body = body;
-            bodyComponent.offsetPosition.set(-0.5f,(h*-0.5f)+i);
             bridgeComponent.number = Integer.parseInt((String)object.getProperties().get("number"));
 
             //Get targets from object property
@@ -1140,6 +1123,24 @@ public class LevelBuilder {
             for(int m = 0;m<coords.length;m+=2){
                 bridgeComponent.targets.add(new Vector2(coords[m],coords[m+1]));
             }
+
+            //Create body
+            Body body;
+            BodyDef def = new BodyDef();
+            def.type = BodyDef.BodyType.KinematicBody;
+            def.position.set(x+w*0.5f, y+h*0.5f);
+            PolygonShape shape = new PolygonShape();
+            shape.setAsBox(w*0.5f, h*0.5f);
+            FixtureDef fix = new FixtureDef();
+            fix.isSensor = true;
+            fix.shape = shape;
+            body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
+            body.createFixture(fix);
+            body.setUserData(null);
+            shape.dispose();
+
+            bodyComponent.body = body;
+            bodyComponent.offsetPosition.set(-0.5f,(h*-0.5f)+i);
 
             Entity entity = new Entity();
             entity.add(transform);
@@ -1168,7 +1169,6 @@ public class LevelBuilder {
         Body body;
         BodyDef def = new BodyDef();
         def.type = BodyDef.BodyType.KinematicBody;
-//        def.position.set(x+w*0.5f, y+h*0.5f);
         def.position.set(x+w*0.5f, y+h*0.5f);
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(w*0.5f, h*0.5f);
@@ -1188,7 +1188,6 @@ public class LevelBuilder {
             TextureRegion r = new TextureRegion(cell.getTile().getTextureRegion());
             float height = h*Constants.inversePPU;
             TextureRegion region = new TextureRegion(r,0,(int)Constants.inversePPU-(int)height,r.getRegionWidth(),(int)height);
-//            TextureRegion region = new TextureRegion(r,0,0,r.getRegionWidth(),r.getRegionHeight());
             region.flip(cell.getFlipHorizontally(), cell.getFlipVertically());
             cell.setTile(null);
 
@@ -1225,7 +1224,7 @@ public class LevelBuilder {
 
             Object property = object.getProperties().get("continuous");
             if(property!=null){
-                bridgeComponent.continuos = Boolean.parseBoolean((String)property);
+                bridgeComponent.continuous = Boolean.parseBoolean((String)property);
             }
 
             property = object.getProperties().get("moving");
@@ -1580,9 +1579,7 @@ public class LevelBuilder {
                     transform.pos.set(x+0.5f, y+0.5f, 0);
                     transform.origin.set(0.5f,0.5f);
                     transform.scale.set(0.4f,0.4f);
-                    bounds.posOffset.set(0.25f,0.20f);
-                    bounds.posOffset.setZero();
-                    bounds.bounds.set(x+0.5f, y+0.5f, 0.35f, 0.35f);
+                    bounds.bounds.set(x+0.5f, y+0.5f, 0.5f, 0.5f);
                     coin.value = Integer.valueOf((String)property);
 
                     entity.add(transform);
@@ -1602,6 +1599,11 @@ public class LevelBuilder {
     private void setMap() {
         levelMap.getLayers().get("Coins").setVisible(false);
         engine.getSystem(RenderingSystem.class).loadMap(levelMap);
+        Entity entity = new Entity();
+        MapComponent mapComponent = new MapComponent();
+        mapComponent.map = levelMap;
+        entity.add(mapComponent);
+        engine.addEntity(entity);
     }
 
     private void createCamera(Entity target) {
@@ -1743,7 +1745,7 @@ public class LevelBuilder {
 
         //Feet
         PolygonShape shape3 = new PolygonShape();
-        shape3.setAsBox(Val_Component.WIDTH*0.3f, Val_Component.HEIGHT*0.01f,new Vector2(0,-(Val_Component.HEIGHT * 0.5f) - 0.005f),0);
+        shape3.setAsBox(Val_Component.WIDTH*0.3f, Val_Component.HEIGHT*0.1f,new Vector2(0,-(Val_Component.HEIGHT * 0.5f) - 0.005f),0);
         FixtureDef fix3 = new FixtureDef();
         fix3.shape = shape3;
         fix3.isSensor=true;

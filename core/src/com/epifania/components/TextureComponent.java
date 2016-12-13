@@ -7,4 +7,7 @@ public class TextureComponent implements Component {
 	public TextureRegion region = null;
 	public float alpha = 1;
 	public float tmp = 1;
+	public boolean transition = false;
+	public float elapsed=0;
+	public static float DURATION = 0.4f;
 }

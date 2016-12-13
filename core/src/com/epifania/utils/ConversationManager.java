@@ -50,7 +50,6 @@ public class ConversationManager {
     //Dialog box vars
     private Vector3 tmp = new Vector3();
     public ConversationDialog dialog;
-    public Container<Label> thoughtDialog;
     private static final float offset = 1f;
 
 

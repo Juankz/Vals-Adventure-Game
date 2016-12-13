@@ -10,16 +10,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
-import com.epifania.components.ParallaxComponent;
-import com.epifania.components.TextureComponent;
-import com.epifania.components.TransformComponent;
-import com.epifania.components.Val_Component;
+import com.epifania.components.*;
 import com.epifania.utils.Constants;
 import com.epifania.utils.ParallaxCamera;
 
@@ -64,16 +62,26 @@ public class RenderingSystem extends IteratingSystem {
 
 	@Override
 	public void update(float deltaTime) {
-		//TODO Check for Improvements
 		super.update(deltaTime);
 		Gdx.gl.glClearColor(0,0,0, 1);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		MapComponent mapComponent = getEngine().getEntitiesFor(Family.all(MapComponent.class).get()).first().getComponent(MapComponent.class);
+		TiledMap map = mapComponent.map;
+
+		//Only render back layers
+		for(MapLayer layer : map.getLayers()){
+			layer.setVisible(true);
+		}
+		map.getLayers().get("Coins").setVisible(false);
+		map.getLayers().get("Items").setVisible(false);
+		map.getLayers().get("Builds Front").setVisible(false);
+		map.getLayers().get("Builds").setVisible(false);
 		renderQueue.sort(comparator);
 		cam.update();
 		batch.begin();
-
+		//render background first
 		for (Entity entity : renderQueue) {
 			if (entity.getComponent(ParallaxComponent.class) != null) {
 				float scrollX = entity.getComponent(ParallaxComponent.class).scrollingFactorX;
@@ -83,19 +91,44 @@ public class RenderingSystem extends IteratingSystem {
 			}
 		}
 		batch.end();
-
+		//Render Back Layers
 		mapRenderer.setView(cam);
 		mapRenderer.render();
 		
 		batch.setProjectionMatrix(cam.combined);
-		batch.begin();
+		//Render only inner items
 		int valFlag = getEngine().getEntitiesFor(Family.all(Val_Component.class).get()).first().flags;
-		for (Entity entity : renderQueue) {
-			if (entity.getComponent(ParallaxComponent.class) != null) continue;
-			if(entity.flags!=valFlag)continue; //Does not draw an object which is not in the vals active layer
-			drawEntity(entity,true);
+		if(valFlag!=0 || mapComponent.transition) {
+			batch.begin();
+			for (Entity entity : renderQueue) {
+				if (entity.getComponent(ParallaxComponent.class) != null) continue;
+				if (entity.flags != 1) continue; //Does not draw an object which is not in the vals active layer
+				drawEntity(entity, true);
+			}
+			batch.end();
 		}
-		batch.end();
+
+
+		//render front tiled map layers
+		for(MapLayer layer : map.getLayers()){
+			layer.setVisible(false);
+		}
+		map.getLayers().get("Items").setVisible(true);
+		map.getLayers().get("Builds Front").setVisible(true);
+		map.getLayers().get("Builds").setVisible(true);
+		mapRenderer.render();
+
+		//render objects in front layers
+		if(valFlag==0 || mapComponent.transition) {
+			batch.begin();
+			for (Entity entity : renderQueue) {
+				if (entity.getComponent(ParallaxComponent.class) != null) continue;
+				if (entity.flags != 0) continue; //Does not draw an object which is not in the vals active layer
+				drawEntity(entity, true);
+			}
+			batch.end();
+		}
+
 		renderQueue.clear();
 	}
 

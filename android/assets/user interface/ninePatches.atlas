@@ -15,7 +15,7 @@ buttonSquareBrown
   index: -1
 buttonSquareBrown_p
   rotate: false
-  xy: 366, 203
+  xy: 369, 203
   size: 45, 45
   split: 8, 8, 17, 16
   pad: -1, -1, 17, 16
@@ -33,7 +33,7 @@ panel_beige
   index: -1
 panel_beige_small
   rotate: false
-  xy: 198, 148
+  xy: 199, 148
   size: 100, 100
   split: 19, 20, 19, 18
   pad: 10, 9, 9, 10
@@ -42,7 +42,7 @@ panel_beige_small
   index: -1
 panel_brown
   rotate: false
-  xy: 198, 81
+  xy: 199, 81
   size: 64, 64
   split: 12, 12, 12, 11
   orig: 64, 64
@@ -50,7 +50,7 @@ panel_brown
   index: -1
 panel_brown2
   rotate: false
-  xy: 300, 184
+  xy: 302, 184
   size: 64, 64
   split: 12, 12, 13, 12
   orig: 64, 64

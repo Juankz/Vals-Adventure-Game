@@ -22,11 +22,9 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.FileHandleResolver;
-import com.badlogic.gdx.assets.loaders.I18NBundleLoader;
-import com.badlogic.gdx.assets.loaders.SkinLoader;
-import com.badlogic.gdx.assets.loaders.TextureLoader;
+import com.badlogic.gdx.assets.loaders.*;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -71,6 +69,7 @@ public class Assets implements Disposable, AssetErrorListener{
 		assetManager.setLoader(FreeTypeFontGenerator.class,new FreeTypeFontGeneratorLoader(resolver));
 		assetManager.setLoader(BitmapFont.class,new FreetypeFontLoader(resolver));
 		assetManager.setLoader(TiledMap.class,new TmxMapLoader(resolver));
+		assetManager.setLoader(Music.class,new MusicLoader(resolver));
 
 		FreetypeFontLoader.FreeTypeFontLoaderParameter parameter = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
 		parameter.fontFileName = "user interface/Lobster.ttf";
@@ -216,7 +215,11 @@ public class Assets implements Disposable, AssetErrorListener{
 	public synchronized <T> T get(String fileName, Class<T> type) {
 		return assetManager.get(fileName, type);
 	}
-	
+
+	public synchronized <T> Array<T>  getAll(Class<T> type, Array<T> out) {
+		return assetManager.getAll(type,out);
+	}
+
 	public class ValAssets{
 		public final Animation hurt;
 		public final Animation jump;
@@ -226,7 +229,6 @@ public class Assets implements Disposable, AssetErrorListener{
 		public final Animation climb;
 
 		public ValAssets(TextureAtlas atlas){
-			//TODO Climb Animation
 			float frameDuration = 1f;
 			Array<TextureRegion> frames = new Array<TextureRegion>();
 			frames.add(new TextureRegion(atlas.findRegion("Val/bunny2_walk1")));

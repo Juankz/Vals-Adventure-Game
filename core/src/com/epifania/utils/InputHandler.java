@@ -2,6 +2,7 @@ package com.epifania.utils;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.gdx.Application;
 import com.epifania.components.StateComponent;
 import com.epifania.components.Val_Component;
 import com.epifania.systems.CollisionSystem;
@@ -32,7 +33,7 @@ public class InputHandler extends InputAdapter {
 	private boolean active = true;
 	private boolean waiting4touchUp = false;
 	private Entity val;
-	
+
 	private int hMovPointer = -1; //-1 equals to not set
 	private int vMovPointer = -1;
 
@@ -46,28 +47,35 @@ public class InputHandler extends InputAdapter {
 	}
 
 	public boolean keyDown (int keycode) {
-		if(!active) return false;
+		if(!active || Gdx.app.getType()!= Application.ApplicationType.Desktop) return false;
 		if (keycode == Keys.RIGHT){
-			engine.getSystem(Val_System.class).setVelocity(1);
+			inputController.right();
 			rightKeyPressed = true;
 		}else if (keycode ==Keys.LEFT){
-			engine.getSystem(Val_System.class).setVelocity(-1);
+			inputController.left();
 			leftKeyPressed = true;
-		}else if(keycode ==Keys.SPACE){
-			engine.getSystem(Val_System.class).setJump(true);
+		}else if(keycode ==Keys.SPACE || keycode == Keys.UP){
+			inputController.up();
 			waiting4touchUp = true;
+		}else if(keycode == Keys.DOWN){
+			inputController.down();
 		}
 		return true;
 	}
 
 	public boolean keyUp (int keycode) {
-		if(!active) return false;
+		if(!active || Gdx.app.getType()!= Application.ApplicationType.Desktop) return false;
 		if (keycode == Keys.RIGHT){
+			inputController.stopHorizontal();
 			rightKeyPressed = false;
 		}else if (keycode ==Keys.LEFT){
+			inputController.stopHorizontal();
 			leftKeyPressed = false;
 		}else if(keycode ==Keys.SPACE){
 			waiting4touchUp = false;
+		}
+		else if(keycode == Keys.DOWN || keycode== Keys.UP){
+			inputController.stopVertical();
 		}
 		if(!(rightKeyPressed|leftKeyPressed)){
 			engine.getSystem(Val_System.class).setVelocity(0);
@@ -76,6 +84,7 @@ public class InputHandler extends InputAdapter {
 	}
 
 	public boolean keyTyped (char character) {
+		if(Gdx.app.getType()!= Application.ApplicationType.Desktop) return false;
 		if(character == 'a' || character == 'A'){
 			engine.getSystem(CollisionSystem.class).action=true;
 			return true;
@@ -84,7 +93,7 @@ public class InputHandler extends InputAdapter {
 	}
 
 	public boolean touchDown (int screenX, int screenY, int pointer, int button){
-		if(!active) return false;
+		if(!active || (Gdx.app.getType()!= Application.ApplicationType.Android && Gdx.app.getType()!= Application.ApplicationType.iOS)) return false;
 		screenCoords.set(screenX, screenY, 0);
 
 		if(screenX < Gdx.graphics.getWidth()/2f && hMovPointer==NOT_SET){
@@ -94,14 +103,13 @@ public class InputHandler extends InputAdapter {
 			vMovPointer = pointer;
 			previousCoordsV.set(screenCoords);
 		}
-			return true;
+		return true;
 	}
 
 	public boolean touchUp (int screenX, int screenY, int pointer, int button) {
-		if(!active) return false;
+		if(!active || (Gdx.app.getType()!= Application.ApplicationType.Android && Gdx.app.getType()!= Application.ApplicationType.iOS)) return false;
 		if(hMovPointer==pointer){
 			hMovPointer = NOT_SET;
-//			engine.getSystem(Val_System.class).setVelocity(0);
 			inputController.stopHorizontal();
 		}else if(vMovPointer == pointer){
 			vMovPointer = NOT_SET;
@@ -113,8 +121,7 @@ public class InputHandler extends InputAdapter {
 	}
 
 	public boolean touchDragged (int screenX, int screenY, int pointer) {
-		Val_System val_system = engine.getSystem(Val_System.class);
-		if(!active) return false;
+		if(!active || (Gdx.app.getType()!= Application.ApplicationType.Android && Gdx.app.getType()!= Application.ApplicationType.iOS)) return false;
 		//X Axis
 		if(hMovPointer==pointer){
 			screenCoords.set(screenX, screenY, 0);
@@ -126,31 +133,17 @@ public class InputHandler extends InputAdapter {
 					inputController.left();
 				else
 					inputController.right();
-//				val_system.setVelocity(d);
-			}else{
-//				val_system.setVelocity(0);
 			}
 		}else if(vMovPointer==pointer){ //Y Axis
 			screenCoords.set(screenX, screenY, 0);
 			newCoordsV.set(screenCoords);
 			float distance = newCoordsV.y - (previousCoordsV.y);
 			distance*=-1; //Because of screen coords
-			if(val_system.canClimb && !val_system.climbing){
-				if(Math.abs(distance)>DRAG_TOLERANCE){
-					if(val.getComponent(StateComponent.class).get()!=Val_Component.CLIMB){
-						val_system.setState(val,Val_Component.CLIMB);
-					}
-				}
-			}else if (val_system.climbing){
-				if(Math.abs(distance)>DRAG_TOLERANCE){
-					int d = distance<0? -1:1;
-					val_system.climb(d);
-				}else{
-					val_system.climb(0);
-				}
-			}else if(distance>DRAG_TOLERANCE && !val_system.isJumping() && !waiting4touchUp){
-				engine.getSystem(Val_System.class).setJump(true);
-				waiting4touchUp = true;
+			if(Math.abs(distance)>DRAG_TOLERANCE){
+				if (distance>0)
+					inputController.up();
+				else
+					inputController.down();
 			}
 		}
 		return true;
@@ -182,11 +175,5 @@ public class InputHandler extends InputAdapter {
 
 	public boolean isActive(){
 		return active;
-	}
-
-	public void act(float delta){
-		if(leftKeyPressed){
-
-		}
 	}
 }
