@@ -31,12 +31,10 @@ public class TextureManipulationSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         TextureComponent textureComponent = textureMapper.get(entity);
         if(textureComponent.transition) {
-            Gdx.app.debug("Texture Manipulation System", "processing entity with alpha = "+textureComponent.alpha);
             float progress = Math.min(1, textureComponent.elapsed / TextureComponent.DURATION);
             textureComponent.elapsed += deltaTime;
 
             textureComponent.alpha = Interpolation.exp10In.apply(textureComponent.alpha,textureComponent.tmp,progress);
-            //textureComponent.alpha = MathUtils.lerp(textureComponent.alpha, textureComponent.tmp, 0.1f);
 
             if (progress == 1) {
                 textureComponent.transition = false;
@@ -62,7 +60,6 @@ public class TextureManipulationSystem extends IteratingSystem {
                 textureMapper.get(entity).tmp = 0;
             }
             textureMapper.get(entity).transition = true;
-            Gdx.app.debug("Texture Manipulation System","Shuffle alpha of an entity");
         }
     }
 }
