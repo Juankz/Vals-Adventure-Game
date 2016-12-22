@@ -11,22 +11,21 @@
         </Conversation>
         <!-- GOHM -->
         <Conversation character="GOMH" ID="G1"  keys = "NONE" secondary="NONE">
-            <Dialog character="VAL">Hello Crazy Gomh</Dialog>
-            <Dialog character="GOMH">What are you doing here little bunny</Dialog>
-            <Dialog character="VAL">I'm searching something for my dad</Dialog>
-            <Dialog character="VAL">He is very sick</Dialog>
-            <Dialog character="GOMH">Oh you are looking for the golden carrot</Dialog>
-            <Dialog character="VAL">No it is a legend</Dialog>
-            <Dialog character="GOMH">LEGEND!?</Dialog>
-            <Dialog character="GOMH">It is real I have seen it</Dialog>
-            <Dialog character="GOMH">Far away</Dialog>
-            <Dialog character="GOMH">In the iceland, passing an abandoned castle</Dialog>
-            <Dialog character="VAL">I have chores to do, bye Crazy Gomh</Dialog>
+            <Dialog character="VAL">Good morning Gomh</Dialog>
+            <Dialog character="GOMH">Hello Val. What are you doing here little bunny?</Dialog>
+            <Dialog character="VAL">I'm late for the festival, so going home</Dialog>
+            <Dialog character="GOMH">Oh you better hurry, I'm preparing the golden carrot for the festival</Dialog>
+            <Dialog character="VAL">Can't wait to see it, good bye Gomh</Dialog>
         </Conversation>
-        <Conversation character="GOMH" ID="G2" keys="G1" secondary="NONE">
-            <Dialog character="GOMH">You can't go back this way</Dialog>
-            <Dialog character="GOMH">There is another way but dangerous</Dialog>
-            <Dialog character="VAL">I'm not afraid</Dialog>
+        <!-- PINKY -->
+        <Conversation character="PINKY" ID="P1" keys="NONE" secondary="NONE">
+            <Dialog character="PINKY">Hi Val</Dialog>
+            <Dialog character="PINKY">What are you doing?</Dialog>
+            <Dialog character="VAL">Oh hey Pinky, I'm just heading home</Dialog>
+            <Dialog character="VAL">My mom will get angry if I'm not there before noon</Dialog>
+            <Dialog character="VAL">Where do you go?</Dialog>
+            <Dialog character="PINKY">Ehhh me? ... I'm doing some shores for my dad</Dialog>
+            <Dialog character="VAL">Ok, see you later</Dialog>
         </Conversation>
     </Conversations>
 

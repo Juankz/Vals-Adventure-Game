@@ -1,131 +1,145 @@
 
 items.png
-size: 512,256
+size: 1024,256
 format: RGBA8888
 filter: MipMapLinearNearest,Nearest
 repeat: none
 bronze
   rotate: false
-  xy: 1, 5
+  xy: 1, 1
   size: 84, 84
   orig: 84, 84
   offset: 0, 0
   index: 1
 bronze
   rotate: false
-  xy: 88, 5
+  xy: 530, 157
   size: 66, 84
   orig: 66, 84
   offset: 0, 0
   index: 2
 bronze
   rotate: false
-  xy: 457, 161
+  xy: 88, 1
   size: 50, 84
   orig: 50, 84
   offset: 0, 0
   index: 3
 bronze
   rotate: false
-  xy: 470, 1
+  xy: 141, 1
   size: 14, 84
   orig: 14, 84
   offset: 0, 0
   index: 4
 carrot
   rotate: false
-  xy: 283, 88
+  xy: 737, 171
   size: 78, 70
   orig: 78, 70
   offset: 0, 0
   index: -1
 carrotBucket
   rotate: false
-  xy: 445, 88
+  xy: 899, 171
   size: 62, 70
   orig: 62, 70
   offset: 0, 0
   index: -1
 carrot_gold
   rotate: false
-  xy: 364, 88
+  xy: 818, 171
   size: 78, 70
   orig: 78, 70
   offset: 0, 0
   index: -1
 gold
   rotate: false
-  xy: 283, 161
+  xy: 356, 157
   size: 84, 84
   orig: 84, 84
   offset: 0, 0
   index: 1
 gold
   rotate: false
-  xy: 157, 6
+  xy: 599, 157
   size: 66, 84
   orig: 66, 84
   offset: 0, 0
   index: 2
 gold
   rotate: false
-  xy: 226, 6
+  xy: 158, 2
   size: 50, 84
   orig: 50, 84
   offset: 0, 0
   index: 3
 gold
   rotate: false
-  xy: 452, 1
+  xy: 264, 2
   size: 15, 84
   orig: 15, 84
   offset: 0, 0
   index: 4
+hammer
+  rotate: false
+  xy: 283, 123
+  size: 70, 118
+  orig: 70, 118
+  offset: 0, 0
+  index: -1
 knife
   rotate: false
-  xy: 401, 15
+  xy: 299, 50
   size: 48, 70
   orig: 48, 70
   offset: 0, 0
   index: -1
+pala
+  rotate: false
+  xy: 964, 141
+  size: 54, 100
+  orig: 54, 100
+  offset: 0, 0
+  index: -1
 plant1
   rotate: false
-  xy: 1, 92
+  xy: 1, 88
   size: 141, 153
   orig: 141, 153
   offset: 0, 0
   index: -1
 plant2
   rotate: false
-  xy: 145, 93
+  xy: 145, 89
   size: 135, 152
   orig: 135, 152
   offset: 0, 0
   index: -1
 silver
   rotate: false
-  xy: 370, 161
+  xy: 443, 157
   size: 84, 84
   orig: 84, 84
   offset: 0, 0
   index: 1
 silver
   rotate: false
-  xy: 279, 1
+  xy: 668, 157
   size: 66, 84
   orig: 66, 84
   offset: 0, 0
   index: 2
 silver
   rotate: false
-  xy: 348, 1
+  xy: 211, 2
   size: 50, 84
   orig: 50, 84
   offset: 0, 0
   index: 3
 silver
   rotate: false
-  xy: 487, 1
+  xy: 282, 2
   size: 14, 84
   orig: 14, 84
   offset: 0, 0

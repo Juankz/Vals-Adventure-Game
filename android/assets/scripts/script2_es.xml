@@ -1,45 +1,14 @@
 <Script>
-    <Conversations>    
-        <!--MOM -->
-        <Conversation character="MOM" ID="M1" keys = "NONE" secondary="NONE">
-            <Dialog character="MOM">Val, bring carrots please</Dialog>
-            <Dialog character="MOM">I'll prepare medicine for your father</Dialog>
-            <Dialog character="VAL">Yes mom</Dialog>
-            <Dialog character="MOM">Be careful Val</Dialog>
-        </Conversation>
-        <Conversation character="MOM" ID="M2" keys = "M1,GOAL" secondary="NONE">
-            <Dialog character="MOM">Your Dad is very sick</Dialog>
-            <Dialog character="MOM">I'm afraid of what can happen</Dialog>
-            <Dialog character="VAL">......</Dialog>
-            <Dialog character="VAL">I will find the golden carrot</Dialog>
-            <Dialog character="MOM">Are you crazy!?</Dialog>
-            <Dialog character="MOM">Bunnies like you never go out of the village</Dialog>
-            <Dialog character="MOM">Besides, it doesn't even exist</Dialog>
-            <Dialog character="VAL">Dad says it is real, so do Gomh</Dialog>
-            <Dialog character="MOM">Gomh is a crazy bunny</Dialog>
-            <Dialog character="VAL">Dad is not, and ...</Dialog>
-            <Dialog character="VAL">and is the only way to help him</Dialog>
-            <Dialog character="MOM">Oh Val</Dialog>
-            <Dialog character="VAL">I go home to prepare the trip</Dialog>
-        </Conversation>
-        <!-- GOHM -->
-        <Conversation character="GOMH" ID="G1"  keys = "NONE" secondary="NONE">
-            <Dialog character="VAL">Hello Crazy Gomh</Dialog>
-            <Dialog character="GOMH">What are you doing here little bunny</Dialog>
-            <Dialog character="VAL">I'm searching something for my dad</Dialog>
-            <Dialog character="VAL">He is very sick</Dialog>
-            <Dialog character="GOMH">Oh you are looking for the golden carrot</Dialog>
-            <Dialog character="VAL">No it is a legend</Dialog>
-            <Dialog character="GOMH">LEGEND!?</Dialog>
-            <Dialog character="GOMH">It is real I have seen it</Dialog>
-            <Dialog character="GOMH">Far away</Dialog>
-            <Dialog character="GOMH">In the iceland, passing an abandoned castle</Dialog>
-            <Dialog character="VAL">I have chores to do, bye Crazy Gomh</Dialog>
-        </Conversation>
-        <Conversation character="GOMH" ID="G2" keys="G1" secondary="NONE">
-            <Dialog character="GOMH">You can't go back this way</Dialog>
-            <Dialog character="GOMH">There is another way but dangerous</Dialog>
-            <Dialog character="VAL">I'm not afraid</Dialog>
+    <Conversations>
+        <!--BLUE -->
+        <Conversation character="BLUE" ID="B1" keys = "NONE" secondary="NONE">
+            <Dialog character="BLUE">Hey Val, ready for the festival?</Dialog>
+            <Dialog character="BLUE">Remember this is the most important even in the year</Dialog>
+            <Dialog character="BLUE">The Golden Carrot represents wealth and abundance for out village</Dialog>
+            <Dialog character="VAL">I wish to be ready Marco, I need to collect some carrots for the festival</Dialog>
+            <Dialog character="BLUE">I left some carrots in my blue house, you can take them</Dialog>
+            <Dialog character="BLUE">I just forgot where did I left the key</Dialog>
+            <Dialog character="VAL">No problem I will find it, thanks Marco</Dialog>
         </Conversation>
     </Conversations>
 

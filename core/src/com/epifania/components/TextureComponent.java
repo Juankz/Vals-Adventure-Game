@@ -10,4 +10,9 @@ public class TextureComponent implements Component {
 	public boolean transition = false;
 	public float elapsed=0;
 	public static float DURATION = 0.4f;
+	public CallBack callBack = null;
+
+	public interface CallBack{
+		void callback();
+	}
 }

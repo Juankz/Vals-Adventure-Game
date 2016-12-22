@@ -39,14 +39,24 @@ public class TextureManipulationSystem extends IteratingSystem {
             if (progress == 1) {
                 textureComponent.transition = false;
                 textureComponent.elapsed = 0;
+                if(textureComponent.callBack != null){
+                    textureComponent.callBack.callback();
+                }
             }
         }
     }
 
-    public void decreaseAlpha(Entity entity, float value){
+    public void decreaseAlpha(final Entity entity, float value){
         if(!getFamily().matches(entity))return;
         TextureComponent textureComponent = textureMapper.get(entity);
-        textureComponent.tmp = value;
+        textureComponent.tmp=0;
+        textureComponent.transition = true;
+        textureComponent.callBack = new TextureComponent.CallBack() {
+            @Override
+            public void callback() {
+                getEngine().removeEntity(entity);
+            }
+        };
     }
 
     public void shuffleAlpha(){
