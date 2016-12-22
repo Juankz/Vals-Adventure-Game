@@ -40,9 +40,9 @@ public class LevelBuilder {
         void addJoint(int id,Joint joint);
     }
 
-    public Engine engine;
-    public TiledMap levelMap;
-    public Listener listener;
+    private Engine engine;
+    private TiledMap levelMap;
+    private Listener listener;
     public int totalCoins;
 
     private ObjectMap<Integer,Body> bodiesA;
@@ -145,7 +145,7 @@ public class LevelBuilder {
                 Joint joint = engine.getSystem(PhysicsSystem.class).getWorld().createJoint(jointDef);
                 listener.addJoint(id,joint);
             }else if(type.equals("revolution joint")){
-
+                //If there are other types of joints
             }
         }
     }
@@ -170,7 +170,7 @@ public class LevelBuilder {
             }else
             if(type.equals("character")){
                 String name = (String)object.getProperties().get("name");
-                if(name.equals("GOMH")||name.equals("MOM")||name.equals("PINKY")){
+                if(name.equals("GOMH")||name.equals("MOM")||name.equals("PINKY")||name.equals("BLUE")){
                     createCharacter(object,flag,name);
                 }else if(name.equals("VAL")){
                     //Create the main character and make the camera follow it
@@ -220,7 +220,7 @@ public class LevelBuilder {
     /**
      * This is for the items which depends form others which had been
      * already created and thus cannot be create before the dependencies
-     * @param flag
+     * @param flag layer ID
      */
     private void createPostItems(int flag){
         MapObjects objects = levelMap.getLayers().get(Constants.objectsLayersNames[flag]).getObjects();
@@ -239,7 +239,7 @@ public class LevelBuilder {
     }
 
     private void createBlock(final MapObject object , int flag){
-        ActionableComponent component = new ActionableComponent();
+        final ActionableComponent actionableComponent = new ActionableComponent();
         TextureComponent textureComponent = new TextureComponent();
 
         final Entity entity = createRectangle(object,"",
@@ -249,8 +249,8 @@ public class LevelBuilder {
 
         textureComponent.region = captureTile((TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]),object);
 
-        component.key = (String)object.getProperties().get("key");
-        component.actionable = new ActionableComponent.Actionable() {
+        actionableComponent.key = (String)object.getProperties().get("key");
+        actionableComponent.actionable = new ActionableComponent.Actionable() {
             @Override
             public void action() {
                 engine.getSystem(PhysicsSystem.class).destroyBody(entity.getComponent(BodyComponent.class).body);
@@ -265,7 +265,8 @@ public class LevelBuilder {
         boundsComponent.bounds.x -= 0.25f;
 
         entity.add(textureComponent);
-        entity.add(component);
+        entity.add(actionableComponent);
+        entity.flags = flag;
         engine.addEntity(entity);
     }
 
@@ -397,6 +398,7 @@ public class LevelBuilder {
         thread.add(boundsComponent);
         thread.add(tagComponent);
         thread.add(actionableComponent);
+        thread.flags = flag;
         engine.addEntity(thread);
 
 
@@ -531,7 +533,12 @@ public class LevelBuilder {
         Object property = object.getProperties().get("breakable");
         if(property != null) {
             platformComponent.breakable = Boolean.parseBoolean((String)property);
-            platformComponent.breakingTime = PlatformComponent.BREAKING_TIME_EASY;
+            platformComponent.breakingTime = PlatformComponent.BREAKING_TIME_MEDIUM;
+        }
+
+        property = object.getProperties().get("time");
+        if(property != null) {
+            platformComponent.breakingTime = Float.parseFloat((String)property);
         }
 
         MapRecToWorldRec(object,boundsComponent.bounds);
@@ -1831,6 +1838,7 @@ public class LevelBuilder {
 //        TextureRegion region = new TextureRegion(r,0,(int)Constants.inversePPU-(int)height,r.getRegionWidth(),(int)height);
 //        r.flip(cell.getFlipHorizontally(), cell.getFlipVertically());
         TextureRegion region = new TextureRegion(r,0,(int)ty,r.getRegionWidth(),(int)height);
+
         cell.setTile(null);
         return region;
     }
