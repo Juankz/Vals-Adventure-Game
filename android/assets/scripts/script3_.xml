@@ -1,0 +1,38 @@
+<Script>
+    <Conversations>
+        <Conversation character="PINKY" ID="P1" keys = "NONE" secondary="NONE">
+            <Dialog character="PINKY">Val! Hwat are you doing here</Dialog>
+            <Dialog character="VAL">Someone stole the golden carrot and ran this way</Dialog>
+            <Dialog character="PINKY">Oh no! It must have been the brown bunnie that attacked me</Dialog>
+            <Dialog character="VAL">Attacked you?</Dialog>
+            <Dialog character="PINKY">Yes I lost my ribbon</Dialog>
+            <Dialog character="VAL">I found your ribbon, where did the thief go?</Dialog>
+            <Dialog character="PINKY">He went up the ladder, run and maybe you will catch it</Dialog>
+        </Conversation>
+        <!-- GOHM -->
+        <Conversation character="GOMH" ID="G1"  keys = "NONE" secondary="NONE">
+            <Dialog character="VAL">Hello Crazy Gomh</Dialog>
+            <Dialog character="GOMH">What are you doing here little bunny</Dialog>
+            <Dialog character="VAL">I'm searching something for my dad</Dialog>
+            <Dialog character="VAL">He is very sick</Dialog>
+            <Dialog character="GOMH">Oh you are looking for the golden carrot</Dialog>
+            <Dialog character="VAL">No it is a legend</Dialog>
+            <Dialog character="GOMH">LEGEND!?</Dialog>
+            <Dialog character="GOMH">It is real I have seen it</Dialog>
+            <Dialog character="GOMH">Far away</Dialog>
+            <Dialog character="GOMH">In the iceland, passing an abandoned castle</Dialog>
+            <Dialog character="VAL">I have chores to do, bye Crazy Gomh</Dialog>
+        </Conversation>
+        <Conversation character="GOMH" ID="G2" keys="G1" secondary="NONE">
+            <Dialog character="GOMH">You can't go back this way</Dialog>
+            <Dialog character="GOMH">There is another way but dangerous</Dialog>
+            <Dialog character="VAL">I'm not afraid</Dialog>
+        </Conversation>
+    </Conversations>
+
+    <SelfToughts>
+        <Dialog key = "PALA">I could dig into this, but how?</Dialog>
+        <Dialog key = "HAMMER">That's the exit, let's break it with something</Dialog>
+        <Dialog key = "KNIFE">I need to cut it</Dialog>
+    </SelfToughts>
+</Script>
