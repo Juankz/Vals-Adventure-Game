@@ -21,5 +21,8 @@ void main() {
 	float len = length(position);
 	float vignette = smoothstep(radius, radius-SOFTNESS, len);
 	texColor.rgb = mix(texColor.rgb, texColor.rgb * vignette, VIGNETTE_OPACITY);
+	float a = v_color.w;
+	a = step(0.05,a);
+	texColor.w=a*texColor.w;
     gl_FragColor = vec4(texColor.r, texColor.g, texColor.b, texColor.a);
 }
