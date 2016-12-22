@@ -263,7 +263,12 @@ public class LevelBuilder {
         BoundsComponent boundsComponent = entity.getComponent(BoundsComponent.class);
         boundsComponent.bounds.width+=0.5f;
         boundsComponent.bounds.x -= 0.25f;
+        boundsComponent.bounds.height+=0.5f;
+        boundsComponent.bounds.y -= 0.25f;
 
+        BoxComponent boxComponent = new BoxComponent();
+
+        entity.add(boxComponent);
         entity.add(textureComponent);
         entity.add(actionableComponent);
         entity.flags = flag;
