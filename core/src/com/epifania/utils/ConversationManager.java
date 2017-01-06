@@ -79,7 +79,7 @@ public class ConversationManager {
 
 
             this.selfThoughts = new Array<XmlReader.Element>();
-            XmlReader.Element selfThoughts = root.getChildByName("SelfToughts");
+            XmlReader.Element selfThoughts = root.getChildByName("SelfThoughts");
             Array<XmlReader.Element> dialogs = selfThoughts.getChildrenByNameRecursively("Dialog");
             this.selfThoughts.addAll(dialogs);
 
