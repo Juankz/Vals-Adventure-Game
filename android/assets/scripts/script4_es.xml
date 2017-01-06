@@ -1,0 +1,14 @@
+<Script>
+    <Conversations>
+        <Conversation character="GOMH" ID="G2" keys="G1" secondary="NONE">
+            <Dialog character="GOMH">You can't go back this way</Dialog>
+            <Dialog character="GOMH">There is another way but dangerous</Dialog>
+            <Dialog character="VAL">I'm not afraid</Dialog>
+        </Conversation>
+    </Conversations>
+
+    <SelfThoughts>
+        <Dialog key = "GREEN KEY">Necesito la llave</Dialog>
+        <Dialog key = "TOOL">Esta dañado, quizá pueda repararlo</Dialog>
+    </SelfThoughts>
+</Script>
