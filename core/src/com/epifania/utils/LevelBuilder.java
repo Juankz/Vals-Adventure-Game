@@ -171,15 +171,13 @@ public class LevelBuilder {
             }else
             if(type.equals("character")){
                 String name = (String)object.getProperties().get("name");
-                if(name.equals("GOMH")||name.equals("MOM")||name.equals("PINKY")||name.equals("BLUE")){
+                if(!name.equals("VAL")){
                     createCharacter(object,flag,name);
-                }else if(name.equals("VAL")){
+                }else{
                     //Create the main character and make the camera follow it
                     Entity val = createVal(object.getProperties(),flag);
                     createCamera(val);
                     engine.addEntity(val);
-                }else {
-                    Gdx.app.error(tag,"character not found : "+name);
                 }
             }else
             if(type.equals("thought")){
@@ -1746,6 +1744,11 @@ public class LevelBuilder {
                 break;
             case BONNY:
                 out.put(CharacterComponent.IDLE,Assets.instance.bonnyAnimations.idle);
+                break;
+            case CAPTAIN:
+                out.put(CharacterComponent.IDLE,Assets.instance.captainAnimations.center);
+                out.put(CharacterComponent.RIGHT,Assets.instance.captainAnimations.right);
+                out.put(CharacterComponent.LEFT,Assets.instance.captainAnimations.left);
                 break;
             default:
                 Gdx.app.error(tag,"No character found under the name of: "+character);

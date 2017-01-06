@@ -55,6 +55,7 @@ public class Assets implements Disposable, AssetErrorListener{
 	public PinkyAnimations pinkyAnimations;
 	public BlueAnimations blueAnimations;
 	public BonnyAnimations bonnyAnimations;
+	public CaptainAnimations captainAnimations;
 	public Items items;
 	
 	private Assets(){}
@@ -162,6 +163,7 @@ public class Assets implements Disposable, AssetErrorListener{
 		pinkyAnimations = new PinkyAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
 		blueAnimations = new BlueAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
 		bonnyAnimations = new BonnyAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
+		captainAnimations = new CaptainAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
 		items = new Items(assetManager.get("game_objects/items.atlas",TextureAtlas.class));
 	}
 
@@ -255,6 +257,31 @@ public class Assets implements Disposable, AssetErrorListener{
 		}
 	}
 
+	public class CaptainAnimations{
+		public  final Animation left;
+		public  final Animation right;
+		public  final Animation center;
+		public CaptainAnimations(TextureAtlas atlas){
+			float frameDuration = 1.0f;
+			Array<TextureRegion> frames = new Array<TextureRegion>();
+			frames.add(new TextureRegion(atlas.findRegion("Captain/captainLeft1")));
+			frames.add(new TextureRegion(atlas.findRegion("Captain/captainLeft2")));
+			left = new Animation(frameDuration,frames,PlayMode.NORMAL);
+			frames.clear();
+			frames.add(new TextureRegion(atlas.findRegion("Captain/captainRight1")));
+			frames.add(new TextureRegion(atlas.findRegion("Captain/captainRight2")));
+			right = new Animation(frameDuration,frames,PlayMode.NORMAL);
+			frames.clear();
+			frames.add(new TextureRegion(atlas.findRegion("Captain/captainLeft1")));
+			frames.add(new TextureRegion(atlas.findRegion("Captain/captainLeft2")));
+			frames.add(new TextureRegion(atlas.findRegion("Captain/captainLeft1")));
+			frames.add(new TextureRegion(atlas.findRegion("Captain/captainRight1")));
+			frames.add(new TextureRegion(atlas.findRegion("Captain/captainRight2")));
+			frames.add(new TextureRegion(atlas.findRegion("Captain/captainRight1")));
+			center = new Animation(frameDuration,frames,PlayMode.LOOP_PINGPONG);
+		}
+	}
+
 	public class GomhAnimations{
 		public  final Animation left;
 		public  final Animation right;
@@ -263,13 +290,18 @@ public class Assets implements Disposable, AssetErrorListener{
 			float frameDuration = 1.0f;
 			Array<TextureRegion> frames = new Array<TextureRegion>();
 			frames.add(new TextureRegion(atlas.findRegion("Gomh/gomhLeft")));
+			frames.add(new TextureRegion(atlas.findRegion("Gomh/gomhRight")));
 			left = new Animation(frameDuration,frames,PlayMode.NORMAL);
 			frames.clear();
 			frames.add(new TextureRegion(atlas.findRegion("Gomh/gomhRight")));
 			right = new Animation(frameDuration,frames,PlayMode.NORMAL);
 			frames.clear();
+			frames.add(new TextureRegion(atlas.findRegion("Gomh/gomhLeft")));
 			frames.add(new TextureRegion(atlas.findRegion("Gomh/gomhIdle")));
-			center = new Animation(frameDuration,frames,PlayMode.NORMAL);
+			frames.add(new TextureRegion(atlas.findRegion("Gomh/gomhIdle2")));
+			frames.add(new TextureRegion(atlas.findRegion("Gomh/gomhIdle")));
+			frames.add(new TextureRegion(atlas.findRegion("Gomh/gomhRight")));
+			center = new Animation(frameDuration,frames,PlayMode.LOOP_PINGPONG);
 		}
 	}
 

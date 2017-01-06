@@ -1,9 +1,19 @@
 <Script>
     <Conversations>
-        <Conversation character="GOMH" ID="G2" keys="G1" secondary="NONE">
-            <Dialog character="GOMH">You can't go back this way</Dialog>
-            <Dialog character="GOMH">There is another way but dangerous</Dialog>
-            <Dialog character="VAL">I'm not afraid</Dialog>
+        <Conversation character="GOMH" ID="G1" keys="NONE" secondary="NONE">
+            <Dialog character="VAL">Gom have you seen a brown bunny?</Dialog>
+            <Dialog character="GOMH">Yes I saw one, he departed on a ship</Dialog>
+            <Dialog character="VAL">Why? He is the thief</Dialog>
+            <Dialog character="GOMH">Didn't look suspicious. Oh dear, we are lost!</Dialog>
+            <Dialog character="VAL">No we are not, I'll trace him</Dialog>
+        </Conversation>
+        <Conversation character="CAPTAIN" ID="C1" keys="NONE" secondary="NONE">
+            <Dialog character="VAL">Captain I need to travel with you</Dialog>
+            <Dialog character="CAPTAIN">Ha ha ha girls are not allowed in boats... bad omen</Dialog>
+            <Dialog character="VAL">Hey I don't care about omens, I need to pursue the thief</Dialog>
+            <Dialog character="CAPTAIN">I will help you if you do something for me first</Dialog>
+            <Dialog character="CAPTAIN">I lost my gold if you find it, I will let you get on board</Dialog>
+            <Dialog character="VAL">Deal. I'll be back with your gold</Dialog>
         </Conversation>
     </Conversations>
 

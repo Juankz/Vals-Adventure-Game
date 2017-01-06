@@ -1,9 +1,19 @@
 <Script>
     <Conversations>
-        <Conversation character="GOMH" ID="G2" keys="G1" secondary="NONE">
-            <Dialog character="GOMH">You can't go back this way</Dialog>
-            <Dialog character="GOMH">There is another way but dangerous</Dialog>
-            <Dialog character="VAL">I'm not afraid</Dialog>
+        <Conversation character="GOMH" ID="G1" keys="NONE" secondary="NONE">
+            <Dialog character="VAL">Gom ¿Has visto un conjejo de color café?</Dialog>
+            <Dialog character="GOMH">Si, vi uno partir en un barco</Dialog>
+            <Dialog character="VAL">¡No! El es el ladrón</Dialog>
+            <Dialog character="GOMH">No parecía sospechoso. Oh querida, ¡Estamos perdidos!</Dialog>
+            <Dialog character="VAL">No los estamos, voy por él</Dialog>
+        </Conversation>
+        <Conversation character="CAPTAIN" ID="C1" keys="NONE" secondary="NONE">
+            <Dialog character="VAL">Capitan necesito viajar con usted</Dialog>
+            <Dialog character="CAPTAIN">Ja ja ja las mujeres no estan permitidas en botes, son mal augürio</Dialog>
+            <Dialog character="VAL">¡Ey! no me interesan sus augurios, necesito perseguir al ladrón</Dialog>
+            <Dialog character="CAPTAIN">Bueno, te ayudaré si me haces un favor primero</Dialog>
+            <Dialog character="CAPTAIN">Perdí mi tesoro si me lo traes de vuelta, te dejaré viajar</Dialog>
+            <Dialog character="VAL">Trato hecho. Volveré con su tesoro</Dialog>
         </Conversation>
     </Conversations>
 
