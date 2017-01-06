@@ -182,7 +182,9 @@ public class LevelBuilder {
                     Gdx.app.error(tag,"character not found : "+name);
                 }
             }else
-            if(type.equals("collectable")){
+            if(type.equals("thought")){
+                createThought(object,flag);
+            }else if(type.equals("collectable")){
                 createCollectable(object,flag);
             }else if(type.equals("bridge")){
                 createBridge(object,flag);
@@ -830,6 +832,43 @@ public class LevelBuilder {
         entity.add(textureComponent);
         entity.add(boundsComponent);
         entity.add(collectableComponent);
+        entity.flags = flag;
+        engine.addEntity(entity);
+    }
+
+    private void createThought(MapObject object, int flag){
+        BoundsComponent boundsComponent = new BoundsComponent();
+        TransformComponent transformComponent = new TransformComponent();
+        ThoughtComponent thoughtComponent = new ThoughtComponent();
+
+        float unit = 1/70f;
+        float x,y,w,h;
+        Object property;
+
+        Rectangle rectangle =  ((RectangleMapObject)object).getRectangle();
+        x = rectangle.x*unit;
+        y=rectangle.y*unit;
+        w=rectangle.width*unit;
+        h=rectangle.height*unit;
+
+        boundsComponent.bounds.set(x,y,w,h);
+        transformComponent.pos.set(x,y,0);
+        transformComponent.origin.setZero();
+
+        thoughtComponent.thoughtID = (String)object.getProperties().get("id"); //It is mandatory to have an ID
+
+        property = object.getProperties().get("key");
+        if(property!=null)
+            thoughtComponent.key = (String)property;
+
+        property = object.getProperties().get("target");
+        if(property!=null)
+            thoughtComponent.target = (String)property;
+
+        Entity entity = new Entity();
+        entity.add(boundsComponent);
+        entity.add(transformComponent);
+        entity.add(thoughtComponent);
         entity.flags = flag;
         engine.addEntity(entity);
     }

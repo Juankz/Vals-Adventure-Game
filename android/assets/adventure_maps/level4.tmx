@@ -421,7 +421,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Objects" width="0" height="0">
+ <objectgroup name="Objects" width="0" height="0" visible="0">
   <object type="ground" x="3220" y="1890" width="3920" height="70">
    <properties>
     <property name="shape" value="0"/>
@@ -742,7 +742,7 @@
    <polygon points="63,70 0,0 280,-70 140,70"/>
   </object>
  </objectgroup>
- <objectgroup name="Interior Objects" width="0" height="0" visible="0">
+ <objectgroup name="Interior Objects" width="0" height="0">
   <object type="ground" x="3290" y="1890" width="420" height="70">
    <properties>
     <property name="shape" value="0"/>
@@ -812,6 +812,12 @@
   <object type="ground" x="5110" y="1190" width="280" height="70">
    <properties>
     <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object type="thought" x="5216" y="1749" width="140" height="140">
+   <properties>
+    <property name="id" value="GLANCE_GOAL"/>
+    <property name="target" value="GOAL"/>
    </properties>
   </object>
  </objectgroup>

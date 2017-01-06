@@ -10,5 +10,7 @@
     <SelfThoughts>
         <Dialog key = "GREEN KEY">Necesito la llave</Dialog>
         <Dialog key = "TOOL">Esta dañado, quizá pueda repararlo</Dialog>
+        <Dialog key = "GLANCE_GOAL">Allí arriba está el tesoro del capitán</Dialog>
+
     </SelfThoughts>
 </Script>

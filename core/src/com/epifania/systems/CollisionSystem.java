@@ -44,6 +44,7 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 	private ImmutableArray<Entity> ladders;
 	private ImmutableArray<Entity> packs;
 	private ImmutableArray<Entity> trunks;
+	private ImmutableArray<Entity> thoughts;
 
 	public interface CollisionListener {
 		void pickCoin ();
@@ -79,6 +80,7 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		ladders = this.engine.getEntitiesFor(Family.all(LadderComponent.class,BoundsComponent.class).get());
 		packs = this.engine.getEntitiesFor(Family.all(PackComponent.class,BoundsComponent.class).get());
 		trunks = this.engine.getEntitiesFor(Family.all(TrunkComponent.class,BoundsComponent.class).get());
+		thoughts = this.engine.getEntitiesFor(Family.all(ThoughtComponent.class,BoundsComponent.class).get());
 	}
 
 	@Override
@@ -156,6 +158,29 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 			}
 			setActionButtonVisibility(isOnSwitch);
 
+			for(Entity entity : thoughts){
+				if(entity.flags!=val.flags)continue;
+				BoundsComponent boundsComponent = bm.get(entity);
+				ThoughtComponent thoughtComponent = entity.getComponent(ThoughtComponent.class);
+				if(boundsComponent.bounds.overlaps(valBounds.bounds)){
+					//If no key is needed (or required key has been collected) to show the dialog
+					if(thoughtComponent.key.equals(NONE)||matchKey(thoughtComponent.key)!=null){
+						//If has a target which once collected deactivate this thought
+						if(!thoughtComponent.target.equals(NONE)){
+							//If has already collected the target object removes this entity,
+							//whether not, display thought
+							if(matchKey(thoughtComponent.target)!=null){
+								engine.removeEntity(entity);
+							}else {
+								engine.getSystem(Val_System.class).showThoughts(val,thoughtComponent.thoughtID);
+							}
+						}else{ //No target, so never deactivates this Val thought
+							engine.getSystem(Val_System.class).showThoughts(val,thoughtComponent.thoughtID);
+						}
+					}
+				}
+			}
+
 			for(Entity entity : checkpoints){
 				if(entity.flags!=val.flags)continue;
 				BoundsComponent boundsComponent = bm.get(entity);
@@ -232,6 +257,7 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 				if(entity.flags!=val.flags)continue;
 				Rectangle bounds = bm.get(entity).bounds;
 				if(valBounds.bounds.overlaps(bounds)){
+					//IF no key is needed can activate the component and set the action button position
 					if(entity.getComponent(ActionableComponent.class).key.equals(NONE)) {
 						isOnSwitch = true;
 						setDialogPosition(bounds);
@@ -240,6 +266,7 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 							break label1;
 						}
 					}else{
+						//If key es needed then check if the key has been collected iterating through Vals inventory
 						for (Entity object : val.getComponent(Val_Component.class).objects) {
 							if (object.getComponent(CollectableComponent.class).key.equals(entity.getComponent(ActionableComponent.class).key)) {
 								isOnSwitch = true;
@@ -279,7 +306,9 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		}
 	}
 
-	/*Return the entity which contains the selected key. Returns null if no key is found*/
+	/**
+	 * @return the entity which contains the selected key. Returns null if no key is found
+	 * */
 	private Entity matchKey(String key){
 		for (Entity object : vals.first().getComponent(Val_Component.class).objects) {
 			if(object.getComponent(CollectableComponent.class).key.equals(key)){
