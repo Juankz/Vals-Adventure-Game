@@ -111,20 +111,46 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 			}
 			engine.getSystem(Val_System.class).canClimb = canClimb;
 
-			boolean isOnSwitch = false;
-			boolean isOnSwitchLocked = false;
-			boolean isOnSwitchUnlocked = false;
+			boolean isOnSwitch = false; //If the object can be activated
+			boolean isOnSwitchLocked = false; //If a key is required and hasn't been collected, then the object is locked
+			boolean isOnSwitchUnlocked = false; //If a key required and has been collected,
+												// then the object can be activated and display the key together with the action button
 
 			for(Entity sw : switches){
-				if(sw.flags!=val.flags)continue;
+				if(sw.flags!=val.flags)continue; // if val and the object are not in the same layer, skip this process
 				BoundsComponent boundsComponent = bm.get(sw);
-				if(boundsComponent.bounds.overlaps(valBounds.bounds)){
-					isOnSwitch = true;
-					setDialogPosition(boundsComponent.bounds);
-					if(action) {
-						SwitchSystem switchSystem = engine.getSystem(SwitchSystem.class);
-						switchSystem.actionate(sw);
-						action = false;
+				SwitchComponent switchComponent = sw.getComponent(SwitchComponent.class);
+
+				if(boundsComponent.bounds.overlaps(valBounds.bounds)){ //Check if there is collision
+					boolean hasKey = !switchComponent.key.equals(NONE);
+					Entity object = matchKey(switchComponent.key);
+					//Validate the condition for activation which are if the object doesn't need a key or
+					//if has a key then if Val has collected an object with such key.
+					if(!hasKey || object!=null){
+						isOnSwitch = true;
+						//If key required, set the key's image into a scene2D item for display with the activation button
+						if(hasKey){
+							itemImage.setActor(listener.getItemImage(object.getComponent(CollectableComponent.class).key));
+							itemImage.pack();
+							isOnSwitchUnlocked = true;
+						}
+						setDialogPosition(boundsComponent.bounds);
+						if(action) {
+							SwitchSystem switchSystem = engine.getSystem(SwitchSystem.class);
+							switchSystem.activate(sw);
+							action = false;
+
+							//If a key is used, set the objects key as NONE and remove the key from Vals inventory
+							if(hasKey){
+								val.getComponent(Val_Component.class).objects.removeValue(object, true);
+								listener.usedObject(object.getComponent(CollectableComponent.class).key);
+								switchComponent.key = NONE;
+							}
+						}
+					}else {
+						//If key is required but has not been collected, set the values to display the locked button
+						isOnSwitchLocked=true;
+						setDialogPosition(boundsComponent.bounds);
 					}
 				}
 			}
@@ -218,7 +244,6 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 							if (object.getComponent(CollectableComponent.class).key.equals(entity.getComponent(ActionableComponent.class).key)) {
 								isOnSwitch = true;
 								itemImage.setActor(listener.getItemImage(object.getComponent(CollectableComponent.class).key));
-//								itemImage.getActor().setSize(30,30);
                                 itemImage.pack();
                                 isOnSwitchUnlocked=true;
 
@@ -252,6 +277,16 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 			setButtonVisibility(lockedButton,isOnSwitchLocked);
 			setButtonVisibility(itemImage,isOnSwitchUnlocked);
 		}
+	}
+
+	/*Return the entity which contains the selected key. Returns null if no key is found*/
+	private Entity matchKey(String key){
+		for (Entity object : vals.first().getComponent(Val_Component.class).objects) {
+			if(object.getComponent(CollectableComponent.class).key.equals(key)){
+				return  object;
+			}
+		}
+		return null;
 	}
 
 	private void setDialogPosition(Rectangle bounds){

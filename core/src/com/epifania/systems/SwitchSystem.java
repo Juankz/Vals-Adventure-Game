@@ -30,7 +30,7 @@ public class SwitchSystem extends IteratingSystem {
 
     }
 
-    public void actionate(Entity entity){
+    public void activate(Entity entity){
         if(!getFamily().matches(entity)) return;
         SwitchComponent sw = sm.get(entity);
         AnimatedTileComponent animatedTileComponent = atm.get(entity);
