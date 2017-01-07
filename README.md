@@ -6,10 +6,6 @@
 
 Val es a little purple bunny with an adventurer spirit, at her village people prepares the Golden Carrot Festival, which is the most important event ever. But just before the festival started, the Golden Carrot was stolen. Val decides to catch the thief, chasing him through dangerous lands full of traps and even face an angry ghost on an abandoned castle.
 
-### Download
-
-<a href="https://juankz.itch.io/vals-adventure?secret=96sQnLQieu9ql9pPlVo1KkBJ5A"><img src="https://github.com/itchio/itch.io/blob/master/logos/badge1.png?raw=true"></a>
-
 ### Screenshots
 
 ![Pretty_cool_gif](https://cloud.githubusercontent.com/assets/18577412/21743147/4b8ba722-d4ca-11e6-8f00-0764a48eba79.gif)
