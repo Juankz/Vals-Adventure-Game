@@ -103,8 +103,8 @@ public class MainMenuScreen extends ScreenAdapter {
 		float bw = 64;
 		float gap = 10;
 
-		title = new Label(bundle.get("game").toUpperCase(),skin,"header");
-		title.setColor(Color.BROWN);
+		title = new Label(bundle.get("game").toUpperCase(),skin,"h3title");
+//		title.setColor(Color.BROWN);
 		title.setName("title");
 
 		infoButton = new Button(skin,"info");

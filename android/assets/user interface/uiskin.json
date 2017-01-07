@@ -23,10 +23,11 @@
     "title": {"font": "title", "fontColor": "white"},
     "middle_outline": {"font": "middle_outline", "fontColor": "white"},
     "middle": {"font": "middle", "fontColor": "white"},
-    "middle_negative": {"font": "middle_negative", "fontColor": "white"},
     "h1title":{"font": "h1title", "fontColor": "white"},
+    "h3title":{"font": "h3title", "fontColor": "white"},
     "header":{"font": "header", "fontColor": "white"},
     "body":{"font": "middle", "fontColor": "white"}
+    "numeric":{"font": "numeric", "fontColor": "white"}
 },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle":{
@@ -44,8 +45,8 @@
 },
 
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle":{
-  "longBrown":{"font": "middle" , "up": "buttonLongBrown" , "down":"buttonLongBrown_p"},
-  "longNegative":{"font": "middle", "up": "longNegative" , "down":"longNegative_p"}
+  "longBrown":{"font": "middle_outline" , "up": "buttonLongBrown" , "down":"buttonLongBrown_p"},
+  "longNegative":{"font": "middle_outline", "up": "longNegative" , "down":"longNegative_p"}
 },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle":{

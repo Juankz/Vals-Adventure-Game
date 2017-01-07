@@ -592,7 +592,7 @@ public class GameScreen extends ScreenAdapter{
 		});
 
 
-		coinsLabel = new Label("0",skin,"middle_outline");
+		coinsLabel = new Label("0",skin,"numeric");
 		coinsLabel.setColor(Color.GOLD);
 
 		coinImage = new Image(skin.getDrawable("gold"));
