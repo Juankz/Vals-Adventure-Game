@@ -113,7 +113,7 @@ public class IntroScreen extends ScreenAdapter {
         body = new Label(bodyText,skin,"body");
         body.setAlignment(Align.center);
         body.setWrap(true);
-        body.setWidth(stage.getWidth()*0.7f);
+        body.setWidth(stage.getWidth()*0.75f);
 
         image = new Image(new Texture(Gdx.files.internal("user interface/placeHolder.png")));
 
@@ -143,7 +143,7 @@ public class IntroScreen extends ScreenAdapter {
         table.row();
         table.add(image).padTop(padB*0.5f).padBottom(padC*0.5f);
         table.row();
-        table.add(body).prefWidth(stage.getWidth()*0.7f).padTop(padC*0.5f);
+        table.add(body).prefWidth(stage.getWidth()*0.75f).padTop(padC*0.5f);
         table.setWidth(stage.getWidth());
         table.pack();
 

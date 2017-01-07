@@ -31,7 +31,7 @@ public class ConversationDialog extends Group {
 //        container = new Container<Label>(text);
         container = new Table();
         container.setBackground(skin.getDrawable("panel_brown"));
-        cell = container.add(text).prefWidth(200).top().padBottom(30).padTop(15).padLeft(15).padRight(15).center();
+        cell = container.add(text).prefWidth(300).top().padBottom(30).padTop(15).padLeft(15).padRight(15).center();
 //        container.top();
         next = new Button(skin,"next");
         next.addListener(new ClickListener(){

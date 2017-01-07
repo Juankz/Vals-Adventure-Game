@@ -115,8 +115,8 @@ public class GameOverScreen extends ScreenAdapter {
 
         epilogueLabel = new Label(bundle.get("content"+level),skin,"middle");
         epilogueLabel.setWrap(true);
-        epilogueLabel.setWidth(stage.getWidth()*0.5f);
-        epilogueLabel.setPosition(stage.getWidth()*0.25f,100-epilogueLabel.getHeight()*0.5f);
+        epilogueLabel.setWidth(stage.getWidth()*0.75f);
+        epilogueLabel.setPosition(stage.getWidth()*0.125f,100-epilogueLabel.getHeight()*0.5f);
         epilogueLabel.setAlignment(Align.center);
 
         coinImage = new Image(skin.getDrawable("gold"));
@@ -124,7 +124,7 @@ public class GameOverScreen extends ScreenAdapter {
         coinImage.setOrigin(coinImage.getWidth()*0.5f,coinImage.getHeight()*0.5f);
         coinImage.setPosition(background.getX() - 100,stage.getHeight() - coinImage.getHeight() - 50);
 
-        coinsLabel = new Label(coinsAmount+"/"+totalCoins,skin,"middle_outline");
+        coinsLabel = new Label(coinsAmount+"/"+totalCoins,skin,"numeric");
         coinsLabel.setColor(Color.GOLD);
         coinsLabel.setPosition(coinImage.getX() + coinImage.getWidth() + 20,
                 coinImage.getY());

@@ -73,45 +73,51 @@ public class Assets implements Disposable, AssetErrorListener{
 		assetManager.setLoader(Music.class,new MusicLoader(resolver));
 
 		FreetypeFontLoader.FreeTypeFontLoaderParameter parameter = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-		parameter.fontFileName = "user interface/Lobster.ttf";
+		parameter.fontFileName = "user interface/fonts/FreeSerifBold.ttf";
 		parameter.fontParameters.size = 25;
 		parameter.fontParameters.magFilter = Texture.TextureFilter.Linear;
 		parameter.fontParameters.minFilter = Texture.TextureFilter.MipMapLinearNearest;
 		parameter.fontParameters.genMipMaps = true;
 		this.assetManager.load("gameFont.fnt",BitmapFont.class,parameter);
 		FreetypeFontLoader.FreeTypeFontLoaderParameter parameter2 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-		parameter2.fontFileName = "user interface/Lobster.ttf";
+		parameter2.fontFileName = "user interface/fonts/FreeSerifBold.ttf";
 		parameter2.fontParameters.size = 50;
 		parameter2.fontParameters.magFilter = Texture.TextureFilter.Linear;
 		parameter2.fontParameters.minFilter = Texture.TextureFilter.MipMapLinearNearest;
 		parameter2.fontParameters.genMipMaps = true;
 		this.assetManager.load("bigFont.fnt",BitmapFont.class,parameter2);
 		FreetypeFontLoader.FreeTypeFontLoaderParameter parameter3= new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-		parameter3.fontFileName = "user interface/Lobster.ttf";
+		parameter3.fontFileName = "user interface/fonts/FreeSerifBold.ttf";
 		parameter3.fontParameters.size = 40;
 		parameter3.fontParameters.magFilter = Texture.TextureFilter.Linear;
 		parameter3.fontParameters.minFilter = Texture.TextureFilter.MipMapLinearNearest;
 		parameter3.fontParameters.genMipMaps = true;
 		this.assetManager.load("midFont.fnt",BitmapFont.class,parameter3);
 		FreetypeFontLoader.FreeTypeFontLoaderParameter parameter4= new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-		parameter4.fontFileName = "user interface/Lobster.ttf";
+		parameter4.fontFileName = "user interface/fonts/FreeSerifBold.ttf";
 		parameter4.fontParameters.size = 40;
-		parameter4.fontParameters.borderColor = Color.GRAY;
-		parameter4.fontParameters.borderWidth = 3;
 		parameter4.fontParameters.magFilter = Texture.TextureFilter.Linear;
 		parameter4.fontParameters.minFilter = Texture.TextureFilter.MipMapLinearNearest;
 		parameter4.fontParameters.genMipMaps = true;
 		this.assetManager.load("midFont_outline.fnt",BitmapFont.class,parameter4);
 		FreetypeFontLoader.FreeTypeFontLoaderParameter parameter5= new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-		parameter5.fontFileName = "user interface/Lobster.ttf";
+		parameter5.fontFileName = "user interface/fonts/Lobster.ttf";
 		parameter5.fontParameters.size = 40;
-		parameter5.fontParameters.borderColor = new Color(0xc83737ff);
+		parameter5.fontParameters.borderColor = Color.GRAY;
 		parameter5.fontParameters.borderWidth = 3;
 		parameter5.fontParameters.magFilter = Texture.TextureFilter.Linear;
 		parameter5.fontParameters.minFilter = Texture.TextureFilter.MipMapLinearNearest;
 		parameter5.fontParameters.genMipMaps = true;
-		this.assetManager.load("midFont_negative.fnt",BitmapFont.class,parameter5);
-
+		this.assetManager.load("numeric.fnt",BitmapFont.class,parameter5);
+		FreetypeFontLoader.FreeTypeFontLoaderParameter parameter6= new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+		parameter6.fontFileName = "user interface/fonts/Cinzel_Regular.ttf";
+		parameter6.fontParameters.size = 60;
+		parameter6.fontParameters.borderColor = new Color(0.54f,0.27f,0.07f,1);
+		parameter6.fontParameters.borderWidth = 1.5f;
+		parameter6.fontParameters.magFilter = Texture.TextureFilter.Linear;
+		parameter6.fontParameters.minFilter = Texture.TextureFilter.MipMapLinearNearest;
+		parameter6.fontParameters.genMipMaps = true;
+		this.assetManager.load("h3title.fnt",BitmapFont.class,parameter6);
 		assetManager.load("user interface/uiskin.atlas", TextureAtlas.class);
 
 		//i18n
@@ -127,8 +133,8 @@ public class Assets implements Disposable, AssetErrorListener{
 		//Load skin
 		//TODO solve issue of bitmap font in skin and free type font
 
-		BitmapFont fontHeader = generateFont("user interface/Tinos-Regular.ttf",50);
-		BitmapFont fontTitle = generateFont("user interface/Cinzel_Regular.ttf",90);
+		BitmapFont fontHeader = generateFont("user interface/fonts/Tinos-Regular.ttf",50);
+		BitmapFont fontTitle = generateFont("user interface/fonts/Cinzel_Regular.ttf",90);
 
 		String textureAtlasPath = "user interface/ninePatches.atlas";
 		ObjectMap<String, Object> resources = new ObjectMap<String, Object>();
@@ -140,15 +146,18 @@ public class Assets implements Disposable, AssetErrorListener{
 		BitmapFont skinFont3 = new BitmapFont(f3.getData(),f3.getRegions(),true);
 		BitmapFont f4 = assetManager.get("midFont_outline.fnt",BitmapFont.class);
 		BitmapFont skinFont4 = new BitmapFont(f4.getData(),f4.getRegions(),true);
-		BitmapFont f5 = assetManager.get("midFont_negative.fnt",BitmapFont.class);
+		BitmapFont f5 = assetManager.get("numeric.fnt",BitmapFont.class);
 		BitmapFont skinFont5 = new BitmapFont(f5.getData(),f5.getRegions(),true);
+		BitmapFont f6 = assetManager.get("h3title.fnt",BitmapFont.class);
+		BitmapFont fontTitle2 = new BitmapFont(f6.getData(),f6.getRegions(),true);
 		resources.put("default",skinFont);
 		resources.put("title",skinFont2);
 		resources.put("middle",skinFont3);
 		resources.put("middle_outline",skinFont4);
-		resources.put("middle_negative",skinFont5);
 		resources.put("header",fontHeader);
 		resources.put("h1title",fontTitle);
+		resources.put("h3title",fontTitle2);
+		resources.put("numeric",skinFont5);
 		TextureAtlas atlas = assetManager.get("user interface/uiskin.atlas", TextureAtlas.class);
 		for(int i = 0; i <atlas.getRegions().size;i++){
 			TextureAtlas.AtlasRegion region = atlas.getRegions().get(i);
