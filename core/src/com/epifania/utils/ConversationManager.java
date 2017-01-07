@@ -54,7 +54,7 @@ public class ConversationManager {
 
 
     public ConversationManager(FileHandle script){
-
+        //Read the script file and store the values in arrays
         dialogs = new Array<Array<XmlReader.Element>>();
         try {
             XmlReader reader = new XmlReader();
@@ -64,7 +64,7 @@ public class ConversationManager {
                 Array<XmlReader.Element> dialogs = conversation.getChildrenByNameRecursively("Dialog");
                 this.dialogs.add(dialogs);
             }
-            /*
+            /* Uncomment the following to print the result of the XML file on the application loading
             System.out.println("CONVERSATIONS");
             for(XmlReader.Element conversation : conversations)
             {
@@ -77,9 +77,8 @@ public class ConversationManager {
             }
             */
 
-
             this.selfThoughts = new Array<XmlReader.Element>();
-            XmlReader.Element selfThoughts = root.getChildByName("SelfToughts");
+            XmlReader.Element selfThoughts = root.getChildByName("SelfThoughts");
             Array<XmlReader.Element> dialogs = selfThoughts.getChildrenByNameRecursively("Dialog");
             this.selfThoughts.addAll(dialogs);
 
@@ -88,6 +87,11 @@ public class ConversationManager {
         }
     }
 
+    /**
+     * Gets scene2d position of a character and store it inside a vector
+     * @param character a string identifying the characters name
+     * @param out vector used to store the result
+     */
     private void getRelativePosition(String character,Vector3 out){
         if(character==null)return;
         Entity entity = null;
@@ -119,6 +123,12 @@ public class ConversationManager {
         }
     }
 
+    /**
+     * Check if all conditions(keys) are met to start a conversation
+     * @param conversationName Identifier for the conversation
+     * @param keys Array with available keys
+     * @return true if all keys are found
+     */
     public boolean matches(String conversationName,Array<String> keys){
         XmlReader.Element conversation = getConversationByID(conversationName);
         //If conversation does not exit return
@@ -165,16 +175,24 @@ public class ConversationManager {
         return null;
     }
 
+    /**
+     * Displays a dialog with the first conversation element
+     * @param conversationID identifier to get the conversation from the xml array
+     */
     public void startConversation(String conversationID){
         for(XmlReader.Element conversation : conversations){
             if(conversation.getAttribute("ID").equals(conversationID)){
                 conversationNumber = conversations.indexOf(conversation,true);
-                conversationEnded();
+                conversationEnded(); //This method is called to set the text and position for the dialog actor
                 dialog.setVisible(true);
             }
         }
     }
 
+    /**
+     * Check if the conversation has ended. In such case, hides the ConversationDialog scene2D actor
+     * @return true if conversation has ended, otherwise false
+     */
     public boolean conversationEnded(){
         if(line< dialogs.get(conversationNumber).size) {
             XmlReader.Element element = dialogs.get(conversationNumber).get(line);
@@ -189,6 +207,10 @@ public class ConversationManager {
         return false;
     }
 
+    /**
+     * Increase the conversation line counter
+     * @return true if there are more lines of conversation. False if is the end of the conversation
+     */
     public boolean next(){
         if(line< dialogs.get(conversationNumber).size) {
             line++;
@@ -197,10 +219,14 @@ public class ConversationManager {
         return false;
     }
 
+    /**
+     * Display a dialog with timer instead of a skip button
+     * @param key identifier to get the correspondent text from the xml array
+     */
     public void showThoughts(String key){
         String text=NONE;
         for(int i = 0 ; i < selfThoughts.size ; i++) {
-            String k = selfThoughts.get(i).getAttribute("key",NONE);
+            String k = selfThoughts.get(i).getAttribute("key",NONE); //returns NONE if there is no key attribute
             Gdx.app.debug(tag,"key = "+key);
             Gdx.app.debug(tag,"k = "+k);
 
@@ -209,6 +235,7 @@ public class ConversationManager {
             }
 
         }
+        //If found, set text to the Scene2D dialog and start timer
         if(text!=NONE) {
             time=0;
             showingThoughts=true;
@@ -218,11 +245,17 @@ public class ConversationManager {
         }
     }
 
+    /**Puts the dialog actor over the image of a character
+      * @param character ID for the character
+     */
     public void updateDialogPosition(String character){
         getRelativePosition(character,tmp);
         dialog.setPosition(tmp.x,tmp.y);
     }
 
+    /**
+     * Set flags to false for thoughts and dialog visibility
+     */
     public void hideThoughts(){
         showingThoughts=false;
         dialog.setVisible(false);

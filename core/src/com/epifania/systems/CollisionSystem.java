@@ -44,6 +44,7 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 	private ImmutableArray<Entity> ladders;
 	private ImmutableArray<Entity> packs;
 	private ImmutableArray<Entity> trunks;
+	private ImmutableArray<Entity> thoughts;
 
 	public interface CollisionListener {
 		void pickCoin ();
@@ -79,6 +80,7 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		ladders = this.engine.getEntitiesFor(Family.all(LadderComponent.class,BoundsComponent.class).get());
 		packs = this.engine.getEntitiesFor(Family.all(PackComponent.class,BoundsComponent.class).get());
 		trunks = this.engine.getEntitiesFor(Family.all(TrunkComponent.class,BoundsComponent.class).get());
+		thoughts = this.engine.getEntitiesFor(Family.all(ThoughtComponent.class,BoundsComponent.class).get());
 	}
 
 	@Override
@@ -111,24 +113,73 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 			}
 			engine.getSystem(Val_System.class).canClimb = canClimb;
 
-			boolean isOnSwitch = false;
-			boolean isOnSwitchLocked = false;
-			boolean isOnSwitchUnlocked = false;
+			boolean isOnSwitch = false; //If the object can be activated
+			boolean isOnSwitchLocked = false; //If a key is required and hasn't been collected, then the object is locked
+			boolean isOnSwitchUnlocked = false; //If a key required and has been collected,
+												// then the object can be activated and display the key together with the action button
 
 			for(Entity sw : switches){
-				if(sw.flags!=val.flags)continue;
+				if(sw.flags!=val.flags)continue; // if val and the object are not in the same layer, skip this process
 				BoundsComponent boundsComponent = bm.get(sw);
-				if(boundsComponent.bounds.overlaps(valBounds.bounds)){
-					isOnSwitch = true;
-					setDialogPosition(boundsComponent.bounds);
-					if(action) {
-						SwitchSystem switchSystem = engine.getSystem(SwitchSystem.class);
-						switchSystem.actionate(sw);
-						action = false;
+				SwitchComponent switchComponent = sw.getComponent(SwitchComponent.class);
+
+				if(boundsComponent.bounds.overlaps(valBounds.bounds)){ //Check if there is collision
+					boolean hasKey = !switchComponent.key.equals(NONE);
+					Entity object = matchKey(switchComponent.key);
+					//Validate the condition for activation which are if the object doesn't need a key or
+					//if has a key then if Val has collected an object with such key.
+					if(!hasKey || object!=null){
+						isOnSwitch = true;
+						//If key required, set the key's image into a scene2D item for display with the activation button
+						if(hasKey){
+							itemImage.setActor(listener.getItemImage(object.getComponent(CollectableComponent.class).key));
+							itemImage.pack();
+							isOnSwitchUnlocked = true;
+						}
+						setDialogPosition(boundsComponent.bounds);
+						if(action) {
+							SwitchSystem switchSystem = engine.getSystem(SwitchSystem.class);
+							switchSystem.activate(sw);
+							action = false;
+
+							//If a key is used, set the objects key as NONE and remove the key from Vals inventory
+							if(hasKey){
+								val.getComponent(Val_Component.class).objects.removeValue(object, true);
+								listener.usedObject(object.getComponent(CollectableComponent.class).key);
+								switchComponent.key = NONE;
+							}
+						}
+					}else {
+						//If key is required but has not been collected, set the values to display the locked button
+						isOnSwitchLocked=true;
+						setDialogPosition(boundsComponent.bounds);
 					}
 				}
 			}
 			setActionButtonVisibility(isOnSwitch);
+
+			for(Entity entity : thoughts){
+				if(entity.flags!=val.flags)continue;
+				BoundsComponent boundsComponent = bm.get(entity);
+				ThoughtComponent thoughtComponent = entity.getComponent(ThoughtComponent.class);
+				if(boundsComponent.bounds.overlaps(valBounds.bounds)){
+					//If no key is needed (or required key has been collected) to show the dialog
+					if(thoughtComponent.key.equals(NONE)||matchKey(thoughtComponent.key)!=null){
+						//If has a target which once collected deactivate this thought
+						if(!thoughtComponent.target.equals(NONE)){
+							//If has already collected the target object removes this entity,
+							//whether not, display thought
+							if(matchKey(thoughtComponent.target)!=null){
+								engine.removeEntity(entity);
+							}else {
+								engine.getSystem(Val_System.class).showThoughts(val,thoughtComponent.thoughtID);
+							}
+						}else{ //No target, so never deactivates this Val thought
+							engine.getSystem(Val_System.class).showThoughts(val,thoughtComponent.thoughtID);
+						}
+					}
+				}
+			}
 
 			for(Entity entity : checkpoints){
 				if(entity.flags!=val.flags)continue;
@@ -206,6 +257,7 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 				if(entity.flags!=val.flags)continue;
 				Rectangle bounds = bm.get(entity).bounds;
 				if(valBounds.bounds.overlaps(bounds)){
+					//IF no key is needed can activate the component and set the action button position
 					if(entity.getComponent(ActionableComponent.class).key.equals(NONE)) {
 						isOnSwitch = true;
 						setDialogPosition(bounds);
@@ -214,11 +266,11 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 							break label1;
 						}
 					}else{
+						//If key es needed then check if the key has been collected iterating through Vals inventory
 						for (Entity object : val.getComponent(Val_Component.class).objects) {
 							if (object.getComponent(CollectableComponent.class).key.equals(entity.getComponent(ActionableComponent.class).key)) {
 								isOnSwitch = true;
 								itemImage.setActor(listener.getItemImage(object.getComponent(CollectableComponent.class).key));
-//								itemImage.getActor().setSize(30,30);
                                 itemImage.pack();
                                 isOnSwitchUnlocked=true;
 
@@ -252,6 +304,18 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 			setButtonVisibility(lockedButton,isOnSwitchLocked);
 			setButtonVisibility(itemImage,isOnSwitchUnlocked);
 		}
+	}
+
+	/**
+	 * @return the entity which contains the selected key. Returns null if no key is found
+	 * */
+	private Entity matchKey(String key){
+		for (Entity object : vals.first().getComponent(Val_Component.class).objects) {
+			if(object.getComponent(CollectableComponent.class).key.equals(key)){
+				return  object;
+			}
+		}
+		return null;
 	}
 
 	private void setDialogPosition(Rectangle bounds){

@@ -29,8 +29,8 @@
         </Conversation>
     </Conversations>
 
-    <SelfToughts>
+    <SelfThoughts>
         <Dialog key = "KEY">Necesito la llave</Dialog>
         <Dialog key = "GOAL">Necesito la llave primero</Dialog>
-    </SelfToughts>
+    </SelfThoughts>
 </Script>

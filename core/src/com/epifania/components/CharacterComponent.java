@@ -20,8 +20,8 @@ public class CharacterComponent implements Component{
     public Character character;
     public States state = States.WAITING_IN;
 
-    public static enum Character{
-        GOMH, PINKY, MOM, BLUE, BONNY
+    public enum Character{
+        GOMH, PINKY, MOM, BLUE, BONNY, CAPTAIN
     }
 
     public enum States{

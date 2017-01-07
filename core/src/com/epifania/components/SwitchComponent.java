@@ -12,4 +12,5 @@ public class SwitchComponent implements Component {
     public static final int CENTER = 2;
     public int number = 0;
     public TiledMapTileLayer.Cell cell=null;
+    public String key = "NONE";
 }

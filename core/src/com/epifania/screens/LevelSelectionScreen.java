@@ -91,7 +91,7 @@ public class LevelSelectionScreen extends ScreenAdapter {
         background.setPosition(0,0);
         background.setFillParent(true);
 
-        levelImages = new Image[3];
+        levelImages = new Image[Constants.mapsNames.length];
         for(int i = 0;i<levelImages.length;i++){
             levelImages[i] = new Image(Assets.instance.get("user interface/level selection/level"+(i+1)+".png",Texture.class));
         }

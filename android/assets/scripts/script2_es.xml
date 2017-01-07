@@ -2,19 +2,32 @@
     <Conversations>
         <!--BLUE -->
         <Conversation character="BLUE" ID="B1" keys = "NONE" secondary="NONE">
-            <Dialog character="BLUE">Hey Val, ready for the festival?</Dialog>
-            <Dialog character="BLUE">Remember this is the most important even in the year</Dialog>
-            <Dialog character="BLUE">The Golden Carrot represents wealth and abundance for out village</Dialog>
-            <Dialog character="VAL">I wish to be ready Marco, I need to collect some carrots for the festival</Dialog>
-            <Dialog character="BLUE">I left some carrots in my blue house, you can take them</Dialog>
-            <Dialog character="BLUE">I just forgot where did I left the key</Dialog>
-            <Dialog character="VAL">No problem I will find it, thanks Marco</Dialog>
+            <Dialog character="BLUE">Hey Val, ¿Lista para el festival?</Dialog>
+            <Dialog character="BLUE">Recuerda que este es el festival más importante del año</Dialog>
+            <Dialog character="BLUE">La zanahoria dorada representa abuncia y bienestar para la aldea</Dialog>
+            <Dialog character="VAL">Desearía estar lista Marco, pero necestio recolectar zanahorias para la celebración</Dialog>
+            <Dialog character="BLUE">Yo tengo algunas zanahorias en mi casa subiendo por este camino, puedes tomarlas</Dialog>
+            <Dialog character="BLUE">Pero olvidé donde dejé la llave</Dialog>
+            <Dialog character="VAL">No hay problema, la encontraré, gracias Marco</Dialog>
+        </Conversation>
+        <Conversation character="GOMH" ID="EXIT" keys="NONE" secondary="NONE">
+            <Dialog character="GOMH">!HORROR! !DESGRACIA!</Dialog>
+            <Dialog character="GOMH">¡Alguien ha robado la Zanahoria Dorada!</Dialog>
+            <Dialog character="MOM">¡Esto es terrible! ¿Como pasó?</Dialog>
+            <Dialog character="GOMH">No lo sé, solo ví una silueta corriendo hacia el bosque</Dialog>
+            <Dialog character="VAL">No hay tiempo que perder, atrapémos al ladrón</Dialog>
+            <Dialog character="MOM">VAL!</Dialog>
+            <Dialog character="VAL">No te preocupes mamá, estaré de vuelta pronto</Dialog>
+            <Dialog character="GOMH">Cuando encuentres al ladrón, avísanos</Dialog>
+        </Conversation>
+        <Conversation character="MOM" ID="M1" keys="PLACEHOLDER" secondary="NONE">
+            <Dialog character="MOM"></Dialog>
         </Conversation>
     </Conversations>
 
-    <SelfToughts>
-        <Dialog key = "KEY">I need a key</Dialog>
-        <Dialog key = "GOAL">Nothing to do here</Dialog>
+    <SelfThoughts>
+        <Dialog key = "YELLOW KEY">Necesito la llave</Dialog>
+        <Dialog key = "GOAL">Antes necesito las zanahorias</Dialog>
         <Dialog key = "KNIFE">I need to cut it</Dialog>
-    </SelfToughts>
+    </SelfThoughts>
 </Script>

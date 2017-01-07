@@ -29,9 +29,9 @@
         </Conversation>
     </Conversations>
 
-    <SelfToughts>
+    <SelfThoughts>
         <Dialog key = "KEY">I need a key</Dialog>
         <Dialog key = "GOAL">Nothing to do here</Dialog>
         <Dialog key = "KNIFE">I need to cut it</Dialog>
-    </SelfToughts>
+    </SelfThoughts>
 </Script>

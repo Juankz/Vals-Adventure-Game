@@ -1,7 +1,7 @@
 <Script>
     <Conversations>
         <Conversation character="PINKY" ID="P1" keys = "NONE" secondary="NONE">
-            <Dialog character="PINKY">Val! Hwat are you doing here</Dialog>
+            <Dialog character="PINKY">Val! What are you doing here</Dialog>
             <Dialog character="VAL">Someone stole the golden carrot and ran this way</Dialog>
             <Dialog character="PINKY">Oh no! It must have been the brown bunnie that attacked me</Dialog>
             <Dialog character="VAL">Attacked you?</Dialog>
@@ -30,9 +30,9 @@
         </Conversation>
     </Conversations>
 
-    <SelfToughts>
+    <SelfThoughts>
         <Dialog key = "PALA">I could dig into this, but how?</Dialog>
         <Dialog key = "HAMMER">That's the exit, let's break it with something</Dialog>
         <Dialog key = "KNIFE">I need to cut it</Dialog>
-    </SelfToughts>
+    </SelfThoughts>
 </Script>

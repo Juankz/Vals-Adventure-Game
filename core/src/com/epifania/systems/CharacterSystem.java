@@ -19,10 +19,11 @@ public class CharacterSystem extends IteratingSystem {
 
     public interface CharacterListener{
         void setActive(boolean b);
+        void gameOver();
     }
 
     private static final String tag = "Character System";
-    private static final float dstXM = 2.5f;
+    private static final float dstXM = 2f;
     private static final float dstYM = 4;
     private static final float dstYm = -2;
 
@@ -31,6 +32,7 @@ public class CharacterSystem extends IteratingSystem {
     public ConversationManager manager;
     private boolean isSecondary = false;
     public CharacterListener characterListener;
+    private boolean exitAfterConversation = false;
 
     public CharacterSystem() {
         super(Family.all(CharacterComponent.class,TransformComponent.class).get());
@@ -49,6 +51,10 @@ public class CharacterSystem extends IteratingSystem {
 
                     if (isEntityClose(entity, val)) {
                         if (manager.matches(conversationID, valKeys)) {
+                            //Some level may and with a conversation, just one conversation key with
+                            // id "EXIT" is allowed. If this is the case, then use enable a flag for notification
+                            if(conversationID.equals("EXIT"))
+                                exitAfterConversation=true;
                             characterComponent.state = CharacterComponent.States.CONVERSATING;
                             Gdx.app.debug(tag,"Start Conversation with "+characterComponent.character);
                             isSecondary = false;
@@ -73,6 +79,9 @@ public class CharacterSystem extends IteratingSystem {
                         getEngine().getSystem(Val_System.class).canMove = true;
                         characterComponent.state = CharacterComponent.States.WATING_OUT;
                         Gdx.app.debug(tag,"Waiting out for "+characterComponent.character);
+                        if(exitAfterConversation){
+                            characterListener.gameOver();
+                        }
                     }
                     break;
                 case WATING_OUT:
@@ -102,15 +111,16 @@ public class CharacterSystem extends IteratingSystem {
     }
 
     private boolean isEntityClose(Entity entity, Entity other){
-        Vector3 entityPosition = entity.getComponent(TransformComponent.class).pos;
-        Vector3 otherPosition = other.getComponent(TransformComponent.class).pos;
+        if(entity.flags==other.flags) {
+            Vector3 entityPosition = entity.getComponent(TransformComponent.class).pos;
+            Vector3 otherPosition = other.getComponent(TransformComponent.class).pos;
 
-        float dstX = Math.abs(entityPosition.x - otherPosition.x);
-        float dstY = entityPosition.y - otherPosition.y;
+            float dstX = Math.abs(entityPosition.x - otherPosition.x);
+            float dstY = entityPosition.y - otherPosition.y;
 
-        if(dstX < dstXM && (dstY<dstYM && dstY>dstYm))
-            return  true;
-
+            if (dstX < dstXM && (dstY < dstYM && dstY > dstYm))
+                return true;
+        }
         return false;
     }
 }

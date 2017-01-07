@@ -6,14 +6,14 @@ filter: MipMapLinearNearest,Nearest
 repeat: none
 Blue/talk1
   rotate: false
-  xy: 199, 528
+  xy: 323, 309
   size: 59, 100
   orig: 59, 100
   offset: 0, 0
   index: -1
 Blue/talk2
   rotate: false
-  xy: 199, 329
+  xy: 447, 537
   size: 59, 96
   orig: 59, 96
   offset: 0, 0
@@ -32,86 +32,114 @@ Bonny/idle2
   orig: 121, 192
   offset: 0, 0
   index: -1
+Captain/captainLeft1
+  rotate: false
+  xy: 694, 673
+  size: 106, 144
+  orig: 106, 144
+  offset: 0, 0
+  index: -1
+Captain/captainLeft2
+  rotate: false
+  xy: 511, 670
+  size: 106, 148
+  orig: 106, 148
+  offset: 0, 0
+  index: -1
+Captain/captainRight1
+  rotate: false
+  xy: 125, 470
+  size: 106, 148
+  orig: 106, 148
+  offset: 0, 0
+  index: -1
+Captain/captainRight2
+  rotate: false
+  xy: 125, 323
+  size: 106, 144
+  orig: 106, 144
+  offset: 0, 0
+  index: -1
 Gomh/gomhIdle
   rotate: false
-  xy: 601, 671
+  xy: 125, 22
   size: 86, 147
   orig: 86, 147
   offset: 0, 0
   index: -1
 Gomh/gomhIdle2
   rotate: false
-  xy: 779, 676
+  xy: 234, 338
   size: 86, 141
   orig: 86, 141
   offset: 0, 0
   index: -1
 Gomh/gomhLeft
   rotate: false
-  xy: 511, 670
+  xy: 125, 172
   size: 87, 148
   orig: 87, 148
   offset: 0, 0
   index: -1
 Gomh/gomhRight
   rotate: false
-  xy: 690, 671
+  xy: 234, 482
   size: 86, 146
   orig: 86, 146
   offset: 0, 0
   index: -1
 Mom/happy1
   rotate: false
-  xy: 941, 902
+  xy: 620, 698
   size: 71, 120
   orig: 71, 120
   offset: 0, 0
   index: -1
 Mom/happy2
   rotate: false
-  xy: 125, 379
+  xy: 397, 417
   size: 71, 116
   orig: 71, 116
   offset: 0, 0
   index: -1
 Mom/sad1
   rotate: false
-  xy: 868, 699
+  xy: 941, 902
   size: 71, 120
   orig: 71, 120
   offset: 0, 0
   index: -1
 Mom/sad2
   rotate: false
-  xy: 125, 260
+  xy: 471, 418
   size: 71, 116
   orig: 71, 116
   offset: 0, 0
   index: -1
 Mom/sad3
   rotate: false
-  xy: 125, 498
+  xy: 323, 412
   size: 71, 120
   orig: 71, 120
   offset: 0, 0
   index: -1
 Pinky/despective1
   rotate: false
-  xy: 125, 157
+  xy: 323, 535
   size: 59, 100
   orig: 59, 100
   offset: 0, 0
   index: -1
 Pinky/despective2
   rotate: false
-  xy: 199, 428
+  xy: 385, 536
   size: 59, 97
   orig: 59, 97
   offset: 0, 0
   index: -1
 Pinky/idle1
   rotate: false
-  xy: 125, 54
+  xy: 941, 799
   size: 59, 100
   orig: 59, 100
   offset: 0, 0

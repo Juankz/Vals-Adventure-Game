@@ -24,14 +24,17 @@ public class DesktopLauncher {
 			settings.filterMag = Texture.TextureFilter.Nearest;
 			settings.filterMin = Texture.TextureFilter.Nearest;
 			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/user interface/nine patches","../assets/user interface","ninePatches");
-
+			settings.paddingY = 2;
+			settings.paddingX = 2;
+			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/user interface/nine patches","../assets/user interface","ninePatches");
 		}
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new main(), config);
+		config.title = "Vals Adventure";
 		config.width = 800;
 //		config.height = config.width*3/4;
 		config.height = config.width*9/16;
-		config.resizable = false;
+		config.resizable = true;
 	}
 }

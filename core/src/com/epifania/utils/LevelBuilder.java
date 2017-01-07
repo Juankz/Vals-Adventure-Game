@@ -61,7 +61,8 @@ public class LevelBuilder {
 
         setMap();
         createWorldBounds();
-        createCoins();
+        createCoins((TiledMapTileLayer)levelMap.getLayers().get("Coins"),0);
+        createCoins((TiledMapTileLayer)levelMap.getLayers().get("Builds Interior"),1);
 
         for(TiledMapTileSet set : levelMap.getTileSets()){
             Gdx.app.debug(tag,"tileset name : "+set.getName());
@@ -170,18 +171,18 @@ public class LevelBuilder {
             }else
             if(type.equals("character")){
                 String name = (String)object.getProperties().get("name");
-                if(name.equals("GOMH")||name.equals("MOM")||name.equals("PINKY")||name.equals("BLUE")){
+                if(!name.equals("VAL")){
                     createCharacter(object,flag,name);
-                }else if(name.equals("VAL")){
+                }else{
                     //Create the main character and make the camera follow it
                     Entity val = createVal(object.getProperties(),flag);
                     createCamera(val);
                     engine.addEntity(val);
-                }else {
-                    Gdx.app.error(tag,"character not found : "+name);
                 }
             }else
-            if(type.equals("collectable")){
+            if(type.equals("thought")){
+                createThought(object,flag);
+            }else if(type.equals("collectable")){
                 createCollectable(object,flag);
             }else if(type.equals("bridge")){
                 createBridge(object,flag);
@@ -212,7 +213,7 @@ public class LevelBuilder {
             }else if(type.equals("password")){
                 createPassword(object,flag);
             }else if(type.equals("exit")){
-                createExit(object.getProperties());
+                createExit(object.getProperties(),flag);
             }
         }
     }
@@ -720,7 +721,7 @@ public class LevelBuilder {
         }
     }
 
-    private void createExit(MapProperties properties){
+    private void createExit(MapProperties properties, int flag){
         BoundsComponent boundsComponent = new BoundsComponent();
         ActionableComponent actionableComponent = new ActionableComponent();
 
@@ -740,6 +741,7 @@ public class LevelBuilder {
         Entity entity = new Entity();
         entity.add(boundsComponent);
         entity.add(actionableComponent);
+        entity.flags = flag;
         engine.addEntity(entity);
     }
 
@@ -832,6 +834,43 @@ public class LevelBuilder {
         engine.addEntity(entity);
     }
 
+    private void createThought(MapObject object, int flag){
+        BoundsComponent boundsComponent = new BoundsComponent();
+        TransformComponent transformComponent = new TransformComponent();
+        ThoughtComponent thoughtComponent = new ThoughtComponent();
+
+        float unit = 1/70f;
+        float x,y,w,h;
+        Object property;
+
+        Rectangle rectangle =  ((RectangleMapObject)object).getRectangle();
+        x = rectangle.x*unit;
+        y=rectangle.y*unit;
+        w=rectangle.width*unit;
+        h=rectangle.height*unit;
+
+        boundsComponent.bounds.set(x,y,w,h);
+        transformComponent.pos.set(x,y,0);
+        transformComponent.origin.setZero();
+
+        thoughtComponent.thoughtID = (String)object.getProperties().get("id"); //It is mandatory to have an ID
+
+        property = object.getProperties().get("key");
+        if(property!=null)
+            thoughtComponent.key = (String)property;
+
+        property = object.getProperties().get("target");
+        if(property!=null)
+            thoughtComponent.target = (String)property;
+
+        Entity entity = new Entity();
+        entity.add(boundsComponent);
+        entity.add(transformComponent);
+        entity.add(thoughtComponent);
+        entity.flags = flag;
+        engine.addEntity(entity);
+    }
+
     private void createCheckpoint(MapObject object,int flag){
         BoundsComponent boundsComponent = new BoundsComponent();
         TransformComponent transformComponent = new TransformComponent();
@@ -903,12 +942,17 @@ public class LevelBuilder {
         TiledMapTileLayer tileLayer = (TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]);
         TiledMapTileLayer.Cell cell = tileLayer.getCell((int)x,(int)y);
 
+        //If the switch has a key to work then add it
+        Object property = object.getProperties().get("key");
+        if(property!=null){
+            switchComponent.key = property.toString();
+        }
         //Select tiles
         Gdx.app.debug(tag,"flag: "+ flag);
         TiledMapTileSet tileset =  levelMap.getTileSets().getTileSet("Items");
         for(TiledMapTile tile:tileset){
 
-            Object property = tile.getProperties().get("tag");
+            property = tile.getProperties().get("tag");
 
             if(property == null) {
                 continue;
@@ -1560,9 +1604,7 @@ public class LevelBuilder {
         return entity;
     }
 
-    private void createCoins() {
-        Array<TiledMapTileLayer.Cell> items = new Array<TiledMapTileLayer.Cell>();
-        TiledMapTileLayer itemsLayer = (TiledMapTileLayer)levelMap.getLayers().get("Coins");
+    private void createCoins(TiledMapTileLayer itemsLayer,int flag) {
         for(int x = 0; x < itemsLayer.getWidth();x++){
             for(int y = 0; y < itemsLayer.getHeight();y++){
                 TiledMapTileLayer.Cell cell = itemsLayer.getCell(x, y);
@@ -1600,9 +1642,11 @@ public class LevelBuilder {
                     entity.add(animation);
                     entity.add(stateComponent);
                     entity.add(textureComponent);
+                    entity.flags = flag;
                     engine.addEntity(entity);
 
                     totalCoins++;
+                    itemsLayer.setCell(x,y,null);
                 }
             }
         }
@@ -1700,6 +1744,11 @@ public class LevelBuilder {
                 break;
             case BONNY:
                 out.put(CharacterComponent.IDLE,Assets.instance.bonnyAnimations.idle);
+                break;
+            case CAPTAIN:
+                out.put(CharacterComponent.IDLE,Assets.instance.captainAnimations.center);
+                out.put(CharacterComponent.RIGHT,Assets.instance.captainAnimations.right);
+                out.put(CharacterComponent.LEFT,Assets.instance.captainAnimations.left);
                 break;
             default:
                 Gdx.app.error(tag,"No character found under the name of: "+character);

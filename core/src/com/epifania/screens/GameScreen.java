@@ -215,6 +215,11 @@ public class GameScreen extends ScreenAdapter{
 					stageHUD.setActive(b);
 				}
 			}
+
+			@Override
+			public void gameOver() {
+				setState(GameStates.GAMEOVER);
+			}
 		};
 
 		//Add viewport to camera
