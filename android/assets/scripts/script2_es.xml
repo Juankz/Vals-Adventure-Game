@@ -10,7 +10,7 @@
             <Dialog character="BLUE">Pero olvidé donde dejé la llave</Dialog>
             <Dialog character="VAL">No hay problema, la encontraré, gracias Marco</Dialog>
         </Conversation>
-        <Conversation character="GOMH" ID="G1" keys="NONE" secondary="NONE">
+        <Conversation character="GOMH" ID="EXIT" keys="NONE" secondary="NONE">
             <Dialog character="GOMH">!HORROR! !DESGRACIA!</Dialog>
             <Dialog character="GOMH">¡Alguien ha robado la Zanahoria Dorada!</Dialog>
             <Dialog character="MOM">¡Esto es terrible! ¿Como pasó?</Dialog>

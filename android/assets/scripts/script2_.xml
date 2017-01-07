@@ -10,7 +10,7 @@
             <Dialog character="BLUE">I just forgot where did I left the key</Dialog>
             <Dialog character="VAL">No problem I will find it, thanks Marco</Dialog>
         </Conversation>
-        <Conversation character="GOMH" ID="G1" keys="NONE" secondary="NONE">
+        <Conversation character="GOMH" ID="EXIT" keys="NONE" secondary="NONE">
             <Dialog character="GOMH">HORROR! DISGRACE!</Dialog>
             <Dialog character="GOMH">Someone has stolen the golden carrot!</Dialog>
             <Dialog character="MOM">This is terrible! How did it happen?</Dialog>

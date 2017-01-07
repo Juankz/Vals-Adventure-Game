@@ -1,5 +1,6 @@
 <Script>
     <Conversations>
+        <!-- GOM -->
         <Conversation character="GOMH" ID="G1" keys="NONE" secondary="NONE">
             <Dialog character="VAL">Gom have you seen a brown bunny?</Dialog>
             <Dialog character="GOMH">Yes I saw one, he departed on a ship</Dialog>
@@ -7,6 +8,7 @@
             <Dialog character="GOMH">Didn't look suspicious. Oh dear, we are lost!</Dialog>
             <Dialog character="VAL">No we are not, I'll trace him</Dialog>
         </Conversation>
+        <!-- CAPITÁN -->
         <Conversation character="CAPTAIN" ID="C1" keys="NONE" secondary="NONE">
             <Dialog character="VAL">Captain I need to travel with you</Dialog>
             <Dialog character="CAPTAIN">Ha ha ha girls are not allowed in boats... bad omen</Dialog>
@@ -14,6 +16,13 @@
             <Dialog character="CAPTAIN">I will help you if you do something for me first</Dialog>
             <Dialog character="CAPTAIN">I lost my gold if you find it, I will let you get on board</Dialog>
             <Dialog character="VAL">Deal. I'll be back with your gold</Dialog>
+        </Conversation>
+        <!-- CAPTAIN EXIT CONVERSATION!-->
+        <Conversation character="CAPTAIN" ID="EXIT" keys="C1,GOAL" secondary="NONE">
+            <Dialog character="CAPTAIN">I'm surprised! I didn't expect you to be able to find my gold</Dialog>
+            <Dialog character="VAL">Gross! I can do much more than you are able to imagine</Dialog>
+            <Dialog character="VAL">Now can we depart?</Dialog>
+            <Dialog character="CAPTAIN">A deal is a deal. You are on board</Dialog>
         </Conversation>
     </Conversations>
 

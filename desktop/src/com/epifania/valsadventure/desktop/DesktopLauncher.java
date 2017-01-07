@@ -32,7 +32,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new main(), config);
 		config.title = "Vals Adventure";
-		config.width = 1000;
+		config.width = 800;
 //		config.height = config.width*3/4;
 		config.height = config.width*9/16;
 		config.resizable = true;
