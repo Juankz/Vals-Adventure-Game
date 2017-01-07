@@ -6,8 +6,6 @@
 
 Val es a little purple bunny with an adventurer spirit, at her village people prepares the Golden Carrot Festival, which is the most important event ever. But just before the festival started, the Golden Carrot was stolen. Val decides to catch the thief, chasing him through dangerous lands full of traps and even face an angry ghost on an abandoned castle.
 
-Vals Adventure is an adventure game that tells the story of a little bunny named Val and how she starts an adventure that will challegue her (and the player) with interesting puzzles.
-
 ### Screenshots
 
 ![Pretty_cool_gif](https://cloud.githubusercontent.com/assets/18577412/21743147/4b8ba722-d4ca-11e6-8f00-0764a48eba79.gif)
