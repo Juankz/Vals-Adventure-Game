@@ -2,30 +2,29 @@
     <Conversations>
         <!--MOM -->
         <Conversation character="MOM" ID="M1" keys = "NONE" secondary="NONE">
-            <Dialog character="MOM">Val, you know I don't like you being so far from home</Dialog>
-            <Dialog character="VAL">Yes mom, I was just having fun</Dialog>
-            <Dialog character="MOM">I care about you girl ¿Why cannot you be like other bunnies?</Dialog>
-            <Dialog character="VAL">Sorry</Dialog>
-            <Dialog character="MOM">Anyway. Go home and get ready to go to town</Dialog>
-            <Dialog character="VAL">Yes mom</Dialog>
+            <Dialog character="MOM">Val, sabes que no me gusta que te alejes de casa</Dialog>
+            <Dialog character="VAL">Si mamá, solo me estaba divirtiendo un poco</Dialog>
+            <Dialog character="MOM">Me preocupo por ti Val ¿Por qué no puedes ser como las otras conejas?</Dialog>
+            <Dialog character="VAL">Perd+on</Dialog>
+            <Dialog character="MOM">Como sea, ve a casa y alístate para el festival</Dialog>
+            <Dialog character="VAL">Sí mamá</Dialog>
         </Conversation>
         <!-- GOHM -->
         <Conversation character="GOMH" ID="G1"  keys = "NONE" secondary="NONE">
-            <Dialog character="VAL">Good morning Gomh</Dialog>
-            <Dialog character="GOMH">Hello Val. What are you doing here little bunny?</Dialog>
-            <Dialog character="VAL">I'm late for the festival, so going home</Dialog>
-            <Dialog character="GOMH">Oh you better hurry, I'm preparing the golden carrot for the festival</Dialog>
-            <Dialog character="VAL">Can't wait to see it, good bye Gomh</Dialog>
+            <Dialog character="VAL">Buenos días Gom</Dialog>
+            <Dialog character="GOMH">Hola Val ¿Que estás haciendo aquí pequeña coneja?</Dialog>
+            <Dialog character="VAL">Voy a casa y no soy tan pequeña Gom</Dialog>
+            <Dialog character="GOMH">Jajaja como digas. Mejor apresurate no querrás perderte el festival de la Zanahoria Dorada</Dialog>
+            <Dialog character="VAL">No me lo perdería por nada del mundo. Adios Gom</Dialog>
         </Conversation>
         <!-- PINKY -->
         <Conversation character="PINKY" ID="P1" keys="NONE" secondary="NONE">
-            <Dialog character="PINKY">Hi Val</Dialog>
-            <Dialog character="PINKY">What are you doing?</Dialog>
-            <Dialog character="VAL">Oh hey Pinky, I'm just heading home</Dialog>
-            <Dialog character="VAL">My mom will get angry if I'm not there before noon</Dialog>
-            <Dialog character="VAL">Where do you go?</Dialog>
-            <Dialog character="PINKY">Ehhh me? ... I'm doing some shores for my dad</Dialog>
-            <Dialog character="VAL">Ok, see you later</Dialog>
+            <Dialog character="PINKY">Hola Val ¿Que haces?</Dialog>
+            <Dialog character="VAL">Oh hey Pinky, Solo voy a casa</Dialog>
+            <Dialog character="VAL">Mi mamá se enojará si no llego pronto</Dialog>
+            <Dialog character="VAL">¿A donde vas?</Dialog>
+            <Dialog character="PINKY">Ehhh ¿Yo? ... Tengo algunos encargos por hacer</Dialog>
+            <Dialog character="VAL">Bien, no vemos luego</Dialog>
         </Conversation>
     </Conversations>
 

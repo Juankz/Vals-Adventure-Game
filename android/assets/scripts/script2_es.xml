@@ -4,7 +4,7 @@
         <Conversation character="BLUE" ID="B1" keys = "NONE" secondary="NONE">
             <Dialog character="BLUE">Hey Val, ¿Lista para el festival?</Dialog>
             <Dialog character="BLUE">Recuerda que este es el festival más importante del año</Dialog>
-            <Dialog character="BLUE">La zanahoria dorada representa abuncia y bienestar para la aldea</Dialog>
+            <Dialog character="BLUE">La Zanahoria Dorada representa abuncia y bienestar para la aldea</Dialog>
             <Dialog character="VAL">Desearía estar lista Marco, pero necestio recolectar zanahorias para la celebración</Dialog>
             <Dialog character="BLUE">Yo tengo algunas zanahorias en mi casa subiendo por este camino, puedes tomarlas</Dialog>
             <Dialog character="BLUE">Pero olvidé donde dejé la llave</Dialog>
@@ -28,6 +28,6 @@
     <SelfThoughts>
         <Dialog key = "YELLOW KEY">Necesito la llave</Dialog>
         <Dialog key = "GOAL">Antes necesito las zanahorias</Dialog>
-        <Dialog key = "KNIFE">I need to cut it</Dialog>
+        <Dialog key = "KNIFE">Necesito cortarlo</Dialog>
     </SelfThoughts>
 </Script>
