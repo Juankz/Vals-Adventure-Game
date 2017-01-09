@@ -30,6 +30,6 @@
         <Dialog key = "GREEN KEY">Necesito la llave</Dialog>
         <Dialog key = "TOOL">Esta dañado, quizá pueda repararlo</Dialog>
         <Dialog key = "GLANCE_GOAL">Allí arriba está el tesoro del capitán</Dialog>
-
+        <Dialog key = "GLANCE_TOOL">No puedo subir por aquí</Dialog>
     </SelfThoughts>
 </Script>

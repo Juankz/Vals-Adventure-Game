@@ -2,7 +2,6 @@
     <Conversations>
         <Conversation character="PINKY" ID="P1" keys = "NONE" secondary="NONE">
             <Dialog character="PINKY">!Val! ¿Que haces aquí?</Dialog>
-            <Dialog character="VAL">Someone stole the golden carrot and ran this way</Dialog>
             <Dialog character="VAL">Alguien robó la Zanahoria Dorada y huyó hacia este camino</Dialog>
             <Dialog character="PINKY">¡Oh no! Debió haber sido ese conejo marrón que me atacó</Dialog>
             <Dialog character="VAL">¿Un conejo marrón te atacó?</Dialog>

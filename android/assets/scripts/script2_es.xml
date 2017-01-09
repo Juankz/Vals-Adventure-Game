@@ -29,5 +29,6 @@
         <Dialog key = "YELLOW KEY">Necesito la llave</Dialog>
         <Dialog key = "GOAL">Antes necesito las zanahorias</Dialog>
         <Dialog key = "KNIFE">Necesito cortarlo</Dialog>
+        <Dialog key = "GLANCE_HOUSE">Esta es la casa de Marco</Dialog>
     </SelfThoughts>
 </Script>

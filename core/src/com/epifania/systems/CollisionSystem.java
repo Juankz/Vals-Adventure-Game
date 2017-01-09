@@ -153,6 +153,10 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 						//If key is required but has not been collected, set the values to display the locked button
 						isOnSwitchLocked=true;
 						setDialogPosition(boundsComponent.bounds);
+						if(action){
+							//Show val thoughts or dialogs on button press
+							engine.getSystem(Val_System.class).showThoughts(val, switchComponent.key);
+						}
 					}
 				}
 			}

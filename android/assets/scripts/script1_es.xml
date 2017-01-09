@@ -5,7 +5,7 @@
             <Dialog character="MOM">Val, sabes que no me gusta que te alejes de casa</Dialog>
             <Dialog character="VAL">Si mamá, solo me estaba divirtiendo un poco</Dialog>
             <Dialog character="MOM">Me preocupo por ti Val ¿Por qué no puedes ser como las otras conejas?</Dialog>
-            <Dialog character="VAL">Perd+on</Dialog>
+            <Dialog character="VAL">Perdón</Dialog>
             <Dialog character="MOM">Como sea, ve a casa y alístate para el festival</Dialog>
             <Dialog character="VAL">Sí mamá</Dialog>
         </Conversation>
