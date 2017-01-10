@@ -18,21 +18,18 @@ public class ConversationDialog extends Group {
     }
 
     private Label text;
-//    private Container<Label> container;
     private Table container;
     private Button next;
-    private Cell cell;
     public Listener listener;
 
     public ConversationDialog(Skin skin){
         text = new Label("",skin,"dialog");
         text.setWrap(true);
         text.setAlignment(Align.center);
-//        container = new Container<Label>(text);
         container = new Table();
         container.setBackground(skin.getDrawable("panel_brown"));
-        cell = container.add(text).prefWidth(300).top().padBottom(30).padTop(15).padLeft(15).padRight(15).center();
-//        container.top();
+        container.add(text).prefWidth(300).top().padBottom(30).padTop(15).padLeft(15).padRight(15).center();
+
         next = new Button(skin,"next");
         next.addListener(new ClickListener(){
             @Override
@@ -69,12 +66,7 @@ public class ConversationDialog extends Group {
     @Override
     public void setPosition (float x, float y) {
         super.setPosition(x,y);
-//        container.setPosition(x,y);
         setButtonPosition();
-//        Gdx.app.debug("Conversation Dialog","pos = ["+x+","+y+"]");
-//        Gdx.app.debug("Conversation Dialog","Button pos = ["+next.getX()+","+next.getY()+"]");
-//        Gdx.app.debug("Conversation Dialog","container size = ["+container.getWidth()+","+container.getHeight()+"]");
-//        Gdx.app.debug("Conversation Dialog","text = "+text.getText());
     }
 
     public void setVisible(boolean visible){

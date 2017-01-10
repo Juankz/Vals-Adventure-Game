@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.epifania.ui.LevelItem;
 import com.epifania.utils.*;
 
 /**
@@ -31,10 +32,8 @@ public class LevelSelectionScreen extends ScreenAdapter {
     private Viewport viewPort;
     private SpriteBatch batch;
 
-    private Image background;
-    private Image[] levelImages;
-    private Button leftArrow;
-    private Button rightArrow;
+    private Container<Button> leftArrow;
+    private Container<Button> rightArrow;
     private ScrollPane scrollPane;
     private Table levelsContainer;
     private Image loadingImage;
@@ -85,102 +84,78 @@ public class LevelSelectionScreen extends ScreenAdapter {
         stage= new Stage(viewPort,batch);
         skin = Assets.instance.get("user interface/uiskin.json");
 
-        background = new Image(
-                new TextureRegion(
-                        Assets.instance.get("user interface/level selection/background.png",Texture.class),0,0,(int)stage.getWidth(),(int)stage.getHeight()));
-        background.setPosition(0,0);
-        background.setFillParent(true);
-
-        levelImages = new Image[Constants.mapsNames.length];
-        for(int i = 0;i<levelImages.length;i++){
-            levelImages[i] = new Image(Assets.instance.get("user interface/level selection/level"+(i+1)+".png",Texture.class));
-        }
-
-        float buttonsPad = 75;
-
-        leftArrow = new Button(skin,"leftArrow");
-        leftArrow.addListener(UI_Utils.clickSound());
-        leftArrow.setPosition(buttonsPad,stage.getHeight()*0.5f - leftArrow.getHeight()*0.5f);
-
-        rightArrow = new Button(skin,"rightArrow");
-        rightArrow.addListener(UI_Utils.clickSound());
-        rightArrow.setPosition(stage.getWidth()-rightArrow.getWidth()-buttonsPad,stage.getHeight()*0.5f - rightArrow.getHeight()*0.5f);
-
         levelsContainer = new Table();
 
-        float pad = 50;
-        float pageWidth = 750;
-        float pageHeight = 600;
+        float pageWidth = stage.getWidth();
+        float pageHeight = stage.getHeight();
 
-        for(int i = 0;i<levelImages.length;i++){
-            Stack stack = new Stack();
-            stack.add(levelImages[i]);
-            if(LevelsData.getInstance().getLevelDataOf(i).locked) {
-                stack.add(new Image(Assets.instance.get("user interface/level selection/lock_chain.png", Texture.class)));
-            }else{
-                Image play = new Image(Assets.instance.get("user interface/level selection/play.png", Texture.class));
-                play.setTouchable(Touchable.disabled);
-                stack.add(play);
-            }
-            Container<Stack> container = new Container<Stack>(stack);
-            container.background(skin.getDrawable("panel_brown"));
-            container.align(Align.center);
-            levelsContainer.add(container).width(pageWidth).height(pageHeight).padRight(pad).padLeft(pad);
-        }
-        levelsContainer.row();
-
-        for(int i = 0;i<levelImages.length;i++){
-            Table smallTable = new Table();
-            smallTable.background(skin.getDrawable("panel_brown"));
-            String levelName = bundle.get("chapter").toUpperCase()+" "+new RomanNumeral(i+1).toString();
-            Label label = new Label(levelName,skin,"header");
-            Container<Label> container = new Container<Label>(label);
-            container.pad(20).padLeft(pad).padRight(pad);
-
-            if(LevelsData.getInstance().getLevelDataOf(i).medal){
-                Image medal = new Image(skin.getDrawable("medal"));
-                float h = 75;
-                float w = medal.getWidth()*h/medal.getHeight();
-                smallTable.add(medal).size(w,h).padRight(20);
-            }
-
-            smallTable.add(label).padLeft(pad).padRight(pad).expandX();
-            smallTable.pack();
-            levelsContainer.add(smallTable).fill(true,false).padRight(pad).padLeft(pad);
+        for(int i = 0;i<Constants.mapsNames.length;i++){
+            final int finalI = i;
+            boolean locked = LevelsData.getInstance().getLevelDataOf(i).locked;
+            boolean medal = LevelsData.getInstance().getLevelDataOf(i).medal;
+            LevelItem levelItem = new LevelItem(skin,bundle,i+1,locked,medal,pageWidth,pageHeight);
+            levelItem.setListener(new ClickListener(){
+                public void clicked (InputEvent event, float x, float y) {
+                    if(!LevelsData.getInstance().getLevelDataOf(finalI).locked) {
+                        loadingImage.setVisible(true);
+                        goToGameScreen=true;
+                        level = finalI;
+                    }
+                }
+            });
+            levelsContainer.add(levelItem).size(pageWidth,pageHeight);
         }
 
         levelsContainer.pack();
 
         scrollPane = new ScrollPane(levelsContainer);
-        scrollPane.setSize(pageWidth+2*pad,levelsContainer.getHeight());
-        scrollPane.setPosition(stage.getWidth()*0.5f - scrollPane.getWidth()*0.5f,
-                stage.getHeight()*.5f  - scrollPane.getHeight()*0.5f);
+        scrollPane.setSize(stage.getWidth(),stage.getHeight());
+        scrollPane.setPosition(0,0);
         scrollPane.setFlickScroll(false);
 
-        for(int i = 0;i<levelImages.length;i++){
-            final int finalI = i;
-            levelImages[i].addListener(new ClickListener(){
-               public void clicked (InputEvent event, float x, float y) {
-                   if(!LevelsData.getInstance().getLevelDataOf(finalI).locked) {
-                       loadingImage.setVisible(true);
-                       goToGameScreen=true;
-                       level = finalI;
-                   }
-               }
-            });
-        }
+        final int scrollX = (int)(pageWidth);
 
-        final int scrollX = (int)(pageWidth+2*pad);
+        //Add buttons to scroll through the panel
 
-        rightArrow.addListener(new ClickListener(){
+        float buttonsPad = 175;
+        float buttonsWidth = 200;
+
+        leftArrow = new Container<Button>(new Button(skin,"left_arrow_menu"));
+        leftArrow.addListener(UI_Utils.clickSound());
+        leftArrow.setSize(buttonsWidth,pageHeight);
+        leftArrow.setPosition(buttonsPad,stage.getHeight()*0.5f - leftArrow.getHeight()*0.5f);
+        leftArrow.setTouchable(Touchable.enabled);
+        leftArrow.addListener(new ClickListener(){
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                leftArrow.getActor().setColor(0.75f,0.75f,0.75f,1);
+                return super.touchDown(event,x,y,pointer,button);
+            }
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                leftArrow.getActor().setColor(1,1,1,1);
+                super.touchUp(event,x,y,pointer,button);
+            }
             public void clicked (InputEvent event, float x, float y) {
-                scrollPane.scrollTo(scrollPane.getScrollX()+scrollX,0,scrollX,0);
+                scrollPane.scrollTo(scrollPane.getScrollX()-scrollX,0,scrollX,0);
             }
         });
 
-        leftArrow.addListener(new ClickListener(){
+        rightArrow = new Container<Button>(new Button(skin,"right_arrow_menu"));
+        rightArrow.getActor().setTransform(true);
+        rightArrow.addListener(UI_Utils.clickSound());
+        rightArrow.setSize(buttonsWidth,pageHeight);
+        rightArrow.setPosition(stage.getWidth()-rightArrow.getWidth()-buttonsPad,0);
+        rightArrow.setTouchable(Touchable.enabled);
+        rightArrow.addListener(new ClickListener(){
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                rightArrow.getActor().setColor(0.75f,0.75f,0.75f,1);
+                return super.touchDown(event,x,y,pointer,button);
+            }
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                rightArrow.getActor().setColor(1,1,1,1);
+                super.touchUp(event,x,y,pointer,button);
+            }
             public void clicked (InputEvent event, float x, float y) {
-                scrollPane.scrollTo(scrollPane.getScrollX()-scrollX,0,scrollX,0);
+                scrollPane.scrollTo(scrollPane.getScrollX()+scrollX,0,scrollX,0);
             }
         });
 
@@ -192,7 +167,6 @@ public class LevelSelectionScreen extends ScreenAdapter {
         loadingImage.addAction(Actions.forever(Actions.rotateBy(-7)));
         loadingImage.setVisible(false);
 
-        stage.addActor(background);
         stage.addActor(scrollPane);
         stage.addActor(leftArrow);
         stage.addActor(rightArrow);
@@ -200,11 +174,11 @@ public class LevelSelectionScreen extends ScreenAdapter {
         stage.setDebugAll(debug);
         Gdx.input.setInputProcessor(stage);
 
-        if(Gdx.app.getType()== Application.ApplicationType.Desktop) {
-            for (Actor actor : stage.getActors()) {
-                UI_Utils.moveWithMouse(actor);
-            }
-        }
+//        if(Gdx.app.getType()== Application.ApplicationType.Desktop) {
+//            for (Actor actor : stage.getActors()) {
+//                UI_Utils.moveWithMouse(actor);
+//            }
+//        }
 
     }
 
