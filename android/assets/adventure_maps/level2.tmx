@@ -658,7 +658,7 @@
     <property name="object" value="bridge"/>
    </properties>
   </object>
-  <object type="ground" x="4888" y="1050" width="920" height="22">
+  <object type="ground" x="4888" y="1050" width="918" height="70">
    <properties>
     <property name="shape" value="0"/>
    </properties>
