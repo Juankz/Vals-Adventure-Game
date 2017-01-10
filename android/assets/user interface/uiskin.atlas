@@ -1,264 +1,285 @@
 
 uiskin.png
-size: 1024,1024
+size: 2048,512
 format: RGBA8888
 filter: MipMapLinearNearest,Linear
 repeat: none
 action
   rotate: false
-  xy: 1, 1
+  xy: 1704, 191
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 action2
   rotate: false
-  xy: 722, 653
+  xy: 922, 188
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 action2_p
   rotate: false
-  xy: 853, 653
+  xy: 1053, 188
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 action3
   rotate: false
-  xy: 790, 524
+  xy: 1446, 213
   size: 126, 126
   orig: 126, 126
   offset: 0, 0
   index: -1
 action3_p
   rotate: false
-  xy: 271, 249
+  xy: 1575, 213
   size: 126, 126
   orig: 126, 126
   offset: 0, 0
   index: -1
 action_p
   rotate: false
-  xy: 258, 464
+  xy: 1771, 191
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 arrowDown
   rotate: false
-  xy: 349, 678
+  xy: 1166, 342
   size: 132, 132
   orig: 132, 132
   offset: 0, 0
   index: -1
 arrowDown_p
   rotate: false
-  xy: 1, 243
+  xy: 1301, 342
   size: 132, 132
   orig: 132, 132
   offset: 0, 0
   index: -1
 arrowLeft
   rotate: false
-  xy: 1, 108
+  xy: 1436, 342
   size: 132, 132
   orig: 132, 132
   offset: 0, 0
   index: -1
 arrowLeft_p
   rotate: false
-  xy: 136, 243
+  xy: 1571, 342
   size: 132, 132
   orig: 132, 132
   offset: 0, 0
   index: -1
 arrowRight
   rotate: false
-  xy: 136, 108
+  xy: 1706, 342
   size: 132, 132
   orig: 132, 132
   offset: 0, 0
   index: -1
 arrowRight_p
   rotate: false
-  xy: 258, 531
+  xy: 1841, 342
   size: 132, 132
   orig: 132, 132
   offset: 0, 0
   index: -1
 arrowUp
   rotate: false
-  xy: 393, 543
+  xy: 652, 133
   size: 132, 132
   orig: 132, 132
   offset: 0, 0
   index: -1
 arrowUp_p
   rotate: false
-  xy: 587, 649
+  xy: 787, 133
   size: 132, 132
   orig: 132, 132
   offset: 0, 0
   index: -1
+arrow_left
+  rotate: false
+  xy: 1976, 356
+  size: 33, 118
+  orig: 33, 118
+  offset: 0, 0
+  index: -1
+arrow_right
+  rotate: false
+  xy: 2012, 356
+  size: 33, 118
+  orig: 33, 118
+  offset: 0, 0
+  index: -1
 buttonLongBrown
   rotate: false
-  xy: 606, 942
+  xy: 1, 41
   size: 300, 77
   orig: 300, 77
   offset: 0, 0
   index: -1
 buttonLongBrown_p
   rotate: false
-  xy: 606, 863
+  xy: 349, 189
   size: 300, 76
   orig: 300, 76
   offset: 0, 0
   index: -1
 buttons
   rotate: false
-  xy: 1, 457
+  xy: 349, 268
   size: 254, 206
   orig: 254, 206
   offset: 0, 0
   index: -1
 close
   rotate: false
-  xy: 736, 435
+  xy: 1350, 128
   size: 74, 80
   orig: 74, 80
   offset: 0, 0
   index: -1
 close_p
   rotate: false
-  xy: 813, 441
+  xy: 1103, 18
   size: 74, 80
   orig: 74, 80
   offset: 0, 0
   index: -1
 gold
   rotate: false
-  xy: 909, 795
+  xy: 1103, 101
   size: 84, 84
   orig: 84, 84
   offset: 0, 0
   index: -1
 info2
   rotate: false
-  xy: 271, 82
+  xy: 1832, 259
   size: 125, 80
   orig: 125, 80
   offset: 0, 0
   index: -1
 info2_p
   rotate: false
-  xy: 271, 165
+  xy: 1704, 258
   size: 125, 81
   orig: 125, 81
   offset: 0, 0
   index: -1
 labelBgndBrown
   rotate: false
-  xy: 1, 68
+  xy: 1, 1
   size: 182, 37
   orig: 182, 37
   offset: 0, 0
   index: -1
 loading
   rotate: false
-  xy: 484, 710
+  xy: 922, 85
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 locked
   rotate: false
-  xy: 68, 1
+  xy: 1838, 192
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 locked2
   rotate: false
-  xy: 528, 518
+  xy: 1184, 211
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 locked2_p
   rotate: false
-  xy: 659, 518
+  xy: 1315, 211
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 locked_p
   rotate: false
-  xy: 325, 464
+  xy: 1905, 192
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 longNegative
   rotate: false
-  xy: 606, 784
+  xy: 863, 398
   size: 300, 76
   orig: 300, 76
   offset: 0, 0
   index: -1
 longNegative_p
   rotate: false
-  xy: 1, 378
+  xy: 863, 319
   size: 300, 76
   orig: 300, 76
   offset: 0, 0
   index: -1
 medal
   rotate: false
-  xy: 909, 882
+  xy: 1025, 48
   size: 75, 137
   orig: 75, 137
   offset: 0, 0
   index: -1
 pause
   rotate: false
-  xy: 656, 432
+  xy: 1270, 125
   size: 77, 83
   orig: 77, 83
   offset: 0, 0
   index: -1
 pause_p
   rotate: false
-  xy: 919, 566
+  xy: 1190, 124
   size: 77, 84
   orig: 77, 84
   offset: 0, 0
   index: -1
 pause_panel
   rotate: false
-  xy: 1, 666
+  xy: 1, 121
   size: 345, 353
   orig: 345, 353
   offset: 0, 0
   index: -1
+play
+  rotate: false
+  xy: 863, 271
+  size: 45, 45
+  orig: 45, 45
+  offset: 0, 0
+  index: -1
 share2
   rotate: false
-  xy: 400, 460
+  xy: 349, 106
   size: 125, 80
   orig: 125, 80
   offset: 0, 0
   index: -1
 share2_p
   rotate: false
-  xy: 528, 435
+  xy: 477, 106
   size: 125, 80
   orig: 125, 80
   offset: 0, 0
   index: -1
 touch
   rotate: false
-  xy: 349, 813
+  xy: 606, 268
   size: 254, 206
   orig: 254, 206
   offset: 0, 0

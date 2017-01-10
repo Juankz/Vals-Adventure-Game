@@ -26,7 +26,7 @@
     "h1title":{"font": "h1title", "fontColor": "white"},
     "h3title":{"font": "h3title", "fontColor": "white"},
     "header":{"font": "header", "fontColor": "white"},
-    "body":{"font": "middle", "fontColor": "white"}
+    "body":{"font": "middle", "fontColor": "white"},
     "numeric":{"font": "numeric", "fontColor": "white"}
 },
 
@@ -41,7 +41,9 @@
     "close":{"up":"close","down":"close_p"},
     "pause":{"up":"pause","down":"pause_p"},
     "upArrow":{"up":"arrowUp","down":"arrowUp_p"},
-    "downArrow":{"up":"arrowDown","down":"arrowDown_p"}
+    "downArrow":{"up":"arrowDown","down":"arrowDown_p"},
+    "left_arrow_menu":{"up":"arrow_left","down":"arrow_left"},
+    "right_arrow_menu":{"up":"arrow_right","down":"arrow_right"}
 },
 
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle":{

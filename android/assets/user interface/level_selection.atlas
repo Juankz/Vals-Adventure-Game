@@ -1,0 +1,81 @@
+
+level_selection.png
+size: 2048,1024
+format: RGBA8888
+filter: MipMapLinearNearest,Linear
+repeat: none
+background
+  rotate: false
+  xy: 1, 1
+  size: 1280, 720
+  orig: 1280, 720
+  offset: 0, 0
+  index: -1
+frame
+  rotate: false
+  xy: 1284, 171
+  size: 453, 550
+  orig: 453, 550
+  offset: 0, 0
+  index: -1
+
+level_selection2.png
+size: 2048,1024
+format: RGBA8888
+filter: MipMapLinearNearest,Linear
+repeat: none
+level1
+  rotate: false
+  xy: 913, 3
+  size: 421, 517
+  orig: 421, 517
+  offset: 0, 0
+  index: -1
+level2
+  rotate: false
+  xy: 1337, 3
+  size: 421, 517
+  orig: 421, 517
+  offset: 0, 0
+  index: -1
+level4
+  rotate: false
+  xy: 1, 1
+  size: 453, 519
+  orig: 453, 519
+  offset: 0, 0
+  index: -1
+level4_locked
+  rotate: false
+  xy: 457, 1
+  size: 453, 519
+  orig: 453, 519
+  offset: 0, 0
+  index: -1
+
+level_selection3.png
+size: 2048,1024
+format: RGBA8888
+filter: MipMapLinearNearest,Linear
+repeat: none
+level2_locked
+  rotate: false
+  xy: 425, 1
+  size: 421, 517
+  orig: 421, 517
+  offset: 0, 0
+  index: -1
+level3
+  rotate: false
+  xy: 1, 1
+  size: 421, 517
+  orig: 421, 517
+  offset: 0, 0
+  index: -1
+level3_locked
+  rotate: false
+  xy: 849, 1
+  size: 421, 517
+  orig: 421, 517
+  offset: 0, 0
+  index: -1

@@ -13,6 +13,7 @@ public class DesktopLauncher {
 		if(false){
 			TexturePacker.Settings settings = new TexturePacker.Settings();
 			settings.filterMin = Texture.TextureFilter.MipMapLinearNearest;
+			settings.maxWidth=2048;
 			settings.duplicatePadding=true;
 			settings.combineSubdirectories=true;
 			settings.paddingY = 3;
@@ -21,6 +22,7 @@ public class DesktopLauncher {
 			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/items","../assets/game_objects","items");
 			settings.filterMag = Texture.TextureFilter.Linear;
 			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/user interface/buttons","../assets/user interface","uiskin");
+			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/user interface/level_selection","../assets/user interface","level_selection");
 			settings.filterMag = Texture.TextureFilter.Nearest;
 			settings.filterMin = Texture.TextureFilter.Nearest;
 			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/user interface/nine patches","../assets/user interface","ninePatches");
@@ -33,7 +35,7 @@ public class DesktopLauncher {
 		new LwjglApplication(new main(), config);
 		config.title = "Vals Adventure";
 		config.width = 800;
-//		config.height = config.width*3/4;
+		config.height = config.width*3/4;
 		config.height = config.width*9/16;
 		config.resizable = true;
 	}

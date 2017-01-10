@@ -128,6 +128,7 @@ public class Assets implements Disposable, AssetErrorListener{
 		//Load resources
 		Assets.instance.load("characters/characters.atlas",TextureAtlas.class);
 		Assets.instance.load("game_objects/items.atlas",TextureAtlas.class);
+		Assets.instance.load("user interface/level_selection.atlas",TextureAtlas.class);
 		assetManager.load("sounds/click1.ogg",Sound.class);
 
 		//Load skin
