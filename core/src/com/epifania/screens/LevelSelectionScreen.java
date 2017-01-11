@@ -88,6 +88,7 @@ public class LevelSelectionScreen extends ScreenAdapter {
 
         float pageWidth = stage.getWidth();
         float pageHeight = stage.getHeight();
+        int lastLevel = 0;
 
         for(int i = 0;i<Constants.mapsNames.length;i++){
             final int finalI = i;
@@ -104,6 +105,9 @@ public class LevelSelectionScreen extends ScreenAdapter {
                 }
             });
             levelsContainer.add(levelItem).size(pageWidth,pageHeight);
+
+            if(!locked)
+                lastLevel=i;
         }
 
         levelsContainer.pack();
@@ -114,6 +118,11 @@ public class LevelSelectionScreen extends ScreenAdapter {
         scrollPane.setFlickScroll(false);
 
         final int scrollX = (int)(pageWidth);
+
+        //Scroll automatically to the last level available
+        scrollPane.layout();
+        scrollPane.scrollTo(scrollX*lastLevel,0,scrollX,0);
+        scrollPane.updateVisualScroll(); //Make it instantaneously
 
         //Add buttons to scroll through the panel
 
