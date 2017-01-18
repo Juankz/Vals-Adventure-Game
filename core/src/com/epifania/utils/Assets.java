@@ -112,8 +112,8 @@ public class Assets implements Disposable, AssetErrorListener{
 		FreetypeFontLoader.FreeTypeFontLoaderParameter parameter6= new FreetypeFontLoader.FreeTypeFontLoaderParameter();
 		parameter6.fontFileName = "user interface/fonts/Cinzel_Regular.ttf";
 		parameter6.fontParameters.size = 60;
-		parameter6.fontParameters.borderColor = new Color(0.54f,0.27f,0.07f,1);
-		parameter6.fontParameters.borderWidth = 1.5f;
+		parameter6.fontParameters.borderColor = Color.WHITE;
+		parameter6.fontParameters.borderWidth = 1f;
 		parameter6.fontParameters.magFilter = Texture.TextureFilter.Linear;
 		parameter6.fontParameters.minFilter = Texture.TextureFilter.MipMapLinearNearest;
 		parameter6.fontParameters.genMipMaps = true;

@@ -36,14 +36,13 @@ public class LevelSelectionScreen extends ScreenAdapter {
     private Container<Button> rightArrow;
     private ScrollPane scrollPane;
     private Table levelsContainer;
-    private Image loadingImage;
 
     private I18NBundle bundle;
 
     private boolean goToScreen=false;
     private boolean goToGameScreen=false;
     private Screen nextScreen=null;
-    private int level;
+    private int level = 0;
 
     private float d = 1/60f;
     private boolean debug = false;
@@ -56,6 +55,17 @@ public class LevelSelectionScreen extends ScreenAdapter {
 
     @Override
     public void render(float deltaTime) {
+        //Disable one arrow when reach the limit
+        if(level==0){
+            leftArrow.setVisible(false);
+        }else if(level==Constants.scriptsNames.length-1){
+            rightArrow.setVisible(false);
+        }else{
+            //Reactivate arrows
+            leftArrow.setVisible(true);
+            rightArrow.setVisible(true);
+        }
+        
         stage.act(Math.min(d,deltaTime));
         stage.draw();
         if(Gdx.input.isKeyJustPressed(Input.Keys.P)){
@@ -98,7 +108,6 @@ public class LevelSelectionScreen extends ScreenAdapter {
             levelItem.setListener(new ClickListener(){
                 public void clicked (InputEvent event, float x, float y) {
                     if(!LevelsData.getInstance().getLevelDataOf(finalI).locked) {
-                        loadingImage.setVisible(true);
                         goToGameScreen=true;
                         level = finalI;
                     }
@@ -110,6 +119,7 @@ public class LevelSelectionScreen extends ScreenAdapter {
                 lastLevel=i;
         }
 
+        level=lastLevel;
         levelsContainer.pack();
 
         scrollPane = new ScrollPane(levelsContainer);
@@ -144,6 +154,7 @@ public class LevelSelectionScreen extends ScreenAdapter {
                 super.touchUp(event,x,y,pointer,button);
             }
             public void clicked (InputEvent event, float x, float y) {
+                level--;
                 scrollPane.scrollTo(scrollPane.getScrollX()-scrollX,0,scrollX,0);
             }
         });
@@ -164,17 +175,10 @@ public class LevelSelectionScreen extends ScreenAdapter {
                 super.touchUp(event,x,y,pointer,button);
             }
             public void clicked (InputEvent event, float x, float y) {
+                level++;
                 scrollPane.scrollTo(scrollPane.getScrollX()+scrollX,0,scrollX,0);
             }
         });
-
-        loadingImage = new Image(skin.getDrawable("loading"));
-        loadingImage.setOrigin(Align.center);
-        loadingImage.setColor(Color.BLACK);
-        loadingImage.setPosition(stage.getWidth()*0.5f - loadingImage.getWidth()*0.5f,
-                stage.getHeight()*0.5f - loadingImage.getHeight()*0.5f);
-        loadingImage.addAction(Actions.forever(Actions.rotateBy(-7)));
-        loadingImage.setVisible(false);
 
         stage.addActor(scrollPane);
         stage.addActor(leftArrow);
