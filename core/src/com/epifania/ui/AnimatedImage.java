@@ -10,13 +10,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 /**
  * Created by juan on 6/1/16.
  */
-public class ImageAnimation extends Image{
+public class AnimatedImage extends Image{
 
     private Animation animation;
     private TextureRegionDrawable drawable;
     private float stateTime = 0;
 
-    public ImageAnimation(Animation animation){
+    public AnimatedImage(Animation animation){
         this.animation = animation;
         this.drawable = new TextureRegionDrawable(animation.getKeyFrame(0));
     }

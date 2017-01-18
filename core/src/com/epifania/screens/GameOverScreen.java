@@ -21,7 +21,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.epifania.ui.ImageAnimation;
+import com.epifania.ui.AnimatedImage;
 import com.epifania.utils.Assets;
 import com.epifania.utils.Constants;
 import com.epifania.utils.LevelsData;
@@ -40,7 +40,7 @@ public class GameOverScreen extends ScreenAdapter {
 
     //UI Vars
     private Image background;
-    private ImageAnimation victoryAnim;
+    private AnimatedImage victoryAnim;
     private Button nextButton;
     private Label epilogueLabel;
     private Label coinsLabel;
@@ -99,7 +99,7 @@ public class GameOverScreen extends ScreenAdapter {
 //        background.setPosition(stage.getWidth()*0.5f - background.getWidth()*0.5f,-background.getHeight() - 20);
 
         float offset = -158;
-        victoryAnim = new ImageAnimation(Assets.instance.valAssets.walkRight);
+        victoryAnim = new AnimatedImage(Assets.instance.valAssets.walkRight);
         victoryAnim.setWidth(120);
         victoryAnim.setPosition(background.getX()+background.getWidth()*0.5f-victoryAnim.getWidth()*0.5f,
                 background.getY()+background.getHeight()*0.5f-victoryAnim.getHeight()*0.5f + offset);

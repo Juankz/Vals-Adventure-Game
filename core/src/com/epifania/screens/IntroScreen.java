@@ -1,7 +1,6 @@
 package com.epifania.screens;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.assets.loaders.MusicLoader;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -19,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.epifania.ui.ImageAnimation;
 import com.epifania.utils.Assets;
 import com.epifania.utils.Constants;
 import com.epifania.utils.RomanNumeral;
