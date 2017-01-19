@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) throws IOException{
-		if(false){
+		if(true){
 			TexturePacker.Settings settings = new TexturePacker.Settings();
 			settings.filterMin = Texture.TextureFilter.MipMapLinearNearest;
 			settings.maxWidth=2048;

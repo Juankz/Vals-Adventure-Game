@@ -22,6 +22,13 @@ buttonSquareBrown_p
   orig: 45, 45
   offset: 0, 0
   index: -1
+opaque_pixel
+  rotate: false
+  xy: 264, 144
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
 panel_beige
   rotate: false
   xy: 1, 52
@@ -54,5 +61,12 @@ panel_brown2
   size: 64, 64
   split: 12, 12, 13, 12
   orig: 64, 64
+  offset: 0, 0
+  index: -1
+slider_background
+  rotate: false
+  xy: 198, 75
+  size: 4, 4
+  orig: 4, 4
   offset: 0, 0
   index: -1

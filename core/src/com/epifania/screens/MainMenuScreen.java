@@ -7,12 +7,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.epifania.ui.AnimatedImage;
+import com.epifania.ui.SettingsPanel;
 import com.epifania.utils.Assets;
 import com.epifania.utils.Constants;
 import com.epifania.utils.UI_Utils;
@@ -31,6 +34,8 @@ public class MainMenuScreen extends ScreenAdapter {
 	private Table table2;
 	private Button infoButton;
 	private Button shareButton;
+	private SettingsPanel settingsPanel;
+	private boolean debug = false;
 
 	private I18NBundle bundle;
 
@@ -58,6 +63,10 @@ public class MainMenuScreen extends ScreenAdapter {
 						+"size = ("+actor.getWidth()+","+actor.getHeight()+")");
 			}
 		}
+		if(Gdx.input.isKeyJustPressed(Input.Keys.D)){
+			debug = !debug;
+			stage.setDebugAll(debug);
+		}
 	}
 	@Override
 	public void resize(int width, int height) {
@@ -79,6 +88,12 @@ public class MainMenuScreen extends ScreenAdapter {
 	}
 
 	public void buildUI(){
+
+		//Settings Panel
+		settingsPanel = new SettingsPanel(skin,bundle);
+		settingsPanel.setPosition(0,0);
+		settingsPanel.setFillParent(true);
+
 		bgnd1 = new Image(new TextureRegion(Assets.instance.get("user interface/bgnd1.png",Texture.class)));
 		bgnd1.setName("bgnd1");
 		bgnd1.setPosition(0,0);
@@ -111,6 +126,11 @@ public class MainMenuScreen extends ScreenAdapter {
 //		TextButton playTB = UI_Utils.genericTextButton("PLAY",skin,"longBrown",getGameScreen(0));
 		TextButton playTB = UI_Utils.genericTextButton(bundle.get("play").toUpperCase(),skin,"longBrown",new LevelSelectionScreen(batch,viewPort));
 		TextButton settingsTB = UI_Utils.genericTextButton(bundle.get("settings").toUpperCase(),skin,"longBrown");
+		settingsTB.addListener(new ClickListener(){
+			public void clicked (InputEvent event, float x, float y) {
+				settingsPanel.show();
+			}
+		});
 		TextButton creditsButton = UI_Utils.genericTextButton(bundle.get("credits").toUpperCase(),skin,"longBrown");
 
 		table2 = new Table();
@@ -131,12 +151,14 @@ public class MainMenuScreen extends ScreenAdapter {
 		stage.addActor(val);
 		stage.addActor(title);
 		stage.addActor(table2);
+		stage.addActor(settingsPanel);
+		stage.setDebugAll(debug);
 		//Arrange buttons
-		if(Gdx.app.getType()== Application.ApplicationType.Desktop) {
-			for (Actor actor : stage.getActors()) {
-				UI_Utils.moveWithMouse(actor);
-			}
-		}
+//		if(Gdx.app.getType()== Application.ApplicationType.Desktop) {
+//			for (Actor actor : stage.getActors()) {
+//				UI_Utils.moveWithMouse(actor);
+//			}
+//		}
 	}
 
 	@Override

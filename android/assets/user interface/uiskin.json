@@ -43,12 +43,18 @@
     "upArrow":{"up":"arrowUp","down":"arrowUp_p"},
     "downArrow":{"up":"arrowDown","down":"arrowDown_p"},
     "left_arrow_menu":{"up":"arrow_left","down":"arrow_left"},
-    "right_arrow_menu":{"up":"arrow_right","down":"arrow_right"}
+    "right_arrow_menu":{"up":"arrow_right","down":"arrow_right"},
+    "next_white_button":{"up":"next_white_button","down":"next_white_button"},
+    "previous_white_button":{"up":"previous_white_button","down":"previous_white_button"}
 },
 
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle":{
   "longBrown":{"font": "middle_outline" , "up": "buttonLongBrown" , "down":"buttonLongBrown_p"},
   "longNegative":{"font": "middle_outline", "up": "longNegative" , "down":"longNegative_p"}
+},
+
+  "com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle": {
+  "default-horizontal": { "background": "slider_background", "knob": "slider_knob" }
 },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle":{

@@ -11,7 +11,7 @@ public class Settings {
 
     public static final Settings instance = new Settings();
 
-    private ObjectMap<String,String> languajes;
+    private ObjectMap<String,String> languages;
     private Preferences preferences;
     public boolean setted = false;
     public boolean controls = false; //False = Buttons ; true = touch
@@ -20,9 +20,9 @@ public class Settings {
     public float musicVolume = 0.8f;
 
     private Settings(){
-        languajes = new ObjectMap<String, String>();
-        languajes.put("en","ENGLISH");
-        languajes.put("es","ESPAÑOL");
+        languages = new ObjectMap<String, String>();
+        languages.put("en","ENGLISH");
+        languages.put("es","ESPAÑOL");
         Gdx.app.debug("Settings","Locale languaje = "+Locale.getDefault().getLanguage());
     }
     public void loadSettings(){
