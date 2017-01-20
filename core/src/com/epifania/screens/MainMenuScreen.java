@@ -2,6 +2,7 @@ package com.epifania.screens;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,6 +19,7 @@ import com.epifania.ui.AnimatedImage;
 import com.epifania.ui.SettingsPanel;
 import com.epifania.utils.Assets;
 import com.epifania.utils.Constants;
+import com.epifania.utils.SoundManager;
 import com.epifania.utils.UI_Utils;
 
 public class MainMenuScreen extends ScreenAdapter {
@@ -50,6 +52,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		parameter.minFilter = Texture.TextureFilter.MipMapLinearNearest;
 		Assets.instance.load("user interface/bgnd1.png",Texture.class,parameter);
 		Assets.instance.load("user interface/main menu.png",Texture.class,parameter);
+		Assets.instance.load("sounds/Farm Frolics.ogg",Music.class);
 		Assets.instance.finishLoading();
 	}
 
@@ -84,6 +87,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		skin = Assets.instance.get("user interface/uiskin.json");
 		bundle = Assets.instance.get("i18n/strings_ui");
 		buildUI();
+		SoundManager.playMusic("sounds/Farm Frolics.ogg",false);
 		Gdx.input.setInputProcessor(stage);
 	}
 

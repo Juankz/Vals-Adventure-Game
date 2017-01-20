@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -22,10 +23,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.epifania.ui.AnimatedImage;
-import com.epifania.utils.Assets;
-import com.epifania.utils.Constants;
-import com.epifania.utils.LevelsData;
-import com.epifania.utils.UI_Utils;
+import com.epifania.utils.*;
 
 /**
  * Created by juan on 6/15/16.
@@ -260,6 +258,7 @@ public class GameOverScreen extends ScreenAdapter {
         Assets.instance.load("user interface/game over/background2.png",Texture.class,parameter);
         Assets.instance.load("user interface/game over/mask.png",Texture.class,parameter);
         Assets.instance.load("i18n/strings_outro", I18NBundle.class);
+        Assets.instance.load("sounds/Beat ident.ogg",Music.class);
 //        Assets.instance.finishLoading();
 
         modifyLevelsData();
@@ -281,6 +280,7 @@ public class GameOverScreen extends ScreenAdapter {
                 if(Assets.instance.update()&&stateTime>time1){
                     state = States.TRANSITION1;
                     stateTime = 0;
+                    SoundManager.playMusic("sounds/Beat ident.ogg",false);
                     buildUI();
                 }else {
                     stateTime+=delta;

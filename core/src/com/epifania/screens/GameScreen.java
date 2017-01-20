@@ -225,11 +225,6 @@ public class GameScreen extends ScreenAdapter{
 		//Add viewport to camera
 		OrthographicCamera cam = engine.getSystem(RenderingSystem.class).getCamera();
 		viewport = new FillViewport(Constants.ViewportWidth,Constants.ViewportHeight,cam);
-
-		//Music
-		music = Assets.instance.get("sounds/"+levelMap.getProperties().get("music","default_music.ogg",String.class));
-		music.setLooping(true);
-		SoundManager.playMusic(music);
 	}
 
 	private LevelBuilder.Listener levelListener(){

@@ -18,10 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.epifania.utils.Assets;
-import com.epifania.utils.Constants;
-import com.epifania.utils.RomanNumeral;
-import com.epifania.utils.UI_Utils;
+import com.epifania.utils.*;
 
 /**
  * Created by juan on 6/20/16.
@@ -183,9 +180,19 @@ public class IntroScreen extends ScreenAdapter {
 
     private void loadGameScreenAssets(int level){
         //Load resources
+
+        //
         TmxMapLoader.Parameters parameters = new TmxMapLoader.Parameters();
         Assets.instance.load(Constants.mapsNames[level], TiledMap.class, parameters);
         Assets.instance.finishLoading();
+
+        map = Assets.instance.get(Constants.mapsNames[level],TiledMap.class);
+        String musicPath = "sounds/"+map.getProperties().get("music","default_music.ogg",String.class);
+        Assets.instance.load(musicPath,Music.class);
+        Assets.instance.finishLoading();
+        SoundManager.stopMusic("sounds/Farm Frolics.ogg");
+        SoundManager.playMusic(musicPath,true);
+
         TextureLoader.TextureParameter textureParameter = new TextureLoader.TextureParameter();
         textureParameter.wrapU = Texture.TextureWrap.Repeat;
         textureParameter.wrapV = Texture.TextureWrap.ClampToEdge;
@@ -195,10 +202,6 @@ public class IntroScreen extends ScreenAdapter {
         Assets.instance.load("backgrounds/bg.png",Texture.class,textureParameter);
         Assets.instance.load("backgrounds/bg1.png",Texture.class,textureParameter);
         Assets.instance.load("backgrounds/bg2.png",Texture.class,textureParameter);
-        map = Assets.instance.get(Constants.mapsNames[level],TiledMap.class);
-        String musicPath = "sounds/"+map.getProperties().get("music","default_music.ogg",String.class);
-        Assets.instance.load(musicPath,Music.class);
-
         Assets.instance.load("sounds/doorOpen.ogg",Sound.class);
         Assets.instance.load("sounds/jump.ogg",Sound.class);
         Assets.instance.load("sounds/jump_spring.ogg",Sound.class);

@@ -44,12 +44,13 @@ public class SoundManager {
         Assets.instance.get(path,Sound.class).pause();
     }
 
-    public static void playMusic(String path){
+    public static void playMusic(String path,boolean loop){
         Music music = Assets.instance.get(path, Music.class);
-        playMusic(music);
+        playMusic(music,loop);
     }
 
-    public static void playMusic(Music music){
+    public static void playMusic(Music music, boolean loop){
+        music.setLooping(loop);
         music.setVolume(Settings.instance.musicVolume);
         if(!music.isPlaying())
             music.play();
