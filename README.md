@@ -10,7 +10,7 @@ Val es a little purple bunny with an adventurer spirit, at her village people pr
 
 ![Pretty_cool_gif](https://cloud.githubusercontent.com/assets/18577412/21743147/4b8ba722-d4ca-11e6-8f00-0764a48eba79.gif)
 
-![Another_cool_gif](https://cloud.githubusercontent.com/assets/18577412/22162393/8a8b0a06-df1c-11e6-8e35-4f21d9c0ec33.gif)
+![screenshot_2017-01-07-10-44-10_com epifania valsadventure](https://cloud.githubusercontent.com/assets/18577412/21742935/c8962098-d4c6-11e6-83d6-3b8134f12e83.png)
 
 ![screenshot_2017-01-07-10-45-53_com epifania valsadventure](https://cloud.githubusercontent.com/assets/18577412/21742937/cb067864-d4c6-11e6-8f2e-e489ac19a14e.png)
 
