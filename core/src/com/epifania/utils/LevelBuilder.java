@@ -1231,6 +1231,9 @@ public class LevelBuilder {
         FixtureDef fix = new FixtureDef();
         fix.shape = shape;
         fix.friction = 0.5f;
+        fix.filter.groupIndex = Constants.groupsIndexes[flag];
+        fix.filter.categoryBits = Constants.layerCategoryBits[flag];
+        fix.filter.maskBits = Constants.layerMaskBits[flag];
         body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
         body.createFixture(fix);
         shape.dispose();
