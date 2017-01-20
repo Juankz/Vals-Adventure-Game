@@ -87,7 +87,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		skin = Assets.instance.get("user interface/uiskin.json");
 		bundle = Assets.instance.get("i18n/strings_ui");
 		buildUI();
-		SoundManager.playMusic("sounds/Farm Frolics.ogg",false);
+		SoundManager.playMusic("sounds/Farm Frolics.ogg",true);
 		Gdx.input.setInputProcessor(stage);
 	}
 

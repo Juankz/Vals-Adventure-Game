@@ -650,7 +650,7 @@
     <property name="key" value="TOOL"/>
    </properties>
   </object>
-  <object name="VAL" type="character" x="5390" y="1750" width="70" height="140">
+  <object name="VAL" type="character" x="10080" y="1820" width="70" height="140">
    <properties>
     <property name="name" value="VAL"/>
    </properties>
