@@ -41,8 +41,6 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import java.util.Locale;
-
 public class Assets implements Disposable, AssetErrorListener{
 
 	private static final String TAG = Assets.class.getName();
@@ -53,7 +51,7 @@ public class Assets implements Disposable, AssetErrorListener{
 	public GomhAnimations gomhAnimations;
 	public MomAnimations momAnimations;
 	public PinkyAnimations pinkyAnimations;
-	public BlueAnimations blueAnimations;
+	public MarcoAnimations marcoAnimations;
 	public BonnyAnimations bonnyAnimations;
 	public CaptainAnimations captainAnimations;
 	public Items items;
@@ -181,7 +179,7 @@ public class Assets implements Disposable, AssetErrorListener{
 		gomhAnimations = new GomhAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
 		momAnimations = new MomAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
 		pinkyAnimations = new PinkyAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
-		blueAnimations = new BlueAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
+		marcoAnimations = new MarcoAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
 		bonnyAnimations = new BonnyAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
 		captainAnimations = new CaptainAnimations(assetManager.get("characters/characters.atlas",TextureAtlas.class));
 		items = new Items(assetManager.get("game_objects/items.atlas",TextureAtlas.class));
@@ -348,27 +346,24 @@ public class Assets implements Disposable, AssetErrorListener{
 			float frameDuration = 1.0f;
 			Array<TextureRegion> frames = new Array<TextureRegion>();
 			frames.add(new TextureRegion(atlas.findRegion("Pinky/idle1")));
-			idle = new Animation(frameDuration,frames,PlayMode.NORMAL);
+			frames.add(new TextureRegion(atlas.findRegion("Pinky/idle2")));
+			idle = new Animation(frameDuration,frames,PlayMode.LOOP);
 			frames.clear();
 			frames.add(new TextureRegion(atlas.findRegion("Pinky/despective1")));
 			frames.add(new TextureRegion(atlas.findRegion("Pinky/despective2")));
-			despective = new Animation(frameDuration,frames,PlayMode.NORMAL);
+			despective = new Animation(frameDuration,frames,PlayMode.LOOP);
 		}
 	}
 
-	public class BlueAnimations{
+	public class MarcoAnimations {
 		public  final Animation idle;
-		public  final Animation talk;
-		public BlueAnimations(TextureAtlas atlas){
+		public MarcoAnimations(TextureAtlas atlas){
 			float frameDuration = 1.0f;
 			Array<TextureRegion> frames = new Array<TextureRegion>();
-			frames.add(new TextureRegion(atlas.findRegion("Blue/talk1")));
-			frames.add(new TextureRegion(atlas.findRegion("Blue/talk2")));
-			idle = new Animation(frameDuration,frames,PlayMode.NORMAL);
+			frames.add(new TextureRegion(atlas.findRegion("Marco/idle1")));
+			frames.add(new TextureRegion(atlas.findRegion("Marco/idle2")));
+			idle = new Animation(frameDuration,frames,PlayMode.LOOP);
 			frames.clear();
-			frames.add(new TextureRegion(atlas.findRegion("Blue/talk1")));
-			frames.add(new TextureRegion(atlas.findRegion("Blue/talk1")));
-			talk = new Animation(frameDuration,frames,PlayMode.NORMAL);
 		}
 	}
 
