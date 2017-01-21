@@ -19,12 +19,9 @@ import com.epifania.utils.SoundManager;
 /**
  * Created by juan on 1/18/17.
  */
-public class SettingsPanel extends Table {
+public class SettingsPanel extends Panel {
 
     private String tag = "UI/SettingsPanel";
-    private  I18NBundle bundle;
-
-    private Table root;
 
     private Label language_label;
     private Button next_language_button;
@@ -44,11 +41,12 @@ public class SettingsPanel extends Table {
     }
 
     public SettingsPanel(Skin skin, I18NBundle bundle, Listener listener){
-        init(skin,bundle,listener);
+        super(skin,bundle);
+        init(listener);
 
     }
     public SettingsPanel(Skin skin, I18NBundle bundle){
-        init(skin, bundle, new Listener() {
+        this(skin, bundle, new Listener() {
             @Override
             public void applyChanges() {
 
@@ -56,10 +54,7 @@ public class SettingsPanel extends Table {
         });
     }
 
-    private void init(Skin skin, final I18NBundle bundle, final Listener listener){
-        this.bundle = bundle;
-        root = new Table();
-        root.setBackground(skin.getDrawable("pause_panel"));
+    private void init(final Listener listener){
 
         Label title = new Label(bundle.get("settings").toUpperCase(),skin,"header");
         title.setColor(Color.LIGHT_GRAY.BROWN);
@@ -127,7 +122,7 @@ public class SettingsPanel extends Table {
 
         float pad = 5;
         root.pad(60,50,20,50);
-        root.add(title);
+        root.add(title).pad(pad*2);
         root.row().pad(pad);
         root.add(settingsTable);
         root.row().pad(pad);
@@ -135,14 +130,6 @@ public class SettingsPanel extends Table {
         root.row().pad(pad);
         root.add(ok_button);
         root.pack();
-        root.setTransform(true);
-        root.setOrigin(Align.center);
-
-        this.add(root).center();
-        this.setBackground(skin.getDrawable("opaque_pixel"));
-        this.setTouchable(Touchable.enabled);
-        this.setFillParent(true);
-
 
         //Add listeners
         ok_button.addListener(new ClickListener(){
@@ -228,31 +215,4 @@ public class SettingsPanel extends Table {
         }
     }
 
-    @Override
-    public void setScale(float scaleX, float scaleY) {
-        super.setScale(scaleX, scaleY);
-        root.setScale(scaleX, scaleY);
-    }
-
-    public void show(){
-        float duration = 0.2f;
-        this.setScale(1.1f,1.1f);
-        this.addAction(Actions.sequence(
-                Actions.alpha(0),
-                Actions.show(),
-                Actions.parallel(
-                        Actions.fadeIn(duration),
-                        Actions.scaleTo(1f,1f,duration*2,Interpolation.bounceOut))
-        ));
-    }
-    public void hide(){
-        float duration = 0.2f;
-        this.addAction(Actions.sequence(
-                Actions.alpha(1),
-                Actions.parallel(
-                    Actions.fadeOut(duration),
-                    Actions.scaleTo(1.1f,1.1f,duration*2)),
-                Actions.hide()
-        ));
-    }
 }

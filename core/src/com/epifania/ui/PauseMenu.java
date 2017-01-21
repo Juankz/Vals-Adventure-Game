@@ -15,10 +15,8 @@ import com.epifania.utils.UI_Utils;
 /**
  * Created by juan on 6/15/16.
  */
-public class PauseMenu extends Table {
+public class PauseMenu extends Panel {
 
-    private Skin skin;
-    private Table root;
     private TextButton resume;
     private TextButton settings;
     private TextButton exit;
@@ -32,10 +30,8 @@ public class PauseMenu extends Table {
     }
 
     public  PauseMenu(final Listener listener1, I18NBundle bundle){
+        super(Assets.instance.get("user interface/uiskin.json",Skin.class),bundle);
         this.listener = listener1;
-        skin = Assets.instance.get("user interface/uiskin.json",Skin.class);
-        root = new Table(skin);
-        root.setBackground(skin.getDrawable("pause_panel"));
 
         label = new Label(bundle.get("pause").toUpperCase(),skin,"header");
         label.setColor(Color.LIGHT_GRAY.BROWN);
@@ -86,38 +82,8 @@ public class PauseMenu extends Table {
 
         float size=Math.max(root.getWidth(), root.getHeight());
 
+        //Add root with square shape
+        this.removeActor(root);
         add(root).center().size(size);
-
-        this.setBackground(skin.getDrawable("opaque_pixel"));
-        this.setTouchable(Touchable.enabled);
-        this.setFillParent(true);
-    }
-
-    @Override
-    public void setScale(float scaleX, float scaleY) {
-        super.setScale(scaleX, scaleY);
-        root.setScale(scaleX, scaleY);
-    }
-
-    public void show(){
-        float duration = 0.2f;
-        this.setScale(1.1f,1.1f);
-        this.addAction(Actions.sequence(
-                Actions.alpha(0),
-                Actions.show(),
-                Actions.parallel(
-                        Actions.fadeIn(duration),
-                        Actions.scaleTo(1f,1f,duration*2,Interpolation.bounceOut))
-        ));
-    }
-    public void hide(){
-        float duration = 0.2f;
-        this.addAction(Actions.sequence(
-                Actions.alpha(1),
-                Actions.parallel(
-                        Actions.fadeOut(duration),
-                        Actions.scaleTo(1.1f,1.1f,duration*2)),
-                Actions.hide()
-        ));
     }
 }
