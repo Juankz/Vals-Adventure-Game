@@ -27,7 +27,6 @@ public class DesktopLauncher {
 			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/user interface/level_selection","../assets/user interface","level_selection");
 			settings.filterMag = Texture.TextureFilter.Nearest;
 			settings.filterMin = Texture.TextureFilter.Nearest;
-			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/user interface/nine patches","../assets/user interface","ninePatches");
 			settings.paddingY = 2;
 			settings.paddingX = 2;
 			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/user interface/nine patches","../assets/user interface","ninePatches");
