@@ -385,8 +385,6 @@ public class Assets implements Disposable, AssetErrorListener{
 
 	public class Items{
 		public final Animation coin_gold;
-		public final Animation coin_silver;
-		public final Animation coin_bronze;
 
 		public Items(TextureAtlas atlas){
 			float frameDuration = 0.15f;
@@ -401,32 +399,6 @@ public class Assets implements Disposable, AssetErrorListener{
 				frames.add(region);
 			}
 			coin_gold = new Animation(frameDuration,frames,PlayMode.LOOP_REVERSED);
-
-			frames.clear();
-			frames = new Array<TextureRegion>();
-			for(int index = 1;index<=4;index++){
-				frames.add(atlas.findRegion("silver",index));
-			}
-			for(int i = 3;i>=2;i--){
-				TextureRegion region = new TextureRegion(atlas.findRegion("silver",i));
-				region.flip(true,false);
-				frames.add(region);
-			}
-			coin_silver = new Animation(frameDuration,frames,PlayMode.LOOP_REVERSED);
-
-			frames.clear();
-			frames = new Array<TextureRegion>();
-			for(int index = 1;index<=4;index++){
-				frames.add(atlas.findRegion("bronze",index));
-			}
-			for(int i = 3;i>=2;i--){
-				TextureRegion region = new TextureRegion(atlas.findRegion("bronze",i));
-				region.flip(true,false);
-				frames.add(region);
-			}
-			coin_bronze = new Animation(frameDuration,frames,PlayMode.LOOP_REVERSED);
-			frames.clear();
-
 		}
 	}
 }

@@ -1624,12 +1624,7 @@ public class LevelBuilder {
                     StateComponent stateComponent =  new StateComponent();
                     TextureComponent textureComponent = new TextureComponent();
 
-                    if(Integer.parseInt((String)property) == 1)
-                        animation.animations.put(0,Assets.instance.items.coin_gold);
-                    else if(Integer.parseInt((String)property) == 2)
-                        animation.animations.put(0,Assets.instance.items.coin_silver);
-                    else
-                        animation.animations.put(0,Assets.instance.items.coin_bronze);
+                    animation.animations.put(0,Assets.instance.items.coin_gold);
 
                     stateComponent.set(0);
 
