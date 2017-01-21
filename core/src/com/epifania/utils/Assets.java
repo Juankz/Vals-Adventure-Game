@@ -79,8 +79,13 @@ public class Assets implements Disposable, AssetErrorListener{
 		parameter.fontParameters.minFilter = Texture.TextureFilter.MipMapLinearNearest;
 		parameter.fontParameters.genMipMaps = true;
 		this.assetManager.load("gameFont.fnt",BitmapFont.class,parameter);
-		parameter.fontParameters.size=30;
-		this.assetManager.load("normal.fnt",BitmapFont.class,parameter);
+		FreetypeFontLoader.FreeTypeFontLoaderParameter parameter1 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
+		parameter1.fontFileName = "user interface/fonts/FreeSerifBold.ttf";
+		parameter1.fontParameters.size = 30;
+		parameter1.fontParameters.magFilter = Texture.TextureFilter.Linear;
+		parameter1.fontParameters.minFilter = Texture.TextureFilter.MipMapLinearNearest;
+		parameter1.fontParameters.genMipMaps = true;
+		this.assetManager.load("normal.fnt",BitmapFont.class,parameter1);
 		FreetypeFontLoader.FreeTypeFontLoaderParameter parameter2 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
 		parameter2.fontFileName = "user interface/fonts/FreeSerifBold.ttf";
 		parameter2.fontParameters.size = 50;
