@@ -13,11 +13,11 @@ public class Settings {
 
     public ObjectMap<String,String> languages;
     private Preferences preferences;
-    public boolean setted = false;
-    public boolean controls = false; //False = Buttons ; true = touch
+    public boolean all_set = false;
+    public boolean controls = true; //False = Buttons ; true = touch
     public String language = Locale.getDefault().getLanguage();
-    public float sfxVolume =0.8f;
-    public float musicVolume = 0.8f;
+    public float sfxVolume =0.3f;
+    public float musicVolume = 0.4f;
 
     private Settings(){
         languages = new ObjectMap<String, String>();
@@ -28,12 +28,12 @@ public class Settings {
     public void loadSettings(){
         preferences = Gdx.app.getPreferences("settings");
 
-        setted = preferences.getBoolean("setted");
+        all_set = preferences.getBoolean("all_set");
         sfxVolume = preferences.getFloat("sfxVolume");
         musicVolume = preferences.getFloat("musicVolume");
         controls = preferences.getBoolean("controls");
         language = preferences.getString("language");
-        if(setted == false) {
+        if(all_set == false) {
             sfxVolume = 0.8f;
             musicVolume = 0.8f;
             language = Locale.getDefault().getLanguage();
@@ -42,14 +42,14 @@ public class Settings {
         Gdx.app.debug("Settings","sfxVolume = "+sfxVolume);
         Gdx.app.debug("Settings","musicVolume = "+musicVolume);
         Gdx.app.debug("Settings","language = "+ language);
-        Gdx.app.debug("Settings","setted = "+setted);
+        Gdx.app.debug("Settings","all_set = "+ all_set);
         Gdx.app.debug("Settings","controls = "+controls);
         Locale.setDefault(new Locale(language));
     }
     public void saveSettings(){
         preferences.putFloat("sfxVolume",sfxVolume);
         preferences.putFloat("musicVolume",musicVolume);
-        preferences.putBoolean("setted",setted);
+        preferences.putBoolean("all_set", all_set);
         preferences.putBoolean("controls",controls);
         preferences.putString("language", language);
         preferences.flush();
