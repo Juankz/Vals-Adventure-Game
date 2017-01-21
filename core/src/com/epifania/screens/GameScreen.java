@@ -83,6 +83,7 @@ public class GameScreen extends ScreenAdapter{
 	private InputMultiplexer multiplexer;
     private InputController inputController;
     private boolean activeInput = true;
+	private boolean control;
 
 	//GameState vars
 	private GameStates gameState;
@@ -151,6 +152,7 @@ public class GameScreen extends ScreenAdapter{
 		}
 
 		//Initialize InputController
+		control = Settings.instance.controls;
         inputController = new InputController() {
             @Override
             public void left() {
@@ -604,7 +606,12 @@ public class GameScreen extends ScreenAdapter{
                 stageHUD.getHeight() - 50 - coinsIndicator.getHeight()
         );
 
-		settingsPanel = new SettingsPanel(skin,bundle_ui);
+		settingsPanel = new SettingsPanel(skin, bundle_ui, new SettingsPanel.Listener() {
+			@Override
+			public void applyChanges() {
+				switchControl();
+			}
+		});
 
 		pauseMenu = new PauseMenu(new PauseMenu.Listener() {
 			@Override
@@ -709,8 +716,7 @@ public class GameScreen extends ScreenAdapter{
 	 * @param dialog1 Show dialog with information
 	 */
 	private void onControlSelected(boolean control, final Table inputSelectionTable, final Dialog dialog1){
-		Settings.instance.controls = control;
-		Settings.instance.setted = true;
+		switchControl();
 		inputSelectionTable.addAction(Actions.sequence(
 				Actions.fadeOut(0.5f, Interpolation.exp5),
 				Actions.removeActor()
@@ -721,10 +727,10 @@ public class GameScreen extends ScreenAdapter{
 		));
 	}
 
-	private void switchControl(boolean control, final Dialog dialog1){
+	private void switchControl(){
 		if(Settings.instance.controls == control) return;
 
-		Settings.instance.controls = control;
+		control = Settings.instance.controls;
 		Settings.instance.setted = true;
 
 		if(control) {
@@ -732,8 +738,8 @@ public class GameScreen extends ScreenAdapter{
 			inputHandler = new InputHandler(engine, inputController);
 			multiplexer.addProcessor(inputHandler);
 		}else{
-			stageHUD.setAsController(inputController);
 			multiplexer.removeProcessor(inputHandler);
+			stageHUD.setAsController(inputController);
 		}
 
 	}

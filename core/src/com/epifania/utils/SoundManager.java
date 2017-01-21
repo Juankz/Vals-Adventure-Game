@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Array;
  * Created by juan on 5/29/16.
  */
 public class SoundManager {
-    private Array<Music> musicFiles = new Array<Music>();
+    public static final Array<Music> musicFiles = new Array<Music>();
 
     public static void playSound(Sound sound){
         sound.play(Settings.instance.sfxVolume);
@@ -52,12 +52,16 @@ public class SoundManager {
     public static void playMusic(Music music, boolean loop){
         music.setLooping(loop);
         music.setVolume(Settings.instance.musicVolume);
-        if(!music.isPlaying())
+        if(!music.isPlaying()) {
             music.play();
+            musicFiles.add(music);
+        }
     }
 
     public static void stopMusic(String path){
-        Assets.instance.get(path, Music.class).stop();
+        Music music = Assets.instance.get(path, Music.class);
+        music.stop();
+        musicFiles.removeValue(music,true);
     }
 
     public void updateVolume(){
