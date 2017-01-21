@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.epifania.ui.AnimatedImage;
+import com.epifania.ui.CreditsPanel;
 import com.epifania.ui.SettingsPanel;
 import com.epifania.utils.Assets;
 import com.epifania.utils.Constants;
@@ -37,6 +38,7 @@ public class MainMenuScreen extends ScreenAdapter {
 	private Button infoButton;
 	private Button shareButton;
 	private SettingsPanel settingsPanel;
+	private CreditsPanel creditsPanel;
 	private boolean debug = false;
 
 	private I18NBundle bundle;
@@ -101,6 +103,10 @@ public class MainMenuScreen extends ScreenAdapter {
 		settingsPanel.setPosition(0,0);
 		settingsPanel.setFillParent(true);
 
+		//Credits panel
+		creditsPanel = new CreditsPanel(skin,bundle);
+		creditsPanel.setPosition(0,0);
+
 		bgnd1 = new Image(new TextureRegion(Assets.instance.get("user interface/bgnd1.png",Texture.class)));
 		bgnd1.setName("bgnd1");
 		bgnd1.setPosition(0,0);
@@ -139,6 +145,12 @@ public class MainMenuScreen extends ScreenAdapter {
 			}
 		});
 		TextButton creditsButton = UI_Utils.genericTextButton(bundle.get("credits").toUpperCase(),skin,"longBrown");
+		creditsButton.addListener(new ClickListener(){
+			public void clicked (InputEvent event, float x, float y) {
+				creditsPanel.show();
+			}
+		});
+
 
 		table2 = new Table();
 		table2.add(playTB).pad(pad);
@@ -159,6 +171,7 @@ public class MainMenuScreen extends ScreenAdapter {
 		stage.addActor(title);
 		stage.addActor(table2);
 		stage.addActor(settingsPanel);
+		stage.addActor(creditsPanel);
 		stage.setDebugAll(debug);
 		//Arrange buttons
 //		if(Gdx.app.getType()== Application.ApplicationType.Desktop) {

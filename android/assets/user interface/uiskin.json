@@ -20,12 +20,17 @@
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
     "default": {"font": "default", "fontColor": "white"},
     "dialog": {"font": "normal", "fontColor": "white"},
+    "credits": {"font": "normal", "fontColor": "brown"},
+    "credits_text": {"font": "normal", "fontColor": "black"},
+    "credits_small": {"font": "default", "fontColor": "black"},
+    "credits_small_brown": {"font": "default", "fontColor": "brown"},
     "title": {"font": "title", "fontColor": "white"},
     "middle_outline": {"font": "middle_outline", "fontColor": "white"},
     "middle": {"font": "middle", "fontColor": "white"},
     "h1title":{"font": "h1title", "fontColor": "white"},
     "h3title":{"font": "h3title", "fontColor": "white"},
     "header":{"font": "header", "fontColor": "white"},
+    "header_brown":{"font": "header", "fontColor": "brown"},
     "body":{"font": "middle", "fontColor": "white"},
     "numeric":{"font": "numeric", "fontColor": "white"}
 },
