@@ -716,6 +716,7 @@ public class GameScreen extends ScreenAdapter{
 	 */
 	private void onControlSelected(boolean control, final Table inputSelectionTable, final Dialog dialog1){
 		Settings.instance.controls=control;
+		Settings.instance.all_set = true;
 		switchControl();
 		inputSelectionTable.addAction(Actions.sequence(
 				Actions.fadeOut(0.5f, Interpolation.exp5),
@@ -734,7 +735,7 @@ public class GameScreen extends ScreenAdapter{
 		if(Settings.instance.controls == control) return;
 
 		control = Settings.instance.controls;
-		Settings.instance.all_set = true;
+		Gdx.app.debug(tag,"Settings.instance.all_set:"+Settings.instance.all_set);
 
 		if(control) {
 			stageHUD.removeAsController();
