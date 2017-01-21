@@ -82,8 +82,6 @@ public class PauseMenu extends Panel {
 
         float size=Math.max(root.getWidth(), root.getHeight());
 
-        //Add root with square shape
-        this.removeActor(root);
         add(root).center().size(size);
     }
 }

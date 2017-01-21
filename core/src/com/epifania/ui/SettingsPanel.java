@@ -130,6 +130,8 @@ public class SettingsPanel extends Panel {
         root.row().pad(pad);
         root.add(ok_button);
         root.pack();
+        root.setOrigin(Align.center);
+        this.add(root).center();
 
         //Add listeners
         ok_button.addListener(new ClickListener(){

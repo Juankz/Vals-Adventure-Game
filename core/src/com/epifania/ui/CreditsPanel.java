@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
 /**
@@ -36,9 +37,13 @@ public class CreditsPanel extends Panel {
         root.row();
         root.add(new Label(bundle.get("based_on")+" Kenney.nl",skin,"credits_small")).pad(pad).colspan(2);
         root.row();
-
         TextButton button = new TextButton("OK",skin,"longBrown");
         root.add(button).padTop(40).colspan(2);
+
+
+        root.pack();
+        root.setOrigin(Align.center);
+        this.add(root).center();
 
         button.addListener(new ClickListener(){
             @Override

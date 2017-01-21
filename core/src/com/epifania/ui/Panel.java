@@ -28,8 +28,6 @@ public class Panel extends Table {
         root = new Table();
         root.setBackground(skin.getDrawable("pause_panel"));
         root.setTransform(true);
-        root.setOrigin(Align.center);
-        this.add(root).center();
     }
 
     @Override
