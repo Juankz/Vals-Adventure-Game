@@ -6,16 +6,44 @@ filter: MipMapLinearNearest,Linear
 repeat: none
 background
   rotate: false
-  xy: 1, 1
+  xy: 1, 201
   size: 1280, 720
   orig: 1280, 720
   offset: 0, 0
   index: -1
 frame
   rotate: false
-  xy: 1284, 171
+  xy: 1284, 371
   size: 453, 550
   orig: 453, 550
+  offset: 0, 0
+  index: -1
+intro1
+  rotate: false
+  xy: 1740, 543
+  size: 75, 178
+  orig: 75, 178
+  offset: 0, 0
+  index: -1
+intro2
+  rotate: false
+  xy: 1, 1
+  size: 217, 197
+  orig: 217, 197
+  offset: 0, 0
+  index: -1
+intro3
+  rotate: false
+  xy: 221, 9
+  size: 175, 189
+  orig: 175, 189
+  offset: 0, 0
+  index: -1
+intro4
+  rotate: false
+  xy: 1740, 724
+  size: 197, 197
+  orig: 197, 197
   offset: 0, 0
   index: -1
 

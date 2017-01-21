@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -110,7 +111,7 @@ public class IntroScreen extends ScreenAdapter {
         body.setWrap(true);
         body.setWidth(stage.getWidth()*0.75f);
 
-        image = new Image(new Texture(Gdx.files.internal("user interface/placeHolder.png")));
+        image = new Image(Assets.instance.get("user interface/level_selection.atlas", TextureAtlas.class).findRegion("intro"+(level+1)));
 
         loading = new Image(skin.getDrawable("loading"));
         loading.setOrigin(Align.center);
