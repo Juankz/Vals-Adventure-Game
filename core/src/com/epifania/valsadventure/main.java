@@ -20,6 +20,7 @@ public class main extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		Gdx.app.setLogLevel(Application.LOG_DEBUG); //For debug purposes
+		Gdx.input.setCatchBackKey(true);
 		Settings.instance.loadSettings();
 		LevelsData.getInstance().loadInfo();
 		Assets.instance.init(new AssetManager()); //AssetsManagement
