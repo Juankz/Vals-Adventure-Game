@@ -51,7 +51,6 @@ public class LevelSelectionScreen extends ScreenAdapter {
     public LevelSelectionScreen(SpriteBatch batch, Viewport viewport){
         this.viewPort = viewport;
         this.batch = batch;
-        loadAssets();
     }
 
     @Override
@@ -90,9 +89,9 @@ public class LevelSelectionScreen extends ScreenAdapter {
     }
 
     @Override
-    public void show(){
+    public void show() {
         bundle = Assets.instance.get("i18n/strings_ui");
-        stage= new Stage(viewPort,batch);
+        stage = new Stage(viewPort, batch);
         skin = Assets.instance.get("user interface/uiskin.json");
 
         levelsContainer = new Table();
@@ -101,38 +100,38 @@ public class LevelSelectionScreen extends ScreenAdapter {
         float pageHeight = stage.getHeight();
         int lastLevel = 0;
 
-        for(int i = 0;i<Constants.mapsNames.length;i++){
+        for (int i = 0; i < Constants.mapsNames.length; i++) {
             final int finalI = i;
             boolean locked = LevelsData.getInstance().getLevelDataOf(i).locked;
             boolean medal = LevelsData.getInstance().getLevelDataOf(i).medal;
-            LevelItem levelItem = new LevelItem(skin,bundle,i+1,locked,medal,pageWidth,pageHeight);
-            levelItem.setListener(new ClickListener(){
-                public void clicked (InputEvent event, float x, float y) {
-                    if(!LevelsData.getInstance().getLevelDataOf(finalI).locked) {
-                        goToGameScreen=true;
+            LevelItem levelItem = new LevelItem(skin, bundle, i + 1, locked, medal, pageWidth, pageHeight);
+            levelItem.setListener(new ClickListener() {
+                public void clicked(InputEvent event, float x, float y) {
+                    if (!LevelsData.getInstance().getLevelDataOf(finalI).locked) {
+                        goToGameScreen = true;
                         level = finalI;
                     }
                 }
             });
-            levelsContainer.add(levelItem).size(pageWidth,pageHeight);
+            levelsContainer.add(levelItem).size(pageWidth, pageHeight);
 
-            if(!locked)
-                lastLevel=i;
+            if (!locked)
+                lastLevel = i;
         }
 
-        level=lastLevel;
+        level = lastLevel;
         levelsContainer.pack();
 
         scrollPane = new ScrollPane(levelsContainer);
-        scrollPane.setSize(stage.getWidth(),stage.getHeight());
-        scrollPane.setPosition(0,0);
+        scrollPane.setSize(stage.getWidth(), stage.getHeight());
+        scrollPane.setPosition(0, 0);
         scrollPane.setFlickScroll(false);
 
-        final int scrollX = (int)(pageWidth);
+        final int scrollX = (int) (pageWidth);
 
         //Scroll automatically to the last level available
         scrollPane.layout();
-        scrollPane.scrollTo(scrollX*lastLevel,0,scrollX,0);
+        scrollPane.scrollTo(scrollX * lastLevel, 0, scrollX, 0);
         scrollPane.updateVisualScroll(); //Make it instantaneously
 
         //Add buttons to scroll through the panel
@@ -140,48 +139,52 @@ public class LevelSelectionScreen extends ScreenAdapter {
         float buttonsPad = 175;
         float buttonsWidth = 200;
 
-        leftArrow = new Container<Button>(new Button(skin,"left_arrow_menu"));
+        leftArrow = new Container<Button>(new Button(skin, "left_arrow_menu"));
         leftArrow.addListener(UI_Utils.clickSound());
-        leftArrow.setSize(buttonsWidth,pageHeight);
-        leftArrow.setPosition(buttonsPad,stage.getHeight()*0.5f - leftArrow.getHeight()*0.5f);
+        leftArrow.setSize(buttonsWidth, pageHeight);
+        leftArrow.setPosition(buttonsPad, stage.getHeight() * 0.5f - leftArrow.getHeight() * 0.5f);
         leftArrow.setTouchable(Touchable.enabled);
-        leftArrow.addListener(new ClickListener(){
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                leftArrow.getActor().setColor(0.75f,0.75f,0.75f,1);
-                return super.touchDown(event,x,y,pointer,button);
+        leftArrow.addListener(new ClickListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                leftArrow.getActor().setColor(0.75f, 0.75f, 0.75f, 1);
+                return super.touchDown(event, x, y, pointer, button);
             }
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                leftArrow.getActor().setColor(1,1,1,1);
-                super.touchUp(event,x,y,pointer,button);
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                leftArrow.getActor().setColor(1, 1, 1, 1);
+                super.touchUp(event, x, y, pointer, button);
             }
-            public void clicked (InputEvent event, float x, float y) {
+
+            public void clicked(InputEvent event, float x, float y) {
                 level--;
-                scrollPane.scrollTo(scrollPane.getScrollX()-scrollX,0,scrollX,0);
+                scrollPane.scrollTo(scrollPane.getScrollX() - scrollX, 0, scrollX, 0);
             }
         });
 
-        rightArrow = new Container<Button>(new Button(skin,"right_arrow_menu"));
+        rightArrow = new Container<Button>(new Button(skin, "right_arrow_menu"));
         rightArrow.getActor().setTransform(true);
         rightArrow.addListener(UI_Utils.clickSound());
-        rightArrow.setSize(buttonsWidth,pageHeight);
-        rightArrow.setPosition(stage.getWidth()-rightArrow.getWidth()-buttonsPad,0);
+        rightArrow.setSize(buttonsWidth, pageHeight);
+        rightArrow.setPosition(stage.getWidth() - rightArrow.getWidth() - buttonsPad, 0);
         rightArrow.setTouchable(Touchable.enabled);
-        rightArrow.addListener(new ClickListener(){
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                rightArrow.getActor().setColor(0.75f,0.75f,0.75f,1);
-                return super.touchDown(event,x,y,pointer,button);
+        rightArrow.addListener(new ClickListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                rightArrow.getActor().setColor(0.75f, 0.75f, 0.75f, 1);
+                return super.touchDown(event, x, y, pointer, button);
             }
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                rightArrow.getActor().setColor(1,1,1,1);
-                super.touchUp(event,x,y,pointer,button);
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                rightArrow.getActor().setColor(1, 1, 1, 1);
+                super.touchUp(event, x, y, pointer, button);
             }
-            public void clicked (InputEvent event, float x, float y) {
+
+            public void clicked(InputEvent event, float x, float y) {
                 level++;
-                scrollPane.scrollTo(scrollPane.getScrollX()+scrollX,0,scrollX,0);
+                scrollPane.scrollTo(scrollPane.getScrollX() + scrollX, 0, scrollX, 0);
             }
         });
 
-        backButton = UI_Utils.genericButton(skin,"back",40,pageHeight -120, new MainMenuScreen(batch));
+        backButton = UI_Utils.genericButton(skin, "back", 40, pageHeight - 120, new MainMenuScreen(batch));
 
         stage.addActor(scrollPane);
         stage.addActor(leftArrow);
@@ -197,36 +200,6 @@ public class LevelSelectionScreen extends ScreenAdapter {
 //            }
 //        }
 
-    }
-
-    private void loadAssets(){
-        TextureLoader.TextureParameter textureParameter = new TextureLoader.TextureParameter();
-        textureParameter.magFilter = Texture.TextureFilter.Linear;
-        textureParameter.minFilter = Texture.TextureFilter.MipMapLinearNearest;
-        textureParameter.genMipMaps = true;
-        textureParameter.wrapV = Texture.TextureWrap.ClampToEdge;
-        textureParameter.wrapU = Texture.TextureWrap.Repeat;
-        Assets.instance.load("user interface/level selection/background.png",Texture.class,textureParameter);
-        Assets.instance.load("user interface/level selection/level1.png",Texture.class,textureParameter);
-        Assets.instance.load("user interface/level selection/level2.png",Texture.class,textureParameter);
-        Assets.instance.load("user interface/level selection/level3.png",Texture.class,textureParameter);
-        Assets.instance.load("user interface/level selection/level4.png",Texture.class,textureParameter);
-        Assets.instance.load("user interface/level selection/level5.png",Texture.class,textureParameter);
-        Assets.instance.load("user interface/level selection/lock_chain.png",Texture.class,textureParameter);
-        Assets.instance.load("user interface/level selection/play.png",Texture.class,textureParameter);
-        Assets.instance.finishLoading();
-    }
-
-    @Override
-    public void hide(){
-        Assets.instance.unload("user interface/level selection/background.png");
-        Assets.instance.unload("user interface/level selection/level1.png");
-        Assets.instance.unload("user interface/level selection/level2.png");
-        Assets.instance.unload("user interface/level selection/level3.png");
-        Assets.instance.unload("user interface/level selection/level4.png");
-        Assets.instance.unload("user interface/level selection/level5.png");
-        Assets.instance.unload("user interface/level selection/lock_chain.png");
-        Assets.instance.unload("user interface/level selection/play.png");
     }
 
     private void goToScreen(Screen screen){

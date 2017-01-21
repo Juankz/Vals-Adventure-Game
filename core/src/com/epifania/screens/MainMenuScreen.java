@@ -53,7 +53,6 @@ public class MainMenuScreen extends ScreenAdapter {
 		parameter.genMipMaps = true;
 		parameter.minFilter = Texture.TextureFilter.MipMapLinearNearest;
 		Assets.instance.load("user interface/bgnd1.png",Texture.class,parameter);
-		Assets.instance.load("user interface/main menu.png",Texture.class,parameter);
 		Assets.instance.load("sounds/Farm Frolics.ogg",Music.class);
 		Assets.instance.finishLoading();
 	}
@@ -184,7 +183,6 @@ public class MainMenuScreen extends ScreenAdapter {
 	@Override
 	public void hide() {
 		Assets.instance.unload("user interface/bgnd1.png");
-		Assets.instance.unload("user interface/main menu.png");
 	}
 
 	@Override
