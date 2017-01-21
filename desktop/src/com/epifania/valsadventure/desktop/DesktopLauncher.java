@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) throws IOException{
-		if(true){
+		if(false){
 			TexturePacker.Settings settings = new TexturePacker.Settings();
 			settings.filterMin = Texture.TextureFilter.MipMapLinearNearest;
 			settings.maxWidth=2048;
@@ -19,7 +19,9 @@ public class DesktopLauncher {
 			settings.paddingY = 3;
 			settings.paddingX = 3;
 			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/characters","../assets/characters","characters");
+			settings.grid=true;
 			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/items","../assets/game_objects","items");
+			settings.grid=false;
 			settings.filterMag = Texture.TextureFilter.Linear;
 			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/user interface/buttons","../assets/user interface","uiskin");
 			TexturePacker.process(settings,"/home/juan/GameProjects/Val's Adventure/assetsRaw/user interface/level_selection","../assets/user interface","level_selection");
