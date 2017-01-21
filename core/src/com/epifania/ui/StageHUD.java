@@ -65,8 +65,9 @@ public class StageHUD extends Stage {
         leftButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if(!isControllerActive) return false;
                 inputController.left();
-                return isControllerActive;
+                return true;
             }
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 inputController.stopHorizontal();
@@ -77,8 +78,9 @@ public class StageHUD extends Stage {
         rightButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if(!isControllerActive) return false;
                 inputController.right();
-                return isControllerActive;
+                return true;
             }
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 inputController.stopHorizontal();
@@ -88,8 +90,9 @@ public class StageHUD extends Stage {
         upButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if(!isControllerActive) return false;
                 inputController.up();
-                return isControllerActive;
+                return true;
             }
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 inputController.stopVertical();
@@ -99,8 +102,9 @@ public class StageHUD extends Stage {
         downButton.addListener(new InputListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if(!isControllerActive) return false;
                 inputController.down();
-                return isControllerActive;
+                return true;
             }
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 inputController.stopVertical();
@@ -123,6 +127,7 @@ public class StageHUD extends Stage {
         this.inputController = inputController;
         init();
         addActor(controlTable);
+        controlTable.setZIndex(0);
         isController = true;
         isControllerActive = true;
     }

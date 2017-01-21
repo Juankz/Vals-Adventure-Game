@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -19,8 +18,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -82,7 +81,6 @@ public class GameScreen extends ScreenAdapter{
 	private InputHandler inputHandler;
 	private InputMultiplexer multiplexer;
     private InputController inputController;
-    private boolean activeInput = true;
 	private boolean control;
 
 	//GameState vars
@@ -348,8 +346,6 @@ public class GameScreen extends ScreenAdapter{
 			@Override
             public void die() {
                 setState(GameStates.DEATH);
-//                inputHandler.setActive(false);
-                activeInput = true;
                 engine.getSystem(CollisionSystem.class).setProcessing(false);
 				SoundManager.playSound("sounds/lose.ogg");
 			}
@@ -636,7 +632,8 @@ public class GameScreen extends ScreenAdapter{
 		pauseMenu.setFillParent(true);
 		pauseMenu.setVisible(false);
 
-		if(!Settings.instance.setted){
+		if(!Settings.instance.all_set){
+			setInputActive(false);
 			final Dialog dialog1 = new Dialog("",skin,"dialog");
 			TextButton dialogButton = new TextButton("OK", skin , "longBrown");
 			dialogButton.addListener(UI_Utils.clickSound());
@@ -645,7 +642,7 @@ public class GameScreen extends ScreenAdapter{
 					 dialog1.hide(Actions.fadeOut(0.7f));
 				 }
 			});
-			Label labelD = new Label(bundle_ui.get("changeControlDialog"),skin,"middle");
+			Label labelD = new Label(bundle_ui.get("changeControlDialog"),skin,"dialog");
 			labelD.setColor(Color.BLACK);
 			labelD.setAlignment(Align.center);
 			labelD.setWrap(true);
@@ -691,6 +688,8 @@ public class GameScreen extends ScreenAdapter{
 			inputSelectionTable.add(buttons).size(buttons.getWidth()).pad(padA);
 			inputSelectionTable.add(touch).size(buttons.getWidth()).pad(padA);
 			inputSelectionTable.setFillParent(true);
+			inputSelectionTable.setTouchable(Touchable.enabled);
+			inputSelectionTable.setBackground(skin.getDrawable("opaque_pixel"));
 			stageHUD.addActor(inputSelectionTable);
 		}
 
@@ -716,6 +715,7 @@ public class GameScreen extends ScreenAdapter{
 	 * @param dialog1 Show dialog with information
 	 */
 	private void onControlSelected(boolean control, final Table inputSelectionTable, final Dialog dialog1){
+		Settings.instance.controls=control;
 		switchControl();
 		inputSelectionTable.addAction(Actions.sequence(
 				Actions.fadeOut(0.5f, Interpolation.exp5),
@@ -725,23 +725,27 @@ public class GameScreen extends ScreenAdapter{
 				Actions.delay(0.5f),
 				Actions.fadeIn(0.5f, Interpolation.exp5)
 		));
+
+		setInputActive(true);
+
 	}
 
 	private void switchControl(){
 		if(Settings.instance.controls == control) return;
 
 		control = Settings.instance.controls;
-		Settings.instance.setted = true;
+		Settings.instance.all_set = true;
 
 		if(control) {
 			stageHUD.removeAsController();
 			inputHandler = new InputHandler(engine, inputController);
+			inputHandler.setActive(false);
 			multiplexer.addProcessor(inputHandler);
 		}else{
 			multiplexer.removeProcessor(inputHandler);
 			stageHUD.setAsController(inputController);
+			stageHUD.setActive(false);
 		}
-
 	}
 
 	@Override
@@ -766,8 +770,7 @@ public class GameScreen extends ScreenAdapter{
 			setState(previousGameState);
 		}
 		pauseMenu.hide();
-//		inputHandler.setActive(true);
-        activeInput = true;
+        setInputActive(true);
 		multiplexer.addProcessor(0,stage);
 	}
 
@@ -777,7 +780,7 @@ public class GameScreen extends ScreenAdapter{
 			setState(GameStates.PAUSE);
 		}
 		pauseMenu.show();
-		activeInput = false;
+		setInputActive(false);
 		multiplexer.removeProcessor(stage);
 	}
 
@@ -820,8 +823,7 @@ public class GameScreen extends ScreenAdapter{
 				setState(GameStates.RUN);
 				break;
 			case RUN:
-//				inputHandler.setActive(true);
-                activeInput = true;
+				setInputActive(true);
 				engine.getSystem(CollisionSystem.class).setProcessing(true);
 				break;
 			case PAUSE:
@@ -848,6 +850,14 @@ public class GameScreen extends ScreenAdapter{
 				break;
 			default:
 				break;
+		}
+	}
+
+	private void setInputActive(boolean b){
+		if(Settings.instance.controls){
+			inputHandler.setActive(b);
+		}else {
+			stageHUD.setActive(b);
 		}
 	}
 
