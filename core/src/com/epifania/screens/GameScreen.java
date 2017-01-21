@@ -54,6 +54,7 @@ public class GameScreen extends ScreenAdapter{
 	private StageHUD stageHUD;
 	private Skin skin;
 	private PauseMenu pauseMenu;
+	private SettingsPanel settingsPanel;
 	private Button actionButton;
 	private Button lockedButton;
 	private Button pauseButton;
@@ -603,6 +604,8 @@ public class GameScreen extends ScreenAdapter{
                 stageHUD.getHeight() - 50 - coinsIndicator.getHeight()
         );
 
+		settingsPanel = new SettingsPanel(skin,bundle_ui);
+
 		pauseMenu = new PauseMenu(new PauseMenu.Listener() {
 			@Override
 			public void exit() {
@@ -613,10 +616,17 @@ public class GameScreen extends ScreenAdapter{
 			public void resume1() {
 				unpause();
 			}
+
+			@Override
+			public void showSettings() {
+				settingsPanel.show();
+			}
+
+
 		},bundle_ui);
 
-		pauseMenu.setPosition(stageHUD.getWidth()*0.5f - pauseMenu.getWidth()*0.5f,
-				stageHUD.getHeight()*0.5f - pauseMenu.getHeight()*0.5f);
+		pauseMenu.setPosition(0,0);
+		pauseMenu.setFillParent(true);
 		pauseMenu.setVisible(false);
 
 		if(!Settings.instance.setted){
@@ -629,7 +639,8 @@ public class GameScreen extends ScreenAdapter{
 				 }
 			});
 			Label labelD = new Label(bundle_ui.get("changeControlDialog"),skin,"middle");
-			labelD.setColor(Color.BROWN);
+			labelD.setColor(Color.BLACK);
+			labelD.setAlignment(Align.center);
 			labelD.setWrap(true);
 			dialog1.getContentTable().add(labelD).width(400).pad(30).padTop(0);
 			dialog1.button(dialogButton);
@@ -680,6 +691,7 @@ public class GameScreen extends ScreenAdapter{
 		stageHUD.addActor(coinsIndicator);
 		stageHUD.addActor(pauseButton);
 		stageHUD.addActor(pauseMenu);
+		stageHUD.addActor(settingsPanel);
 		stageHUD.setDebugAll(false);
 
 		//Set input processor
@@ -691,6 +703,11 @@ public class GameScreen extends ScreenAdapter{
 		Gdx.input.setInputProcessor(multiplexer);
 	}
 
+	/**
+	 * @param control False: Buttons , True: Touch
+	 * @param inputSelectionTable
+	 * @param dialog1 Show dialog with information
+	 */
 	private void onControlSelected(boolean control, final Table inputSelectionTable, final Dialog dialog1){
 		Settings.instance.controls = control;
 		Settings.instance.setted = true;
@@ -702,6 +719,23 @@ public class GameScreen extends ScreenAdapter{
 				Actions.delay(0.5f),
 				Actions.fadeIn(0.5f, Interpolation.exp5)
 		));
+	}
+
+	private void switchControl(boolean control, final Dialog dialog1){
+		if(Settings.instance.controls == control) return;
+
+		Settings.instance.controls = control;
+		Settings.instance.setted = true;
+
+		if(control) {
+			stageHUD.removeAsController();
+			inputHandler = new InputHandler(engine, inputController);
+			multiplexer.addProcessor(inputHandler);
+		}else{
+			stageHUD.setAsController(inputController);
+			multiplexer.removeProcessor(inputHandler);
+		}
+
 	}
 
 	@Override
@@ -725,7 +759,7 @@ public class GameScreen extends ScreenAdapter{
 		if(gameState==GameStates.PAUSE){
 			setState(previousGameState);
 		}
-		pauseMenu.setVisible(false);
+		pauseMenu.hide();
 //		inputHandler.setActive(true);
         activeInput = true;
 		multiplexer.addProcessor(0,stage);
@@ -736,7 +770,7 @@ public class GameScreen extends ScreenAdapter{
 		if(gameState==GameStates.RUN) {
 			setState(GameStates.PAUSE);
 		}
-		pauseMenu.setVisible(true);
+		pauseMenu.show();
 		activeInput = false;
 		multiplexer.removeProcessor(stage);
 	}
