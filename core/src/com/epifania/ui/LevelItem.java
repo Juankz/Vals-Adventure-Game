@@ -1,8 +1,6 @@
 package com.epifania.ui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -37,7 +35,6 @@ public class LevelItem extends WidgetGroup {
         background = new Image(atlas.findRegion("background"));
         frame = new Image(atlas.findRegion("frame"));
         medalImage = new Image(skin.getDrawable("medal"));
-        frame = new Image(atlas.findRegion("frame"));
         play = new Image(skin.getDrawable("play"));
         medalImage = new Image(skin.getDrawable("medal"));
         title = new Label(bundle.get("chapter").toUpperCase()+" "+new RomanNumeral(level).toString(),skin,"header");
