@@ -19,7 +19,7 @@
 
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
     "default": {"font": "default", "fontColor": "white"},
-    "dialog": {"font": "default", "fontColor": "white"},
+    "dialog": {"font": "normal", "fontColor": "white"},
     "title": {"font": "title", "fontColor": "white"},
     "middle_outline": {"font": "middle_outline", "fontColor": "white"},
     "middle": {"font": "middle", "fontColor": "white"},
@@ -32,6 +32,7 @@
 
   "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle":{
    "action":{"up": "action2" , "down":"action2_p"},
+   "back":{"up": "back1" , "down":"back1_p"},
     "next":{"up":"action3","down":"action3_p"},
     "info":{"up":"info2","down":"info2_p"},
     "share":{"up":"share2","down":"share2_p"},

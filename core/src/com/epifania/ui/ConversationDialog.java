@@ -23,7 +23,7 @@ public class ConversationDialog extends Group {
     public Listener listener;
 
     public ConversationDialog(Skin skin){
-        text = new Label("",skin,"dialog");
+        text = new Label("",skin);
         text.setWrap(true);
         text.setAlignment(Align.center);
         container = new Table();

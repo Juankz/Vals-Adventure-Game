@@ -70,6 +70,9 @@ public class MainMenuScreen extends ScreenAdapter {
 			debug = !debug;
 			stage.setDebugAll(debug);
 		}
+		if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
+			Gdx.app.exit();
+		}
 	}
 	@Override
 	public void resize(int width, int height) {

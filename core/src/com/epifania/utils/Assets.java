@@ -79,6 +79,8 @@ public class Assets implements Disposable, AssetErrorListener{
 		parameter.fontParameters.minFilter = Texture.TextureFilter.MipMapLinearNearest;
 		parameter.fontParameters.genMipMaps = true;
 		this.assetManager.load("gameFont.fnt",BitmapFont.class,parameter);
+		parameter.fontParameters.size=30;
+		this.assetManager.load("normal.fnt",BitmapFont.class,parameter);
 		FreetypeFontLoader.FreeTypeFontLoaderParameter parameter2 = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
 		parameter2.fontFileName = "user interface/fonts/FreeSerifBold.ttf";
 		parameter2.fontParameters.size = 50;
@@ -141,6 +143,8 @@ public class Assets implements Disposable, AssetErrorListener{
 		ObjectMap<String, Object> resources = new ObjectMap<String, Object>();
 		BitmapFont f=assetManager.get("gameFont.fnt",BitmapFont.class);
 		BitmapFont skinFont = new BitmapFont(f.getData(),f.getRegions(),true);
+		BitmapFont f1=assetManager.get("normal.fnt",BitmapFont.class);
+		BitmapFont skinFont1 = new BitmapFont(f1.getData(),f1.getRegions(),true);
 		BitmapFont f2 = assetManager.get("bigFont.fnt",BitmapFont.class);
 		BitmapFont skinFont2 = new BitmapFont(f2.getData(),f2.getRegions(),true);
 		BitmapFont f3 = assetManager.get("midFont.fnt",BitmapFont.class);
@@ -152,6 +156,7 @@ public class Assets implements Disposable, AssetErrorListener{
 		BitmapFont f6 = assetManager.get("h3title.fnt",BitmapFont.class);
 		BitmapFont fontTitle2 = new BitmapFont(f6.getData(),f6.getRegions(),true);
 		resources.put("default",skinFont);
+		resources.put("normal",skinFont1);
 		resources.put("title",skinFont2);
 		resources.put("middle",skinFont3);
 		resources.put("middle_outline",skinFont4);

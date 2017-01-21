@@ -34,6 +34,7 @@ public class LevelSelectionScreen extends ScreenAdapter {
 
     private Container<Button> leftArrow;
     private Container<Button> rightArrow;
+    private Button backButton;
     private ScrollPane scrollPane;
     private Table levelsContainer;
 
@@ -180,9 +181,12 @@ public class LevelSelectionScreen extends ScreenAdapter {
             }
         });
 
+        backButton = UI_Utils.genericButton(skin,"back",40,pageHeight -120, new MainMenuScreen(batch));
+
         stage.addActor(scrollPane);
         stage.addActor(leftArrow);
         stage.addActor(rightArrow);
+        stage.addActor(backButton);
 
         stage.setDebugAll(debug);
         Gdx.input.setInputProcessor(stage);

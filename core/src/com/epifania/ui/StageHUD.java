@@ -47,8 +47,7 @@ public class StageHUD extends Stage {
 
     public StageHUD(Viewport viewPort, Batch batch, InputController inputController){
         super(viewPort,batch);
-        this.inputController = inputController;
-        setAsController();
+        setAsController(inputController);
     }
 
     @Override
@@ -120,7 +119,8 @@ public class StageHUD extends Stage {
         controlTable.setPosition(0,20);
     }
 
-    public void setAsController(){
+    public void setAsController(InputController inputController){
+        this.inputController = inputController;
         init();
         addActor(controlTable);
         isController = true;
@@ -130,6 +130,7 @@ public class StageHUD extends Stage {
         controlTable.remove();
         isController = false;
         isControllerActive = false;
+        controlTable.setVisible(false);
     }
 
     public void setActive(boolean b){
