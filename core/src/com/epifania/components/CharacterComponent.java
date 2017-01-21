@@ -21,7 +21,7 @@ public class CharacterComponent implements Component{
     public States state = States.WAITING_IN;
 
     public enum Character{
-        GOMH, PINKY, MOM, BLUE, BONNY, CAPTAIN
+        GOMH, PINKY, MOM, MARCO, BONNY, CAPTAIN
     }
 
     public enum States{

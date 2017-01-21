@@ -710,7 +710,7 @@
   <object name="MARCO" type="character" x="1610" y="2310" width="70" height="140">
    <properties>
     <property name="conversations" value="B1"/>
-    <property name="name" value="BLUE"/>
+    <property name="name" value="MARCO"/>
    </properties>
   </object>
   <object type="door" x="6580" y="1400" width="70" height="140">

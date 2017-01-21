@@ -1737,9 +1737,8 @@ public class LevelBuilder {
                 out.put(CharacterComponent.SAD,Assets.instance.momAnimations.sad);
                 out.put(CharacterComponent.HAPPY,Assets.instance.momAnimations.happy);
                 break;
-            case BLUE:
-                out.put(CharacterComponent.IDLE,Assets.instance.blueAnimations.idle);
-                out.put(CharacterComponent.TALKING,Assets.instance.blueAnimations.talk);
+            case MARCO:
+                out.put(CharacterComponent.IDLE,Assets.instance.marcoAnimations.idle);
                 break;
             case BONNY:
                 out.put(CharacterComponent.IDLE,Assets.instance.bonnyAnimations.idle);
