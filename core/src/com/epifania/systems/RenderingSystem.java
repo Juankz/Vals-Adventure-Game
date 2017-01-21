@@ -9,7 +9,10 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
@@ -18,6 +21,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 import com.epifania.components.*;
+import com.epifania.utils.Assets;
 import com.epifania.utils.Constants;
 import com.epifania.utils.ParallaxCamera;
 
@@ -39,7 +43,7 @@ public class RenderingSystem extends IteratingSystem {
 	private ComponentMapper<TransformComponent> transformM;
 	
 	public RenderingSystem(SpriteBatch batch) {
-		super(Family.all(TransformComponent.class, TextureComponent.class).get());
+		super(Family.all(TransformComponent.class).one(TextureComponent.class,ParticleEffectComponent.class).get());
 		
 		textureM = ComponentMapper.getFor(TextureComponent.class);
 		transformM = ComponentMapper.getFor(TransformComponent.class);
@@ -87,7 +91,7 @@ public class RenderingSystem extends IteratingSystem {
 				float scrollX = entity.getComponent(ParallaxComponent.class).scrollingFactorX;
 				float scrollY = entity.getComponent(ParallaxComponent.class).scrollingFactorY;
 				batch.setProjectionMatrix(cam.calculateParallaxMatrix(scrollX, scrollY));
-				drawEntity(entity,false);
+				drawEntity(entity,deltaTime,false);
 			}
 		}
 		batch.end();
@@ -103,7 +107,7 @@ public class RenderingSystem extends IteratingSystem {
 			for (Entity entity : renderQueue) {
 				if (entity.getComponent(ParallaxComponent.class) != null) continue;
 				if (entity.flags != 1) continue; //Does not draw an object which is not in the vals active layer
-				drawEntity(entity, true);
+				drawEntity(entity, deltaTime, true);
 			}
 			batch.end();
 		}
@@ -124,7 +128,7 @@ public class RenderingSystem extends IteratingSystem {
 			for (Entity entity : renderQueue) {
 				if (entity.getComponent(ParallaxComponent.class) != null) continue;
 				if (entity.flags != 0) continue; //Does not draw an object which is not in the vals active layer
-				drawEntity(entity, true);
+				drawEntity(entity,deltaTime, true);
 			}
 			batch.end();
 		}
@@ -132,13 +136,35 @@ public class RenderingSystem extends IteratingSystem {
 		renderQueue.clear();
 	}
 
-	private void drawEntity(Entity entity,boolean cull) {
+	private void drawEntity(Entity entity,float delta,boolean cull) {
+		//TODO Clean code
 		TextureComponent tex = textureM.get(entity);
+		ParticleEffectComponent particleComponent = entity.getComponent(ParticleEffectComponent.class);
 
-		if (tex.region == null) {
-			return;
+		//Check if there must be rendered a texture or particle effect or both
+		if(tex==null){
+			if(particleComponent==null){
+				return;
+			}else {
+				drawEffect(entity,delta);
+				return;
+			}
 		}
 
+		if (tex.region == null) {
+			if(entity.getComponent(ParticleEffectComponent.class)!=null){
+				drawEffect(entity,delta);
+				return;
+			}else {
+				return;
+			}
+		}
+		//There is a texture, check if a particle effect must be rendered
+		if(entity.getComponent(ParticleEffectComponent.class)!=null){
+			drawEffect(entity,delta);
+		}
+
+		//Render Texture
 		TransformComponent t = transformM.get(entity);
 
 		float width = tex.region.getRegionWidth()*PIXELS_TO_METRES;
@@ -162,10 +188,23 @@ public class RenderingSystem extends IteratingSystem {
 			}
 		}
 
+		//draw
 		batch.setColor(1,1,1,tex.alpha);
 		batch.draw(tex.region, posX-originX, posY-originY,originX,originY,width,height,t.scale.x,t.scale.y,t.rotation);
 		batch.setColor(1,1,1,1);
+
+
 	}
+
+	private void drawEffect(Entity entity,float delta){
+		ParticleEffectComponent particleEffectComponent = entity.getComponent(ParticleEffectComponent.class);
+		if(particleEffectComponent.particleEffect==null)return;
+
+		ParticleEffectPool.PooledEffect effect = particleEffectComponent.particleEffect;
+		effect.draw(batch, delta);
+		Gdx.app.debug("Rendering System","rendering effect");
+	}
+
 	@Override
 	public void processEntity(Entity entity, float deltaTime) {
 		renderQueue.add(entity);

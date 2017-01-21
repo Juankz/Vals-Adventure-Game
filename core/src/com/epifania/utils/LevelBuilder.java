@@ -1640,6 +1640,7 @@ public class LevelBuilder {
                     entity.add(animation);
                     entity.add(stateComponent);
                     entity.add(textureComponent);
+                    entity.add(new ParticleEffectComponent());
                     entity.flags = flag;
                     engine.addEntity(entity);
 

@@ -92,7 +92,7 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 				if(coin.flags!=val.flags)continue;
 				BoundsComponent coinBounds = bm.get(coin);
 				if(coinBounds.bounds.overlaps(valBounds.bounds)){
-					engine.removeEntity(coin);
+					engine.getSystem(CoinSystem.class).picked(coin);
 					listener.pickCoin();
 				}
 			}
