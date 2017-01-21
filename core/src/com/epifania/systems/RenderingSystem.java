@@ -202,7 +202,6 @@ public class RenderingSystem extends IteratingSystem {
 
 		ParticleEffectPool.PooledEffect effect = particleEffectComponent.particleEffect;
 		effect.draw(batch, delta);
-		Gdx.app.debug("Rendering System","rendering effect");
 	}
 
 	@Override
