@@ -336,6 +336,8 @@ public class GameScreen extends ScreenAdapter{
 								public void run() {
 									coinsCollected++;
 									coinsLabel.setText(String.valueOf(coinsCollected));
+									SoundManager.playSound("sounds/pickup_coin.ogg");
+
 								}
 							}),
 							Actions.delay(delay),
