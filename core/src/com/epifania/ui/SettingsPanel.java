@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.epifania.utils.Settings;
 import com.epifania.utils.SoundManager;
+import com.epifania.utils.UI_Utils;
 
 /**
  * Created by juan on 1/18/17.
@@ -134,6 +135,7 @@ public class SettingsPanel extends Panel {
         this.add(root).center();
 
         //Add listeners
+        ok_button.addListener(UI_Utils.clickSound());
         ok_button.addListener(new ClickListener(){
             public void clicked (InputEvent event, float x, float y) {
                 listener.applyChanges();
@@ -167,6 +169,7 @@ public class SettingsPanel extends Panel {
                 set_control_text();
             }
         });
+        next_control_button.addListener(UI_Utils.clickSound());
 
         previous_control_button.addListener(new ClickListener(){
             public void clicked (InputEvent event, float x, float y) {
@@ -174,6 +177,7 @@ public class SettingsPanel extends Panel {
                 set_control_text();
             }
         });
+        previous_control_button.addListener(UI_Utils.clickSound());
 
         next_language_button.addListener(new ClickListener(){
             public void clicked (InputEvent event, float x, float y) {
@@ -186,6 +190,7 @@ public class SettingsPanel extends Panel {
                 set_language_text();
             }
         });
+        next_language_button.addListener(UI_Utils.clickSound());
 
         previous_language_button.addListener(new ClickListener(){
             public void clicked (InputEvent event, float x, float y) {
@@ -198,6 +203,7 @@ public class SettingsPanel extends Panel {
                 set_language_text();
             }
         });
+        previous_language_button.addListener(UI_Utils.clickSound());
 
         this.setVisible(false);
     }
