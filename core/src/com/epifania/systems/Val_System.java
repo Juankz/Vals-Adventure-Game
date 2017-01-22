@@ -67,6 +67,11 @@ public class Val_System extends IteratingSystem {
 
 				movement.velocity.x = 0;
 			}
+
+			/*
+			 * jump: order to jump has bee given
+			 * canJump: whether can or cannot jump
+			 */
 			if (jump && canJump) {
 				state.set(Val_Component.JUMP);
 				body.body.setLinearVelocity(body.body.getLinearVelocity().x,0);
@@ -121,7 +126,7 @@ public class Val_System extends IteratingSystem {
 	}
 
 	public boolean isJumping(){
-		return jump;
+		return !canJump;
 	}
 
     public void endJump() {
