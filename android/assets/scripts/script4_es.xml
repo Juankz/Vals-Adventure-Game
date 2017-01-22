@@ -8,6 +8,20 @@
             <Dialog character="GOMH">No parecía sospechoso. Oh querida, ¡Estamos perdidos!</Dialog>
             <Dialog character="VAL">No los estamos, voy por él</Dialog>
         </Conversation>
+        <!-- MAMÁ -->
+        <Conversation character="MOM" ID="M1" keys="NONE" secondary="NONE">
+            <Dialog character="MOM">¿Val?</Dialog>
+            <Dialog character="VAL">Perdón mamá, ahora no</Dialog>
+        </Conversation>
+        <Conversation character="MOM" ID="M2" keys="M1,GOAL" secondary="NONE">
+            <Dialog character="MOM">¿Val que estás haciendo?</Dialog>
+            <Dialog character="VAL">Debo partir para atrapar al ladrón</Dialog>
+            <Dialog character="MOM">¿Que no ves que es peligroso?</Dialog>
+            <Dialog character="VAL">Mamá, tengo que hacerlo, esto es quien soy</Dialog>
+            <Dialog character="VAL">Desearías que fuera diferente pero no lo soy</Dialog>
+            <Dialog character="MOM">Lo sé. Cuidate mucho Val, te quiero</Dialog>
+            <Dialog character="VAL">Yo también te quiero mamá, adiós</Dialog>
+        </Conversation>
         <!-- CAPITÁN -->
         <Conversation character="CAPTAIN" ID="C1" keys="NONE" secondary="NONE">
             <Dialog character="VAL">Capitan necesito viajar con usted</Dialog>

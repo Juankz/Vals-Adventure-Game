@@ -35,5 +35,6 @@
         <Dialog key = "HAMMER">That's the exit, let's break it with something</Dialog>
         <Dialog key = "KNIFE">I need to cut it</Dialog>
         <Dialog key = "GLANCE_FLAG">What is this?</Dialog>
+        <Dialog key = "ENTERED_CAVE">If there is and entrance, there must be an exit</Dialog>
     </SelfThoughts>
 </Script>

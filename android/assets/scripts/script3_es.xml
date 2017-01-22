@@ -16,5 +16,6 @@
         <Dialog key = "HAMMER">Esta es la salida, necesito romperla con algo</Dialog>
         <Dialog key = "KNIFE">Necesito cortar este lazo</Dialog>
         <Dialog key = "GLANCE_FLAG">¿Que es eso?</Dialog>
+        <Dialog key = "ENTERED_CAVE">Si hay una entrada, debe haber una salida</Dialog>
     </SelfThoughts>
 </Script>
