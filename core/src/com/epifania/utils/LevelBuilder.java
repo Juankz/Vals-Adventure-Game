@@ -1165,7 +1165,7 @@ public class LevelBuilder {
             TextureComponent textureComponent = new TextureComponent();
             MovementComponent movementComponent = new MovementComponent();
 
-            transform.pos.set((int)x,(int)y+i,0);
+            transform.pos.set((int)x,(int)y+i,1);
             transform.origin.set(0.0f,0.0f);
             transform.rotation = cell.getRotation();
             textureComponent.region = region;
