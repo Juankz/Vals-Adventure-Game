@@ -974,7 +974,9 @@ public class LevelBuilder {
         switchComponent.number = Integer.parseInt((String)object.getProperties().get("number"));
         switchComponent.cell = cell;
 
-        boundsComponent.bounds.set(x,y,w,h);
+        //Expand switch boundaries to allow easy collision
+        boundsComponent.bounds.set(x-0.5f,y,w+1,h);
+        boundsComponent.posOffset.x = -0.5f;
 
         Entity entity = new Entity();
         entity.add(animatedTileComponent);
