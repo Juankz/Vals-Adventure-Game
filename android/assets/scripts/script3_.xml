@@ -4,10 +4,10 @@
             <Dialog character="PINKY">Val! What are you doing here</Dialog>
             <Dialog character="VAL">Someone stole the golden carrot and ran this way</Dialog>
             <Dialog character="PINKY">Oh no! It must have been the brown bunnie that attacked me</Dialog>
-            <Dialog character="VAL">Attacked you?</Dialog>
-            <Dialog character="PINKY">Yes I lost my ribbon</Dialog>
-            <Dialog character="VAL">I found your ribbon, where did the thief go?</Dialog>
-            <Dialog character="PINKY">He went up the ladder, run and maybe you will catch it</Dialog>
+            <Dialog character="VAL">A brown bunny attacked you?</Dialog>
+            <Dialog character="PINKY">Yes then he ran up to the cave</Dialog>
+            <Dialog character="VAL">Thanks Pinky, that bunny won't scape</Dialog>
+            <Dialog character="PINKY">Good luck Val</Dialog>
         </Conversation>
         <!-- GOHM -->
         <Conversation character="GOMH" ID="G1"  keys = "NONE" secondary="NONE">
@@ -34,5 +34,6 @@
         <Dialog key = "PALA">I could dig into this, but how?</Dialog>
         <Dialog key = "HAMMER">That's the exit, let's break it with something</Dialog>
         <Dialog key = "KNIFE">I need to cut it</Dialog>
+        <Dialog key = "GLANCE_FLAG">What is this?</Dialog>
     </SelfThoughts>
 </Script>

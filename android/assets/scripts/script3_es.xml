@@ -3,8 +3,8 @@
         <Conversation character="PINKY" ID="P1" keys = "NONE" secondary="NONE">
             <Dialog character="PINKY">!Val! ¿Que haces aquí?</Dialog>
             <Dialog character="VAL">Alguien robó la Zanahoria Dorada y huyó hacia este camino</Dialog>
-            <Dialog character="PINKY">¡Oh no! Debió haber sido ese conejo marrón que me atacó</Dialog>
-            <Dialog character="VAL">¿Un conejo marrón te atacó?</Dialog>
+            <Dialog character="PINKY">¡Oh no! Debió haber sido ese conejo café que me atacó</Dialog>
+            <Dialog character="VAL">¿Un conejo café te atacó?</Dialog>
             <Dialog character="PINKY">Si y corrió hacia una cueva</Dialog>
             <Dialog character="VAL">Gracias Pinky, ese conejo no escapará</Dialog>
             <Dialog character="PINKY">Buena suerte Val</Dialog>
@@ -15,5 +15,6 @@
         <Dialog key = "PALA">Podría cavar aquí ¿Pero como?</Dialog>
         <Dialog key = "HAMMER">Esta es la salida, necesito romperla con algo</Dialog>
         <Dialog key = "KNIFE">Necesito cortar este lazo</Dialog>
+        <Dialog key = "GLANCE_FLAG">¿Que es eso?</Dialog>
     </SelfThoughts>
 </Script>
