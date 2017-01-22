@@ -274,7 +274,7 @@
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object type="wall" x="4760" y="1330" width="70" height="420"/>
+  <object type="wall" x="4760" y="1260" width="70" height="490"/>
   <object type="ground" x="5810" y="1190" width="1540" height="70">
    <properties>
     <property name="shape" value="0"/>
@@ -403,15 +403,15 @@
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object type="wall" x="3710" y="1330" width="490" height="420"/>
+  <object type="wall" x="3710" y="1260" width="490" height="490"/>
   <object type="trigger" x="0" y="1680" width="7420" height="70">
    <properties>
     <property name="action" value="die"/>
    </properties>
   </object>
-  <object type="wall" x="3080" y="1330" width="350" height="420"/>
-  <object type="wall" x="2450" y="1330" width="420" height="420"/>
-  <object type="wall" x="1260" y="1330" width="980" height="420"/>
+  <object type="wall" x="3080" y="1260" width="350" height="490"/>
+  <object type="wall" x="2450" y="1260" width="420" height="490"/>
+  <object type="wall" x="1260" y="1260" width="980" height="490"/>
   <object type="wall" x="840" y="1540" width="420" height="210"/>
   <object type="wall" x="0" y="1680" width="840" height="70"/>
   <object type="trigger" x="5469" y="1223" width="119" height="35">
