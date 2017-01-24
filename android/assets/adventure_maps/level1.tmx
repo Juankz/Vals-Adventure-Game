@@ -275,7 +275,7 @@
    </properties>
   </object>
   <object type="wall" x="4760" y="1260" width="70" height="490"/>
-  <object type="ground" x="5810" y="1190" width="1540" height="70">
+  <object type="ground" x="5880" y="1190" width="1470" height="70">
    <properties>
     <property name="shape" value="0"/>
    </properties>
