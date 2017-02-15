@@ -31,7 +31,7 @@ public class PlatformSystem extends IteratingSystem {
         BodyComponent bodyComponent = bodyMapper.get(entity);
 
         if(platformComponent.breaking){
-            if(platformComponent.breakingTime<=0){
+            if(platformComponent.time<=0){
                 bodyComponent.body.setType(BodyDef.BodyType.DynamicBody);
                 for(Fixture fixture : bodyComponent.body.getFixtureList()){
                     Filter filter = new Filter();
@@ -41,7 +41,7 @@ public class PlatformSystem extends IteratingSystem {
                     fixture.setFilterData(filter);
                 }
             }else {
-                platformComponent.breakingTime-=deltaTime;
+                platformComponent.time-=deltaTime;
             }
         }
     }
@@ -60,7 +60,7 @@ public class PlatformSystem extends IteratingSystem {
             BodyComponent bodyComponent = entity.getComponent(BodyComponent.class);
 
             platformComponent.breaking = false;
-            platformComponent.breakingTime = PlatformComponent.BREAKING_TIME_EASY;
+            platformComponent.time = platformComponent.breakingTime;
 
             bodyComponent.body.setType(BodyDef.BodyType.StaticBody);
             bodyComponent.body.setTransform(platformComponent.originalPosition,0);

@@ -545,6 +545,7 @@ public class LevelBuilder {
         property = object.getProperties().get("time");
         if(property != null) {
             platformComponent.breakingTime = Float.parseFloat((String)property);
+            platformComponent.time = platformComponent.breakingTime;
         }
 
         MapRecToWorldRec(object,boundsComponent.bounds);
