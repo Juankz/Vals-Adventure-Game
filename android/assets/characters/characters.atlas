@@ -76,7 +76,7 @@ Gomh/gomhRight
   index: -1
 Marco/idle1
   rotate: false
-  xy: 63, 1
+  xy: 991, 200
   size: 59, 100
   orig: 59, 100
   offset: 0, 0
@@ -139,7 +139,7 @@ Pinky/despective2
   index: -1
 Pinky/idle1
   rotate: false
-  xy: 991, 200
+  xy: 63, 1
   size: 59, 100
   orig: 59, 100
   offset: 0, 0

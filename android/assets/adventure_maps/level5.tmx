@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="70" tilewidth="70" tileheight="70" nextobjectid="39">
+ <properties>
+  <property name="background" value="background1.json"/>
+  <property name="music" value="Wacky Waiting.ogg"/>
+ </properties>
+ <tileset firstgid="1" source="base.tsx"/>
+ <tileset firstgid="197" source="GrassExtension.tsx"/>
+ <tileset firstgid="239" source="Items.tsx"/>
+ <layer name="GroundBack" width="200" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt27ENgCAURVHYfzIHcASNhUOohb2Jn/DRc5LXW3i1gVIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADemYM2dXoWAAAAAAAAAAAAAAAA4qwl7q4IjKbW2MGX3P+HqAEAAAAAAAAAAAAA8D9LiT2b7qw6X3G1sZ3bGw4yevJtb92GPsiq9XuvD0bWuwt9kFnvLvRBZgecNdWM
+  </data>
+ </layer>
+ <layer name="GroundMid" width="200" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1rCKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4A9rAAAE=
+  </data>
+ </layer>
+ <layer name="Builds Interior" width="200" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1rCKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4A9rAAAE=
+  </data>
+ </layer>
+ <layer name="Builds" width="200" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1rCKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4A9rAAAE=
+  </data>
+ </layer>
+ <layer name="Builds Front" width="200" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1rCKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4A9rAAAE=
+  </data>
+ </layer>
+ <layer name="Items" width="200" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt2rENgDAMAMGwAfsvwgQUDMAKzEFqkEUBkSNyJ7l3+5ZLAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6NNRZ6+zZS8CAAAA3MxT9gbQryV7AQAAYEhaHWJaHQAAePK2q3U5fxZ19XoZAAAA4HvuThDzDwIAALSmyyGmywEAACCPuxUAAAAAQJ4T984Jow==
+  </data>
+ </layer>
+ <layer name="Coins" width="200" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt2CEOACAQA8HD8//3IhBHSOpwzCR9wppWAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8MocPaDdTWgEttSCRiDTB2T6gEwfkOkDsvPv1QoAAAAAAAAAAAAAAAAAAAAAAMCfFhl3AMQ=
+  </data>
+ </layer>
+ <objectgroup name="Objects">
+  <object id="1" name="VAL" type="character" x="1470" y="3080" width="70" height="140">
+   <properties>
+    <property name="name" value="VAL"/>
+   </properties>
+  </object>
+  <object id="2" type="ground" x="0" y="4620" width="2380" height="280">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="4" type="ground" x="770" y="4480" width="1610" height="140">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="5" type="ground" x="630" y="4620">
+   <properties>
+    <property name="shape" value="1"/>
+   </properties>
+   <polygon points="0,0 140,-140.095 141,1.90541"/>
+  </object>
+  <object id="13" type="wall" x="1190" y="4060" width="70" height="70"/>
+  <object id="21" type="wall" x="1330" y="3710" width="70" height="70"/>
+  <object id="22" type="wall" x="1470" y="3290" width="70" height="70"/>
+  <object id="24" type="platform" x="1890" y="3290" width="70" height="70">
+   <properties>
+    <property name="breakable" value="true"/>
+    <property name="captureTile" value="true"/>
+    <property name="time" value="0.2"/>
+   </properties>
+  </object>
+  <object id="25" type="platform" x="2030" y="3290" width="70" height="70">
+   <properties>
+    <property name="breakable" value="true"/>
+    <property name="captureTile" value="true"/>
+    <property name="time" value="0.2"/>
+   </properties>
+  </object>
+  <object id="26" type="platform" x="1960" y="3290" width="70" height="70">
+   <properties>
+    <property name="breakable" value="true"/>
+    <property name="captureTile" value="true"/>
+    <property name="time" value="0.2"/>
+   </properties>
+  </object>
+  <object id="27" type="platform" x="2100" y="3290" width="70" height="70">
+   <properties>
+    <property name="breakable" value="true"/>
+    <property name="captureTile" value="true"/>
+    <property name="time" value="0.2"/>
+   </properties>
+  </object>
+  <object id="28" type="trigger" x="1900.36" y="3395.67" width="1378.64" height="34.3333">
+   <properties>
+    <property name="action" value="die"/>
+   </properties>
+  </object>
+  <object id="29" type="ground" x="1890" y="3430" width="1400" height="70">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="31" type="ground" x="2450" y="3290" width="210" height="70">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="33" type="wall" x="2520" y="2590" width="70" height="70"/>
+  <object id="34" type="wall" x="2730" y="2940" width="70" height="70"/>
+  <object id="35" type="bridge" x="2100" y="2170" width="210" height="70">
+   <properties>
+    <property name="continuous" value="true"/>
+    <property name="moving" value="true"/>
+    <property name="number" value="0"/>
+    <property name="target" value="7,0,-7,0"/>
+   </properties>
+  </object>
+  <object id="36" type="trigger" x="280" y="3850" width="70" height="770">
+   <properties>
+    <property name="action" value="checkpoint"/>
+    <property name="number" value="0"/>
+   </properties>
+  </object>
+  <object id="37" type="ground" x="560" y="2170" width="1330" height="70">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="38" type="ground" x="3010" y="2170" width="910" height="70">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Interior Objects"/>
+</map>

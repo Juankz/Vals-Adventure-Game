@@ -46,38 +46,66 @@ intro4
   orig: 197, 197
   offset: 0, 0
   index: -1
+intro5
+  rotate: false
+  xy: 1740, 724
+  size: 197, 197
+  orig: 197, 197
+  offset: 0, 0
+  index: -1
+intro6
+  rotate: false
+  xy: 1740, 724
+  size: 197, 197
+  orig: 197, 197
+  offset: 0, 0
+  index: -1
+intro7
+  rotate: false
+  xy: 1740, 724
+  size: 197, 197
+  orig: 197, 197
+  offset: 0, 0
+  index: -1
+intro8
+  rotate: false
+  xy: 1740, 724
+  size: 197, 197
+  orig: 197, 197
+  offset: 0, 0
+  index: -1
 
 level_selection2.png
 size: 2048,1024
 format: RGBA8888
 filter: MipMapLinearNearest,Linear
 repeat: none
-level1
-  rotate: false
-  xy: 913, 3
-  size: 421, 517
-  orig: 421, 517
-  offset: 0, 0
-  index: -1
-level2
-  rotate: false
-  xy: 1337, 3
-  size: 421, 517
-  orig: 421, 517
-  offset: 0, 0
-  index: -1
 level4
   rotate: false
-  xy: 1, 1
+  xy: 925, 3
   size: 453, 519
   orig: 453, 519
   offset: 0, 0
   index: -1
 level4_locked
   rotate: false
-  xy: 457, 1
+  xy: 1381, 3
   size: 453, 519
   orig: 453, 519
+  offset: 0, 0
+  index: -1
+level5
+  rotate: false
+  xy: 1, 1
+  size: 459, 521
+  orig: 459, 521
+  offset: 0, 0
+  index: -1
+level5_locked
+  rotate: false
+  xy: 463, 1
+  size: 459, 521
+  orig: 459, 521
   offset: 0, 0
   index: -1
 
@@ -86,23 +114,43 @@ size: 2048,1024
 format: RGBA8888
 filter: MipMapLinearNearest,Linear
 repeat: none
-level2_locked
-  rotate: false
-  xy: 425, 1
-  size: 421, 517
-  orig: 421, 517
-  offset: 0, 0
-  index: -1
-level3
+level1
   rotate: false
   xy: 1, 1
   size: 421, 517
   orig: 421, 517
   offset: 0, 0
   index: -1
-level3_locked
+level2
+  rotate: false
+  xy: 425, 1
+  size: 421, 517
+  orig: 421, 517
+  offset: 0, 0
+  index: -1
+level2_locked
+  rotate: false
+  xy: 1273, 1
+  size: 421, 517
+  orig: 421, 517
+  offset: 0, 0
+  index: -1
+level3
   rotate: false
   xy: 849, 1
+  size: 421, 517
+  orig: 421, 517
+  offset: 0, 0
+  index: -1
+
+level_selection4.png
+size: 512,1024
+format: RGBA8888
+filter: MipMapLinearNearest,Linear
+repeat: none
+level3_locked
+  rotate: false
+  xy: 1, 1
   size: 421, 517
   orig: 421, 517
   offset: 0, 0
