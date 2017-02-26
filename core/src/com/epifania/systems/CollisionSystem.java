@@ -380,6 +380,7 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 				}
 				if (otherEntity.getComponent(PlatformComponent.class) != null) {
 					addFeetCollide(valEntity,otherEntity);
+					platformCollision(valEntity,otherEntity);
 				}
 		}
 
@@ -397,7 +398,7 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 			}
 			if (otherEntity.getComponent(PlatformComponent.class) != null) {
 				addBodyCollide(valEntity,otherEntity);
-				platformCollision();
+				platformCollision(valEntity,otherEntity);
 			}
 
 		if(otherEntity.getComponent(SpringComponent.class)!=null){
@@ -592,8 +593,13 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		}
 		valSystem.endJump();
 	}
-	private void platformCollision(){
-		engine.getSystem(PlatformSystem.class).characterCollision(otherEntity);
+	private void platformCollision(Entity val, Entity platform){
+		Val_Component val_component = val.getComponent(Val_Component.class);
+		if(val_component.feetCollisionEntities.contains(platform,true)&&
+				val_component.bodyCollisionEntities.contains(platform,true)){
+			engine.getSystem(PlatformSystem.class).characterCollision(otherEntity);
+		}
+
 	}
 	private void bridgeCollision(){
 //		Val_System vs = this.getEngine().getSystem(Val_System.class);
