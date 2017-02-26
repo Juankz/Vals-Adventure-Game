@@ -307,6 +307,9 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 			setButtonVisibility(actionButton,isOnSwitch);
 			setButtonVisibility(lockedButton,isOnSwitchLocked);
 			setButtonVisibility(itemImage,isOnSwitchUnlocked);
+
+			Gdx.app.debug(tag,"body collide= "+val.getComponent(Val_Component.class).bodyCollide);
+			Gdx.app.debug(tag,"feet collide= "+val.getComponent(Val_Component.class).feetCollide);
 		}
 	}
 
@@ -366,17 +369,17 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		if(valEntity!=null && otherEntity!=null) {
 
 				if (otherEntity.getComponent(GroundComponent.class) != null) {
-					addFeetCollide(valEntity);
+					addFeetCollide(valEntity,otherEntity);
 				}
 				if (otherEntity.getComponent(BoxComponent.class) != null) {
-					addFeetCollide(valEntity);
+					addFeetCollide(valEntity,otherEntity);
 				}
 				if (Family.all(BridgeComponent.class).get().matches(otherEntity)) {
-					addFeetCollide(valEntity);
+					addFeetCollide(valEntity,otherEntity);
 					bridgeCollision();
 				}
 				if (otherEntity.getComponent(PlatformComponent.class) != null) {
-					addFeetCollide(valEntity);
+					addFeetCollide(valEntity,otherEntity);
 				}
 		}
 
@@ -384,16 +387,16 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		getBodyCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
 		if(valEntity==null || otherEntity==null) return;
 			if (otherEntity.getComponent(GroundComponent.class) != null) {
-				addBodyCollide(valEntity);
+				addBodyCollide(valEntity,otherEntity);
 			}
 			if (otherEntity.getComponent(BoxComponent.class) != null) {
-				addBodyCollide(valEntity);
+				addBodyCollide(valEntity,otherEntity);
 			}
 			if (Family.all(BridgeComponent.class).get().matches(otherEntity)) {
-				addBodyCollide(valEntity);
+				addBodyCollide(valEntity,otherEntity);
 			}
 			if (otherEntity.getComponent(PlatformComponent.class) != null) {
-				addBodyCollide(valEntity);
+				addBodyCollide(valEntity,otherEntity);
 				platformCollision();
 			}
 
@@ -411,18 +414,19 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		valEntity =null;
 		otherEntity = null;
 
+		getBodyCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
 		if(valEntity!=null && otherEntity!=null) {
 			if (otherEntity.getComponent(GroundComponent.class) != null) {
-				subBodyCollide(valEntity);
+				subBodyCollide(valEntity,otherEntity);
 			}
 			if (otherEntity.getComponent(BoxComponent.class) != null) {
-				subBodyCollide(valEntity);
+				subBodyCollide(valEntity,otherEntity);
 			}
 			if (Family.all(BridgeComponent.class).get().matches(otherEntity)) {
-				subBodyCollide(valEntity);
+				subBodyCollide(valEntity,otherEntity);
 			}
 			if (otherEntity.getComponent(PlatformComponent.class) != null) {
-				subBodyCollide(valEntity);
+				subBodyCollide(valEntity,otherEntity);
 			}
 		}
 
@@ -431,16 +435,16 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		if(valEntity==null || otherEntity==null) return;
 
 		if(otherEntity.getComponent(GroundComponent.class)!=null){
-			subFeetCollide(valEntity);
+			subFeetCollide(valEntity,otherEntity);
 		}
 		if(otherEntity.getComponent(BoxComponent.class)!=null){
-			subFeetCollide(valEntity);
+			subFeetCollide(valEntity,otherEntity);
 		}
 		if(otherEntity.getComponent(PlatformComponent.class)!=null){
-			subFeetCollide(valEntity);
+			subFeetCollide(valEntity,otherEntity);
 		}
 		if(Family.all(BridgeComponent.class).get().matches(otherEntity)){
-			subFeetCollide(valEntity);
+			subFeetCollide(valEntity,otherEntity);
 			valEntity.getComponent(MovementComponent.class).bringerBody = null;
 		}
 	}
@@ -535,22 +539,37 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		}
 		return false;
 	}
-	private void addBodyCollide(Entity val){
-		val.getComponent(Val_Component.class).bodyCollide++;
-		checkIfCanJump(val);
+	private void addBodyCollide(Entity val,Entity other){
+		Val_Component val_component = val.getComponent(Val_Component.class);
+		if(!val_component.bodyCollisionEntities.contains(other,true)){
+			val_component.bodyCollisionEntities.add(other);
+			val_component.bodyCollide++;
+			checkIfCanJump(val);
+		}
 	}
-	private void addFeetCollide(Entity val){
-		val.getComponent(Val_Component.class).feetCollide++;
-		checkIfCanJump(val);
+	private void addFeetCollide(Entity val,Entity other){
+		Val_Component val_component = val.getComponent(Val_Component.class);
+		if(!val_component.feetCollisionEntities.contains(other,true)){
+			val_component.feetCollisionEntities.add(other);
+			val_component.feetCollide++;
+			checkIfCanJump(val);
+		}
 	}
-	private void subBodyCollide(Entity val){
-		val.getComponent(Val_Component.class).bodyCollide--;
-		this.getEngine().getSystem(Val_System.class).canJump=checkIfCanJump(val);
-
+	private void subBodyCollide(Entity val,Entity other){
+		Val_Component val_component = val.getComponent(Val_Component.class);
+		if(val_component.bodyCollisionEntities.contains(other,true)) {
+			val_component.bodyCollisionEntities.removeValue(other,true);
+			val_component.bodyCollide--;
+			this.getEngine().getSystem(Val_System.class).canJump = checkIfCanJump(val);
+		}
 	}
-	private void subFeetCollide(Entity val){
-		val.getComponent(Val_Component.class).feetCollide--;
-		this.getEngine().getSystem(Val_System.class).canJump=checkIfCanJump(val);
+	private void subFeetCollide(Entity val,Entity other){
+		Val_Component val_component = val.getComponent(Val_Component.class);
+		if(val_component.feetCollisionEntities.contains(other,true)) {
+			val_component.feetCollisionEntities.removeValue(other,true);
+			val_component.feetCollide--;
+			this.getEngine().getSystem(Val_System.class).canJump = checkIfCanJump(val);
+		}
 	}
 	private void springCollision(){
 		Val_System valSystem = this.getEngine().getSystem(Val_System.class);
@@ -580,5 +599,10 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 //		Val_System vs = this.getEngine().getSystem(Val_System.class);
 //		vs.endJump();
 		valEntity.getComponent(MovementComponent.class).bringerBody = otherEntity.getComponent(BodyComponent.class).body;
+	}
+	public void breakPlatform(Entity platform){
+		Entity val = vals.first();
+		subBodyCollide(val,platform);
+		subFeetCollide(val,platform);
 	}
 }

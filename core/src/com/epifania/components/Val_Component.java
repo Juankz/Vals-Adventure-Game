@@ -22,6 +22,8 @@ public class Val_Component implements Component{
 	public static final float HEIGHT = 1.0f;
 
 	public final Array<Entity> objects = new Array<Entity>();
+	public final Array<Entity> bodyCollisionEntities = new Array<Entity>();
+	public final Array<Entity> feetCollisionEntities = new Array<Entity>();
 	public final Array<String> conversationKeys = new Array<String>();
 
 	public int bodyCollide = 0;

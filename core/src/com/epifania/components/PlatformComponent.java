@@ -12,6 +12,7 @@ public class PlatformComponent implements Component {
     public static final float BREAKING_TIME_HARD = 0.75f;
     public boolean breakable = false;
     public boolean breaking = false;
+    public boolean broke = false;
     public float breakingTime = BREAKING_TIME_EASY;
     public float time = BREAKING_TIME_EASY;
     public final Vector2 originalPosition = new Vector2();

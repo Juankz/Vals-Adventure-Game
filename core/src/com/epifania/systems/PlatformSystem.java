@@ -30,7 +30,7 @@ public class PlatformSystem extends IteratingSystem {
         PlatformComponent platformComponent = platformMapper.get(entity);
         BodyComponent bodyComponent = bodyMapper.get(entity);
 
-        if(platformComponent.breaking){
+        if(platformComponent.breaking && !platformComponent.broke){
             if(platformComponent.time<=0){
                 bodyComponent.body.setType(BodyDef.BodyType.DynamicBody);
                 for(Fixture fixture : bodyComponent.body.getFixtureList()){
@@ -40,6 +40,7 @@ public class PlatformSystem extends IteratingSystem {
                     filter.groupIndex = 0;
                     fixture.setFilterData(filter);
                 }
+                getEngine().getSystem(CollisionSystem.class).breakPlatform(entity);
             }else {
                 platformComponent.time-=deltaTime;
             }
