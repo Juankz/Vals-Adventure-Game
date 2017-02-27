@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-down" width="200" height="70" tilewidth="70" tileheight="70" nextobjectid="73">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="70" tilewidth="70" tileheight="70" nextobjectid="74">
  <properties>
   <property name="background" value="background1.json"/>
   <property name="music" value="Wacky Waiting.ogg"/>
@@ -43,7 +43,7 @@
   </data>
  </layer>
  <objectgroup name="Objects">
-  <object id="1" name="VAL" type="character" x="2491" y="3150" width="70" height="140">
+  <object id="1" name="VAL" type="character" x="630" y="1960" width="70" height="140">
    <properties>
     <property name="name" value="VAL"/>
    </properties>
@@ -66,28 +66,28 @@
    <properties>
     <property name="breakable" value="true"/>
     <property name="captureTile" value="true"/>
-    <property name="time" value="1"/>
+    <property name="time" value="0.2"/>
    </properties>
   </object>
   <object id="25" type="platform" x="2030" y="3290" width="70" height="70">
    <properties>
-    <property name="breakable" value="false"/>
+    <property name="breakable" value="true"/>
     <property name="captureTile" value="true"/>
-    <property name="time" value="1"/>
+    <property name="time" value="0.2"/>
    </properties>
   </object>
   <object id="26" type="platform" x="1960" y="3290" width="70" height="70">
    <properties>
     <property name="breakable" value="true"/>
     <property name="captureTile" value="true"/>
-    <property name="time" value="1"/>
+    <property name="time" value="0.2"/>
    </properties>
   </object>
   <object id="27" type="platform" x="2100" y="3290" width="70" height="70">
    <properties>
     <property name="breakable" value="true"/>
     <property name="captureTile" value="true"/>
-    <property name="time" value="1"/>
+    <property name="time" value="0.4"/>
    </properties>
   </object>
   <object id="28" type="trigger" x="1900.36" y="3395.67" width="1378.64" height="34.3333">
@@ -135,21 +135,21 @@
    <properties>
     <property name="breakable" value="true"/>
     <property name="captureTile" value="true"/>
-    <property name="time" value="0.2"/>
+    <property name="time" value="0.4"/>
    </properties>
   </object>
   <object id="42" type="platform" x="1120" y="1610" width="70" height="44">
    <properties>
     <property name="breakable" value="true"/>
     <property name="captureTile" value="true"/>
-    <property name="time" value="0.2"/>
+    <property name="time" value="0.4"/>
    </properties>
   </object>
   <object id="43" type="platform" x="910" y="1470" width="70" height="33.3333">
    <properties>
     <property name="breakable" value="true"/>
     <property name="captureTile" value="true"/>
-    <property name="time" value="0.2"/>
+    <property name="time" value="0.4"/>
    </properties>
   </object>
   <object id="45" type="wall" x="420" y="420" width="70" height="1820"/>
@@ -205,26 +205,13 @@
     <property name="jointID" value="0"/>
    </properties>
   </object>
-  <object id="66" type="pack" x="770" y="1120" width="70" height="70">
-   <properties>
-    <property name="amount" value="10"/>
-    <property name="body" value="BodyB"/>
-    <property name="captureTile" value="true"/>
-    <property name="content" value="coins"/>
-    <property name="dynamic" value="true"/>
-    <property name="free" value="false"/>
-    <property name="hasJoint" value="true"/>
-    <property name="jointID" value="0"/>
-    <property name="key" value="NONE"/>
-   </properties>
-  </object>
   <object id="67" type="distance joint" x="804" y="602">
    <properties>
     <property name="jointID" value="0"/>
    </properties>
    <polyline points="0,0 1,518"/>
   </object>
-  <object id="68" type="button" x="560" y="1400" width="70" height="70">
+  <object id="68" type="button" x="560" y="1442.5" width="70" height="27.5">
    <properties>
     <property name="number" value="0"/>
     <property name="object" value="joint"/>
@@ -247,6 +234,19 @@
   <object id="71" type="ground" x="2450" y="3290" width="210" height="70">
    <properties>
     <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="73" type="collectable" x="770" y="1120" width="70" height="70">
+   <properties>
+    <property name="body" value="BodyB"/>
+    <property name="captureTile" value="true"/>
+    <property name="conversationKey" value="YELLOW KEY"/>
+    <property name="dynamic" value="true"/>
+    <property name="free" value="true"/>
+    <property name="hasJoint" value="true"/>
+    <property name="jointID" value="0"/>
+    <property name="key" value="YELLOW KEY"/>
+    <property name="tag" value="YELLOW KEY"/>
    </properties>
   </object>
  </objectgroup>
