@@ -41,7 +41,7 @@
     "next":{"up":"action3","down":"action3_p"},
     "info":{"up":"info2","down":"info2_p"},
     "share":{"up":"share2","down":"share2_p"},
-    "locked":{"up":"locked2","down":"locked2_p"},
+    "locked":{"up":"locked","down":"locked_p"},
     "leftArrow":{"up":"arrowLeft","down":"arrowLeft_p"},
     "rightArrow":{"up":"arrowRight","down":"arrowRight_p"},
     "close":{"up":"close","down":"close_p"},
