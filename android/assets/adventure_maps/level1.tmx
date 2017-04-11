@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="105" height="25" tilewidth="70" tileheight="70" backgroundcolor="#55aaff">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="105" height="25" tilewidth="70" tileheight="70" backgroundcolor="#55aaff" nextobjectid="45">
  <properties>
   <property name="background" value="background1.json"/>
   <property name="music" value="Italian Mom.ogg"/>
  </properties>
- <tileset firstgid="1" name="base" tilewidth="70" tileheight="70" spacing="2" margin="1">
+ <tileset firstgid="1" name="base" tilewidth="70" tileheight="70" spacing="2" margin="1" tilecount="196">
   <image source="resources/base.png" width="1024" height="1024"/>
   <tile id="15">
    <properties>
@@ -27,15 +27,97 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="197" source="Items.tsx"/>
- <tileset firstgid="295" name="GrassExtension" tilewidth="70" tileheight="70" spacing="2" margin="1">
+ <tileset firstgid="197" name="Items" tilewidth="70" tileheight="70" spacing="2" margin="1" tilecount="98">
+  <image source="resources/Items.png" width="1024" height="512"/>
+  <tile id="1">
+   <properties>
+    <property name="color" value="yellow"/>
+    <property name="frame" value="1"/>
+    <property name="tag" value="flag"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="color" value="brown"/>
+    <property name="state" value="right"/>
+    <property name="tag" value="switch"/>
+   </properties>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="coin" value="1"/>
+   </properties>
+  </tile>
+  <tile id="33">
+   <properties>
+    <property name="state" value="normal"/>
+    <property name="tag" value="spring"/>
+   </properties>
+  </tile>
+  <tile id="42">
+   <properties>
+    <property name="color" value="blue"/>
+    <property name="state" value="down"/>
+    <property name="tag" value="button"/>
+   </properties>
+  </tile>
+  <tile id="43">
+   <properties>
+    <property name="color" value="yellow"/>
+    <property name="state" value="up"/>
+    <property name="tag" value="button"/>
+   </properties>
+  </tile>
+  <tile id="48">
+   <properties>
+    <property name="state" value="expanded"/>
+    <property name="tag" value="spring"/>
+   </properties>
+  </tile>
+  <tile id="58">
+   <properties>
+    <property name="color" value="yellow"/>
+    <property name="state" value="down"/>
+    <property name="tag" value="button"/>
+   </properties>
+  </tile>
+  <tile id="78">
+   <properties>
+    <property name="color" value="brown"/>
+    <property name="state" value="left"/>
+    <property name="tag" value="switch"/>
+   </properties>
+  </tile>
+  <tile id="86">
+   <properties>
+    <property name="color" value="blue"/>
+    <property name="state" value="up"/>
+    <property name="tag" value="button"/>
+   </properties>
+  </tile>
+  <tile id="90">
+   <properties>
+    <property name="color" value="yellow"/>
+    <property name="frame" value="2"/>
+    <property name="tag" value="flag"/>
+   </properties>
+  </tile>
+  <tile id="93">
+   <properties>
+    <property name="color" value="brown"/>
+    <property name="state" value="center"/>
+    <property name="tag" value="switch"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="295" name="GrassExtension" tilewidth="70" tileheight="70" spacing="2" margin="1" tilecount="42">
   <image source="resources/GrassExtension.png" width="1024" height="256"/>
  </tileset>
  <tileset firstgid="337" source="Builds.tsx"/>
- <tileset firstgid="435" name="springTrees" tilewidth="70" tileheight="70">
+ <tileset firstgid="435" name="springTrees" tilewidth="70" tileheight="70" tilecount="288">
   <image source="resources/springTrees.png" width="840" height="1680"/>
  </tileset>
- <tileset firstgid="723" name="foliage1" tilewidth="70" tileheight="70">
+ <tileset firstgid="723" name="foliage1" tilewidth="70" tileheight="70" tilecount="75">
   <image source="resources/foliage1.png" width="1050" height="350"/>
  </tileset>
  <layer name="GroundBack" width="105" height="25">
@@ -241,190 +323,184 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Interior Objects" width="105" height="25"/>
- <objectgroup name="Objects" width="105" height="25">
-  <object name="MOM" type="character" x="6230" y="1050" width="70" height="140">
+ <objectgroup name="Interior Objects"/>
+ <objectgroup name="Objects">
+  <object id="1" name="MOM" type="character" x="6230" y="1050" width="70" height="140">
    <properties>
     <property name="conversations" value="M1"/>
     <property name="name" value="MOM"/>
    </properties>
   </object>
-  <object type="ground" x="1260" y="1260" width="980" height="490">
+  <object id="2" type="ground" x="1260" y="1260" width="980" height="490">
    <properties>
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object type="ground" x="2450" y="1260" width="420" height="70">
+  <object id="3" type="ground" x="2450" y="1260" width="420" height="70">
    <properties>
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object type="ground" x="3080" y="1260" width="350" height="70">
+  <object id="4" type="ground" x="3080" y="1260" width="350" height="70">
    <properties>
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object type="ground" x="3710" y="1260" width="490" height="70">
+  <object id="5" type="ground" x="3710" y="1260" width="490" height="70">
    <properties>
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object type="ground" x="4760" y="1260" width="1050" height="70">
+  <object id="6" type="ground" x="4760" y="1260" width="1050" height="70">
    <properties>
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object type="wall" x="4760" y="1260" width="70" height="490"/>
-  <object type="ground" x="5880" y="1190" width="1470" height="70">
+  <object id="7" type="wall" x="4760" y="1260" width="70" height="490"/>
+  <object id="8" type="ground" x="5880" y="1190" width="1470" height="70">
    <properties>
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object type="ground" x="5740" y="1330">
+  <object id="9" type="ground" x="5740" y="1330">
    <properties>
     <property name="shape" value="1"/>
    </properties>
    <polygon points="0,0 148,-138 148,2"/>
   </object>
-  <object name="VAL" type="character" x="420" y="1470" width="70" height="140">
+  <object id="10" name="VAL" type="character" x="350" y="1470" width="70" height="140">
    <properties>
     <property name="name" value="VAL"/>
    </properties>
   </object>
-  <object type="trigger" x="2240" y="1306" width="210" height="444">
+  <object id="11" type="trigger" x="2240" y="1306" width="210" height="444">
    <properties>
     <property name="action" value="die"/>
    </properties>
   </object>
-  <object type="trigger" x="2870" y="1306" width="210" height="444">
+  <object id="12" type="trigger" x="2870" y="1306" width="210" height="444">
    <properties>
     <property name="action" value="die"/>
    </properties>
   </object>
-  <object type="trigger" x="3430" y="1299" width="271" height="442">
+  <object id="13" type="trigger" x="3430" y="1299" width="271" height="442">
    <properties>
     <property name="action" value="die"/>
    </properties>
   </object>
-  <object type="trigger" x="4198" y="1302" width="558" height="450">
+  <object id="14" type="trigger" x="4198" y="1302" width="558" height="450">
    <properties>
     <property name="action" value="die"/>
    </properties>
   </object>
-  <object type="ladder" x="6872" y="629" width="44" height="557"/>
-  <object type="rope" x="4270" y="0" width="70" height="980">
+  <object id="15" type="ladder" x="6872" y="629" width="44" height="557"/>
+  <object id="16" type="rope" x="4270" y="0" width="70" height="980">
    <properties>
     <property name="number" value="1"/>
     <property name="target" value="0,-4,0,4"/>
    </properties>
   </object>
-  <object type="rope" x="4620" y="0" width="70" height="980">
+  <object id="17" type="rope" x="4620" y="0" width="70" height="980">
    <properties>
     <property name="number" value="1"/>
     <property name="target" value="0,-4,0,4"/>
    </properties>
   </object>
-  <object type="switch" x="4060" y="1190" width="70" height="70">
+  <object id="18" type="switch" x="4060" y="1190" width="70" height="70">
    <properties>
     <property name="number" value="1"/>
     <property name="object" value="bridge"/>
    </properties>
   </object>
-  <object type="trigger" x="2030" y="490" width="70" height="770">
+  <object id="19" type="trigger" x="2030" y="490" width="70" height="770">
    <properties>
     <property name="action" value="checkpoint"/>
     <property name="number" value="1"/>
    </properties>
   </object>
-  <object type="trigger" x="490" y="840" width="70" height="770">
+  <object id="20" type="trigger" x="490" y="840" width="70" height="770">
    <properties>
     <property name="action" value="checkpoint"/>
     <property name="number" value="0"/>
    </properties>
   </object>
-  <object type="collectable" x="6580" y="630" width="70" height="70">
+  <object id="21" type="collectable" x="6580" y="630" width="70" height="70">
    <properties>
     <property name="captureTile" value="true"/>
     <property name="key" value="GREEN KEY"/>
    </properties>
   </object>
-  <object type="exit" x="6650" y="1080" width="70" height="110">
+  <object id="22" type="exit" x="6650" y="1080" width="70" height="110">
    <properties>
     <property name="key" value="GREEN KEY"/>
    </properties>
   </object>
-  <object type="trigger" x="4970" y="490" width="70" height="770">
+  <object id="23" type="trigger" x="4970" y="490" width="70" height="770">
    <properties>
     <property name="action" value="checkpoint"/>
     <property name="number" value="3"/>
    </properties>
   </object>
-  <object type="ground" x="6150" y="700" width="710" height="14">
+  <object id="24" type="ground" x="6150" y="700" width="710" height="14">
    <properties>
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object type="bridge" x="4200" y="980" width="560" height="26">
+  <object id="25" type="bridge" x="4200" y="980" width="560" height="26">
    <properties>
     <property name="number" value="1"/>
     <property name="target" value="0,-4,0,4"/>
    </properties>
   </object>
-  <object type="trigger" x="3780" y="490" width="70" height="770">
+  <object id="26" type="trigger" x="3780" y="490" width="70" height="770">
    <properties>
     <property name="action" value="checkpoint"/>
     <property name="number" value="2"/>
    </properties>
   </object>
-  <object name="GOMH" type="character" x="1820" y="1120" width="70" height="140">
-   <properties>
-    <property name="conversations" value="G1"/>
-    <property name="name" value="GOMH"/>
-   </properties>
-  </object>
-  <object name="PINKY" type="character" x="3920" y="1120" width="70" height="140">
+  <object id="28" name="PINKY" type="character" x="1820" y="1120" width="70" height="140">
    <properties>
     <property name="conversations" value="P1"/>
     <property name="name" value="PINKY"/>
    </properties>
   </object>
-  <object type="trigger" x="5118" y="1225" width="119" height="35">
+  <object id="29" type="trigger" x="5118" y="1225" width="119" height="35">
    <properties>
     <property name="action" value="die"/>
    </properties>
   </object>
-  <object type="ground" x="840" y="1540" width="420" height="210">
+  <object id="30" type="ground" x="840" y="1540" width="420" height="210">
    <properties>
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object type="ground" x="0" y="1610" width="840" height="70">
+  <object id="31" type="ground" x="0" y="1610" width="840" height="70">
    <properties>
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object type="wall" x="3710" y="1260" width="490" height="490"/>
-  <object type="trigger" x="0" y="1680" width="7420" height="70">
+  <object id="32" type="wall" x="3710" y="1260" width="490" height="490"/>
+  <object id="33" type="trigger" x="0" y="1680" width="7420" height="70">
    <properties>
     <property name="action" value="die"/>
    </properties>
   </object>
-  <object type="wall" x="3080" y="1260" width="350" height="490"/>
-  <object type="wall" x="2450" y="1260" width="420" height="490"/>
-  <object type="wall" x="1260" y="1260" width="980" height="490"/>
-  <object type="wall" x="840" y="1540" width="420" height="210"/>
-  <object type="wall" x="0" y="1680" width="840" height="70"/>
-  <object type="trigger" x="5469" y="1223" width="119" height="35">
+  <object id="34" type="wall" x="3080" y="1260" width="350" height="490"/>
+  <object id="35" type="wall" x="2450" y="1260" width="420" height="490"/>
+  <object id="36" type="wall" x="1260" y="1260" width="980" height="490"/>
+  <object id="37" type="wall" x="840" y="1540" width="420" height="210"/>
+  <object id="38" type="wall" x="0" y="1680" width="840" height="70"/>
+  <object id="39" type="trigger" x="5469" y="1223" width="119" height="35">
    <properties>
     <property name="action" value="die"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="mockup" width="105" height="25" visible="0">
-  <object name="window" x="6510" y="980" width="70" height="140"/>
-  <object name="puerta" x="6650" y="1050" width="70" height="140"/>
-  <object name="casa" x="840" y="0" width="700" height="490"/>
-  <object name="window" x="6300" y="980" width="70" height="140"/>
-  <object name="techo" x="6090" y="700" width="840" height="210"/>
+ <objectgroup name="mockup" visible="0">
+  <object id="40" name="window" x="6510" y="980" width="70" height="140"/>
+  <object id="41" name="puerta" x="6650" y="1050" width="70" height="140"/>
+  <object id="42" name="casa" x="840" y="0" width="700" height="490"/>
+  <object id="43" name="window" x="6300" y="980" width="70" height="140"/>
+  <object id="44" name="techo" x="6090" y="700" width="840" height="210"/>
  </objectgroup>
 </map>
