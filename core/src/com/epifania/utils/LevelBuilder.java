@@ -316,9 +316,14 @@ public class LevelBuilder {
         Object property = tile.getProperties().get("color");
         String color = (String)property;
 
+
         final ButtonComponent buttonComponent = new ButtonComponent();
         buttonComponent.number = Integer.parseInt((String)object.getProperties().get("number"));
-        buttonComponent.color = ButtonComponent.Color.valueOf(color.toUpperCase());
+        property = object.getProperties().get("keepDown");
+        Gdx.app.debug("Level Builder","keep down = "+property);
+        if(property!=null)buttonComponent.keepDown = Boolean.parseBoolean((String)property);
+//        buttonComponent.color = ButtonComponent.Color.valueOf(color.toUpperCase());
+        buttonComponent.target = ButtonComponent.Target.valueOf((String)(object.getProperties().get("object")).toString().toUpperCase());
 
         final MapTileComponent mapTileComponent = new MapTileComponent();
         mapTileComponent.tiledMaps.putAll(getButtonTiles(color));
@@ -335,6 +340,9 @@ public class LevelBuilder {
                         if(bridgeComponent.number==number){
                             engine.getSystem(BridgeSystem.class).moveBy(bridge,bridgeComponent.targets.get(bridgeComponent.targetIndex));
                             bridgeComponent.targetIndex++;
+                            if(bridgeComponent.targetIndex>=bridgeComponent.targets.size){
+                                bridgeComponent.targetIndex=0;
+                            }
                         }
                     }
                 }
@@ -1200,6 +1208,7 @@ public class LevelBuilder {
 
             bodyComponent.body = body;
             bodyComponent.offsetPosition.set(-0.5f,(h*-0.5f)+i);
+            bridgeComponent.target.set(bodyComponent.body.getPosition());
 
             Entity entity = new Entity();
             entity.add(transform);
@@ -1293,7 +1302,7 @@ public class LevelBuilder {
             if(property!=null){
                 bridgeComponent.moving = Boolean.parseBoolean((String)property);
             }
-
+            bridgeComponent.target.set(bodyComponent.body.getPosition());
 
             entity.add(transform);
             entity.add(textureComponent);

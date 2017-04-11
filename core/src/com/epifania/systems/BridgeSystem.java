@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -22,6 +23,7 @@ public class BridgeSystem extends IteratingSystem {
     public ComponentMapper<TransformComponent> tm;
     public ComponentMapper<MovementComponent> mm;
     public ComponentMapper<BodyComponent> bm2;
+    private final Vector2 tmp = new Vector2();
     private Array<Body> processedBodies = new Array<Body>();
 
     public BridgeSystem(){
@@ -61,17 +63,24 @@ public class BridgeSystem extends IteratingSystem {
         //If target reached, stop
         if(bridgeComponent.target.epsilonEquals(bodyComponent.body.getTransform().getPosition(),0.05f)){
             bodyComponent.body.setLinearVelocity(0,0);
-            nextTarget(bridgeComponent);
+            bodyComponent.body.getTransform().setPosition(bridgeComponent.target);
+//            nextTarget(bridgeComponent);
             bridgeComponent.moving=false;
 
             if(bridgeComponent.continuous){
+                nextTarget(bridgeComponent);
                 moveBy(entity,bridgeComponent.targets.get(bridgeComponent.targetIndex));
                 bridgeComponent.moving=true;
             }
         }
+
+        if(bridgeComponent.number==1) {
+            Gdx.app.debug("Bridge System", "target = " + bridgeComponent.target);
+            Gdx.app.debug("Bridge System", "position = " + bodyComponent.body.getTransform().getPosition());
+        }
     }
 
-    private void nextTarget(BridgeComponent bridgeComponent){
+    public void nextTarget(BridgeComponent bridgeComponent){
         //TODO add bridge sound and stop
         if(bridgeComponent.targetIndex +1<bridgeComponent.targets.size){
             bridgeComponent.targetIndex++;
@@ -79,7 +88,7 @@ public class BridgeSystem extends IteratingSystem {
             bridgeComponent.targetIndex =0;
         }
 
-        bridgeComponent.target.set(bridgeComponent.targets.get(bridgeComponent.targetIndex));
+//        bridgeComponent.target.set(bridgeComponent.targets.get(bridgeComponent.targetIndex));
     }
 
     public void moveBy(Entity entity, Vector2 target){
@@ -97,9 +106,12 @@ public class BridgeSystem extends IteratingSystem {
         if (y!= 0)
             vY = y>0? 1:-1;
 
+        tmp.set(bridgeComponent.target);
+        tmp.sub(bodyComponent.body.getTransform().getPosition());
 
         bodyComponent.body.setLinearVelocity(vX*bridgeComponent.speed,vY*bridgeComponent.speed);
         bridgeComponent.target.set(x,y);
+        bridgeComponent.target.add(tmp);
         bridgeComponent.target.add(bodyComponent.body.getTransform().getPosition());
         bridgeComponent.moving=true;
     }

@@ -10,6 +10,7 @@ import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
@@ -308,8 +309,8 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 			setButtonVisibility(lockedButton,isOnSwitchLocked);
 			setButtonVisibility(itemImage,isOnSwitchUnlocked);
 
-			Gdx.app.debug(tag,"body collide= "+val.getComponent(Val_Component.class).bodyCollide);
-			Gdx.app.debug(tag,"feet collide= "+val.getComponent(Val_Component.class).feetCollide);
+//			Gdx.app.debug(tag,"body collide= "+val.getComponent(Val_Component.class).bodyCollide);
+//			Gdx.app.debug(tag,"feet collide= "+val.getComponent(Val_Component.class).feetCollide);
 		}
 	}
 
@@ -447,6 +448,20 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		if(Family.all(BridgeComponent.class).get().matches(otherEntity)){
 			subFeetCollide(valEntity,otherEntity);
 			valEntity.getComponent(MovementComponent.class).bringerBody = null;
+		}
+		if(Family.all(ButtonComponent.class,ActionableComponent.class,BodyComponent.class).get().matches(otherEntity)){
+			ButtonComponent buttonComponent = otherEntity.getComponent(ButtonComponent.class);
+			if(!buttonComponent.keepDown){
+				if(buttonComponent.target.equals(ButtonComponent.Target.BRIDGE)){
+					for(Entity bridge : engine.getEntitiesFor(Family.all(BridgeComponent.class).get())){
+						BridgeComponent bridgeComponent = bridge.getComponent(BridgeComponent.class);
+						if(bridgeComponent.number==buttonComponent.number){
+							engine.getSystem(BridgeSystem.class).moveBy(bridge,bridgeComponent.targets.get(bridgeComponent.targetIndex));
+							engine.getSystem(BridgeSystem.class).nextTarget(bridgeComponent);
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -593,6 +608,7 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		}
 		valSystem.endJump();
 	}
+
 	private void platformCollision(Entity val, Entity platform){
 		Val_Component val_component = val.getComponent(Val_Component.class);
 		if(val_component.feetCollisionEntities.contains(platform,true)&&
