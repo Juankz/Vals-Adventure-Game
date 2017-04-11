@@ -561,7 +561,6 @@ public class LevelBuilder {
 
         boolean captureTile = Boolean.parseBoolean((String)object.getProperties().get("captureTile"));
         if(captureTile){
-            Gdx.app.debug(tag,"captureTile platform");
             textureComponent.region=captureTile((TiledMapTileLayer)levelMap.getLayers().get(Constants.itemsLayersNames[flag]),object);
         }else{
             String textureName = (String)object.getProperties().get("texture");
@@ -1897,7 +1896,7 @@ public class LevelBuilder {
         if(cell.getFlipVertically()){
             ty = Constants.inversePPU-height;
         }
-        Gdx.app.debug(tag,"ty = "+ty);
+//        Gdx.app.debug(tag,"ty = "+ty);
         TextureRegion r = cell.getTile().getTextureRegion();
 //        TextureRegion region = new TextureRegion(r,0,(int)Constants.inversePPU-(int)height,r.getRegionWidth(),(int)height);
 //        r.flip(cell.getFlipHorizontally(), cell.getFlipVertically());

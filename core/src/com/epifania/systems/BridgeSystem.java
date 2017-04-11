@@ -14,6 +14,7 @@ import com.epifania.components.BridgeComponent;
 import com.epifania.components.MovementComponent;
 import com.epifania.components.TransformComponent;
 
+
 /**
  * Created by juan on 11/05/16.
  */
@@ -64,7 +65,6 @@ public class BridgeSystem extends IteratingSystem {
         if(bridgeComponent.target.epsilonEquals(bodyComponent.body.getTransform().getPosition(),0.05f)){
             bodyComponent.body.setLinearVelocity(0,0);
             bodyComponent.body.getTransform().setPosition(bridgeComponent.target);
-//            nextTarget(bridgeComponent);
             bridgeComponent.moving=false;
 
             if(bridgeComponent.continuous){
@@ -72,11 +72,6 @@ public class BridgeSystem extends IteratingSystem {
                 moveBy(entity,bridgeComponent.targets.get(bridgeComponent.targetIndex));
                 bridgeComponent.moving=true;
             }
-        }
-
-        if(bridgeComponent.number==1) {
-            Gdx.app.debug("Bridge System", "target = " + bridgeComponent.target);
-            Gdx.app.debug("Bridge System", "position = " + bodyComponent.body.getTransform().getPosition());
         }
     }
 
@@ -87,8 +82,6 @@ public class BridgeSystem extends IteratingSystem {
         }else{
             bridgeComponent.targetIndex =0;
         }
-
-//        bridgeComponent.target.set(bridgeComponent.targets.get(bridgeComponent.targetIndex));
     }
 
     public void moveBy(Entity entity, Vector2 target){
