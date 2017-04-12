@@ -45,6 +45,7 @@ public class BridgeSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         BridgeComponent bridgeComponent = bm.get(entity);
         BodyComponent bodyComponent = bm2.get(entity);
+        if(!bridgeComponent.moving) return;
 
         /*As the same body is used by different entities of the same bridge,
          only process one entity with the respective body

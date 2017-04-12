@@ -10,7 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 public class ButtonComponent implements Component{
     public static final int UP= 0;
     public static final int DOWN= 1;
-    public static final int RESISTANCE = 2;
+    public static final int RESISTANCE = 0;
     public boolean keepDown = true; //If false, it returns to state UP
     public int number = 0;
     public int state = 0;
