@@ -67,9 +67,9 @@ public class BridgeSystem extends IteratingSystem {
             bodyComponent.body.setLinearVelocity(0,0);
             bodyComponent.body.getTransform().setPosition(bridgeComponent.target);
             bridgeComponent.moving=false;
+            nextTarget(bridgeComponent);
 
             if(bridgeComponent.continuous){
-                nextTarget(bridgeComponent);
                 moveBy(entity,bridgeComponent.targets.get(bridgeComponent.targetIndex));
                 bridgeComponent.moving=true;
             }
