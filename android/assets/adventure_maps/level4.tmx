@@ -582,12 +582,12 @@
     <property name="action" value="die"/>
    </properties>
   </object>
-  <object id="39" type="trigger" x="1819" y="2547" width="769" height="278">
+  <object id="39" type="trigger" x="1752" y="2547" width="836" height="278">
    <properties>
     <property name="action" value="die"/>
    </properties>
   </object>
-  <object id="40" type="wall" x="1680" y="2542" width="70" height="266"/>
+  <object id="40" type="wall" x="770" y="2529.33" width="980" height="278.667"/>
   <object id="41" type="wall" x="2590" y="2543" width="70" height="257"/>
   <object id="42" type="trigger" x="7140" y="1985" width="1470" height="819">
    <properties>
@@ -734,7 +734,7 @@
    </properties>
    <polygon points="63,70 -147,-140 413,-140 203,70"/>
   </object>
-  <object id="76" type="wall" x="1610" y="1960" width="1540" height="70"/>
+  <object id="76" type="wall" x="1610" y="1898.67" width="1540" height="131.333"/>
   <object id="77" type="ground" x="1260" y="2310">
    <properties>
     <property name="shape" value="1"/>

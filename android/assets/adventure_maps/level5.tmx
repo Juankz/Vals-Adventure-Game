@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="70" tilewidth="70" tileheight="70" nextobjectid="119">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="70" tilewidth="70" tileheight="70" backgroundcolor="#55aaff" nextobjectid="144">
  <properties>
   <property name="background" value="background1.json"/>
   <property name="music" value="Wacky Waiting.ogg"/>
@@ -89,14 +89,15 @@
    </properties>
   </tile>
  </tileset>
+ <tileset firstgid="337" source="custom.tsx"/>
  <layer name="GroundBack" width="200" height="70">
   <data encoding="base64" compression="zlib">
-   eJzt3U1q20AYgGH7bF32QrlBzlaabbvvoqWFHqIZGhEwGv1EM5r5Rs8DQ4IUGZHo9chybN9uAAAAANCvvwsDrk4fkLfUx97R2z7BUaWOL30wIn1AXsk+Sh2Tc/vyZ2Vf9UENpfsocWzm+oCz6QPyavRRY5/0QQv6gDx9QJ4+IO/qfTy/fb3f59en5bl1nzPLGUfUPr7NjI94eh2/3rb/8rBuWr627nF9bjnxRO2jlKcKt1nyd0FbS33suW/Wxzt9jOPq8wcs0Qfk1ejjaCMt+kjXop7Xf4yLWevjI48/avTx9TZ/zarkqPFYhNh6nD+i+XR/H4xlbx9LP3/VPhiXY/y/Lc+Fe778evSx7zHK94dtf+7cPjfo01Ifo13PyR2bW88Zp+sEUyOpjR8btiGupb9rup5T6tpQif9DOroPezpYayTd3pY29BHbWh/T9y+tdvCgUk0cGcS1pY+obSSt29BHbFv6AICWXOsEAAAAAAAAAOCI3PvgwhVM74VeasBISr9fFYwi3d973RHMK/n6b30wkhpzhz4YRY25Qx+MoNbcoQ+iS23Umjv0QXQ129AHkdU8r9IHkdU+r9IHkZ3Rhj6I6IzzKn0Q1Vlzhz6I5sy5Qx9Ec+bcoQ96UupzxEp+bg30ILXx+3bu3KAPerDl/r3HNvTBGVof4/qgZ62PcX3Qs9bHuD7o2T+pAbVJ
+   eJzt3V9K7DAUgPG4PjfkDnx0B+5HHfBJHxQEHxQFZw8adLCUk7Zpz0lO0u8H4cL8o97mu2k7c8cQAAAAAAAAAL++jAbQA+0ujoE+0A/NNg7OtgnYSmt+xcffF9imXvvo+WdrmWYfWo3ssY+n0O/P1jLtPjQakbblc2ZbW59D9OGTRR9b91+qj57Rh08WfRwMtok+6KMGiz4stok+6KMG+vCBPnyiDx/owyf68IE+fNp7H5d/f56dyffH21P3nSduX4M+fGq1jwdhrHHxM97/nn8zuu90+9x94/tTt0+hD59a7UPLhcFrrvm7yOkD5Uzth5x/m+njH330Q3v9OBhtE+fn9FGDdh9Wn0+kD/qoweL8w+rziZbitajL+YeZoQ+f5vbDmvOPrftQ2pa7IF+z0hwW5yJL0YdPFusH+zAfffiUux+Og/uPgzF8nsY5+t7Qh0/sh19L3gvXfL98jD58Yj/knaM8jp77JjzmejCWvu5HoA+PpvZDzes5FlJzc+m8PF0nODUS23gVHjPsI+e14c/U/orXc7SuDS39HNKUrduQM1fnGomvJ7VBH32Z68PbOfdz0JvnVoM++rGkDy9tTPHUDX30Y0kfrajdBX3AMy9rCH1gjfH/KbI4j/fQCH3Aq5dQbu5Lgz7glXUb9IFWxffqSh870Qdakfv9BvSBPaEPQBa/n8pLH1sGYOE25H3+lT6wFyXXDvpAa+LaUaqNOK4MB6Ct5NphPYApqe/BTSl9bEUfsHT6LnStUfK8nD5gLc5nze+rqj2f6QNaejsWog9o6u1YiD6ghbWDPpDG2kEfkLF20AdkPV6DpQ9ooQ36gIzjKvqAjOMq+kAabdAHZBxX0QfSWDvoAzLWDvpAGmsHfeyV9HvEev+8OX1gidgG6wJ97JH2745k0EdPas8JBn14VntOMOjDs9pzgkEfnn0DMyxKMg==
   </data>
  </layer>
  <layer name="GroundMid" width="200" height="70">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T+1rCKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4A9rAAAE=
+   eJzt06ENACAMRcHuPyvdAQMJAepw3CUV/f5FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC/a+OAkz6gpg+o6QNq+oDa7CMvey63/+sOAAAAAAAAAAAAAAAAAAAAAAAAAADAOx1+kBYq
   </data>
  </layer>
  <layer name="Builds Interior" width="200" height="70">
@@ -116,7 +117,7 @@
  </layer>
  <layer name="Items" width="200" height="70">
   <data encoding="base64" compression="zlib">
-   eJzt27Ftw0AMBdDTBq6NDOPGy2SSjOE2E2QCF17Ec9ilIIgpohikzPeA67+EI6R/kMYAAAAAAADo6ys7ABRmPiBmPiBmPiBWcT4qZqKninuxYiZ6qrgXK2aip4p7sWImmprGJTvCkvmAmPmAWIX5+M4OAIEK80Ffxyk7we8+xzhlZ4C5a3aAGe82APtU6VkC3R2K9yHwzIB107S+uvtwDwCYcX4M8HfRmVHUPzr0kvMbXxv57s91yw4BAAAAO7C1Q+vgAAAAsH/+hYLYT3YAAACgvK29Wi/nnUW9+rpYAAAAwP9z7gQx34MAAACvppdDTC8HAACAPM6tAAAAAADyPAClXxox
+   eJzt27ENwjAQBVBnA2qmoWEZJmEMWhpaJqBgEeaAjghxNAm6S/ye5P5H8sn5VtIaAAAAAABAv47ZAaAw8wEx8wEx8wGxivNRMRN9qrgXK2aiTxX3YsVM9KniXqyYiU4N7ZQd4ZP5gJj5gFiF+ThnB4BAhfmgX9shO8Fvh9Z22Rlg7JYdYMS7DcAyVTpLoHeb4n0InBnw3TB8XwDAm/tjmNdltFi/6M4o6h899JL9ip+NfI/XumeHAAAAgAWY2qF1cAAAAFg+/0JB7JodAAAAKG9qr9bLWbOoV98+FgAAADA/904Q8z0IAADwb3o5xPRyAAAAyOPeCgAAAAAgzxPJFRwe
   </data>
  </layer>
  <layer name="Coins" width="200" height="70">
@@ -125,7 +126,7 @@
   </data>
  </layer>
  <objectgroup name="Objects">
-  <object id="1" name="VAL" type="character" x="5810" y="1890" width="70" height="140">
+  <object id="1" name="VAL" type="character" x="5180" y="1890" width="70" height="140">
    <properties>
     <property name="name" value="VAL"/>
    </properties>
@@ -202,7 +203,7 @@
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object id="38" type="ground" x="3010" y="2170" width="3220" height="70">
+  <object id="38" type="ground" x="3010" y="2170" width="1190" height="70">
    <properties>
     <property name="shape" value="0"/>
    </properties>
@@ -375,7 +376,7 @@
    </properties>
    <polyline points="0,0 1,699.333"/>
   </object>
-  <object id="81" type="ground" x="5670" y="2030" width="1190" height="70">
+  <object id="81" type="ground" x="5670" y="2030" width="280" height="70">
    <properties>
     <property name="shape" value="0"/>
    </properties>
@@ -400,15 +401,6 @@
    </properties>
   </object>
   <object id="87" type="box" x="4620" y="1960" width="70" height="70">
-   <properties>
-    <property name="captureTile" value="true"/>
-    <property name="density" value="1000"/>
-    <property name="dynamic" value="false"/>
-    <property name="playerCollide" value="false"/>
-    <property name="shape" value="0"/>
-   </properties>
-  </object>
-  <object id="88" type="box" x="5250" y="1960" width="70" height="70">
    <properties>
     <property name="captureTile" value="true"/>
     <property name="density" value="1000"/>
@@ -515,10 +507,10 @@
   <object id="111" type="wall" x="4130" y="2100" width="70" height="70"/>
   <object id="112" type="wall" x="4550" y="2030" width="70" height="70"/>
   <object id="113" type="wall" x="5950" y="1330" width="210" height="210"/>
-  <object id="116" type="bridge" x="5670" y="1820" width="210" height="70">
+  <object id="116" type="bridge" x="5950" y="2030" width="210" height="70">
    <properties>
     <property name="number" value="1"/>
-    <property name="target" value="0,-3,0,3"/>
+    <property name="target" value="0,2,0,-2"/>
    </properties>
   </object>
   <object id="117" type="box" x="5460" y="2170" width="70" height="70">
@@ -536,6 +528,53 @@
     <property name="number" value="1"/>
     <property name="object" value="bridge"/>
    </properties>
+  </object>
+  <object id="119" type="box" x="5250" y="1960" width="70" height="70">
+   <properties>
+    <property name="captureTile" value="true"/>
+    <property name="density" value="1000"/>
+    <property name="dynamic" value="false"/>
+    <property name="playerCollide" value="false"/>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="120" type="ground" x="6160" y="2030" width="700" height="70">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="121" type="wall" x="5600" y="2100" width="350" height="490"/>
+  <object id="122" type="wall" x="6160" y="2100" width="770" height="910"/>
+  <object id="123" type="ground" x="5250" y="3150" width="1680" height="70">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="124" type="wall" x="6860" y="630" width="840" height="1470"/>
+  <object id="125" type="wall" x="5740" y="2590" width="210" height="420"/>
+  <object id="126" type="wall" x="3920" y="2170" width="1680" height="420"/>
+  <object id="127" type="wall" x="4550" y="2590" width="770" height="560"/>
+  <object id="131" type="ground" x="3710" y="2590">
+   <properties>
+    <property name="shape" value="1"/>
+   </properties>
+   <polygon points="0,0 -140,-140 -210,-280 0,-280"/>
+  </object>
+  <object id="133" type="ground" x="3080" y="2240">
+   <properties>
+    <property name="shape" value="1"/>
+   </properties>
+   <polygon points="0,0 70,70 840,70 840,0"/>
+  </object>
+  <object id="139" type="wall" x="3360" y="3150" width="70" height="350"/>
+  <object id="140" type="wall" x="3290" y="3360" width="70" height="140"/>
+  <object id="141" type="wall" x="3422.58" y="3017.88" width="70" height="140"/>
+  <object id="142" type="wall" x="3500" y="2800" width="70" height="210"/>
+  <object id="143" type="ground" x="3710" y="2870">
+   <properties>
+    <property name="shape" value="1"/>
+   </properties>
+   <polygon points="0,0 -210,0 -210,-70 0,-280"/>
   </object>
  </objectgroup>
  <objectgroup name="Interior Objects" visible="0"/>
