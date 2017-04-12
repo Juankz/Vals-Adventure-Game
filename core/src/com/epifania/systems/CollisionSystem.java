@@ -412,8 +412,10 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		getBoxCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
 		if(boxEntity!=null && otherEntity!=null){
 			if(Family.all(ButtonComponent.class).get().matches(otherEntity)){
-				ActionableComponent actionableComponent = otherEntity.getComponent(ActionableComponent.class);
-				actionableComponent.actionable.action();
+				if(otherEntity.getComponent(ButtonComponent.class).state==ButtonComponent.UP) {
+					ActionableComponent actionableComponent = otherEntity.getComponent(ActionableComponent.class);
+					actionableComponent.actionable.action();
+				}
 			}
 		}
 
@@ -440,13 +442,16 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 			}
 			if(Family.all(ButtonComponent.class,ActionableComponent.class,BodyComponent.class).get().matches(otherEntity)){
 				ButtonComponent buttonComponent = otherEntity.getComponent(ButtonComponent.class);
-				if(!buttonComponent.keepDown){
+				if(!buttonComponent.keepDown && buttonComponent.state==ButtonComponent.DOWN){
 					if(buttonComponent.target.equals(ButtonComponent.Target.BRIDGE)){
 						for(Entity bridge : engine.getEntitiesFor(Family.all(BridgeComponent.class).get())){
 							BridgeComponent bridgeComponent = bridge.getComponent(BridgeComponent.class);
 							if(bridgeComponent.number==buttonComponent.number){
 								engine.getSystem(BridgeSystem.class).moveBy(bridge,bridgeComponent.targets.get(bridgeComponent.targetIndex));
 								engine.getSystem(BridgeSystem.class).nextTarget(bridgeComponent);
+								buttonComponent.state = ButtonComponent.UP;
+								MapTileComponent mapTileComponent = otherEntity.getComponent(MapTileComponent.class);
+								mapTileComponent.cell.setTile(mapTileComponent.tiledMaps.get(buttonComponent.state));
 							}
 						}
 					}
@@ -477,13 +482,16 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 		if(boxEntity!=null && otherEntity!=null){
 			if(Family.all(ButtonComponent.class).get().matches(otherEntity)){
 				ButtonComponent buttonComponent = otherEntity.getComponent(ButtonComponent.class);
-				if(!buttonComponent.keepDown){
+				if(!buttonComponent.keepDown && buttonComponent.state==ButtonComponent.DOWN){
 					if(buttonComponent.target.equals(ButtonComponent.Target.BRIDGE)){
 						for(Entity bridge : engine.getEntitiesFor(Family.all(BridgeComponent.class).get())){
 							BridgeComponent bridgeComponent = bridge.getComponent(BridgeComponent.class);
 							if(bridgeComponent.number==buttonComponent.number){
 								engine.getSystem(BridgeSystem.class).moveBy(bridge,bridgeComponent.targets.get(bridgeComponent.targetIndex));
 								engine.getSystem(BridgeSystem.class).nextTarget(bridgeComponent);
+								buttonComponent.state = ButtonComponent.UP;
+								MapTileComponent mapTileComponent = otherEntity.getComponent(MapTileComponent.class);
+								mapTileComponent.cell.setTile(mapTileComponent.tiledMaps.get(buttonComponent.state));
 							}
 						}
 					}
@@ -652,9 +660,14 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 	private void buttonCollision(){
 		Val_System valSystem = this.getEngine().getSystem(Val_System.class);
 
-		ActionableComponent actionableComponent = otherEntity.getComponent(ActionableComponent.class);
-		actionableComponent.actionable.action();
-
+		if(valEntity.getComponent(BodyComponent.class).body.getLinearVelocity().y + ButtonComponent.RESISTANCE <= 0) {
+			ButtonComponent buttonComponent = otherEntity.getComponent(ButtonComponent.class);
+			if(buttonComponent.state==ButtonComponent.UP){
+				ActionableComponent actionableComponent = otherEntity.getComponent(ActionableComponent.class);
+				actionableComponent.actionable.action();
+//				buttonComponent.state = ButtonComponent.DOWN; //This already happen in the actionable.action() method
+			}
+		}
 		valSystem.endJump();
 	}
 
