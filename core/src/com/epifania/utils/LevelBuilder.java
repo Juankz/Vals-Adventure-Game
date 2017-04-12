@@ -1293,14 +1293,12 @@ public class LevelBuilder {
             }
 
             Object property = object.getProperties().get("continuous");
-            if(property!=null){
-                bridgeComponent.continuous = Boolean.parseBoolean((String)property);
-            }
+            if(property!=null) bridgeComponent.continuous = Boolean.parseBoolean((String)property);
+
 
             property = object.getProperties().get("moving");
-            if(property!=null){
-                bridgeComponent.moving = Boolean.parseBoolean((String)property);
-            }
+            if(property!=null) bridgeComponent.moving = Boolean.parseBoolean((String)property);
+
             bridgeComponent.target.set(bodyComponent.body.getPosition());
 
             entity.add(transform);
