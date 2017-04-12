@@ -29,7 +29,7 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 	public Button lockedButton;
 	public Container<Image> itemImage;
 	private Vector3 tmp = new Vector3();
-	private Entity valEntity, otherEntity;
+	private Entity valEntity, otherEntity, boxEntity;
 
 	private ComponentMapper<BoundsComponent> bm;
 	private ComponentMapper<StateComponent> sm;
@@ -387,26 +387,34 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 
 		valEntity = null; otherEntity = null;
 		getBodyCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
-		if(valEntity==null || otherEntity==null) return;
+		if(valEntity!=null && otherEntity!=null) {
 			if (otherEntity.getComponent(GroundComponent.class) != null) {
-				addBodyCollide(valEntity,otherEntity);
+				addBodyCollide(valEntity, otherEntity);
 			}
 			if (otherEntity.getComponent(BoxComponent.class) != null) {
-				addBodyCollide(valEntity,otherEntity);
+				addBodyCollide(valEntity, otherEntity);
 			}
 			if (Family.all(BridgeComponent.class).get().matches(otherEntity)) {
-				addBodyCollide(valEntity,otherEntity);
+				addBodyCollide(valEntity, otherEntity);
 			}
 			if (otherEntity.getComponent(PlatformComponent.class) != null) {
-				addBodyCollide(valEntity,otherEntity);
-				platformCollision(valEntity,otherEntity);
+				addBodyCollide(valEntity, otherEntity);
+				platformCollision(valEntity, otherEntity);
 			}
-
-		if(otherEntity.getComponent(SpringComponent.class)!=null){
-			springCollision();
+			if (otherEntity.getComponent(SpringComponent.class) != null) {
+				springCollision();
+			}
+			if (Family.all(ButtonComponent.class, ActionableComponent.class, BodyComponent.class).get().matches(otherEntity)) {
+				buttonCollision();
+			}
 		}
-		if(Family.all(ButtonComponent.class,ActionableComponent.class,BodyComponent.class).get().matches(otherEntity)){
-			buttonCollision();
+		valEntity = null; otherEntity = null;
+		getBoxCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
+		if(boxEntity!=null && otherEntity!=null){
+			if(Family.all(ButtonComponent.class).get().matches(otherEntity)){
+				ActionableComponent actionableComponent = otherEntity.getComponent(ActionableComponent.class);
+				actionableComponent.actionable.action();
+			}
 		}
 
 	}
@@ -430,34 +438,53 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 			if (otherEntity.getComponent(PlatformComponent.class) != null) {
 				subBodyCollide(valEntity,otherEntity);
 			}
+			if(Family.all(ButtonComponent.class,ActionableComponent.class,BodyComponent.class).get().matches(otherEntity)){
+				ButtonComponent buttonComponent = otherEntity.getComponent(ButtonComponent.class);
+				if(!buttonComponent.keepDown){
+					if(buttonComponent.target.equals(ButtonComponent.Target.BRIDGE)){
+						for(Entity bridge : engine.getEntitiesFor(Family.all(BridgeComponent.class).get())){
+							BridgeComponent bridgeComponent = bridge.getComponent(BridgeComponent.class);
+							if(bridgeComponent.number==buttonComponent.number){
+								engine.getSystem(BridgeSystem.class).moveBy(bridge,bridgeComponent.targets.get(bridgeComponent.targetIndex));
+								engine.getSystem(BridgeSystem.class).nextTarget(bridgeComponent);
+							}
+						}
+					}
+				}
+			}
 		}
 
 		valEntity = null; otherEntity = null;
 		getFeetCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
-		if(valEntity==null || otherEntity==null) return;
+		if(valEntity!=null && otherEntity!=null){
+			if(otherEntity.getComponent(GroundComponent.class)!=null){
+				subFeetCollide(valEntity,otherEntity);
+			}
+			if(otherEntity.getComponent(BoxComponent.class)!=null){
+				subFeetCollide(valEntity,otherEntity);
+			}
+			if(otherEntity.getComponent(PlatformComponent.class)!=null){
+				subFeetCollide(valEntity,otherEntity);
+			}
+			if(Family.all(BridgeComponent.class).get().matches(otherEntity)){
+				subFeetCollide(valEntity,otherEntity);
+				valEntity.getComponent(MovementComponent.class).bringerBody = null;
+			}
+		}
 
-		if(otherEntity.getComponent(GroundComponent.class)!=null){
-			subFeetCollide(valEntity,otherEntity);
-		}
-		if(otherEntity.getComponent(BoxComponent.class)!=null){
-			subFeetCollide(valEntity,otherEntity);
-		}
-		if(otherEntity.getComponent(PlatformComponent.class)!=null){
-			subFeetCollide(valEntity,otherEntity);
-		}
-		if(Family.all(BridgeComponent.class).get().matches(otherEntity)){
-			subFeetCollide(valEntity,otherEntity);
-			valEntity.getComponent(MovementComponent.class).bringerBody = null;
-		}
-		if(Family.all(ButtonComponent.class,ActionableComponent.class,BodyComponent.class).get().matches(otherEntity)){
-			ButtonComponent buttonComponent = otherEntity.getComponent(ButtonComponent.class);
-			if(!buttonComponent.keepDown){
-				if(buttonComponent.target.equals(ButtonComponent.Target.BRIDGE)){
-					for(Entity bridge : engine.getEntitiesFor(Family.all(BridgeComponent.class).get())){
-						BridgeComponent bridgeComponent = bridge.getComponent(BridgeComponent.class);
-						if(bridgeComponent.number==buttonComponent.number){
-							engine.getSystem(BridgeSystem.class).moveBy(bridge,bridgeComponent.targets.get(bridgeComponent.targetIndex));
-							engine.getSystem(BridgeSystem.class).nextTarget(bridgeComponent);
+		valEntity = null; otherEntity = null;
+		getBoxCollisionEntity(contact.getFixtureA(),contact.getFixtureB());
+		if(boxEntity!=null && otherEntity!=null){
+			if(Family.all(ButtonComponent.class).get().matches(otherEntity)){
+				ButtonComponent buttonComponent = otherEntity.getComponent(ButtonComponent.class);
+				if(!buttonComponent.keepDown){
+					if(buttonComponent.target.equals(ButtonComponent.Target.BRIDGE)){
+						for(Entity bridge : engine.getEntitiesFor(Family.all(BridgeComponent.class).get())){
+							BridgeComponent bridgeComponent = bridge.getComponent(BridgeComponent.class);
+							if(bridgeComponent.number==buttonComponent.number){
+								engine.getSystem(BridgeSystem.class).moveBy(bridge,bridgeComponent.targets.get(bridgeComponent.targetIndex));
+								engine.getSystem(BridgeSystem.class).nextTarget(bridgeComponent);
+							}
 						}
 					}
 				}
@@ -509,6 +536,29 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 			if(dataB.equals("feetFixture")){
 				valEntity = (Entity) fixB.getBody().getUserData();
 				otherEntity = (Entity) fixA.getBody().getUserData();
+			}
+		}
+	}
+	/**
+	 * Gets the entity which a box collides with and store it in output Entities.
+	 * All body.userData must be an Entity object
+	 * @param fixA contact Fixture
+	 * @param fixB contact fixture
+	 */
+	private void getBoxCollisionEntity(Fixture fixA, Fixture fixB){
+		Object dataA = fixA.getBody().getUserData();
+		Object dataB = fixB.getBody().getUserData();
+
+		if(dataA != null){
+			if(((Entity)dataA).getComponent(BoxComponent.class)!=null){
+				boxEntity = (Entity)dataA;
+				otherEntity = (Entity)dataB;
+			}
+		}
+		if(dataB != null){
+			if(((Entity)dataB).getComponent(BoxComponent.class)!=null){
+				boxEntity = (Entity)dataB;
+				otherEntity = (Entity)dataA;
 			}
 		}
 	}
@@ -602,10 +652,9 @@ public class CollisionSystem extends EntitySystem implements ContactListener {
 	private void buttonCollision(){
 		Val_System valSystem = this.getEngine().getSystem(Val_System.class);
 
-		if(valEntity.getComponent(BodyComponent.class).body.getLinearVelocity().y + ButtonComponent.RESISTANCE <= 0) {
-			ActionableComponent actionableComponent = otherEntity.getComponent(ActionableComponent.class);
-			actionableComponent.actionable.action();
-		}
+		ActionableComponent actionableComponent = otherEntity.getComponent(ActionableComponent.class);
+		actionableComponent.actionable.action();
+
 		valSystem.endJump();
 	}
 
