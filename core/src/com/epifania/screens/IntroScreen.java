@@ -203,6 +203,7 @@ public class IntroScreen extends ScreenAdapter {
         Assets.instance.load("backgrounds/bg.png",Texture.class,textureParameter);
         Assets.instance.load("backgrounds/bg1.png",Texture.class,textureParameter);
         Assets.instance.load("backgrounds/bg2.png",Texture.class,textureParameter);
+        Assets.instance.load("backgrounds/bg3.png",Texture.class,textureParameter);
         Assets.instance.load("sounds/doorOpen.ogg",Sound.class);
         Assets.instance.load("sounds/jump.ogg",Sound.class);
         Assets.instance.load("sounds/jump_spring.ogg",Sound.class);

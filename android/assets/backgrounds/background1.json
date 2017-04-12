@@ -10,12 +10,18 @@
     "name":"bg2.png",
     "layer":1,
     "scrollX":0.125,
-    "scrollY":0.125
+    "scrollY":0.065
   },
   {
     "name":"bg1.png",
     "layer":2,
     "scrollX":0.25,
+    "scrollY":0.125
+  },
+  {
+    "name":"bg3.png",
+    "layer":3,
+    "scrollX":0.5,
     "scrollY":0.25
   }
 ]

@@ -1865,13 +1865,13 @@ public class LevelBuilder {
                 float textureWidth = texture.getWidth()*1/70;
                 float textureHeight = texture.getHeight()*1/70;
                 int mapWidth = (Integer) levelMap.getProperties().get("width");
-                int repeatNumber = (int)(mapWidth/textureWidth);
+                int repeatNumber = (int)(mapWidth/textureWidth)+1;
                 textureComponent.region = new TextureRegion(texture,texture.getWidth()*repeatNumber,texture.getHeight());
                 parallaxComponent.scrollingFactorX = layer.scrollX;
                 parallaxComponent.scrollingFactorY = layer.scrollY;
 
-                transformComponent.pos.x = layer.scrollX*(textureWidth+48);
-                transformComponent.pos.y = layer.scrollY*(textureHeight+1.8f);
+                transformComponent.pos.x = layer.scrollX*(textureWidth);
+                transformComponent.pos.y = layer.scrollY*(textureHeight);
                 transformComponent.pos.z = backgroundLayers.layers.size-layer.layer;
                 Entity entity = new Entity();
                 entity.add(textureComponent);
