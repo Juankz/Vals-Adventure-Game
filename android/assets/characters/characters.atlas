@@ -6,147 +6,147 @@ filter: MipMapLinearNearest,Nearest
 repeat: none
 Bonny/idle1
   rotate: false
-  xy: 1066, 303
-  size: 121, 202
-  orig: 121, 202
+  xy: 1, 1
+  size: 60, 100
+  orig: 60, 100
   offset: 0, 0
   index: -1
 Bonny/idle2
   rotate: false
-  xy: 1436, 313
-  size: 121, 192
-  orig: 121, 192
+  xy: 971, 205
+  size: 60, 95
+  orig: 60, 95
   offset: 0, 0
   index: -1
 Captain/captainLeft1
   rotate: false
-  xy: 1778, 361
+  xy: 1530, 361
   size: 106, 144
   orig: 106, 144
   offset: 0, 0
   index: -1
 Captain/captainLeft2
   rotate: false
-  xy: 1560, 357
+  xy: 1312, 357
   size: 106, 148
   orig: 106, 148
   offset: 0, 0
   index: -1
 Captain/captainRight1
   rotate: false
-  xy: 1669, 357
+  xy: 1421, 357
   size: 106, 148
   orig: 106, 148
   offset: 0, 0
   index: -1
 Captain/captainRight2
   rotate: false
-  xy: 1887, 361
+  xy: 1639, 361
   size: 106, 144
   orig: 106, 144
   offset: 0, 0
   index: -1
 Gomh/gomhIdle
   rotate: false
-  xy: 354, 181
+  xy: 1838, 358
   size: 86, 147
   orig: 86, 147
   offset: 0, 0
   index: -1
 Gomh/gomhIdle2
   rotate: false
-  xy: 443, 170
+  xy: 264, 180
   size: 86, 141
   orig: 86, 141
   offset: 0, 0
   index: -1
 Gomh/gomhLeft
   rotate: false
-  xy: 264, 173
+  xy: 1748, 357
   size: 87, 148
   orig: 87, 148
   offset: 0, 0
   index: -1
 Gomh/gomhRight
   rotate: false
-  xy: 532, 155
+  xy: 1927, 359
   size: 86, 146
   orig: 86, 146
   offset: 0, 0
   index: -1
 Marco/idle1
   rotate: false
-  xy: 991, 200
+  xy: 785, 195
   size: 59, 100
   orig: 59, 100
   offset: 0, 0
   index: -1
 Marco/idle2
   rotate: false
-  xy: 264, 74
+  xy: 1034, 204
   size: 59, 96
   orig: 59, 96
   offset: 0, 0
   index: -1
 Mom/happy1
   rotate: false
-  xy: 621, 181
+  xy: 353, 208
   size: 71, 120
   orig: 71, 120
   offset: 0, 0
   index: -1
 Mom/happy2
   rotate: false
-  xy: 769, 179
+  xy: 427, 195
   size: 71, 116
   orig: 71, 116
   offset: 0, 0
   index: -1
 Mom/sad1
   rotate: false
-  xy: 695, 181
+  xy: 563, 181
   size: 71, 120
   orig: 71, 120
   offset: 0, 0
   index: -1
 Mom/sad2
   rotate: false
-  xy: 843, 179
+  xy: 711, 185
   size: 71, 116
   orig: 71, 116
   offset: 0, 0
   index: -1
 Mom/sad3
   rotate: false
-  xy: 917, 175
+  xy: 637, 181
   size: 71, 120
   orig: 71, 120
   offset: 0, 0
   index: -1
 Pinky/despective1
   rotate: false
-  xy: 1, 1
+  xy: 64, 1
   size: 59, 100
   orig: 59, 100
   offset: 0, 0
   index: -1
 Pinky/despective2
   rotate: false
-  xy: 1053, 203
+  xy: 847, 198
   size: 59, 97
   orig: 59, 97
   offset: 0, 0
   index: -1
 Pinky/idle1
   rotate: false
-  xy: 63, 1
+  xy: 501, 211
   size: 59, 100
   orig: 59, 100
   offset: 0, 0
   index: -1
 Pinky/idle2
   rotate: false
-  xy: 1115, 203
+  xy: 909, 198
   size: 59, 97
   orig: 59, 97
   offset: 0, 0
@@ -188,14 +188,14 @@ Val/bunny2_ready
   index: -1
 Val/bunny2_shook1
   rotate: false
-  xy: 1190, 305
+  xy: 1066, 305
   size: 120, 200
   orig: 120, 200
   offset: 0, 0
   index: -1
 Val/bunny2_shook2
   rotate: false
-  xy: 1313, 305
+  xy: 1189, 305
   size: 120, 200
   orig: 120, 200
   offset: 0, 0
