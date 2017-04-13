@@ -25,7 +25,7 @@ public class CharacterSystem extends IteratingSystem {
     private static final String tag = "Character System";
     private static final float dstXM = 2f;
     private static final float dstYM = 4;
-    private static final float dstYm = -2;
+    private static final float dstYm = -1;
 
     private Entity val;
 
@@ -49,7 +49,7 @@ public class CharacterSystem extends IteratingSystem {
                     String conversationID = characterComponent.conversationIDs.get(characterComponent.current);
                     Array<String> valKeys = val.getComponent(Val_Component.class).conversationKeys;
 
-                    if (isEntityClose(entity, val)) {
+                    if (isEntityClose(val, entity)) {
                         if (manager.matches(conversationID, valKeys)) {
                             //Some level may and with a conversation, just one conversation key with
                             // id "EXIT" is allowed. If this is the case, then use enable a flag for notification
@@ -85,7 +85,8 @@ public class CharacterSystem extends IteratingSystem {
                     }
                     break;
                 case WATING_OUT:
-                    if (!isEntityClose(entity, val)) {
+                    if (!isEntityClose(val, entity
+                    )) {
                         if(characterComponent.current+1<characterComponent.conversationIDs.size) {
                             if(!isSecondary) {
                                 conversationID = characterComponent.conversationIDs.get(characterComponent.current);
