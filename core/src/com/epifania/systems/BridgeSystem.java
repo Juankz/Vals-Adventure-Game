@@ -29,6 +29,7 @@ public class BridgeSystem extends IteratingSystem {
 
     public BridgeSystem(){
         super(Family.all(BridgeComponent.class, TransformComponent.class, BodyComponent.class).get());
+        priority = 1;
         tm = ComponentMapper.getFor(TransformComponent.class);
         bm = ComponentMapper.getFor(BridgeComponent.class);
         mm = ComponentMapper.getFor(MovementComponent.class);
@@ -67,9 +68,9 @@ public class BridgeSystem extends IteratingSystem {
             bodyComponent.body.setLinearVelocity(0,0);
             bodyComponent.body.getTransform().setPosition(bridgeComponent.target);
             bridgeComponent.moving=false;
-            nextTarget(bridgeComponent);
 
             if(bridgeComponent.continuous){
+                nextTarget(bridgeComponent);
                 moveBy(entity,bridgeComponent.targets.get(bridgeComponent.targetIndex));
                 bridgeComponent.moving=true;
             }
