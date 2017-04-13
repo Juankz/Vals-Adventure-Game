@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="70" tilewidth="70" tileheight="70" backgroundcolor="#55aaff" nextobjectid="216">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="70" tilewidth="70" tileheight="70" backgroundcolor="#55aaff" nextobjectid="224">
  <properties>
   <property name="background" value="background1.json"/>
   <property name="music" value="Wacky Waiting.ogg"/>
@@ -94,9 +94,10 @@
   <image source="resources/castle_tiles.png" width="1024" height="256"/>
  </tileset>
  <tileset firstgid="400" source="rune.tsx"/>
+ <tileset firstgid="409" source="medieval.tsx"/>
  <layer name="GroundBack" width="200" height="70">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer name="GroundMid" width="200" height="70">
@@ -111,7 +112,7 @@
  </layer>
  <layer name="Builds" width="200" height="70">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T+1rCKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4A9rAAAE=
+   eJzt2DEKwjAAhtFYRydXD+EhXL2SPYlOXsHVcwiepJNgpA6lJBYRhDTvwb+UdssHJSEAAAAAAAAAAAAAAAAAAAAAAABQml0TwmWwQ/Ofb6EEp3imj4Pdvjjjv3wLJdAH5OkD8vQBefqAPH1AXuqMj+9tU3vd5eqDuUud8fGz1FLv6YO5+dRHm+ii1QcV+dRHl+ij0wcV8X8FefqAvKk+1nHb9/b6oDJTfTziNst+54U+qMtUH9fYxKrpd9cHldEHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAED5niHIq8U=
   </data>
  </layer>
  <layer name="Builds Front" width="200" height="70">
@@ -121,7 +122,7 @@
  </layer>
  <layer name="Items" width="200" height="70">
   <data encoding="base64" compression="zlib">
-   eJzt3DFOG1EQBuDdG1DnLkhuuEoSUVO4pyBlCDlAWk4AF6DgIrlALsBSICFrH8JZ2zM77/ukJyRLoP+JGe/Ok9fDAAAAAAAA0K8f0QEgMf0BbfoD2vQHtGXsj4yZ6FPGWsyYiT5lrMWMmehTxlrMmIlOjcOf6Ai79Ae06Q9oy9Af99EBoCFDf9CvL2N0go9dDsMmOgO89xQd4B33NgDrlOlaAr07Sz4PgWsGzBvH+QWwxHl0ADgw58dwWFfT/eb1tL667+xC68yoNX/0MJdcFN4b8f5O6zk6BAAAAKzA0hnaDA59u4wOAIl5vhfaPN/7/26iA3B0j9EBVmwbHWDlsj0Llf27KtZGfyzzEB3gSMZx2Lyuz75elf6ANv3Rl4+eFWl9nnmf16vNs9udn7BE1Tqquq+WpXN1trk8i6p1VHVfLa25+mlnsZ+qdVR1X5xW1Tqqui9Oq1odmc85pGp1VG0/xNqtp58HOse4nf7Or2ndTev3Cc9GeusP507HNVdP/z75u3cJ/ze99UfVz4Nk930YNm8rOss+eusPatpO155v07pJeA0CYJlb7+1pmcvzOuV5FPPM5XnMnWd5/wIAAKjN3AcAAAAAEOcFmvM2HQ==
+   eJzt3Dtu20AQAFDyBqlzFwNqchXHUJ1CfQqn9CcHcOsT2BdQkYukDpADOHRhQCC4jiVK2uHse8BCAiEJs9AMyVlo1XUAAAAAAADt+lE7AAhMfUCZ+oAy9QFlEesjYky0KWIuRoyJNkXMxYgx0aaIuRgxJhrVdw+1QxhTH1CmPqAsQn081g4ACiLUB+363NeO4H3rrlvVjgF2bWsHsMO9DcAyRbqWQOs+Be+HwDUDpvX99ACY46J2ADDDn4lj1o/huL4N95vfh3HpvjO913Nqac2o1H+00Jd8STw36vs9jF+1gwAAAIAFmNtD68GhbevaAUBg9vdCmf29h7uuHQAn91w7gAXb1A5g4aLthYr+XxVLoz7meaodwIn0fbd6HR89npX6gDL10ZbxXpGXneel3zPvczxbP7sZPcIcWfMo67xK5vTV7+03aV3WPMo6r5JSX70dDfaTNY+yzovzyppHWefFeWXLI/05x5Qtj7LNh7rG+XRzpHWM2+Fz7oZxP4yfZ1wbaa0+rDud1lQ+/f3ge+8Dfjet1UfW34NEd9V1q7dx6Ge8/P8lR9dafZDTZrj2fB3GdcBrEADz3Dq3h6Uvj+uc61FM05fHMbWe5fwFAACQm74PAAAAAKCefxl/Ous=
   </data>
  </layer>
  <layer name="Coins" width="200" height="70">
@@ -130,11 +131,6 @@
   </data>
  </layer>
  <objectgroup name="Objects">
-  <object id="1" name="VAL" type="character" x="7630" y="3570" width="70" height="140">
-   <properties>
-    <property name="name" value="VAL"/>
-   </properties>
-  </object>
   <object id="4" type="ground" x="770" y="4480" width="1610" height="32">
    <properties>
     <property name="shape" value="0"/>
@@ -822,9 +818,49 @@
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object id="215" type="ground" x="11200" y="2800" width="1679.72" height="70">
+  <object id="215" type="ground" x="11200" y="2800" width="1960" height="70">
    <properties>
     <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="216" type="exit" x="11340" y="2660" width="140" height="140">
+   <properties>
+    <property name="key" value="NONE"/>
+   </properties>
+  </object>
+  <object id="218" name="BONNY" type="character" x="11585.4" y="2228.58" width="70" height="140">
+   <properties>
+    <property name="conversations" value=""/>
+    <property name="name" value="BONNY"/>
+   </properties>
+  </object>
+  <object id="219" name="VAL" type="character" x="350" y="4480" width="70" height="140">
+   <properties>
+    <property name="name" value="VAL"/>
+   </properties>
+  </object>
+  <object id="220" type="trigger" x="560" y="1750" width="70" height="420">
+   <properties>
+    <property name="action" value="checkpoint"/>
+    <property name="number" value="2"/>
+   </properties>
+  </object>
+  <object id="221" type="trigger" x="4690" y="1610" width="70" height="420">
+   <properties>
+    <property name="action" value="checkpoint"/>
+    <property name="number" value="3"/>
+   </properties>
+  </object>
+  <object id="222" type="trigger" x="6090" y="2730" width="70" height="420">
+   <properties>
+    <property name="action" value="checkpoint"/>
+    <property name="number" value="4"/>
+   </properties>
+  </object>
+  <object id="223" type="trigger" x="9100" y="3360" width="70" height="420">
+   <properties>
+    <property name="action" value="checkpoint"/>
+    <property name="number" value="5"/>
    </properties>
   </object>
  </objectgroup>
