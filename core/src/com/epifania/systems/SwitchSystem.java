@@ -43,7 +43,7 @@ public class SwitchSystem extends IteratingSystem {
             if(bridgeNumber == number && !bridgeComponent.moving){
                 BridgeSystem bridgeSystem = getEngine().getSystem(BridgeSystem.class);
                 bridgeSystem.moveBy(bridge,bridgeComponent.targets.get(bridgeComponent.targetIndex));
-                bridgeSystem.nextTarget(bridgeComponent);
+                if(!bridgeComponent.continuous)bridgeSystem.nextTarget(bridgeComponent);
             }
         }
 
