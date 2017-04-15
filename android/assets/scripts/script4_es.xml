@@ -2,7 +2,7 @@
     <Conversations>
         <!-- GOM -->
         <Conversation character="GOMH" ID="G1" keys="NONE" secondary="NONE">
-            <Dialog character="VAL">Gom ¿Has visto un conjejo de color café?</Dialog>
+            <Dialog character="VAL">Gom ¿Has visto un conejo de color café?</Dialog>
             <Dialog character="GOMH">Si, vi uno partir en un barco</Dialog>
             <Dialog character="VAL">¡No! El es el ladrón</Dialog>
             <Dialog character="GOMH">No parecía sospechoso. Oh querida, ¡Estamos perdidos!</Dialog>
@@ -25,7 +25,7 @@
         <!-- CAPITÁN -->
         <Conversation character="CAPTAIN" ID="C1" keys="NONE" secondary="NONE">
             <Dialog character="VAL">Capitan necesito viajar con usted</Dialog>
-            <Dialog character="CAPTAIN">Ja ja ja las mujeres no estan permitidas en botes, son mal augürio</Dialog>
+            <Dialog character="CAPTAIN">Ja ja ja las mujeres no estan permitidas en botes, son mal augurio</Dialog>
             <Dialog character="VAL">¡Ey! no me interesan sus augurios, necesito perseguir al ladrón</Dialog>
             <Dialog character="CAPTAIN">Bueno, te ayudaré si me haces un favor primero</Dialog>
             <Dialog character="CAPTAIN">Perdí mi tesoro si me lo traes de vuelta, te dejaré viajar</Dialog>
