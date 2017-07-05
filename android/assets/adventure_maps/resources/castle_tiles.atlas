@@ -1,0 +1,258 @@
+
+castle_tiles.png
+size: 1024,256
+format: RGBA8888
+filter: MipMapLinearNearest,Nearest
+repeat: none
+castleHalf
+  rotate: false
+  xy: 1, 145
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+castleHalfLeft
+  rotate: false
+  xy: 1, 73
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+castleHalfMid
+  rotate: false
+  xy: 73, 145
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+castleHalfRight
+  rotate: false
+  xy: 1, 1
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+slice01
+  rotate: false
+  xy: 73, 73
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 1
+slice02
+  rotate: false
+  xy: 145, 145
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 2
+slice03
+  rotate: false
+  xy: 73, 1
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 3
+slice04
+  rotate: false
+  xy: 145, 73
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 4
+slice05
+  rotate: false
+  xy: 217, 145
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 5
+slice06
+  rotate: false
+  xy: 145, 1
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 6
+slice07
+  rotate: false
+  xy: 217, 73
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 7
+slice12
+  rotate: false
+  xy: 289, 145
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 12
+slice13
+  rotate: false
+  xy: 217, 1
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 13
+slice14
+  rotate: false
+  xy: 289, 73
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 14
+slice15
+  rotate: false
+  xy: 361, 145
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 15
+slice16
+  rotate: false
+  xy: 289, 1
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 16
+slice17
+  rotate: false
+  xy: 361, 73
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 17
+slice18
+  rotate: false
+  xy: 433, 145
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 18
+slice19
+  rotate: false
+  xy: 361, 1
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 19
+slice20
+  rotate: false
+  xy: 433, 73
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 20
+slice21
+  rotate: false
+  xy: 505, 145
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 21
+slice22
+  rotate: false
+  xy: 433, 1
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 22
+slice23
+  rotate: false
+  xy: 505, 73
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 23
+slice24
+  rotate: false
+  xy: 577, 145
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 24
+slice25
+  rotate: false
+  xy: 505, 1
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 25
+slice26
+  rotate: false
+  xy: 577, 73
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 26
+slice27
+  rotate: false
+  xy: 649, 145
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 27
+slice28
+  rotate: false
+  xy: 577, 1
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 28
+slice29
+  rotate: false
+  xy: 649, 73
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 29
+slice30
+  rotate: false
+  xy: 721, 145
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 30
+slice31
+  rotate: false
+  xy: 649, 1
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 31
+slice32
+  rotate: false
+  xy: 721, 73
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 32
+slice33
+  rotate: false
+  xy: 793, 145
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 33
+slice34
+  rotate: false
+  xy: 721, 1
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 34
+slice35
+  rotate: false
+  xy: 793, 73
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 35
+slice36
+  rotate: false
+  xy: 865, 145
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: 36

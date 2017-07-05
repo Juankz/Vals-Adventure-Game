@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="70" tileheight="70" nextobjectid="20">
+ <tileset firstgid="1" source="GrassExtension.tsx"/>
+ <tileset firstgid="43" source="Items.tsx"/>
+ <tileset firstgid="141" name="earth" tilewidth="70" tileheight="70" spacing="2" margin="1" tilecount="9">
+  <image source="resources/earth.png" width="256" height="256"/>
+  <tile id="6">
+   <properties>
+    <property name="state" value="2"/>
+    <property name="tag" value="spike"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="state" value="1"/>
+    <property name="tag" value="spike"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="150" name="castle_tiles" tilewidth="70" tileheight="70" spacing="2" margin="1" tilecount="42">
+  <image source="resources/castle_tiles.png" width="1024" height="256"/>
+ </tileset>
+ <layer name="GroundBack" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt0DERADAIBLC3UBf1v+OtLuC4ZoiBVJICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL5ylph+6nKXmH7q8gAJxaPL
+  </data>
+ </layer>
+ <layer name="GroundMid" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1MEJgDAMBdA/mqM4lL07iqPZg4cK4kGEFvoe/EtCIBBIAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMJYtWdr03md2JTna9N5ndu4xFvf4X/37e3lIra9vvWv2FoCvTqOQJf8=
+  </data>
+ </layer>
+ <layer name="Builds Interior" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+ <layer name="Builds" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+ <layer name="Builds Front" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+ <layer name="Items" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt0bENADAIwDD+5Qwe79yRCZDsCyIlAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAjpoO4OPHLn7sktMBAABHPYpZAfU=
+  </data>
+ </layer>
+ <layer name="Coins" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+ <objectgroup name="Objects">
+  <object id="9" type="spike" x="630" y="6790" width="70" height="70">
+   <properties>
+    <property name="id" value="0"/>
+    <property name="speed" value="4"/>
+    <property name="target" value="6,0,-6,0"/>
+   </properties>
+  </object>
+  <object id="12" type="trigger" x="280" y="6090" width="70" height="770">
+   <properties>
+    <property name="action" value="checkpoint"/>
+    <property name="number" value="0"/>
+   </properties>
+  </object>
+  <object id="13" name="VAL" type="character" x="420" y="6720" width="70" height="140">
+   <properties>
+    <property name="name" value="VAL"/>
+   </properties>
+  </object>
+  <object id="14" type="ground" x="0" y="6860" width="2940" height="70">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="15" type="spike" x="1540" y="6790" width="70" height="70">
+   <properties>
+    <property name="id" value="0"/>
+    <property name="speed" value="4"/>
+    <property name="target" value="-6,0,6,0"/>
+   </properties>
+  </object>
+  <object id="16" type="spike" x="1680" y="6790" width="70" height="70">
+   <properties>
+    <property name="id" value="0"/>
+    <property name="speed" value="4"/>
+    <property name="target" value="0,4,0,-4"/>
+   </properties>
+  </object>
+  <object id="17" type="spike" x="1750" y="6510" width="70" height="70">
+   <properties>
+    <property name="id" value="0"/>
+    <property name="speed" value="4"/>
+    <property name="target" value="0,-4,0,4"/>
+   </properties>
+  </object>
+  <object id="18" type="spike" x="1820" y="6790" width="70" height="70">
+   <properties>
+    <property name="id" value="0"/>
+    <property name="speed" value="4"/>
+    <property name="target" value="0,4,0,-4"/>
+   </properties>
+  </object>
+  <object id="19" type="spike" x="1890" y="6510" width="70" height="70">
+   <properties>
+    <property name="id" value="0"/>
+    <property name="speed" value="4"/>
+    <property name="target" value="0,-4,0,4"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Interior Objects"/>
+</map>
