@@ -87,21 +87,35 @@ level4
   orig: 453, 519
   offset: 0, 0
   index: -1
-level4_locked
+level5
   rotate: false
   xy: 1381, 3
   size: 453, 519
   orig: 453, 519
   offset: 0, 0
   index: -1
-level5
+level7
   rotate: false
   xy: 1, 1
   size: 459, 521
   orig: 459, 521
   offset: 0, 0
   index: -1
-level5_locked
+level8
+  rotate: false
+  xy: 1, 1
+  size: 459, 521
+  orig: 459, 521
+  offset: 0, 0
+  index: -1
+level7_locked
+  rotate: false
+  xy: 463, 1
+  size: 459, 521
+  orig: 459, 521
+  offset: 0, 0
+  index: -1
+level8_locked
   rotate: false
   xy: 463, 1
   size: 459, 521
@@ -110,6 +124,40 @@ level5_locked
   index: -1
 
 level_selection3.png
+size: 2048,1024
+format: RGBA8888
+filter: MipMapLinearNearest,Linear
+repeat: none
+level4_locked
+  rotate: false
+  xy: 457, 1
+  size: 453, 519
+  orig: 453, 519
+  offset: 0, 0
+  index: -1
+level5_locked
+  rotate: false
+  xy: 913, 1
+  size: 453, 519
+  orig: 453, 519
+  offset: 0, 0
+  index: -1
+level6
+  rotate: false
+  xy: 1, 1
+  size: 453, 519
+  orig: 453, 519
+  offset: 0, 0
+  index: -1
+level6_locked
+  rotate: false
+  xy: 1369, 1
+  size: 453, 519
+  orig: 453, 519
+  offset: 0, 0
+  index: -1
+
+level_selection4.png
 size: 2048,1024
 format: RGBA8888
 filter: MipMapLinearNearest,Linear
@@ -143,7 +191,7 @@ level3
   offset: 0, 0
   index: -1
 
-level_selection4.png
+level_selection5.png
 size: 512,1024
 format: RGBA8888
 filter: MipMapLinearNearest,Linear
