@@ -8,22 +8,37 @@
     {
       "level":2,
       "medal":false,
-      "locked":true
+      "locked":false
     },
     {
       "level":3,
       "medal":false,
-      "locked":true
+      "locked":false
     },
     {
       "level":4,
       "medal":false,
-      "locked":true
+      "locked":false
     },
     {
       "level":5,
       "medal":false,
-      "locked":true
+      "locked":false
+    },
+    {
+      "level":6,
+      "medal":false,
+      "locked":false
     }
+//    {
+//      "level":7,
+//      "medal":false,
+//      "locked":true
+//    },
+//    {
+//      "level":8,
+//      "medal":false,
+//      "locked":true
+//    }
   ]
 }

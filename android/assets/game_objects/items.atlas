@@ -1,6 +1,6 @@
 
 items.png
-size: 1024,128
+size: 2048,128
 format: RGBA8888
 filter: MipMapLinearNearest,Nearest
 repeat: none
@@ -79,5 +79,19 @@ particle
   xy: 871, 1
   size: 18, 18
   orig: 18, 18
+  offset: 0, 0
+  index: -1
+spike1
+  rotate: false
+  xy: 958, 1
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+spike2
+  rotate: false
+  xy: 1045, 1
+  size: 70, 70
+  orig: 70, 70
   offset: 0, 0
   index: -1

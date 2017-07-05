@@ -208,6 +208,8 @@ public class LevelBuilder {
                 createBox(object,flag);
             }else if(type.equals("platform")){
                 createPlatform(object,flag);
+            }else if(type.equals("spike")){
+                createSpike(object,flag);
             }else if(type.equals("block")){
                 createBlock(object,flag);
             }else if(type.equals("password")){
@@ -928,6 +930,96 @@ public class LevelBuilder {
         entity.add(boundsComponent);
         entity.add(transformComponent);
         entity.add(deathZoneComponent);
+        entity.flags = flag;
+        engine.addEntity(entity);
+    }
+
+    private void createSpike(MapObject object, int flag){
+        BoundsComponent boundsComponent = new BoundsComponent();
+        TransformComponent transformComponent = new TransformComponent();
+        DeathZoneComponent deathZoneComponent = new DeathZoneComponent();
+        BridgeComponent bridgeComponent = new BridgeComponent();
+        BodyComponent bodyComponent = new BodyComponent();
+        TextureComponent textureComponent = new TextureComponent();
+        MovementComponent movementComponent = new MovementComponent();
+        AnimationComponent animationComponent = new AnimationComponent();
+        StateComponent stateComponent = new StateComponent();
+
+        float unit = 1/70f;
+        float x,y,w,h;
+
+        Rectangle rectangle =  ((RectangleMapObject)object).getRectangle();
+        x = rectangle.x*unit;
+        y=rectangle.y*unit;
+        w=rectangle.width*unit;
+        h=rectangle.height*unit;
+
+        transformComponent.pos.set(x,y,0);
+        transformComponent.origin.set(0.5f,0.5f);
+
+        Array<TextureRegion> frames = new Array<TextureRegion>();
+        frames.add(new TextureRegion(Assets.instance.get("game_objects/items.atlas", TextureAtlas.class).findRegion("spike1")));
+        frames.add(new TextureRegion(Assets.instance.get("game_objects/items.atlas", TextureAtlas.class).findRegion("spike2")));
+
+        animationComponent.animations.put(0,new Animation(0.0625f,frames, Animation.PlayMode.LOOP));
+
+        //Create body
+        Body body;
+        BodyDef def = new BodyDef();
+        def.type = BodyDef.BodyType.KinematicBody;
+        def.position.set(x+w*0.5f, y+h*0.5f);
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(w*0.5f, h*0.5f);
+        FixtureDef fix = new FixtureDef();
+        fix.shape = shape;
+        fix.isSensor = true;
+        fix.friction = 0.0f;
+        fix.filter.groupIndex = Constants.groupsIndexes[flag];
+        fix.filter.categoryBits = Constants.layerCategoryBits[flag];
+        fix.filter.maskBits = Constants.layerMaskBits[flag];
+        body = engine.getSystem(PhysicsSystem.class).getWorld().createBody(def);
+        body.createFixture(fix);
+        shape.dispose();
+        bodyComponent.body = body;
+
+        boundsComponent.bounds.set(x,y,w*0.85f,h*0.85f);
+
+        String s = (String)object.getProperties().get("target");
+        String[] ss = s.split(",");
+        float[] coords = new float[ss.length];
+        for(int m = 0;m<coords.length;m++){
+            coords[m]=Float.parseFloat(ss[m]);
+        }
+        for(int m = 0;m<coords.length;m+=2){
+            bridgeComponent.targets.add(new Vector2(coords[m],coords[m+1]));
+        }
+
+        Object property = object.getProperties().get("continuous");
+        if(property!=null) bridgeComponent.continuous = Boolean.parseBoolean((String)property);
+        else  bridgeComponent.continuous = true;
+
+
+        property = object.getProperties().get("moving");
+        if(property!=null) bridgeComponent.moving = Boolean.parseBoolean((String)property);
+        else  bridgeComponent.moving = true;
+
+        property = object.getProperties().get("speed");
+        if(property!=null) bridgeComponent.speed = Float.parseFloat((String)property);
+        else  bridgeComponent.speed = 4;
+
+        bridgeComponent.target.set(bodyComponent.body.getPosition());
+
+        //Create Entity
+        Entity entity = new Entity();
+        entity.add(transformComponent);
+        entity.add(textureComponent);
+        entity.add(bridgeComponent);
+        entity.add(boundsComponent);
+        entity.add(movementComponent);
+        entity.add(bodyComponent);
+        entity.add(deathZoneComponent);
+        entity.add(animationComponent);
+        entity.add(stateComponent);
         entity.flags = flag;
         engine.addEntity(entity);
     }
