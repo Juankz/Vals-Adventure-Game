@@ -1,0 +1,26 @@
+<Script>
+    <Conversations>
+        <!-- CAPITÁN -->
+        <Conversation character="CAPTAIN" ID="C1" keys="NONE" secondary="NONE">
+            <Dialog character="CAPTAIN">End of the trip little bunny! I wish you luck in your adventure</Dialog>
+            <Dialog character="VAL">Thank you captain!</Dialog>
+        </Conversation>
+        <!-- PINKY -->
+        <Conversation character="PINKY" ID="P1" keys="NONE" secondary="NONE">
+            <Dialog character="PINKY">Hi Val. What a surprise! What are you doing here??</Dialog>
+            <Dialog character="VAL">Pinky I need your help...</Dialog>
+            <Dialog character="VAL">I have followed the thief till here, but don't know where to go now</Dialog>
+            <Dialog character="PINKY">Probably is hiding in the abandoned castle. But is a very dangerous place</Dialog>
+            <Dialog character="PINKY">I have heard that an angry ghost guards the castle, maybe you should stop</Dialog>
+            <Dialog character="VAL">Even knowing that ...</Dialog>
+            <Dialog character="VAL">I won't give up</Dialog>
+            <Dialog character="PINKY">I see... Good luck Val</Dialog>
+        </Conversation>
+    </Conversations>
+
+    <SelfThoughts>
+        <Dialog key = "GREEN KEY">I need a key</Dialog>
+        <Dialog key = "KEY">Could be useful</Dialog>
+        <Dialog key = "PUZZLE1">A box will be handy for this button</Dialog>
+    </SelfThoughts>
+</Script>
