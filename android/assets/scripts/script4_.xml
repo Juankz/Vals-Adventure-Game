@@ -4,9 +4,7 @@
         <Conversation character="GOMH" ID="G1" keys="NONE" secondary="NONE">
             <Dialog character="VAL">Gom have you seen a brown bunny?</Dialog>
             <Dialog character="GOMH">Yes I saw one, he departed on a ship</Dialog>
-            <Dialog character="VAL">Why? He is the thief</Dialog>
-            <Dialog character="GOMH">Didn't look suspicious. Oh dear, we are lost!</Dialog>
-            <Dialog character="VAL">No we are not, I'll trace him</Dialog>
+            <Dialog character="VAL">No! He is the thief. I have to hurry</Dialog>
         </Conversation>
         <!-- MOM -->
         <Conversation character="MOM" ID="M1" keys="NONE" secondary="NONE">
@@ -17,8 +15,7 @@
             <Dialog character="MOM">Val what are you doing?</Dialog>
             <Dialog character="VAL">I must depart to catch that thief</Dialog>
             <Dialog character="MOM">Can't you see it is dangerous?</Dialog>
-            <Dialog character="VAL">Mom. I have to do this. This is who I am</Dialog>
-            <Dialog character="VAL">You wish I would be different, but I am not</Dialog>
+            <Dialog character="VAL">Mom. I have to do this. This is who I am. You wish I would be different, but I am not</Dialog>
             <Dialog character="MOM">I know. Be careful Val, I love you</Dialog>
             <Dialog character="VAL">I love you too mom, good bye</Dialog>
         </Conversation>
@@ -27,15 +24,13 @@
             <Dialog character="VAL">Captain I need to travel with you</Dialog>
             <Dialog character="CAPTAIN">Ha ha ha girls are not allowed in boats... bad omen</Dialog>
             <Dialog character="VAL">Hey I don't care about omens, I need to pursue the thief</Dialog>
-            <Dialog character="CAPTAIN">I will help you if you do something for me first</Dialog>
-            <Dialog character="CAPTAIN">I lost my gold if you find it, I will let you get on board</Dialog>
+            <Dialog character="CAPTAIN">I will help you if you do something for me first. I lost my gold if you find it, I will let you get on board</Dialog>
             <Dialog character="VAL">Deal. I'll be back with your gold</Dialog>
         </Conversation>
         <!-- CAPTAIN EXIT CONVERSATION!-->
         <Conversation character="CAPTAIN" ID="EXIT" keys="C1,GOAL" secondary="NONE">
             <Dialog character="CAPTAIN">I'm surprised! I didn't expect you to be able to find my gold</Dialog>
-            <Dialog character="VAL">Gross! I can do much more than you are able to imagine</Dialog>
-            <Dialog character="VAL">Now can we depart?</Dialog>
+            <Dialog character="VAL">Gross! I can do much more than you are able to imagine. Can we depart now?</Dialog>
             <Dialog character="CAPTAIN">A deal is a deal. You are on board</Dialog>
         </Conversation>
     </Conversations>

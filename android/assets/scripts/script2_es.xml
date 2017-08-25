@@ -3,11 +3,8 @@
         <!--MARCO -->
         <Conversation character="MARCO" ID="B1" keys = "NONE" secondary="NONE">
             <Dialog character="MARCO">Hey Val, ¿Lista para el festival?</Dialog>
-            <Dialog character="MARCO">Recuerda que este es el festival más importante del año</Dialog>
-            <Dialog character="MARCO">La Zanahoria Dorada representa abuncia y bienestar para la aldea</Dialog>
             <Dialog character="VAL">Desearía estar lista Marco, pero necestio recolectar zanahorias para la celebración</Dialog>
-            <Dialog character="MARCO">Yo tengo algunas zanahorias en mi casa subiendo por este camino, puedes tomarlas</Dialog>
-            <Dialog character="MARCO">Pero olvidé donde dejé la llave</Dialog>
+            <Dialog character="MARCO">Yo tengo algunas zanahorias en mi casa subiendo por este camino, puedes tomarlas. Pero olvidé donde dejé la llave</Dialog>
             <Dialog character="VAL">No hay problema, la encontraré, gracias Marco</Dialog>
         </Conversation>
         <Conversation character="GOMH" ID="EXIT" keys="NONE" secondary="NONE">
@@ -16,9 +13,8 @@
             <Dialog character="MOM">¡Esto es terrible! ¿Como pasó?</Dialog>
             <Dialog character="GOMH">No lo sé, solo ví una silueta corriendo hacia el bosque</Dialog>
             <Dialog character="VAL">No hay tiempo que perder, atrapémos al ladrón</Dialog>
-            <Dialog character="MOM">VAL!</Dialog>
+            <Dialog character="MOM">¡Val es peligroso!</Dialog>
             <Dialog character="VAL">No te preocupes mamá, estaré de vuelta pronto</Dialog>
-            <Dialog character="GOMH">Cuando encuentres al ladrón, avísanos</Dialog>
         </Conversation>
         <Conversation character="MOM" ID="M1" keys="PLACEHOLDER" secondary="NONE">
             <Dialog character="MOM"></Dialog>

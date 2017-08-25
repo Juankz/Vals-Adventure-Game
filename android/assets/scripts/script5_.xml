@@ -9,11 +9,9 @@
         <Conversation character="PINKY" ID="P1" keys="NONE" secondary="NONE">
             <Dialog character="PINKY">Hi Val. What a surprise! What are you doing here??</Dialog>
             <Dialog character="VAL">Pinky I need your help...</Dialog>
-            <Dialog character="VAL">I have followed the thief till here, but don't know where to go now</Dialog>
-            <Dialog character="PINKY">Probably is hiding in the abandoned castle. But is a very dangerous place</Dialog>
+            <Dialog character="VAL">I have followed the thief till here, but don't know where to go now. Probably is hiding in the abandoned castle. But is a very dangerous place</Dialog>
             <Dialog character="PINKY">I have heard that an angry ghost guards the castle, maybe you should stop</Dialog>
-            <Dialog character="VAL">Even knowing that ...</Dialog>
-            <Dialog character="VAL">I won't give up</Dialog>
+            <Dialog character="VAL">Even knowing that... I won't give up</Dialog>
             <Dialog character="PINKY">I see... Good luck Val</Dialog>
         </Conversation>
     </Conversations>

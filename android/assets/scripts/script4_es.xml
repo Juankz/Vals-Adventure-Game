@@ -4,9 +4,7 @@
         <Conversation character="GOMH" ID="G1" keys="NONE" secondary="NONE">
             <Dialog character="VAL">Gom ¿Has visto un conejo de color café?</Dialog>
             <Dialog character="GOMH">Si, vi uno partir en un barco</Dialog>
-            <Dialog character="VAL">¡No! El es el ladrón</Dialog>
-            <Dialog character="GOMH">No parecía sospechoso. Oh querida, ¡Estamos perdidos!</Dialog>
-            <Dialog character="VAL">No los estamos, voy por él</Dialog>
+            <Dialog character="VAL">¡No! El es el ladrón, tengo que darme prisa</Dialog>
         </Conversation>
         <!-- MAMÁ -->
         <Conversation character="MOM" ID="M1" keys="NONE" secondary="NONE">
@@ -17,8 +15,7 @@
             <Dialog character="MOM">¿Val que estás haciendo?</Dialog>
             <Dialog character="VAL">Debo partir para atrapar al ladrón</Dialog>
             <Dialog character="MOM">¿Que no ves que es peligroso?</Dialog>
-            <Dialog character="VAL">Mamá, tengo que hacerlo, esto es quien soy</Dialog>
-            <Dialog character="VAL">Desearías que fuera diferente pero no lo soy</Dialog>
+            <Dialog character="VAL">Mamá, tengo que hacerlo, esto es quien soy. Desearías que fuera diferente pero no lo soy</Dialog>
             <Dialog character="MOM">Lo sé. Cuidate mucho Val, te quiero</Dialog>
             <Dialog character="VAL">Yo también te quiero mamá, adiós</Dialog>
         </Conversation>
@@ -27,15 +24,13 @@
             <Dialog character="VAL">Capitan necesito viajar con usted</Dialog>
             <Dialog character="CAPTAIN">Ja ja ja las mujeres no estan permitidas en botes, son mal augurio</Dialog>
             <Dialog character="VAL">¡Ey! no me interesan sus augurios, necesito perseguir al ladrón</Dialog>
-            <Dialog character="CAPTAIN">Bueno, te ayudaré si me haces un favor primero</Dialog>
-            <Dialog character="CAPTAIN">Perdí mi tesoro si me lo traes de vuelta, te dejaré viajar</Dialog>
+            <Dialog character="CAPTAIN">Bueno, te ayudaré si me haces un favor primero. Perdí mi tesoro si me lo traes de vuelta, te dejaré viajar</Dialog>
             <Dialog character="VAL">Trato hecho. Volveré con su tesoro</Dialog>
         </Conversation>
         <!-- CAPITÁN CONVERSATION FINAL!-->
         <Conversation character="CAPTAIN" ID="EXIT" keys="C1,GOAL" secondary="NONE">
             <Dialog character="CAPTAIN">Estoy sorprendido, no esperaba que fueras capáz de encontrar mi oro</Dialog>
-            <Dialog character="VAL">¡Que tonto! Puedo hacer mucho mas de lo que puedes imaginar</Dialog>
-            <Dialog character="VAL">¿Podemos partir ya?</Dialog>
+            <Dialog character="VAL">¡Que tonto! Puedo hacer mucho mas de lo que puedes imaginar. ¿Podemos partir ya?</Dialog>
             <Dialog character="CAPTAIN">Un trato es un trato, estás a bordo </Dialog>
         </Conversation>
     </Conversations>

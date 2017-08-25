@@ -9,16 +9,15 @@
         <Conversation character="PINKY" ID="P1" keys="NONE" secondary="NONE">
             <Dialog character="PINKY">Hola Val !Vaya sorpresa! ¿Que haces aqui?</Dialog>
             <Dialog character="VAL">He seguido al ladron hasta aqui, pero no se a donde ir</Dialog>
-            <Dialog character="PINKY">Probablemente esta en el castillo abandonado, es el lugar perfecto para esconderse</Dialog>
-            <Dialog character="PINKY">Pero es muy peligroso Val, dicen que hay un fantasma malvado que custodia ese lugar</Dialog>
-            <Dialog character="VAL">Aún sabiendo eso ...</Dialog>
-            <Dialog character="VAL">No puedo rendirme</Dialog>
+            <Dialog character="PINKY">Probablemente esta en el castillo abandonado, es el lugar perfecto para esconderse. Pero es muy peligroso Val, dicen que hay un fantasma malvado que custodia ese lugar</Dialog>
+            <Dialog character="VAL">Aún sabiendo eso... No puedo rendirme</Dialog>
             <Dialog character="PINKY">Buena suerte Val</Dialog>
         </Conversation>
     </Conversations>
 
     <SelfThoughts>
         <Dialog key = "GREEN KEY">Necesito una llave</Dialog>
+        <Dialog key = "KEY">Necesito cortarlo con algo</Dialog>
         <Dialog key = "KEY">Puede serme útil</Dialog>
         <Dialog key = "PUZZLE1">Una caja me serviría para oprimir este botón</Dialog>
     </SelfThoughts>

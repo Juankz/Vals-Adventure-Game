@@ -3,11 +3,9 @@
         <!--MARCO -->
         <Conversation character="MARCO" ID="B1" keys = "NONE" secondary="NONE">
             <Dialog character="MARCO">Hey Val, ready for the festival?</Dialog>
-            <Dialog character="MARCO">Remember this is the most important event in the year</Dialog>
-            <Dialog character="MARCO">The Golden Carrot represents wealth and abundance for our village</Dialog>
             <Dialog character="VAL">I wish to be ready Marco, I need to collect some carrots for the festival</Dialog>
-            <Dialog character="MARCO">I left some carrots in my house, up this way, you can take them</Dialog>
-            <Dialog character="MARCO">I just forgot where did I left the key</Dialog>
+            <Dialog character="MARCO">I left some carrots in my house, up this way, you can take them. But I forgot where did I left the key</Dialog>
+            <Dialog character="MARCO"></Dialog>
             <Dialog character="VAL">No problem I will find it, thanks Marco</Dialog>
         </Conversation>
         <Conversation character="GOMH" ID="EXIT" keys="NONE" secondary="NONE">
@@ -16,9 +14,8 @@
             <Dialog character="MOM">This is terrible! How did it happen?</Dialog>
             <Dialog character="GOMH">I don't know. Just saw a silhouette running towards the forest</Dialog>
             <Dialog character="VAL">There is no time to waste, let's catch the thief</Dialog>
-            <Dialog character="MOM">VAL!</Dialog>
+            <Dialog character="MOM">Val it is dangerous!</Dialog>
             <Dialog character="VAL">Don't worry mom, I'll be back soon</Dialog>
-            <Dialog character="GOMH">Once you find the thief, call us</Dialog>
         </Conversation>
         <Conversation character="MOM" ID="M1" keys="PLACEHOLDER" secondary="NONE">
             <Dialog character="MOM"></Dialog>
