@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -98,7 +99,7 @@ public class LevelSelectionScreen extends ScreenAdapter {
 
         float pageWidth = stage.getWidth();
         float pageHeight = stage.getHeight();
-        int lastLevel = 0;
+        int lastLevel = MathUtils.clamp(Settings.instance.lastLevelPlayed,0,Constants.mapsNames.length);
 
         for (int i = 0; i < Constants.mapsNames.length; i++) {
             final int finalI = i;
@@ -114,9 +115,6 @@ public class LevelSelectionScreen extends ScreenAdapter {
                 }
             });
             levelsContainer.add(levelItem).size(pageWidth, pageHeight);
-
-            if (!locked)
-                lastLevel = i;
         }
 
         level = lastLevel;

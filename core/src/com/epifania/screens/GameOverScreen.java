@@ -262,6 +262,7 @@ public class GameOverScreen extends ScreenAdapter {
 //        Assets.instance.finishLoading();
 
         modifyLevelsData();
+        Settings.instance.lastLevelPlayed=level+1;
     }
 
     private void modifyLevelsData(){

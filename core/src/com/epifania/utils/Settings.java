@@ -18,6 +18,7 @@ public class Settings {
     public String language = Locale.getDefault().getLanguage();
     public float sfxVolume =0.3f;
     public float musicVolume = 0.4f;
+    public int lastLevelPlayed = 0;
 
     private Settings(){
         languages = new ObjectMap<String, String>();
@@ -33,6 +34,7 @@ public class Settings {
         musicVolume = preferences.getFloat("musicVolume");
         controls = preferences.getBoolean("controls");
         language = preferences.getString("language");
+        lastLevelPlayed = preferences.getInteger("lastLevelPlayed");
         if(all_set == false) {
             sfxVolume = 0.8f;
             musicVolume = 0.8f;
@@ -44,6 +46,7 @@ public class Settings {
         Gdx.app.debug("Settings","language = "+ language);
         Gdx.app.debug("Settings","all_set = "+ all_set);
         Gdx.app.debug("Settings","controls = "+controls);
+        Gdx.app.debug("Settings","lastLevelPlayed = "+lastLevelPlayed);
         Locale.setDefault(new Locale(language));
     }
     public void saveSettings(){
@@ -52,6 +55,7 @@ public class Settings {
         preferences.putBoolean("all_set", all_set);
         preferences.putBoolean("controls",controls);
         preferences.putString("language", language);
+        preferences.putInteger("lastLevelPlayed", lastLevelPlayed);
         preferences.flush();
     }
 }
