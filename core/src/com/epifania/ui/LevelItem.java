@@ -2,6 +2,7 @@ package com.epifania.ui;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -80,6 +81,7 @@ public class LevelItem extends WidgetGroup {
         levelImage.setPosition(getCenteredX(frame,levelImage),getCenteredY(frame,levelImage));
         title.setPosition(getCenteredX(background,title),frame.getY() - title.getHeight() -10);
         play.setPosition(frame.getX()+frame.getWidth() - 150 , frame.getY()+100);
+        play.setTouchable(Touchable.disabled);
         medalImage.setPosition(getCenteredX(frame,medalImage),frame.getY() + frame.getHeight()-medalImage.getHeight());
     }
 
