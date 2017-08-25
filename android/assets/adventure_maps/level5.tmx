@@ -201,6 +201,7 @@
    </properties>
   </tile>
  </tileset>
+ <tileset firstgid="1291" source="castle_tiles_light.tsx"/>
  <layer name="GroundBack" width="200" height="70">
   <data encoding="base64" compression="zlib">
    eJztnFFq3DAQhu0b9F45SF96gNALBAp57YX61NTQpxTaQqEPLS00d+iKrFln17Jl74w0Gn0f/GSz9hphzWfZXnm7DgAAAAAAAAAAoG3+KQXAA9JePHX4USsc7y6RdGOopK3ekT7m/c3bfFNI1VFY/7Ns015s27sX0jWNHzJI+qHlSAt+fOvKe4Afl0j7oeFIrM/wAz+00fBDuhZb6DP8sImGH4NkA2fa5bHP8MMmGn5I00Kf4YdN8MMG+GET/LCBZT887u9U8MMG+GGT1v24W1ne98/ZuzwV/LCJFz8eZ5LC7SG/j+t/PFs2vr+27Hx57P0l8MMmXvzYy63Qdqbs2Rf4YZOlfbLlWIwfJ/DDD9LjxyDaupfbrqW/8MMP0n7kmp9oub/www/Sfmg4kqO/bvr1e1mp4Icf1vzYc/2x1a09bfzUzd+zuiYS1yLBM/zwg8b4Ie2Hdc7v9eKHH/b4MS5/mmT6uUGxvV7BD5tIjR+1c5PwHXjKOnP8OuTr8fXDIV9m1sEPm+DHtmuUaW0/RNa5708J///sTtdL09fT/OnKO4AflyztE6n7OVaI1fyWOgm1PToSO+ZP/Shd1/hxHUv7JNzPkbo3lDoPaYlr2yBVK+PxP3bMxw8/rPkxvh5KNfCM7135WlmLRz9adSTFDytuLGHJG/xoA425e5qUrh/8AMtYGUPwwz+xZ4Yktql5HW/BEfwAq/zo9Gt+KfgBVtFyAz/wo3bCHA7N2sAP/KgZ7flLLfoh/fzA3Dycaz4P6Vj1QyOlvdHYp3s+D2mE35/S9uN1/5y3+IEflRHm0WrPfx378Z1y7eMHfkiSY+zAD/yolTB25OzLN/3pXCt37o9/S9c1ftSD9efupOupdBvwoxxb57TkOreyEvzw7cf4W+dSyXFdbim5/bB+beWN2PPapZ8HrCVj/eS6dsePfLR2LmTBj9L32fAjndbOhfADP1Jh7JDzY0t9la51/EiDsSOfN/hRF4wddvy4Zrs56n1raqfFe7Ce/HgvEPyIgxv4gR/zcF5Vxg/Jcx380IHzKvzAjzi4Uc4Pye3ihzycV/kJfsjD2OEn+CELY4ev4IcsjB2+gh/phN9fY755W8GPNIIbjAvtxbofrzIk5Tkk3Ggz1v34kCGl+4DYDX6U7wNiN/hRvg+I3Vj34z8+rITz
@@ -228,7 +229,7 @@
  </layer>
  <layer name="Items" width="200" height="70">
   <data encoding="base64" compression="zlib">
-   eJzt3EFO20AUAFD7Bl33LkjZ9CoFse4i+y5gWQgHYMsJ2guw6EW6rtQDgJFAgtRDEux4Zv68J32BrBD9Uf63/UcxXQcAAAAAAMAxXeZOAAqmPyBNf0Ca/oC0GvqjhhyJqYbaqyFHYqqh9mrIkZhqqL0aciSovrvNncIu+gPS9Aek6Q9I0x8s6XOfO4PDnHfdKncOtO3+OUp0lzsBAPZS8rUEWvepsvmI+Fwz3jLz8Frf/x8AU5zkTgAm+DtyzL0TzOvbcL/5fYiv7jvDezqnpvaIUvNHC3PJl8BrI78/Q/zOnQQAAABU6NCZ2gwObTvPnQAUzPO8kOZ53o+7yJ0AR/crdwIVW+dOoHKlPftU2/+qKJ3+mOZn7gSOpO+71VPsezwq/QFp+qMt28+KPLz6PfV95kOOR5tn11s/YYqodRR1XSlT5ur3njdpXdQ6irqulNRcfb8VHCZqHUVdF8uKWkdR18WyotWR+Zw5RaujaOshr+16+jHTPsbV8D7XQ2yGuFlwb6S1/rDvdFxj9fRvz7/dFPjZtNYfUb8PUrqzrlu9xEff42H3S2bXWn8Qy3q45pwOcVHgtQeAeVw5xxfLXF6uJfejGGcuL8fYfpbzFwAAQGzmPgAAAACAcY/crj04
+   eJzt3E1OFEEUAODqBSs3bvUEXsJkNp5FwwnmBrgE8QBuPYFegIUXcW3iAaBJNIGxS2bon6p69X3JC6QDk1fhve55lSlSAgAAAAAAYE0fSycAFdMfkKc/IE9/QF4L/dFCjsTUQu21kCMxtVB7LeRITC3UXgs5EtSQvpRO4Sn6A/L0B+TpD8jTH2zp9VA6g9Ocp7QrnQN9u/kTNfpaOgEAjlLzswR697Kx+Yj4PDMeM/Pw0DD8GwBzvC2dAMzwa+Ka906wrFdnKb0Z48VZ6UxY2/09NbdHlJs/ephL3gVeG+X9HONH6SQAAACgQafO1GZw6Nt56QSgYs7zQp7zvM93UToBVve9dAIN25dOoHG1nX1q7X9V1E5/zPOtdAIrGYa0u49jr0elPyBPf/Tl8KzI7YPvc59nPuV6tHl2f/AV5ohaR1HXlTNnrv7feZPeRa2jqOvKyc3VNwfBaaLWUdR1sa2odRR1XWwrWh2Zz1lStDqKth7KOqyny4X2Ma7G1/k0xvUYnzfcG+mtP+w7rWuqnn4f+bvXFf5teuuPqJ8Hqd2HlHZ/47mvcfv0jyyut/4glv34zHk/xkWFzx4AlnHlHl8tc3m9ttyPYpq5vB5T+1nuXwAAALGZ+wAAAAAApt0B+R88Mw==
   </data>
  </layer>
  <layer name="Coins" width="200" height="70">
@@ -542,7 +543,7 @@
     <property name="texture" value="knife"/>
    </properties>
   </object>
-  <object id="95" type="ground" x="7420" y="1820" width="343" height="70">
+  <object id="95" type="ground" x="7420" y="1820" width="343" height="20">
    <properties>
     <property name="shape" value="0"/>
    </properties>
@@ -1033,7 +1034,7 @@
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object id="240" name="VAL" type="character" x="3710" y="2380" width="70" height="140">
+  <object id="240" name="VAL" type="character" x="420" y="4200" width="70" height="140">
    <properties>
     <property name="name" value="VAL"/>
    </properties>
