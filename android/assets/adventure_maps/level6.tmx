@@ -70,7 +70,7 @@
     <property name="number" value="0"/>
    </properties>
   </object>
-  <object id="13" name="VAL" type="character" x="420" y="6720" width="70" height="140">
+  <object id="13" name="VAL" type="character" x="490" y="6720" width="70" height="140">
    <properties>
     <property name="name" value="VAL"/>
    </properties>
