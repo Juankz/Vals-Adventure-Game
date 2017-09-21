@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="70" tileheight="70" nextobjectid="20">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="70" tileheight="70" nextobjectid="43">
  <tileset firstgid="1" source="GrassExtension.tsx"/>
  <tileset firstgid="43" source="Items.tsx"/>
  <tileset firstgid="141" name="earth" tilewidth="70" tileheight="70" spacing="2" margin="1" tilecount="9">
@@ -21,14 +21,15 @@
   <image source="resources/castle_tiles.png" width="1024" height="256"/>
  </tileset>
  <tileset firstgid="192" source="castle_tiles_light.tsx"/>
+ <tileset firstgid="234" source="base.tsx"/>
  <layer name="GroundBack" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt16EVgEAQQ8Htv6cTdEEHtAH2HIrsPkZMA/kqq6oWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwOMaIr2THnp0lt5JDz06S++khx6dpXfSQ4/O0jvpoUdn6Z30+GePc4j0TgAAbx1DpHf6SvpX+B+7G0QoNy4=
+   eJzt2rENwkAURMGjcipzQBd0QBukQGQk+3ZPnmDy077oW97GGBsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOO1iPROeujRLL2THno0S++khx7N0jvpoUez9E566NEsvZMe1+zxXER6JwCAvR5FWt629x1n9EjfFZ/ut28tt87MmyjdQA899NBDj+N6zPyGk26wQo+Z0g300OPfHle9P1r87r63mx5ZenTRo4seXfTockaP9H8KjZI9AAA41hvdwNkv
   </data>
  </layer>
  <layer name="GroundMid" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt1LEJwDAMBMAfLaNkqLjPKBktLl0YkSIYF3cgHiRUCZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADs50qOKlmrJU+VrOUee3GPf/U/f7dJ9f5ZzYb9MgG+eAHLaSX/
+   eJzt1DEKg0AQBdDxZjlKWu8Ty0COktomkM4yN3G7GFgUBRmD78GHYZeFgWE2AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAtnuXvEo+2Y1AMrsA69iZZbeIS60mRxfxrNXkMI9j2WsebfPNmZQ//9FVUs6vc3eT91GrObZ78xsAAIC99JN6SOsCAAAAAOA/jFwSKBA=
   </data>
  </layer>
  <layer name="Builds Interior" width="100" height="100">
@@ -48,73 +49,124 @@
  </layer>
  <layer name="Items" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztzjEJAAAIADD7GsPi3v6CCFuCRQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOyo6wBDXgcAAJ5qCnYA7w==
+   eJzt1zENgDAQhtE6QgEOcIIABCCQBAfoYIGhAx1uapqW5L3kW27610sJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADGsn1iXEtwv4P7nItMdXOodL4duavzFgAAaM3/AQAAbe29B1BYew8AAPipB5DRB8Q=
   </data>
  </layer>
  <layer name="Coins" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+   eJzt0zEKACAIBVCP5/1P1NxQVEMJvTcJIogfIwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAP+XoBOvKoRR61yKOW3TzyYIZ1O7fNQc09GeOfmPUAAAAAAAAAAOC1BvUHBIE=
   </data>
  </layer>
  <objectgroup name="Objects">
-  <object id="9" type="spike" x="630" y="6790" width="70" height="70">
+  <object id="9" type="spike" x="630" y="5390" width="70" height="70">
    <properties>
     <property name="id" value="0"/>
     <property name="speed" value="4"/>
     <property name="target" value="6,0,-6,0"/>
    </properties>
   </object>
-  <object id="12" type="trigger" x="280" y="6090" width="70" height="770">
+  <object id="12" type="trigger" x="280" y="4690" width="70" height="770">
    <properties>
     <property name="action" value="checkpoint"/>
     <property name="number" value="0"/>
    </properties>
   </object>
-  <object id="13" name="VAL" type="character" x="490" y="6720" width="70" height="140">
+  <object id="13" name="VAL" type="character" x="5040" y="5320" width="70" height="140">
    <properties>
     <property name="name" value="VAL"/>
    </properties>
   </object>
-  <object id="14" type="ground" x="0" y="6860" width="2940" height="70">
+  <object id="14" type="ground" x="0" y="5460" width="2450" height="70">
    <properties>
     <property name="shape" value="0"/>
    </properties>
   </object>
-  <object id="15" type="spike" x="1540" y="6790" width="70" height="70">
+  <object id="15" type="spike" x="1540" y="5390" width="70" height="70">
    <properties>
     <property name="id" value="0"/>
     <property name="speed" value="4"/>
     <property name="target" value="-6,0,6,0"/>
    </properties>
   </object>
-  <object id="16" type="spike" x="1750" y="6790" width="70" height="70">
+  <object id="16" type="spike" x="1750" y="5390" width="70" height="70">
    <properties>
     <property name="id" value="0"/>
     <property name="speed" value="4"/>
     <property name="target" value="0,4,0,-4"/>
    </properties>
   </object>
-  <object id="17" type="spike" x="1890" y="6510" width="70" height="70">
+  <object id="17" type="spike" x="1960" y="5110" width="70" height="70">
    <properties>
     <property name="id" value="0"/>
     <property name="speed" value="4"/>
     <property name="target" value="0,-4,0,4"/>
    </properties>
   </object>
-  <object id="18" type="spike" x="2030" y="6790" width="70" height="70">
+  <object id="20" type="ground" x="2730" y="5460" width="2100" height="70">
    <properties>
-    <property name="id" value="0"/>
-    <property name="speed" value="4"/>
-    <property name="target" value="0,4,0,-4"/>
+    <property name="shape" value="0"/>
    </properties>
   </object>
-  <object id="19" type="spike" x="2170" y="6510" width="70" height="70">
+  <object id="21" type="ground" x="3640" y="5040" width="210" height="70">
    <properties>
-    <property name="id" value="0"/>
-    <property name="speed" value="4"/>
-    <property name="target" value="0,-4,0,4"/>
+    <property name="shape" value="0"/>
    </properties>
   </object>
+  <object id="22" type="ground" x="3640" y="4760" width="210" height="70">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="23" type="ground" x="3290" y="4900" width="210" height="70">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="24" type="wall" x="1820" y="5530" width="630" height="560"/>
+  <object id="25" type="wall" x="2730" y="5530" width="630" height="560"/>
+  <object id="26" type="wall" x="1820" y="6090" width="1540" height="140"/>
+  <object id="28" type="wall" x="4200" y="5530" width="630" height="1050"/>
+  <object id="29" type="trigger" x="0" y="6930" width="7980" height="64">
+   <properties>
+    <property name="action" value="die"/>
+   </properties>
+  </object>
+  <object id="30" type="bridge" x="4830" y="5460" width="280" height="70">
+   <properties>
+    <property name="number" value="1"/>
+    <property name="target" value="0,-8,0,8"/>
+   </properties>
+  </object>
+  <object id="32" type="ground" x="5110" y="5460" width="420" height="70">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="33" type="switch" x="5110" y="5390" width="70" height="70">
+   <properties>
+    <property name="number" value="1"/>
+    <property name="object" value="bridge"/>
+   </properties>
+  </object>
+  <object id="37" type="ground" x="5110" y="6020" width="420" height="70">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="38" type="ground" x="4830" y="6090" width="280" height="70">
+   <properties>
+    <property name="shape" value="0"/>
+   </properties>
+  </object>
+  <object id="39" type="wall" x="5110" y="6090" width="420" height="490"/>
+  <object id="40" type="wall" x="4830" y="6160" width="280" height="420"/>
+  <object id="41" type="switch" x="5110" y="5950" width="70" height="70">
+   <properties>
+    <property name="number" value="1"/>
+    <property name="object" value="bridge"/>
+   </properties>
+  </object>
+  <object id="42" type="wall" x="5110" y="5469" width="420" height="411"/>
  </objectgroup>
  <objectgroup name="Interior Objects"/>
 </map>
