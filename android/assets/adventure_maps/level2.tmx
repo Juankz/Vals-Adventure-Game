@@ -718,7 +718,7 @@
     <property name="key" value="GOAL"/>
    </properties>
   </object>
-  <object id="64" type="trigger" x="1750" y="1995" width="210" height="35">
+  <object id="64" type="trigger" x="1759.33" y="1995" width="191.333" height="35">
    <properties>
     <property name="action" value="die"/>
    </properties>
